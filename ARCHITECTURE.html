@@ -35,10 +35,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-278bf022.js";
+            window.path_to_searchindex_js = "searchindex-7173b7f1.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-0875f73e.js"></script>
+        <script src="toc-2452417a.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -199,9 +199,9 @@ Standalone Utilities:
 <p>The heart of the system containing:</p>
 <ul>
 <li><strong>Models</strong>: Domain types for campaigns, characters, D&amp;D catalog data</li>
-<li><strong>Services</strong>: Business logic (33 services, ~11k LOC)</li>
+<li><strong>Services</strong>: Business logic (28 services)</li>
 <li><strong>DAL</strong>: Data Access Layer with repository traits</li>
-<li><strong>Migrations</strong>: 33 Diesel migrations for SQLite schema</li>
+<li><strong>Migrations</strong>: 35 Diesel migrations for SQLite schema</li>
 </ul>
 <h3 id="mimir-dm-llm"><a class="header" href="#mimir-dm-llm">mimir-dm-llm</a></h3>
 <p>LLM provider abstraction layer:</p>
@@ -227,7 +227,7 @@ Standalone Utilities:
 <h2 id="request-flow"><a class="header" href="#request-flow">Request Flow</a></h2>
 <pre><code>┌──────────┐    ┌─────────────┐    ┌─────────────┐    ┌──────────┐
 │ Frontend │───▶│   Tauri     │───▶│   Service   │───▶│ Database │
-│  (React) │    │  Command    │    │   Layer     │    │ (SQLite) │
+│ (Vue 3)  │    │  Command    │    │   Layer     │    │ (SQLite) │
 └──────────┘    └─────────────┘    └─────────────┘    └──────────┘
      ▲                │                   │
      │                ▼                   │
@@ -264,7 +264,7 @@ pub async fn get_campaign(
 <li><strong>JSON Columns</strong>: Complex/variable data stored as JSON (see <a href="/.metis/adr/MIMIR-A-0003.html">ADR-0003</a>)</li>
 <li><strong>Multi-Ruleset</strong>: Content organized by rule system and source (see <a href="/.metis/adr/MIMIR-A-0002.html">ADR-0002</a>)</li>
 </ul>
-<h3 id="schema-overview-35-tables"><a class="header" href="#schema-overview-35-tables">Schema Overview (35 tables)</a></h3>
+<h3 id="schema-overview-37-tables"><a class="header" href="#schema-overview-37-tables">Schema Overview (37 tables)</a></h3>
 <p><strong>Campaign Management:</strong></p>
 <ul>
 <li><code>campaigns</code>, <code>modules</code>, <code>sessions</code></li>
@@ -278,8 +278,8 @@ pub async fn get_campaign(
 </ul>
 <p><strong>Characters:</strong></p>
 <ul>
-<li><code>player_characters</code>, <code>character_versions</code></li>
-<li><code>character_spells</code>, <code>character_inventory</code></li>
+<li><code>players</code>, <code>characters</code>, <code>character_versions</code></li>
+<li><code>campaign_players</code> (links players to campaigns)</li>
 </ul>
 <h2 id="service-layer"><a class="header" href="#service-layer">Service Layer</a></h2>
 <p>Services follow the stateful pattern per <a href="/.metis/adr/MIMIR-A-0005.html">ADR-0005</a>:</p>
@@ -378,7 +378,7 @@ pub enum DbError {
 │   │   └── services/           # Business logic
 │   │       ├── llm/            # LLM integration
 │   │       └── tools/          # LLM tool implementations
-│   └── frontend/               # React frontend
+│   └── frontend/               # Vue 3 frontend
 │
 ├── mimir-dm-core/              # Core business logic
 │   ├── src/

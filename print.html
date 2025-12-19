@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-278bf022.js";
+            window.path_to_searchindex_js = "searchindex-7173b7f1.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-0875f73e.js"></script>
+        <script src="toc-2452417a.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -184,7 +184,7 @@
 <p><strong>Active Development - v0.0.1 Released</strong> - Mimir is now available as a downloadable desktop application with core campaign management features.</p>
 <h3 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h3>
 <ol>
-<li><strong><a href="https://github.com/colliery-io/mimir/releases">Download Mimir</a></strong> - Get the latest release for your platform</li>
+<li><strong><a href="https://github.com/mimir-dm/mimir/releases">Download Mimir</a></strong> - Get the latest release for your platform</li>
 <li><strong>Install</strong> - Follow the platform-specific installation instructions in the <a href="../../README.html#installation">main README</a></li>
 <li><strong>Explore</strong> - Start managing your D&amp;D campaigns with the Campaign Generation Framework</li>
 </ol>
@@ -234,8 +234,8 @@
 </ul>
 <h2 id="getting-help"><a class="header" href="#getting-help">Getting Help</a></h2>
 <ul>
-<li><strong>Issues</strong>: Report bugs or request features on <a href="https://github.com/colliery-io/mimir/issues">GitHub Issues</a></li>
-<li><strong>Discussions</strong>: Join community discussions on <a href="https://github.com/colliery-io/mimir/discussions">GitHub Discussions</a></li>
+<li><strong>Issues</strong>: Report bugs or request features on <a href="https://github.com/mimir-dm/mimir/issues">GitHub Issues</a></li>
+<li><strong>Discussions</strong>: Join community discussions on <a href="https://github.com/mimir-dm/mimir/discussions">GitHub Discussions</a></li>
 <li><strong>Troubleshooting</strong>: Check our <a href="how-to/troubleshooting.html">troubleshooting guide</a></li>
 </ul>
 <h2 id="license"><a class="header" href="#license">License</a></h2>
@@ -247,8 +247,8 @@
 <ul>
 <li><a href="../../CONTRIBUTING.html">Main Contributing Guide</a> - Quick reference for contributors</li>
 <li><a href="#development-setup-and-guide">Development Setup</a> - Detailed development environment setup</li>
-<li><a href="https://github.com/colliery-io/mimir">GitHub Repository</a></li>
-<li><a href="https://github.com/colliery-io/mimir/issues">Issue Tracker</a></li>
+<li><a href="https://github.com/mimir-dm/mimir">GitHub Repository</a></li>
+<li><a href="https://github.com/mimir-dm/mimir/issues">Issue Tracker</a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
 <ol>
@@ -632,7 +632,7 @@ Related to #456
 <ul>
 <li><a href="../../DEVELOPMENT.html">Main Development Guide</a> - Quick reference for development</li>
 <li><a href="#contributing-to-mimir">Contributing Guide</a> - How to contribute to the project</li>
-<li><a href="https://github.com/colliery-io/mimir">GitHub Repository</a></li>
+<li><a href="https://github.com/mimir-dm/mimir">GitHub Repository</a></li>
 </ul>
 <h2 id="table-of-contents-1"><a class="header" href="#table-of-contents-1">Table of Contents</a></h2>
 <ol>
@@ -777,7 +777,7 @@ brew install gh  # macOS
 <h2 id="building-and-running"><a class="header" href="#building-and-running">Building and Running</a></h2>
 <h3 id="initial-build"><a class="header" href="#initial-build">Initial Build</a></h3>
 <pre><code class="language-bash"># Clone repository
-git clone https://github.com/colliery-io/mimir.git
+git clone https://github.com/mimir-dm/mimir.git
 cd mimir
 
 # Build Rust workspace
@@ -1268,7 +1268,7 @@ npm run type-check
 <h2 id="getting-help-2"><a class="header" href="#getting-help-2">Getting Help</a></h2>
 <ul>
 <li>Check <a href="#contributing-to-mimir">CONTRIBUTING.md</a> for contribution guidelines</li>
-<li>Search <a href="https://github.com/colliery-io/mimir/issues">GitHub Issues</a></li>
+<li>Search <a href="https://github.com/mimir-dm/mimir/issues">GitHub Issues</a></li>
 <li>Review crate READMEs for detailed architecture info</li>
 <li>Ask questions in pull request comments</li>
 </ul>
@@ -1298,9 +1298,9 @@ Standalone Utilities:
 <p>The heart of the system containing:</p>
 <ul>
 <li><strong>Models</strong>: Domain types for campaigns, characters, D&amp;D catalog data</li>
-<li><strong>Services</strong>: Business logic (33 services, ~11k LOC)</li>
+<li><strong>Services</strong>: Business logic (28 services)</li>
 <li><strong>DAL</strong>: Data Access Layer with repository traits</li>
-<li><strong>Migrations</strong>: 33 Diesel migrations for SQLite schema</li>
+<li><strong>Migrations</strong>: 35 Diesel migrations for SQLite schema</li>
 </ul>
 <h3 id="mimir-dm-llm"><a class="header" href="#mimir-dm-llm">mimir-dm-llm</a></h3>
 <p>LLM provider abstraction layer:</p>
@@ -1326,7 +1326,7 @@ Standalone Utilities:
 <h2 id="request-flow"><a class="header" href="#request-flow">Request Flow</a></h2>
 <pre><code>┌──────────┐    ┌─────────────┐    ┌─────────────┐    ┌──────────┐
 │ Frontend │───▶│   Tauri     │───▶│   Service   │───▶│ Database │
-│  (React) │    │  Command    │    │   Layer     │    │ (SQLite) │
+│ (Vue 3)  │    │  Command    │    │   Layer     │    │ (SQLite) │
 └──────────┘    └─────────────┘    └─────────────┘    └──────────┘
      ▲                │                   │
      │                ▼                   │
@@ -1363,7 +1363,7 @@ pub async fn get_campaign(
 <li><strong>JSON Columns</strong>: Complex/variable data stored as JSON (see <a href="/.metis/adr/MIMIR-A-0003.html">ADR-0003</a>)</li>
 <li><strong>Multi-Ruleset</strong>: Content organized by rule system and source (see <a href="/.metis/adr/MIMIR-A-0002.html">ADR-0002</a>)</li>
 </ul>
-<h3 id="schema-overview-35-tables"><a class="header" href="#schema-overview-35-tables">Schema Overview (35 tables)</a></h3>
+<h3 id="schema-overview-37-tables"><a class="header" href="#schema-overview-37-tables">Schema Overview (37 tables)</a></h3>
 <p><strong>Campaign Management:</strong></p>
 <ul>
 <li><code>campaigns</code>, <code>modules</code>, <code>sessions</code></li>
@@ -1377,8 +1377,8 @@ pub async fn get_campaign(
 </ul>
 <p><strong>Characters:</strong></p>
 <ul>
-<li><code>player_characters</code>, <code>character_versions</code></li>
-<li><code>character_spells</code>, <code>character_inventory</code></li>
+<li><code>players</code>, <code>characters</code>, <code>character_versions</code></li>
+<li><code>campaign_players</code> (links players to campaigns)</li>
 </ul>
 <h2 id="service-layer"><a class="header" href="#service-layer">Service Layer</a></h2>
 <p>Services follow the stateful pattern per <a href="/.metis/adr/MIMIR-A-0005.html">ADR-0005</a>:</p>
@@ -1477,7 +1477,7 @@ pub enum DbError {
 │   │   └── services/           # Business logic
 │   │       ├── llm/            # LLM integration
 │   │       └── tools/          # LLM tool implementations
-│   └── frontend/               # React frontend
+│   └── frontend/               # Vue 3 frontend
 │
 ├── mimir-dm-core/              # Core business logic
 │   ├── src/
@@ -6783,6 +6783,353 @@ You feel anxiety when players make unexpected choices. You find yourself steerin
 <p>Remember: The best template is the one you actually use. These tools serve your game, not the other way around.</p>
 <hr>
 <p><em>Next: Browse the <a href="campaign-framework/06-templates/templates">template files</a> to find the tools that match your campaign style.</em></p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="character-and-npc-management"><a class="header" href="#character-and-npc-management">Character and NPC Management</a></h1>
+<p>Mimir provides comprehensive tools for managing player characters (PCs) and non-player characters (NPCs) within your campaigns.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The character system supports:</p>
+<ul>
+<li><strong>Player Characters (PCs)</strong>: Full character sheets with class features, spells, and inventory</li>
+<li><strong>Non-Player Characters (NPCs)</strong>: Quick stat blocks for encounters</li>
+<li><strong>Character Versioning</strong>: Track character progression over time</li>
+<li><strong>Spell Management</strong>: Known spells, prepared spells, and spell slot tracking</li>
+</ul>
+<h2 id="data-model"><a class="header" href="#data-model">Data Model</a></h2>
+<h3 id="players"><a class="header" href="#players">Players</a></h3>
+<p>Players represent the real people at your table. Each player can have multiple characters across different campaigns.</p>
+<pre><code>Player
+├── id
+├── name
+├── email (optional)
+└── characters[] (via campaign_players)
+</code></pre>
+<h3 id="characters"><a class="header" href="#characters">Characters</a></h3>
+<p>Characters are the in-game personas controlled by players (PCs) or the DM (NPCs).</p>
+<pre><code>Character
+├── id
+├── player_id (null for NPCs)
+├── character_name
+├── race, class, level
+├── ability_scores (STR, DEX, CON, INT, WIS, CHA)
+├── hit_points (current, max, temp)
+├── armor_class
+├── speed
+├── proficiencies
+├── features
+├── spells (known, prepared, slots)
+└── inventory
+</code></pre>
+<h2 id="character-creation-1"><a class="header" href="#character-creation-1">Character Creation</a></h2>
+<h3 id="creating-a-pc"><a class="header" href="#creating-a-pc">Creating a PC</a></h3>
+<p>PCs are linked to a player and campaign:</p>
+<ol>
+<li>Create or select a player</li>
+<li>Choose race and class from the catalog</li>
+<li>Set ability scores (manual entry or standard array)</li>
+<li>The system calculates:
+<ul>
+<li>Hit points based on class and CON modifier</li>
+<li>Proficiency bonus based on level</li>
+<li>Spell slots based on class and level</li>
+<li>Starting equipment suggestions</li>
+</ul>
+</li>
+</ol>
+<h3 id="creating-an-npc"><a class="header" href="#creating-an-npc">Creating an NPC</a></h3>
+<p>NPCs are simpler and don’t require a player:</p>
+<ol>
+<li>Provide basic stats (name, race, class)</li>
+<li>Set ability scores</li>
+<li>Optionally add spells and features</li>
+<li>NPC is created with <code>is_npc: true</code></li>
+</ol>
+<h2 id="spell-management"><a class="header" href="#spell-management">Spell Management</a></h2>
+<h3 id="spell-slots"><a class="header" href="#spell-slots">Spell Slots</a></h3>
+<p>The system automatically calculates spell slots based on:</p>
+<ul>
+<li>Character class</li>
+<li>Character level</li>
+<li>Multiclass combinations (if applicable)</li>
+</ul>
+<p>Supported caster types:</p>
+<ul>
+<li><strong>Full Casters</strong>: Wizard, Cleric, Druid, Bard, Sorcerer</li>
+<li><strong>Half Casters</strong>: Paladin, Ranger</li>
+<li><strong>Third Casters</strong>: Eldritch Knight, Arcane Trickster</li>
+<li><strong>Pact Magic</strong>: Warlock (separate slot progression)</li>
+</ul>
+<h3 id="spell-operations"><a class="header" href="#spell-operations">Spell Operations</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operation</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>add_spell_to_known</code></td><td>Add a spell to character’s known spells</td></tr>
+<tr><td><code>prepare_spells</code></td><td>Set which known spells are prepared</td></tr>
+<tr><td><code>cast_spell</code></td><td>Cast a spell, consuming a slot</td></tr>
+<tr><td><code>take_rest</code></td><td>Short or long rest to recover slots</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="character-progression"><a class="header" href="#character-progression">Character Progression</a></h2>
+<h3 id="leveling-up"><a class="header" href="#leveling-up">Leveling Up</a></h3>
+<p>The <code>level_up_character</code> command handles:</p>
+<ul>
+<li>Incrementing character level</li>
+<li>Recalculating hit points</li>
+<li>Updating proficiency bonus</li>
+<li>Adjusting spell slots</li>
+<li>Prompting for ASI/feat choices (at appropriate levels)</li>
+</ul>
+<h3 id="character-versions"><a class="header" href="#character-versions">Character Versions</a></h3>
+<p>Each significant change creates a version snapshot:</p>
+<ul>
+<li>Level ups</li>
+<li>Major stat changes</li>
+<li>Class feature acquisitions</li>
+</ul>
+<p>Retrieve history with <code>get_character_versions</code>.</p>
+<h2 id="api-reference"><a class="header" href="#api-reference">API Reference</a></h2>
+<h3 id="player-commands"><a class="header" href="#player-commands">Player Commands</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>create_player</code></td><td>name, email?</td><td>Create a new player</td></tr>
+<tr><td><code>get_player</code></td><td>player_id</td><td>Get player details</td></tr>
+<tr><td><code>list_players</code></td><td>-</td><td>List all players</td></tr>
+<tr><td><code>update_player</code></td><td>player_id, updates</td><td>Update player info</td></tr>
+<tr><td><code>delete_player</code></td><td>player_id</td><td>Remove a player</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="character-commands"><a class="header" href="#character-commands">Character Commands</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>create_character</code></td><td>character_data</td><td>Full character creation</td></tr>
+<tr><td><code>create_minimal_character</code></td><td>basic_data</td><td>Quick character stub</td></tr>
+<tr><td><code>create_npc</code></td><td>npc_data</td><td>Create an NPC</td></tr>
+<tr><td><code>get_character</code></td><td>character_id</td><td>Get character details</td></tr>
+<tr><td><code>list_characters_for_campaign</code></td><td>campaign_id</td><td>All characters in campaign</td></tr>
+<tr><td><code>list_pcs_for_campaign</code></td><td>campaign_id</td><td>Only PCs</td></tr>
+<tr><td><code>list_npcs_for_campaign</code></td><td>campaign_id</td><td>Only NPCs</td></tr>
+<tr><td><code>update_character</code></td><td>character_id, updates</td><td>Modify character</td></tr>
+<tr><td><code>delete_character</code></td><td>character_id</td><td>Remove character</td></tr>
+<tr><td><code>level_up_character</code></td><td>character_id, options</td><td>Level up a character</td></tr>
+<tr><td><code>assign_character_to_campaign</code></td><td>character_id, campaign_id</td><td>Link to campaign</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="spell-commands"><a class="header" href="#spell-commands">Spell Commands</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>get_character_spell_slots</code></td><td>character_id</td><td>Current slot status</td></tr>
+<tr><td><code>add_spell_to_known</code></td><td>character_id, spell_id</td><td>Learn a spell</td></tr>
+<tr><td><code>prepare_spells</code></td><td>character_id, spell_ids</td><td>Set prepared spells</td></tr>
+<tr><td><code>cast_spell</code></td><td>character_id, spell_id, slot_level</td><td>Cast and use slot</td></tr>
+<tr><td><code>take_rest</code></td><td>character_id, rest_type</td><td>Recover resources</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="frontend-integration"><a class="header" href="#frontend-integration">Frontend Integration</a></h2>
+<p>The frontend provides:</p>
+<ul>
+<li>Character creation wizard with step-by-step guidance</li>
+<li>Character sheet view with all stats and abilities</li>
+<li>Spell management interface with drag-and-drop preparation</li>
+<li>Quick actions for common operations (cast, rest, level up)</li>
+</ul>
+<h2 id="llm-tool-integration"><a class="header" href="#llm-tool-integration">LLM Tool Integration</a></h2>
+<p>The AI assistant can help with character management through natural language:</p>
+<ul>
+<li>“Create a level 5 dwarf cleric named Thorin”</li>
+<li>“What spell slots does my wizard have left?”</li>
+<li>“Cast fireball at 4th level”</li>
+<li>“Take a long rest”</li>
+</ul>
+<p>See <a href="reference/llm-tools.html">LLM Tools</a> for more details on AI-assisted character management.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="books-and-sources"><a class="header" href="#books-and-sources">Books and Sources</a></h1>
+<p>Mimir allows you to import D&amp;D 5e source books for use as reference material and to populate the catalog database.</p>
+<h2 id="overview-1"><a class="header" href="#overview-1">Overview</a></h2>
+<p>The source system provides:</p>
+<ul>
+<li><strong>Book Library</strong>: Browse imported source books</li>
+<li><strong>Content Viewer</strong>: Read book chapters and sections</li>
+<li><strong>Catalog Import</strong>: Extract spells, monsters, items, etc. into searchable catalog</li>
+<li><strong>Cross-References</strong>: Click references like <code>{@spell fireball}</code> to see details</li>
+</ul>
+<h2 id="getting-book-files"><a class="header" href="#getting-book-files">Getting Book Files</a></h2>
+<p>Book data files are available from the <a href="https://github.com/mimir-dm/resources/releases">Mimir Resources</a> repository.</p>
+<ol>
+<li>Visit the releases page</li>
+<li>Download <code>.tar.gz</code> files for books you own</li>
+<li>Import into Mimir using the upload feature</li>
+</ol>
+<h3 id="available-book-types"><a class="header" href="#available-book-types">Available Book Types</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Category</th><th>Examples</th></tr>
+</thead>
+<tbody>
+<tr><td>Core</td><td>Player’s Handbook (PHB), Dungeon Master’s Guide (DMG), Monster Manual (MM)</td></tr>
+<tr><td>Supplements</td><td>Xanathar’s Guide (XGE), Tasha’s Cauldron (TCE), Fizban’s Treasury (FTD)</td></tr>
+<tr><td>Settings</td><td>Eberron (ERLW), Wildemount (EGW), Ravenloft (VRGR), Theros (MOT)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="importing-books"><a class="header" href="#importing-books">Importing Books</a></h2>
+<h3 id="upload-process"><a class="header" href="#upload-process">Upload Process</a></h3>
+<ol>
+<li>Open Mimir and navigate to <strong>Sources</strong></li>
+<li>Click <strong>Import Book</strong></li>
+<li>Select the <code>.tar.gz</code> file</li>
+<li>Mimir extracts and processes:
+<ul>
+<li>Book metadata</li>
+<li>Chapter content</li>
+<li>Images</li>
+<li>Catalog entries (spells, monsters, etc.)</li>
+</ul>
+</li>
+</ol>
+<h3 id="what-gets-imported"><a class="header" href="#what-gets-imported">What Gets Imported</a></h3>
+<p>Each book archive contains:</p>
+<pre><code>BookName/
+├── metadata.json       # Book info (title, author, published date)
+├── book/
+│   └── book-xxx.json   # Chapter content and structure
+├── img/
+│   ├── covers/         # Book cover images
+│   └── book/           # Interior illustrations
+├── spells/             # Spell definitions (if applicable)
+├── bestiary/           # Monster stat blocks (if applicable)
+├── items/              # Magic items (if applicable)
+└── ... other data types
+</code></pre>
+<h3 id="catalog-population"><a class="header" href="#catalog-population">Catalog Population</a></h3>
+<p>When you import a book, Mimir automatically extracts game content into the catalog database:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Content Type</th><th>Catalog Table</th><th>Searchable</th></tr>
+</thead>
+<tbody>
+<tr><td>Spells</td><td><code>catalog_spells</code></td><td>Yes</td></tr>
+<tr><td>Monsters</td><td><code>catalog_monsters</code></td><td>Yes</td></tr>
+<tr><td>Items</td><td><code>catalog_items</code></td><td>Yes</td></tr>
+<tr><td>Classes</td><td><code>catalog_classes</code></td><td>Yes</td></tr>
+<tr><td>Races</td><td><code>catalog_races</code></td><td>Yes</td></tr>
+<tr><td>Feats</td><td><code>catalog_feats</code></td><td>Yes</td></tr>
+<tr><td>Backgrounds</td><td><code>catalog_backgrounds</code></td><td>Yes</td></tr>
+<tr><td>Conditions</td><td><code>catalog_conditions</code></td><td>Yes</td></tr>
+<tr><td>Actions</td><td><code>catalog_actions</code></td><td>Yes</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="using-the-library"><a class="header" href="#using-the-library">Using the Library</a></h2>
+<h3 id="browsing-books"><a class="header" href="#browsing-books">Browsing Books</a></h3>
+<p>The library view shows all imported books with:</p>
+<ul>
+<li>Cover image</li>
+<li>Title and source abbreviation</li>
+<li>Import date</li>
+<li>Content summary</li>
+</ul>
+<h3 id="reading-content"><a class="header" href="#reading-content">Reading Content</a></h3>
+<p>Click a book to open the content viewer:</p>
+<ul>
+<li>Navigate chapters via sidebar</li>
+<li>Full-text content with formatted tables and lists</li>
+<li>Inline images from the book</li>
+<li>Clickable cross-references</li>
+</ul>
+<h3 id="cross-reference-links"><a class="header" href="#cross-reference-links">Cross-Reference Links</a></h3>
+<p>Content contains tagged references like <code>{@spell fireball|PHB}</code> that become clickable links:</p>
+<ul>
+<li><strong>Hover</strong>: Preview tooltip with summary</li>
+<li><strong>Click</strong>: Full modal with complete details</li>
+</ul>
+<p>Supported reference types:</p>
+<ul>
+<li><code>{@spell name}</code> - Spells</li>
+<li><code>{@creature name}</code> - Monsters</li>
+<li><code>{@item name}</code> - Items</li>
+<li><code>{@condition name}</code> - Conditions</li>
+<li><code>{@action name}</code> - Actions</li>
+<li><code>{@class name}</code> - Classes</li>
+<li><code>{@race name}</code> - Races</li>
+<li><code>{@feat name}</code> - Feats</li>
+<li><code>{@background name}</code> - Backgrounds</li>
+</ul>
+<h2 id="api-reference-1"><a class="header" href="#api-reference-1">API Reference</a></h2>
+<h3 id="library-commands"><a class="header" href="#library-commands">Library Commands</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>upload_book_archive</code></td><td>file_path</td><td>Import a book .tar.gz</td></tr>
+<tr><td><code>list_library_books</code></td><td>-</td><td>List all imported books</td></tr>
+<tr><td><code>remove_book_from_library</code></td><td>book_id</td><td>Remove a book</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="content-commands"><a class="header" href="#content-commands">Content Commands</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>get_book_content</code></td><td>book_id, section?</td><td>Get book content</td></tr>
+<tr><td><code>serve_book_image</code></td><td>book_id, image_path</td><td>Get book image</td></tr>
+<tr><td><code>lookup_reference</code></td><td>ref_type, ref_name, source?</td><td>Lookup cross-reference</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="storage"><a class="header" href="#storage">Storage</a></h2>
+<p>Books are stored in the application data directory:</p>
+<pre><code>~/Library/Application Support/com.mimir.mimir/  (macOS)
+├── books/
+│   ├── PHB/
+│   │   ├── metadata.json
+│   │   ├── book/
+│   │   └── img/
+│   └── DMG/
+│       └── ...
+└── mimir.db  (catalog entries)
+</code></pre>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h3 id="import-fails"><a class="header" href="#import-fails">Import Fails</a></h3>
+<ul>
+<li>Ensure the file is a valid <code>.tar.gz</code> archive</li>
+<li>Check the archive contains the expected structure</li>
+<li>Verify you have write permissions to the data directory</li>
+</ul>
+<h3 id="missing-cross-references"><a class="header" href="#missing-cross-references">Missing Cross-References</a></h3>
+<ul>
+<li>The referenced content may be in a book you haven’t imported</li>
+<li>Some references point to SRD (free) content included by default</li>
+</ul>
+<h3 id="images-not-loading"><a class="header" href="#images-not-loading">Images Not Loading</a></h3>
+<ul>
+<li>Images are loaded on-demand from the book directory</li>
+<li>Check the book’s <code>img/</code> folder exists and contains files</li>
+</ul>
 
                     </main>
 
