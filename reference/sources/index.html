@@ -35,10 +35,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-7173b7f1.js";
+            window.path_to_searchindex_js = "../../searchindex-7c6b3561.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-2452417a.js"></script>
+        <script src="../../toc-59f74745.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -175,120 +175,20 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="books-and-sources"><a class="header" href="#books-and-sources">Books and Sources</a></h1>
-<p>Mimir allows you to import D&amp;D 5e source books for use as reference material and to populate the catalog database.</p>
-<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
-<p>The source system provides:</p>
-<ul>
-<li><strong>Book Library</strong>: Browse imported source books</li>
-<li><strong>Content Viewer</strong>: Read book chapters and sections</li>
-<li><strong>Catalog Import</strong>: Extract spells, monsters, items, etc. into searchable catalog</li>
-<li><strong>Cross-References</strong>: Click references like <code>{@spell fireball}</code> to see details</li>
-</ul>
-<h2 id="getting-book-files"><a class="header" href="#getting-book-files">Getting Book Files</a></h2>
-<p>Book data files are available from the <a href="https://github.com/mimir-dm/resources/releases">Mimir Resources</a> repository.</p>
-<ol>
-<li>Visit the releases page</li>
-<li>Download <code>.tar.gz</code> files for books you own</li>
-<li>Import into Mimir using the upload feature</li>
-</ol>
-<h3 id="available-book-types"><a class="header" href="#available-book-types">Available Book Types</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Category</th><th>Examples</th></tr>
-</thead>
-<tbody>
-<tr><td>Core</td><td>Player’s Handbook (PHB), Dungeon Master’s Guide (DMG), Monster Manual (MM)</td></tr>
-<tr><td>Supplements</td><td>Xanathar’s Guide (XGE), Tasha’s Cauldron (TCE), Fizban’s Treasury (FTD)</td></tr>
-<tr><td>Settings</td><td>Eberron (ERLW), Wildemount (EGW), Ravenloft (VRGR), Theros (MOT)</td></tr>
-</tbody>
-</table>
-</div>
-<h2 id="importing-books"><a class="header" href="#importing-books">Importing Books</a></h2>
-<h3 id="upload-process"><a class="header" href="#upload-process">Upload Process</a></h3>
-<ol>
-<li>Open Mimir and navigate to <strong>Sources</strong></li>
-<li>Click <strong>Import Book</strong></li>
-<li>Select the <code>.tar.gz</code> file</li>
-<li>Mimir extracts and processes:
-<ul>
-<li>Book metadata</li>
-<li>Chapter content</li>
-<li>Images</li>
-<li>Catalog entries (spells, monsters, etc.)</li>
-</ul>
-</li>
-</ol>
-<h3 id="what-gets-imported"><a class="header" href="#what-gets-imported">What Gets Imported</a></h3>
-<p>Each book archive contains:</p>
-<pre><code>BookName/
-├── metadata.json       # Book info (title, author, published date)
-├── book/
-│   └── book-xxx.json   # Chapter content and structure
-├── img/
-│   ├── covers/         # Book cover images
-│   └── book/           # Interior illustrations
-├── spells/             # Spell definitions (if applicable)
-├── bestiary/           # Monster stat blocks (if applicable)
-├── items/              # Magic items (if applicable)
-└── ... other data types
-</code></pre>
-<h3 id="catalog-population"><a class="header" href="#catalog-population">Catalog Population</a></h3>
-<p>When you import a book, Mimir automatically extracts game content into the catalog database:</p>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Content Type</th><th>Catalog Table</th><th>Searchable</th></tr>
-</thead>
-<tbody>
-<tr><td>Spells</td><td><code>catalog_spells</code></td><td>Yes</td></tr>
-<tr><td>Monsters</td><td><code>catalog_monsters</code></td><td>Yes</td></tr>
-<tr><td>Items</td><td><code>catalog_items</code></td><td>Yes</td></tr>
-<tr><td>Classes</td><td><code>catalog_classes</code></td><td>Yes</td></tr>
-<tr><td>Races</td><td><code>catalog_races</code></td><td>Yes</td></tr>
-<tr><td>Feats</td><td><code>catalog_feats</code></td><td>Yes</td></tr>
-<tr><td>Backgrounds</td><td><code>catalog_backgrounds</code></td><td>Yes</td></tr>
-<tr><td>Conditions</td><td><code>catalog_conditions</code></td><td>Yes</td></tr>
-<tr><td>Actions</td><td><code>catalog_actions</code></td><td>Yes</td></tr>
-</tbody>
-</table>
-</div>
-<h2 id="using-the-library"><a class="header" href="#using-the-library">Using the Library</a></h2>
-<h3 id="browsing-books"><a class="header" href="#browsing-books">Browsing Books</a></h3>
-<p>The library view shows all imported books with:</p>
-<ul>
-<li>Cover image</li>
-<li>Title and source abbreviation</li>
-<li>Import date</li>
-<li>Content summary</li>
-</ul>
-<h3 id="reading-content"><a class="header" href="#reading-content">Reading Content</a></h3>
-<p>Click a book to open the content viewer:</p>
-<ul>
-<li>Navigate chapters via sidebar</li>
-<li>Full-text content with formatted tables and lists</li>
-<li>Inline images from the book</li>
-<li>Clickable cross-references</li>
-</ul>
-<h3 id="cross-reference-links"><a class="header" href="#cross-reference-links">Cross-Reference Links</a></h3>
-<p>Content contains tagged references like <code>{@spell fireball|PHB}</code> that become clickable links:</p>
-<ul>
-<li><strong>Hover</strong>: Preview tooltip with summary</li>
-<li><strong>Click</strong>: Full modal with complete details</li>
-</ul>
-<p>Supported reference types:</p>
-<ul>
-<li><code>{@spell name}</code> - Spells</li>
-<li><code>{@creature name}</code> - Monsters</li>
-<li><code>{@item name}</code> - Items</li>
-<li><code>{@condition name}</code> - Conditions</li>
-<li><code>{@action name}</code> - Actions</li>
-<li><code>{@class name}</code> - Classes</li>
-<li><code>{@race name}</code> - Races</li>
-<li><code>{@feat name}</code> - Feats</li>
-<li><code>{@background name}</code> - Backgrounds</li>
-</ul>
-<h2 id="api-reference"><a class="header" href="#api-reference">API Reference</a></h2>
+<p>Mimir supports importing D&amp;D 5e source books for reference and catalog population. The source system allows you to browse book content, search the extracted catalog data, and navigate cross-references between game elements.</p>
+<h2 id="book-data-files"><a class="header" href="#book-data-files">Book Data Files</a></h2>
+<p>Book data files are available from the <a href="https://github.com/mimir-dm/resources/releases">Mimir Resources</a> repository. These archives contain structured JSON representations of book content including chapter text, images, and extracted game data like spells and monsters. The repository organizes books into three categories: core rulebooks (PHB, DMG, MM), supplements (XGE, TCE, FTD), and setting guides (ERLW, EGW, VRGR).</p>
+<p>Each book archive follows a consistent structure with a metadata.json file describing the book, a book/ directory containing chapter content, and an img/ directory with cover art and interior illustrations. Books that contain game mechanics also include directories for that content type, such as spells/ for spellcasting sourcebooks or bestiary/ for monster compendiums.</p>
+<h2 id="catalog-population"><a class="header" href="#catalog-population">Catalog Population</a></h2>
+<p>When you import a book, Mimir extracts game content into the catalog database for searching. The extraction process reads content-specific JSON files and populates the appropriate catalog tables. Spells go into catalog_spells, monsters into catalog_monsters, and items into catalog_items. The system also extracts classes, races, feats, backgrounds, conditions, and actions when present.</p>
+<p>The catalog tables store both summary information for search results and complete details for individual entries. This denormalized approach allows fast searching across thousands of entries while still providing full stat blocks and descriptions when viewing a specific item.</p>
+<h2 id="cross-reference-system"><a class="header" href="#cross-reference-system">Cross-Reference System</a></h2>
+<p>Book content contains tagged references using the <code>{@type name|source}</code> syntax. A reference like <code>{@spell fireball|PHB}</code> identifies a spell named “fireball” from the Player’s Handbook. The content renderer converts these tags into clickable links that display tooltips on hover and full details in a modal on click.</p>
+<p>The cross-reference system supports spells, creatures, items, conditions, actions, classes, races, feats, and backgrounds. When you click a reference, the system queries the catalog database for the matching entry and displays its complete information. References to content from books you haven’t imported will appear as plain text rather than links.</p>
+<h2 id="storage-location"><a class="header" href="#storage-location">Storage Location</a></h2>
+<p>Imported books are stored in the application data directory alongside the SQLite database. On macOS this is <code>~/Library/Application Support/com.mimir.mimir/</code>, with equivalent locations on Windows and Linux. Each book occupies its own subdirectory under books/, preserving the original archive structure for image serving and content retrieval.</p>
+<h2 id="tauri-commands"><a class="header" href="#tauri-commands">Tauri Commands</a></h2>
+<p>The source system exposes library and content commands through Tauri IPC.</p>
 <h3 id="library-commands"><a class="header" href="#library-commands">Library Commands</a></h3>
 <div class="table-wrapper">
 <table>
@@ -296,9 +196,9 @@
 <tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><code>upload_book_archive</code></td><td>file_path</td><td>Import a book .tar.gz</td></tr>
-<tr><td><code>list_library_books</code></td><td>-</td><td>List all imported books</td></tr>
-<tr><td><code>remove_book_from_library</code></td><td>book_id</td><td>Remove a book</td></tr>
+<tr><td><code>upload_book_archive</code></td><td>file_path</td><td>Import a book from a .tar.gz archive</td></tr>
+<tr><td><code>list_library_books</code></td><td>—</td><td>List all imported books with metadata</td></tr>
+<tr><td><code>remove_book_from_library</code></td><td>book_id</td><td>Remove a book and its catalog entries</td></tr>
 </tbody>
 </table>
 </div>
@@ -309,41 +209,16 @@
 <tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><code>get_book_content</code></td><td>book_id, section?</td><td>Get book content</td></tr>
-<tr><td><code>serve_book_image</code></td><td>book_id, image_path</td><td>Get book image</td></tr>
-<tr><td><code>lookup_reference</code></td><td>ref_type, ref_name, source?</td><td>Lookup cross-reference</td></tr>
+<tr><td><code>get_book_content</code></td><td>book_id, section</td><td>Retrieve chapter content by section path</td></tr>
+<tr><td><code>serve_book_image</code></td><td>book_id, image_path</td><td>Serve an image from the book’s img directory</td></tr>
+<tr><td><code>lookup_reference</code></td><td>ref_type, ref_name, source</td><td>Resolve a cross-reference to catalog data</td></tr>
 </tbody>
 </table>
 </div>
-<h2 id="storage"><a class="header" href="#storage">Storage</a></h2>
-<p>Books are stored in the application data directory:</p>
-<pre><code>~/Library/Application Support/com.mimir.mimir/  (macOS)
-├── books/
-│   ├── PHB/
-│   │   ├── metadata.json
-│   │   ├── book/
-│   │   └── img/
-│   └── DMG/
-│       └── ...
-└── mimir.db  (catalog entries)
-</code></pre>
 <h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
-<h3 id="import-fails"><a class="header" href="#import-fails">Import Fails</a></h3>
-<ul>
-<li>Ensure the file is a valid <code>.tar.gz</code> archive</li>
-<li>Check the archive contains the expected structure</li>
-<li>Verify you have write permissions to the data directory</li>
-</ul>
-<h3 id="missing-cross-references"><a class="header" href="#missing-cross-references">Missing Cross-References</a></h3>
-<ul>
-<li>The referenced content may be in a book you haven’t imported</li>
-<li>Some references point to SRD (free) content included by default</li>
-</ul>
-<h3 id="images-not-loading"><a class="header" href="#images-not-loading">Images Not Loading</a></h3>
-<ul>
-<li>Images are loaded on-demand from the book directory</li>
-<li>Check the book’s <code>img/</code> folder exists and contains files</li>
-</ul>
+<p>Import failures typically result from invalid archive format or missing required files. The archive must be a valid gzip-compressed tar file containing the expected directory structure with metadata.json at the root. Permission errors can occur if the application data directory is not writable.</p>
+<p>Missing cross-references usually indicate the referenced content comes from a book that hasn’t been imported. Some references point to SRD content that Mimir includes by default, but references to non-SRD material require importing the source book.</p>
+<p>Images that fail to load are served on-demand from the book’s img/ directory. Verify the directory exists and contains the expected files by checking the book’s storage location in the application data directory.</p>
 
                     </main>
 
@@ -353,6 +228,9 @@
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
+                            <a rel="next prefetch" href="../../reference/pdf-export/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -364,6 +242,9 @@
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="../../reference/pdf-export/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
             </nav>
 
         </div>

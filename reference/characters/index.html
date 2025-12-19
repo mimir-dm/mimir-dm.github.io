@@ -35,10 +35,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-7173b7f1.js";
+            window.path_to_searchindex_js = "../../searchindex-7c6b3561.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-2452417a.js"></script>
+        <script src="../../toc-59f74745.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -175,180 +175,31 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="character-and-npc-management"><a class="header" href="#character-and-npc-management">Character and NPC Management</a></h1>
-<p>Mimir provides comprehensive tools for managing player characters (PCs) and non-player characters (NPCs) within your campaigns.</p>
-<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
-<p>The character system supports:</p>
-<ul>
-<li><strong>Player Characters (PCs)</strong>: Full character sheets with class features, spells, and inventory</li>
-<li><strong>Non-Player Characters (NPCs)</strong>: Quick stat blocks for encounters</li>
-<li><strong>Character Versioning</strong>: Track character progression over time</li>
-<li><strong>Spell Management</strong>: Known spells, prepared spells, and spell slot tracking</li>
-</ul>
+<p>Mimir provides a comprehensive character management system for tracking player characters and non-player characters within campaigns. The system handles the full lifecycle of D&amp;D 5e characters, from creation through leveling, spell slot tracking, and version history.</p>
 <h2 id="data-model"><a class="header" href="#data-model">Data Model</a></h2>
-<h3 id="players"><a class="header" href="#players">Players</a></h3>
-<p>Players represent the real people at your table. Each player can have multiple characters across different campaigns.</p>
-<pre><code>Player
-├── id
-├── name
-├── email (optional)
-└── characters[] (via campaign_players)
-</code></pre>
-<h3 id="characters"><a class="header" href="#characters">Characters</a></h3>
-<p>Characters are the in-game personas controlled by players (PCs) or the DM (NPCs).</p>
-<pre><code>Character
-├── id
-├── player_id (null for NPCs)
-├── character_name
-├── race, class, level
-├── ability_scores (STR, DEX, CON, INT, WIS, CHA)
-├── hit_points (current, max, temp)
-├── armor_class
-├── speed
-├── proficiencies
-├── features
-├── spells (known, prepared, slots)
-└── inventory
-</code></pre>
-<h2 id="character-creation"><a class="header" href="#character-creation">Character Creation</a></h2>
-<h3 id="creating-a-pc"><a class="header" href="#creating-a-pc">Creating a PC</a></h3>
-<p>PCs are linked to a player and campaign:</p>
-<ol>
-<li>Create or select a player</li>
-<li>Choose race and class from the catalog</li>
-<li>Set ability scores (manual entry or standard array)</li>
-<li>The system calculates:
-<ul>
-<li>Hit points based on class and CON modifier</li>
-<li>Proficiency bonus based on level</li>
-<li>Spell slots based on class and level</li>
-<li>Starting equipment suggestions</li>
-</ul>
-</li>
-</ol>
-<h3 id="creating-an-npc"><a class="header" href="#creating-an-npc">Creating an NPC</a></h3>
-<p>NPCs are simpler and don’t require a player:</p>
-<ol>
-<li>Provide basic stats (name, race, class)</li>
-<li>Set ability scores</li>
-<li>Optionally add spells and features</li>
-<li>NPC is created with <code>is_npc: true</code></li>
-</ol>
-<h2 id="spell-management"><a class="header" href="#spell-management">Spell Management</a></h2>
-<h3 id="spell-slots"><a class="header" href="#spell-slots">Spell Slots</a></h3>
-<p>The system automatically calculates spell slots based on:</p>
-<ul>
-<li>Character class</li>
-<li>Character level</li>
-<li>Multiclass combinations (if applicable)</li>
-</ul>
-<p>Supported caster types:</p>
-<ul>
-<li><strong>Full Casters</strong>: Wizard, Cleric, Druid, Bard, Sorcerer</li>
-<li><strong>Half Casters</strong>: Paladin, Ranger</li>
-<li><strong>Third Casters</strong>: Eldritch Knight, Arcane Trickster</li>
-<li><strong>Pact Magic</strong>: Warlock (separate slot progression)</li>
-</ul>
-<h3 id="spell-operations"><a class="header" href="#spell-operations">Spell Operations</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Operation</th><th>Description</th></tr>
-</thead>
-<tbody>
-<tr><td><code>add_spell_to_known</code></td><td>Add a spell to character’s known spells</td></tr>
-<tr><td><code>prepare_spells</code></td><td>Set which known spells are prepared</td></tr>
-<tr><td><code>cast_spell</code></td><td>Cast a spell, consuming a slot</td></tr>
-<tr><td><code>take_rest</code></td><td>Short or long rest to recover slots</td></tr>
-</tbody>
-</table>
-</div>
-<h2 id="character-progression"><a class="header" href="#character-progression">Character Progression</a></h2>
-<h3 id="leveling-up"><a class="header" href="#leveling-up">Leveling Up</a></h3>
-<p>The <code>level_up_character</code> command handles:</p>
-<ul>
-<li>Incrementing character level</li>
-<li>Recalculating hit points</li>
-<li>Updating proficiency bonus</li>
-<li>Adjusting spell slots</li>
-<li>Prompting for ASI/feat choices (at appropriate levels)</li>
-</ul>
-<h3 id="character-versions"><a class="header" href="#character-versions">Character Versions</a></h3>
-<p>Each significant change creates a version snapshot:</p>
-<ul>
-<li>Level ups</li>
-<li>Major stat changes</li>
-<li>Class feature acquisitions</li>
-</ul>
-<p>Retrieve history with <code>get_character_versions</code>.</p>
-<h2 id="api-reference"><a class="header" href="#api-reference">API Reference</a></h2>
+<p>Players represent the real people at your table. Each player record stores a name and optional email address, and can be associated with multiple characters across different campaigns through the campaign_players relationship table.</p>
+<p>Characters are the in-game personas controlled by players or the DM. A character record contains the character name, race, class, and level alongside the six ability scores. The system tracks current, maximum, and temporary hit points separately to support combat scenarios. Each character also maintains armor class, movement speed, proficiency selections, class features, known and prepared spells with slot tracking, and a complete inventory.</p>
+<p>The distinction between player characters and NPCs is handled through the player_id field. When this field is null, the character is treated as an NPC. When it references a valid player record, the character appears in player-specific views and receives full character sheet treatment.</p>
+<h2 id="spell-slot-calculation"><a class="header" href="#spell-slot-calculation">Spell Slot Calculation</a></h2>
+<p>The spell slot system automatically calculates available slots based on class and level. Full casters such as Wizard, Cleric, Druid, Bard, and Sorcerer follow the standard progression table. Half casters including Paladin and Ranger gain slots at half the rate, while third casters like Eldritch Knight and Arcane Trickster progress even more slowly. Warlocks use the separate Pact Magic system with fewer slots that recover on short rest.</p>
+<p>Multiclass characters have their slots calculated according to the multiclassing rules, summing effective caster levels from each class before consulting the appropriate progression table. The system stores both the calculated slot maximums and current availability, updating the latter when spells are cast or rests are taken.</p>
+<h2 id="character-versioning"><a class="header" href="#character-versioning">Character Versioning</a></h2>
+<p>Significant character changes create version snapshots in the database. These snapshots capture the complete character state at moments like level advancement, major stat modifications, or class feature acquisitions. The version history allows reviewing a character’s progression over time and can help resolve questions about when particular changes occurred.</p>
+<h2 id="tauri-commands"><a class="header" href="#tauri-commands">Tauri Commands</a></h2>
+<p>The character system exposes its functionality through Tauri commands that the frontend invokes via IPC. These commands follow a consistent pattern of accepting structured parameters and returning ApiResponse wrappers containing either the requested data or an error message.</p>
 <h3 id="player-commands"><a class="header" href="#player-commands">Player Commands</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
-</thead>
-<tbody>
-<tr><td><code>create_player</code></td><td>name, email?</td><td>Create a new player</td></tr>
-<tr><td><code>get_player</code></td><td>player_id</td><td>Get player details</td></tr>
-<tr><td><code>list_players</code></td><td>-</td><td>List all players</td></tr>
-<tr><td><code>update_player</code></td><td>player_id, updates</td><td>Update player info</td></tr>
-<tr><td><code>delete_player</code></td><td>player_id</td><td>Remove a player</td></tr>
-</tbody>
-</table>
-</div>
+<p>The <code>create_player</code> command accepts a name and optional email, returning the newly created player record. The <code>get_player</code> command retrieves a single player by ID, while <code>list_players</code> returns all registered players. Updates are handled through <code>update_player</code> which accepts the player ID and a partial update object. The <code>delete_player</code> command removes a player and cascades to remove their campaign associations.</p>
 <h3 id="character-commands"><a class="header" href="#character-commands">Character Commands</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
-</thead>
-<tbody>
-<tr><td><code>create_character</code></td><td>character_data</td><td>Full character creation</td></tr>
-<tr><td><code>create_minimal_character</code></td><td>basic_data</td><td>Quick character stub</td></tr>
-<tr><td><code>create_npc</code></td><td>npc_data</td><td>Create an NPC</td></tr>
-<tr><td><code>get_character</code></td><td>character_id</td><td>Get character details</td></tr>
-<tr><td><code>list_characters_for_campaign</code></td><td>campaign_id</td><td>All characters in campaign</td></tr>
-<tr><td><code>list_pcs_for_campaign</code></td><td>campaign_id</td><td>Only PCs</td></tr>
-<tr><td><code>list_npcs_for_campaign</code></td><td>campaign_id</td><td>Only NPCs</td></tr>
-<tr><td><code>update_character</code></td><td>character_id, updates</td><td>Modify character</td></tr>
-<tr><td><code>delete_character</code></td><td>character_id</td><td>Remove character</td></tr>
-<tr><td><code>level_up_character</code></td><td>character_id, options</td><td>Level up a character</td></tr>
-<tr><td><code>assign_character_to_campaign</code></td><td>character_id, campaign_id</td><td>Link to campaign</td></tr>
-</tbody>
-</table>
-</div>
+<p>Character creation is handled by <code>create_character</code> for full character data or <code>create_minimal_character</code> for quick stubs that can be fleshed out later. The <code>create_npc</code> command provides a streamlined path for NPCs that skips player association.</p>
+<p>Retrieval commands include <code>get_character</code> for a single character by ID and three listing commands scoped to campaigns: <code>list_characters_for_campaign</code> returns all characters, <code>list_pcs_for_campaign</code> filters to player characters only, and <code>list_npcs_for_campaign</code> returns NPCs exclusively.</p>
+<p>The <code>update_character</code> command accepts a character ID and partial update object for modifying existing characters. The <code>level_up_character</code> command handles level advancement including hit point recalculation, proficiency bonus updates, and spell slot adjustments. Characters are linked to campaigns through <code>assign_character_to_campaign</code>.</p>
 <h3 id="spell-commands"><a class="header" href="#spell-commands">Spell Commands</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
-</thead>
-<tbody>
-<tr><td><code>get_character_spell_slots</code></td><td>character_id</td><td>Current slot status</td></tr>
-<tr><td><code>add_spell_to_known</code></td><td>character_id, spell_id</td><td>Learn a spell</td></tr>
-<tr><td><code>prepare_spells</code></td><td>character_id, spell_ids</td><td>Set prepared spells</td></tr>
-<tr><td><code>cast_spell</code></td><td>character_id, spell_id, slot_level</td><td>Cast and use slot</td></tr>
-<tr><td><code>take_rest</code></td><td>character_id, rest_type</td><td>Recover resources</td></tr>
-</tbody>
-</table>
-</div>
+<p>The <code>get_character_spell_slots</code> command returns current slot status including both maximums and remaining uses. The <code>add_spell_to_known</code> command adds a spell to the character’s repertoire by spell ID. Prepared spell selection is handled through <code>prepare_spells</code> which accepts a list of spell IDs from the known spells.</p>
+<p>Casting uses the <code>cast_spell</code> command with character ID, spell ID, and the slot level being expended. The command validates slot availability before marking the slot as used. Resource recovery happens through <code>take_rest</code> which accepts the rest type (short or long) and restores appropriate slots and features.</p>
 <h2 id="frontend-integration"><a class="header" href="#frontend-integration">Frontend Integration</a></h2>
-<p>The frontend provides:</p>
-<ul>
-<li>Character creation wizard with step-by-step guidance</li>
-<li>Character sheet view with all stats and abilities</li>
-<li>Spell management interface with drag-and-drop preparation</li>
-<li>Quick actions for common operations (cast, rest, level up)</li>
-</ul>
+<p>The frontend provides a character creation wizard that guides users through race and class selection, ability score assignment, and initial equipment choices. The character sheet view displays all statistics, abilities, and equipment in a format familiar to tabletop players. Spell management includes a preparation interface supporting drag-and-drop organization of known spells into prepared slots.</p>
 <h2 id="llm-tool-integration"><a class="header" href="#llm-tool-integration">LLM Tool Integration</a></h2>
-<p>The AI assistant can help with character management through natural language:</p>
-<ul>
-<li>“Create a level 5 dwarf cleric named Thorin”</li>
-<li>“What spell slots does my wizard have left?”</li>
-<li>“Cast fireball at 4th level”</li>
-<li>“Take a long rest”</li>
-</ul>
-<p>See <a href="../llm-tools.html">LLM Tools</a> for more details on AI-assisted character management.</p>
+<p>The AI assistant accesses character data through dedicated tools that wrap the Tauri commands. Natural language requests like “What are Thorin’s hit points?” or “Cast fireball at 4th level” are translated into appropriate tool calls. The assistant can create characters, modify statistics, manage spells, and handle rests through conversational interaction. See the LLM Tools documentation for the complete list of character-related tools.</p>
 
                     </main>
 
