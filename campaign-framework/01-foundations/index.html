@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction - Mimir - D&amp;D Campaign Assistant</title>
+        <title>Framework Philosophy - Mimir - D&amp;D Campaign Assistant</title>
 
 
         <!-- Custom HTML head -->
@@ -12,33 +12,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-278bf022.js";
+            window.path_to_searchindex_js = "../../searchindex-278bf022.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-0875f73e.js"></script>
+        <script src="../../toc-0875f73e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -105,7 +105,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -140,7 +140,7 @@
                     <h1 class="menu-title">Mimir - D&amp;D Campaign Assistant</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
@@ -174,78 +174,161 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="mimir---dd-campaign-assistant"><a class="header" href="#mimir---dd-campaign-assistant">Mimir - D&amp;D Campaign Assistant</a></h1>
-<blockquote>
-<p><em>“Remember, I know everything that can be known in the multiverse.”</em> - Mimir, Planescape</p>
-</blockquote>
-<p>Welcome to Mimir, a project to build a local-first D&amp;D campaign assistant. Named after the wise floating skull of Planescape lore, Mimir will help Dungeon Masters manage the cognitive complexity of running campaigns.</p>
-<h2 id="current-status"><a class="header" href="#current-status">Current Status</a></h2>
-<p><strong>Active Development - v0.0.1 Released</strong> - Mimir is now available as a downloadable desktop application with core campaign management features.</p>
-<h3 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h3>
+                        <h1 id="framework-philosophy"><a class="header" href="#framework-philosophy">Framework Philosophy</a></h1>
+<h2 id="the-problem-with-traditional-dd-prep"><a class="header" href="#the-problem-with-traditional-dd-prep">The Problem with Traditional D&amp;D Prep</a></h2>
+<p>Every Dungeon Master faces the same fundamental challenge: how to create engaging, coherent campaigns while maintaining a sustainable creative pace. Traditional approaches often lead to:</p>
+<ul>
+<li><strong>Prep burnout</strong>: Spending 4-6 hours preparing for each 4-hour session</li>
+<li><strong>Wasted effort</strong>: Creating content that players never encounter</li>
+<li><strong>Narrative drift</strong>: Losing track of plot threads and character arcs</li>
+<li><strong>Cognitive overload</strong>: Trying to keep everything in your head</li>
+<li><strong>Player disconnection</strong>: Failing to integrate player interests into the world</li>
+</ul>
+<p>The Mimir Campaign Generation Framework addresses these challenges through a systematic approach that treats campaign management as a creative project with clear deliverables, feedback loops, and sustainable practices.</p>
+<h2 id="core-philosophy-sustainable-campaign-management"><a class="header" href="#core-philosophy-sustainable-campaign-management">Core Philosophy: Sustainable Campaign Management</a></h2>
+<p>At its heart, this framework rests on a simple principle: <strong>Campaign management should enhance creativity, not constrain it</strong>. By providing structure where structure helps and flexibility where flexibility matters, we create a system that supports long-term campaign success.</p>
+<h3 id="the-five-guiding-principles"><a class="header" href="#the-five-guiding-principles">The Five Guiding Principles</a></h3>
+<h4 id="1-just-in-time-creation"><a class="header" href="#1-just-in-time-creation">1. Just-In-Time Creation</a></h4>
+<p><strong>Principle</strong>: Create content only when you know it will be used.</p>
+<p>Traditional prep often involves creating elaborate dungeons, detailed NPCs, and complex plot lines that players might never encounter. Just-In-Time Creation means:</p>
+<ul>
+<li>Prepare what you need for the next session, plus a small buffer</li>
+<li>Develop deeper content only after players show interest</li>
+<li>Keep a library of modular components for rapid deployment</li>
+<li>Let player choices guide world expansion</li>
+</ul>
+<p><strong>Example</strong>: Instead of detailing every shop in a city, create a template for shops and flesh out specific ones only when players visit them.</p>
+<h4 id="2-design-to-fit-the-container"><a class="header" href="#2-design-to-fit-the-container">2. Design to Fit the Container</a></h4>
+<p><strong>Principle</strong>: Sessions should reach satisfying endings within your time limit.</p>
+<p>Don’t force 4-hour adventures into 1-hour slots—design 1-hour adventures instead. This means:</p>
+<ul>
+<li>Match content scope to actual session length</li>
+<li>Create natural breakpoints and cliffhangers</li>
+<li>Build adventures that can conclude satisfyingly in your timeframe</li>
+<li>Adjust pacing expectations to your table’s schedule</li>
+</ul>
+<p><strong>Example</strong>: If you play 45-minute lunch sessions, design episodic encounters with clear beginnings and endings rather than trying to run a traditional dungeon crawl.</p>
+<h4 id="3-player-driven-development"><a class="header" href="#3-player-driven-development">3. Player-Driven Development</a></h4>
+<p><strong>Principle</strong>: The best content emerges from player interests and choices.</p>
+<p>Rather than forcing players through predetermined storylines:</p>
+<ul>
+<li>Track what excites players during sessions</li>
+<li>Build on throwaway comments and theories</li>
+<li>Let player backstories drive major arcs</li>
+<li>Use player actions to determine world reactions</li>
+</ul>
+<p><strong>Example</strong>: A player mentions their character fears spiders. This becomes a thread that eventually leads to a module featuring a cult of Lolth.</p>
+<h4 id="4-sustainable-pace"><a class="header" href="#4-sustainable-pace">4. Sustainable Pace</a></h4>
+<p><strong>Principle</strong>: Marathon campaigns require marathon training.</p>
+<p>A campaign that lasts years needs consistent, manageable effort:</p>
+<ul>
+<li>Establish a weekly routine that works long-term</li>
+<li>Build in recovery time and prep breaks</li>
+<li>Use “filler” sessions to reduce prep load</li>
+<li>Maintain energy reserves for campaign climaxes</li>
+</ul>
+<p><strong>Example</strong>: Alternating high-prep “main plot” sessions with low-prep “downtime” sessions where players pursue personal goals.</p>
+<h4 id="5-living-documentation"><a class="header" href="#5-living-documentation">5. Living Documentation</a></h4>
+<p><strong>Principle</strong>: Your campaign world should be discoverable, not memorized.</p>
+<p>Human memory is fallible; good organization is reliable:</p>
+<ul>
+<li>Document decisions as you make them</li>
+<li>Maintain accessible reference materials</li>
+<li>Use consistent formats for quick scanning</li>
+<li>Keep player-facing and DM-facing docs separate</li>
+</ul>
+<p><strong>Example</strong>: A simple “Campaign Bible” that tracks all established facts, NPCs, and locations in a searchable format.</p>
+<h2 id="cognitive-load-management"><a class="header" href="#cognitive-load-management">Cognitive Load Management</a></h2>
+<p>The framework explicitly addresses cognitive load through physical and digital organization:</p>
+<h3 id="the-three-types-of-cognitive-load"><a class="header" href="#the-three-types-of-cognitive-load">The Three Types of Cognitive Load</a></h3>
 <ol>
-<li><strong><a href="https://github.com/colliery-io/mimir/releases">Download Mimir</a></strong> - Get the latest release for your platform</li>
-<li><strong>Install</strong> - Follow the platform-specific installation instructions in the <a href="../../README.html#installation">main README</a></li>
-<li><strong>Explore</strong> - Start managing your D&amp;D campaigns with the Campaign Generation Framework</li>
+<li>
+<p><strong>Intrinsic Load</strong>: The inherent complexity of running D&amp;D</p>
+<ul>
+<li>Rules adjudication</li>
+<li>NPC roleplay</li>
+<li>Combat management</li>
+</ul>
+</li>
+<li>
+<p><strong>Extraneous Load</strong>: Unnecessary mental burden</p>
+<ul>
+<li>Searching for information</li>
+<li>Remembering plot details</li>
+<li>Tracking campaign continuity</li>
+</ul>
+</li>
+<li>
+<p><strong>Germane Load</strong>: Productive creative thinking</p>
+<ul>
+<li>Improvising NPC dialogue</li>
+<li>Adapting to player choices</li>
+<li>Building dramatic moments</li>
+</ul>
+</li>
 </ol>
-<h3 id="whats-available-now"><a class="header" href="#whats-available-now">What’s Available Now</a></h3>
+<p>The framework minimizes extraneous load to maximize germane load, allowing you to focus on what matters: creating memorable experiences for your players.</p>
+<h2 id="when-to-use-this-framework"><a class="header" href="#when-to-use-this-framework">When to Use This Framework</a></h2>
+<p>This framework excels in specific scenarios:</p>
+<h3 id="ideal-use-cases"><a class="header" href="#ideal-use-cases">Ideal Use Cases</a></h3>
 <ul>
-<li>
-<p><strong>Desktop Application (v0.0.1)</strong> - Local-first campaign management tool</p>
+<li><strong>Long-term campaigns</strong>: Anything planned for 6+ months</li>
+<li><strong>Complex narratives</strong>: Multiple plot threads and recurring NPCs</li>
+<li><strong>Busy DMs</strong>: Limited prep time but high quality expectations</li>
+<li><strong>New DMs</strong>: Need structure while developing their style</li>
+<li><strong>Collaborative tables</strong>: High player agency and world-building</li>
+</ul>
+<h3 id="when-to-consider-alternatives"><a class="header" href="#when-to-consider-alternatives">When to Consider Alternatives</a></h3>
 <ul>
-<li>Campaign workflow management with structured phases</li>
-<li>D&amp;D 5e catalog with full-text search</li>
-<li>Document templates and rich text editing</li>
-<li>Local LLM integration via Ollama</li>
-<li>Cross-platform support (macOS, Windows, Linux)</li>
+<li><strong>One-shots</strong>: Overhead exceeds benefit</li>
+<li><strong>Purely episodic</strong>: No continuing narrative</li>
+<li><strong>Sandbox purists</strong>: Prefer entirely emergent gameplay</li>
+<li><strong>High-prep preference</strong>: Enjoy extensive world-building</li>
 </ul>
-</li>
-<li>
-<p><strong><a href="./campaign-framework/README.html">Campaign Generation Framework</a></strong> - A complete system for creating and managing D&amp;D campaigns</p>
+<h2 id="the-paradigm-shift"><a class="header" href="#the-paradigm-shift">The Paradigm Shift</a></h2>
+<p>Moving from traditional prep to this framework requires shifting your mindset:</p>
+<p><strong>From</strong>: “I need to know everything”<br><strong>To</strong>: “I need to know enough”</p>
+<p><strong>From</strong>: “Players might go anywhere”<br><strong>To</strong>: “Players will signal their interests”</p>
+<p><strong>From</strong>: “More prep is better”<br><strong>To</strong>: “Smart prep is better”</p>
+<p><strong>From</strong>: “I must control the story”<br><strong>To</strong>: “I facilitate the story”</p>
+<p><strong>From</strong>: “Everything must be original”<br><strong>To</strong>: “Everything must be engaging”</p>
+<p>These shifts create a sustainable, player-centric approach that produces better campaigns with less effort.</p>
+<h2 id="success-metrics"><a class="header" href="#success-metrics">Success Metrics</a></h2>
+<p>How do you know the framework is working?</p>
+<h3 id="quantitative-measures"><a class="header" href="#quantitative-measures">Quantitative Measures</a></h3>
 <ul>
-<li>The Three-Board System for organization</li>
-<li>Campaign genesis process</li>
-<li>Module creation workflow</li>
-<li>Session management techniques</li>
-<li>Ready-to-use templates</li>
+<li>Prep time: 1 hour prep per 4 hours of play</li>
+<li>Session regularity: 90%+ sessions happen as scheduled</li>
+<li>Campaign longevity: Campaigns last as long as intended</li>
+<li>Player retention: Players prioritize game nights</li>
 </ul>
-</li>
-</ul>
-<h2 id="vision"><a class="header" href="#vision">Vision</a></h2>
-<p>Mimir is a <strong>desktop application</strong> built with Rust and Tauri that serves as your intelligent campaign companion. The application implements the Campaign Generation Framework and provides:</p>
+<h3 id="qualitative-measures"><a class="header" href="#qualitative-measures">Qualitative Measures</a></h3>
 <ul>
-<li>Local LLM integration for creative assistance (via Ollama)</li>
-<li>Intelligent NPC and plot tracking</li>
-<li>Session preparation tools</li>
-<li>Privacy-first design with all data stored locally</li>
-<li>Cross-platform native desktop experience</li>
+<li>DM energy: Feeling energized after sessions, not drained</li>
+<li>Player engagement: Active participation and between-session discussions</li>
+<li>Story coherence: Plot threads resolve satisfyingly</li>
+<li>Creative flow: Inspiration comes easily during prep</li>
 </ul>
-<h2 id="documentation-structure"><a class="header" href="#documentation-structure">Documentation Structure</a></h2>
-<p>This documentation follows the <a href="https://diataxis.fr/">Diátaxis</a> framework. Currently available:</p>
-<ul>
-<li><strong><a href="./campaign-framework/README.html">Campaign Framework</a></strong> - The complete campaign management system</li>
-</ul>
-<p>Coming soon:</p>
-<ul>
-<li>Tutorials - Getting started with the software</li>
-<li>How-To Guides - Specific task solutions</li>
-<li>Reference - Technical details</li>
-<li>Explanation - Architecture and design decisions</li>
-</ul>
-<h2 id="getting-help"><a class="header" href="#getting-help">Getting Help</a></h2>
-<ul>
-<li><strong>Issues</strong>: Report bugs or request features on <a href="https://github.com/colliery-io/mimir/issues">GitHub Issues</a></li>
-<li><strong>Discussions</strong>: Join community discussions on <a href="https://github.com/colliery-io/mimir/discussions">GitHub Discussions</a></li>
-<li><strong>Troubleshooting</strong>: Check our <a href="./how-to/troubleshooting.html">troubleshooting guide</a></li>
-</ul>
-<h2 id="license"><a class="header" href="#license">License</a></h2>
-<p>Licensed under either of Apache License, Version 2.0 or MIT license at your option.</p>
+<h2 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h2>
+<p>The framework’s modular nature means you can adopt it gradually:</p>
+<ol>
+<li><strong>Start small</strong>: Implement just the Three-Board System</li>
+<li><strong>Build habits</strong>: Establish your weekly workflow</li>
+<li><strong>Add tools</strong>: Introduce templates as needed</li>
+<li><strong>Refine process</strong>: Adjust to your table’s needs</li>
+</ol>
+<p>Remember: The framework serves you, not the other way around. Take what works, modify what doesn’t, and create your own sustainable campaign management practice.</p>
+<p>The following chapters will guide you through each component of the framework, from high-level organization to session-by-session execution. By the end, you’ll have a complete toolkit for running engaging, sustainable campaigns that grow with your players’ interests while respecting your time and energy.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../campaign-framework/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
 
-                            <a rel="next prefetch" href="CONTRIBUTING.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../campaign-framework/01-foundations/three-board-system.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -255,8 +338,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../campaign-framework/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
 
-                    <a rel="next prefetch" href="CONTRIBUTING.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../campaign-framework/01-foundations/three-board-system.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
@@ -276,13 +362,13 @@
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
 

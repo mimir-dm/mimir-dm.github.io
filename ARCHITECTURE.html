@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction - Mimir - D&amp;D Campaign Assistant</title>
+        <title>Architecture - Mimir - D&amp;D Campaign Assistant</title>
 
 
         <!-- Custom HTML head -->
@@ -174,78 +174,272 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="mimir---dd-campaign-assistant"><a class="header" href="#mimir---dd-campaign-assistant">Mimir - D&amp;D Campaign Assistant</a></h1>
-<blockquote>
-<p><em>“Remember, I know everything that can be known in the multiverse.”</em> - Mimir, Planescape</p>
-</blockquote>
-<p>Welcome to Mimir, a project to build a local-first D&amp;D campaign assistant. Named after the wise floating skull of Planescape lore, Mimir will help Dungeon Masters manage the cognitive complexity of running campaigns.</p>
-<h2 id="current-status"><a class="header" href="#current-status">Current Status</a></h2>
-<p><strong>Active Development - v0.0.1 Released</strong> - Mimir is now available as a downloadable desktop application with core campaign management features.</p>
-<h3 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h3>
+                        <h1 id="mimir-architecture"><a class="header" href="#mimir-architecture">Mimir Architecture</a></h1>
+<p>This document provides a high-level overview of the Mimir codebase architecture for developers.</p>
+<h2 id="crate-overview"><a class="header" href="#crate-overview">Crate Overview</a></h2>
+<p>Mimir is organized as a Cargo workspace with 7 crates:</p>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│                    mimir-dm (Main App)                  │
+│                   Tauri Desktop Application             │
+└─────────────────────────┬───────────────────────────────┘
+                          │
+        ┌─────────────────┼─────────────────┐
+        ▼                 ▼                 ▼
+┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+│ mimir-dm-core │ │ mimir-dm-llm  │ │ mimir-dm-print│
+│  Core Logic   │ │  LLM Layer    │ │  PDF Export   │
+└───────────────┘ └───────────────┘ └───────────────┘
+
+Standalone Utilities:
+├── mimir-dm-agent-test    (Agent test harness)
+├── mimir-5etools-splitter (Data processing)
+└── mimir-llm-eval         (LLM benchmarking)
+</code></pre>
+<h3 id="mimir-dm-core"><a class="header" href="#mimir-dm-core">mimir-dm-core</a></h3>
+<p>The heart of the system containing:</p>
+<ul>
+<li><strong>Models</strong>: Domain types for campaigns, characters, D&amp;D catalog data</li>
+<li><strong>Services</strong>: Business logic (33 services, ~11k LOC)</li>
+<li><strong>DAL</strong>: Data Access Layer with repository traits</li>
+<li><strong>Migrations</strong>: 33 Diesel migrations for SQLite schema</li>
+</ul>
+<h3 id="mimir-dm-llm"><a class="header" href="#mimir-dm-llm">mimir-dm-llm</a></h3>
+<p>LLM provider abstraction layer:</p>
+<ul>
+<li><strong>Traits</strong>: <code>LlmProvider</code> interface for chat operations</li>
+<li><strong>Providers</strong>: Ollama implementation (OpenAI-compatible)</li>
+<li><strong>Config</strong>: Model configuration, rate limiting</li>
+</ul>
+<h3 id="mimir-dm-print"><a class="header" href="#mimir-dm-print">mimir-dm-print</a></h3>
+<p>PDF generation using Typst:</p>
+<ul>
+<li>Character sheets</li>
+<li>Campaign documents</li>
+<li>Markdown to Typst conversion</li>
+</ul>
+<h3 id="mimir-dm"><a class="header" href="#mimir-dm">mimir-dm</a></h3>
+<p>Tauri desktop application:</p>
+<ul>
+<li><strong>Commands</strong>: 50+ Tauri command handlers</li>
+<li><strong>Services</strong>: LLM integration, context management</li>
+<li><strong>State</strong>: Consolidated <code>AppState</code> struct</li>
+</ul>
+<h2 id="request-flow"><a class="header" href="#request-flow">Request Flow</a></h2>
+<pre><code>┌──────────┐    ┌─────────────┐    ┌─────────────┐    ┌──────────┐
+│ Frontend │───▶│   Tauri     │───▶│   Service   │───▶│ Database │
+│  (React) │    │  Command    │    │   Layer     │    │ (SQLite) │
+└──────────┘    └─────────────┘    └─────────────┘    └──────────┘
+     ▲                │                   │
+     │                ▼                   │
+     │         ┌─────────────┐           │
+     └─────────│  AppState   │◀──────────┘
+               │  (db, llm)  │
+               └─────────────┘
+</code></pre>
+<h3 id="typical-command-flow"><a class="header" href="#typical-command-flow">Typical Command Flow</a></h3>
 <ol>
-<li><strong><a href="https://github.com/colliery-io/mimir/releases">Download Mimir</a></strong> - Get the latest release for your platform</li>
-<li><strong>Install</strong> - Follow the platform-specific installation instructions in the <a href="../../README.html#installation">main README</a></li>
-<li><strong>Explore</strong> - Start managing your D&amp;D campaigns with the Campaign Generation Framework</li>
+<li><strong>Frontend</strong> invokes Tauri command (e.g., <code>get_campaign</code>)</li>
+<li><strong>Tauri Command</strong> extracts <code>State&lt;AppState&gt;</code> and parameters</li>
+<li><strong>Service</strong> performs business logic, accesses database</li>
+<li><strong>Response</strong> returned to frontend as JSON</li>
 </ol>
-<h3 id="whats-available-now"><a class="header" href="#whats-available-now">What’s Available Now</a></h3>
+<p>Example:</p>
+<pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[tauri::command]
+pub async fn get_campaign(
+    campaign_id: i32,
+    state: State&lt;'_, AppState&gt;,
+) -&gt; Result&lt;ApiResponse&lt;Campaign&gt;, ApiError&gt; {
+    let mut conn = state.db.get_connection()?;
+    let campaign = CampaignService::get_by_id(&amp;mut conn, campaign_id)?;
+    Ok(ApiResponse::success(campaign))
+}
+<span class="boring">}</span></code></pre>
+<h2 id="database-design"><a class="header" href="#database-design">Database Design</a></h2>
+<p>See <a href="/.metis/adr/MIMIR-A-0001.html">ADR-0001</a> for denormalized design rationale.</p>
+<h3 id="key-design-decisions"><a class="header" href="#key-design-decisions">Key Design Decisions</a></h3>
 <ul>
-<li>
-<p><strong>Desktop Application (v0.0.1)</strong> - Local-first campaign management tool</p>
+<li><strong>Denormalized</strong>: Child entities (subclasses, subraces) contain full parent data</li>
+<li><strong>JSON Columns</strong>: Complex/variable data stored as JSON (see <a href="/.metis/adr/MIMIR-A-0003.html">ADR-0003</a>)</li>
+<li><strong>Multi-Ruleset</strong>: Content organized by rule system and source (see <a href="/.metis/adr/MIMIR-A-0002.html">ADR-0002</a>)</li>
+</ul>
+<h3 id="schema-overview-35-tables"><a class="header" href="#schema-overview-35-tables">Schema Overview (35 tables)</a></h3>
+<p><strong>Campaign Management:</strong></p>
 <ul>
-<li>Campaign workflow management with structured phases</li>
-<li>D&amp;D 5e catalog with full-text search</li>
-<li>Document templates and rich text editing</li>
-<li>Local LLM integration via Ollama</li>
-<li>Cross-platform support (macOS, Windows, Linux)</li>
+<li><code>campaigns</code>, <code>modules</code>, <code>sessions</code></li>
+<li><code>documents</code>, <code>template_documents</code></li>
+<li><code>workflow_cards</code></li>
 </ul>
-</li>
-<li>
-<p><strong><a href="./campaign-framework/README.html">Campaign Generation Framework</a></strong> - A complete system for creating and managing D&amp;D campaigns</p>
+<p><strong>D&amp;D Catalog:</strong></p>
 <ul>
-<li>The Three-Board System for organization</li>
-<li>Campaign genesis process</li>
-<li>Module creation workflow</li>
-<li>Session management techniques</li>
-<li>Ready-to-use templates</li>
+<li><code>catalog_*</code> tables for each entity type (spells, monsters, items, etc.)</li>
+<li><code>uploaded_books</code>, <code>catalog_sources</code></li>
 </ul>
-</li>
-</ul>
-<h2 id="vision"><a class="header" href="#vision">Vision</a></h2>
-<p>Mimir is a <strong>desktop application</strong> built with Rust and Tauri that serves as your intelligent campaign companion. The application implements the Campaign Generation Framework and provides:</p>
+<p><strong>Characters:</strong></p>
 <ul>
-<li>Local LLM integration for creative assistance (via Ollama)</li>
-<li>Intelligent NPC and plot tracking</li>
-<li>Session preparation tools</li>
-<li>Privacy-first design with all data stored locally</li>
-<li>Cross-platform native desktop experience</li>
+<li><code>player_characters</code>, <code>character_versions</code></li>
+<li><code>character_spells</code>, <code>character_inventory</code></li>
 </ul>
-<h2 id="documentation-structure"><a class="header" href="#documentation-structure">Documentation Structure</a></h2>
-<p>This documentation follows the <a href="https://diataxis.fr/">Diátaxis</a> framework. Currently available:</p>
+<h2 id="service-layer"><a class="header" href="#service-layer">Service Layer</a></h2>
+<p>Services follow the stateful pattern per <a href="/.metis/adr/MIMIR-A-0005.html">ADR-0005</a>:</p>
+<pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct SpellService&lt;'a&gt; {
+    pub conn: &amp;'a mut SqliteConnection,
+}
+
+impl&lt;'a&gt; SpellService&lt;'a&gt; {
+    pub fn new(conn: &amp;'a mut SqliteConnection) -&gt; Self {
+        Self { conn }
+    }
+
+    pub fn search(&amp;mut self, filters: SpellFilters) -&gt; Result&lt;Vec&lt;SpellSummary&gt;&gt; {
+        // Query logic
+    }
+}
+<span class="boring">}</span></code></pre>
+<h3 id="service-categories"><a class="header" href="#service-categories">Service Categories</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Category</th><th>Services</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td>Campaign</td><td>CampaignService, ModuleService, SessionService</td><td>Campaign management</td></tr>
+<tr><td>Catalog</td><td>SpellService, MonsterService, ItemService, etc.</td><td>D&amp;D reference data</td></tr>
+<tr><td>Character</td><td>CharacterService, CharacterCreationService</td><td>PC/NPC management</td></tr>
+<tr><td>Content</td><td>DocumentService, TemplateService</td><td>Document management</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="llm-integration"><a class="header" href="#llm-integration">LLM Integration</a></h2>
+<pre><code>┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│  LlmService  │───▶│ ChatProcessor│───▶│   Provider   │
+│  (Tauri)     │    │  (Tools)     │    │  (Ollama)    │
+└──────────────┘    └──────────────┘    └──────────────┘
+                           │
+                    ┌──────┴──────┐
+                    │ ToolRegistry │
+                    │ (15+ tools)  │
+                    └─────────────┘
+</code></pre>
+<h3 id="tool-system"><a class="header" href="#tool-system">Tool System</a></h3>
+<p>Tools enable the LLM to interact with the application:</p>
 <ul>
-<li><strong><a href="./campaign-framework/README.html">Campaign Framework</a></strong> - The complete campaign management system</li>
+<li><strong>Character Tools</strong>: Cast spells, check slots, manage inventory</li>
+<li><strong>Query Tools</strong>: Search spells, monsters, items</li>
+<li><strong>Campaign Tools</strong>: Access session notes, module info</li>
 </ul>
-<p>Coming soon:</p>
+<h2 id="key-patterns"><a class="header" href="#key-patterns">Key Patterns</a></h2>
+<h3 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h3>
+<pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Application-level errors
+pub enum MimirError {
+    Database(DbError),
+    Print(String),
+    Llm(String),
+    NotFound(String),
+    // ...
+}
+
+// Database-level errors
+pub enum DbError {
+    NotFound { entity_type, id },
+    ConstraintViolation { field, message },
+    Query(diesel::result::Error),
+    // ...
+}
+<span class="boring">}</span></code></pre>
+<h3 id="state-management"><a class="header" href="#state-management">State Management</a></h3>
+<p><code>AppState</code> consolidates all shared state:</p>
+<pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct AppState {
+    pub db: Arc&lt;DatabaseService&gt;,       // Database connection pool
+    pub paths: Arc&lt;AppPaths&gt;,           // Application paths
+    pub context: ContextState,          // Conversation context
+    pub sessions: SessionManager,       // Chat sessions
+    pub llm: Arc&lt;Mutex&lt;Option&lt;LlmService&gt;&gt;&gt;, // LLM service
+}
+<span class="boring">}</span></code></pre>
+<h2 id="directory-structure"><a class="header" href="#directory-structure">Directory Structure</a></h2>
+<pre><code>crates/
+├── mimir-dm/                    # Main Tauri app
+│   ├── src/
+│   │   ├── main.rs             # Entry point
+│   │   ├── state.rs            # AppState
+│   │   ├── commands/           # Tauri commands
+│   │   │   ├── catalog/        # D&amp;D reference commands
+│   │   │   ├── campaign/       # Campaign management
+│   │   │   ├── character/      # Character operations
+│   │   │   └── chat/           # LLM chat commands
+│   │   └── services/           # Business logic
+│   │       ├── llm/            # LLM integration
+│   │       └── tools/          # LLM tool implementations
+│   └── frontend/               # React frontend
+│
+├── mimir-dm-core/              # Core business logic
+│   ├── src/
+│   │   ├── models/             # Domain models
+│   │   │   ├── catalog/        # D&amp;D entity types
+│   │   │   └── campaign/       # Campaign types
+│   │   ├── services/           # Business logic services
+│   │   ├── dal/                # Data access layer
+│   │   └── migrations/         # Database migrations
+│
+├── mimir-dm-llm/               # LLM abstraction
+│   └── src/
+│       ├── providers/          # Provider implementations
+│       └── traits/             # Provider interface
+│
+└── mimir-dm-print/             # PDF generation
+    └── src/
+        └── templates/          # Typst templates
+</code></pre>
+<h2 id="development-guidelines"><a class="header" href="#development-guidelines">Development Guidelines</a></h2>
+<h3 id="adding-a-new-catalog-entity"><a class="header" href="#adding-a-new-catalog-entity">Adding a New Catalog Entity</a></h3>
+<ol>
+<li>Create model in <code>mimir-dm-core/src/models/catalog/</code></li>
+<li>Add migration in <code>mimir-dm-core/migrations/</code></li>
+<li>Create service in <code>mimir-dm-core/src/services/</code></li>
+<li>Add Tauri commands in <code>mimir-dm/src/commands/catalog/</code></li>
+<li>Update schema.rs after migration</li>
+</ol>
+<h3 id="adding-a-new-tool"><a class="header" href="#adding-a-new-tool">Adding a New Tool</a></h3>
+<ol>
+<li>Implement tool trait in <code>mimir-dm/src/services/tools/</code></li>
+<li>Register in <code>ToolRegistry</code></li>
+<li>Add tests in corresponding <code>*_test.rs</code> file</li>
+</ol>
+<h3 id="testing"><a class="header" href="#testing">Testing</a></h3>
+<pre><code class="language-bash"># Run all tests
+cargo test --workspace
+
+# Run core tests only
+cargo test -p mimir-dm-core
+
+# Run specific test
+cargo test test_name
+</code></pre>
+<h2 id="related-documentation"><a class="header" href="#related-documentation">Related Documentation</a></h2>
 <ul>
-<li>Tutorials - Getting started with the software</li>
-<li>How-To Guides - Specific task solutions</li>
-<li>Reference - Technical details</li>
-<li>Explanation - Architecture and design decisions</li>
+<li><a href="/.metis/adr/MIMIR-A-0001.html">ADR-0001: Denormalized Database Design</a></li>
+<li><a href="/.metis/adr/MIMIR-A-0002.html">ADR-0002: Multi-Ruleset Architecture</a></li>
+<li><a href="/.metis/adr/MIMIR-A-0003.html">ADR-0003: JSON Storage Strategy</a></li>
+<li><a href="/.metis/adr/MIMIR-A-0005.html">ADR-0005: Service Layer Pattern</a></li>
 </ul>
-<h2 id="getting-help"><a class="header" href="#getting-help">Getting Help</a></h2>
-<ul>
-<li><strong>Issues</strong>: Report bugs or request features on <a href="https://github.com/colliery-io/mimir/issues">GitHub Issues</a></li>
-<li><strong>Discussions</strong>: Join community discussions on <a href="https://github.com/colliery-io/mimir/discussions">GitHub Discussions</a></li>
-<li><strong>Troubleshooting</strong>: Check our <a href="./how-to/troubleshooting.html">troubleshooting guide</a></li>
-</ul>
-<h2 id="license"><a class="header" href="#license">License</a></h2>
-<p>Licensed under either of Apache License, Version 2.0 or MIT license at your option.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="DEVELOPMENT.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
 
-                            <a rel="next prefetch" href="CONTRIBUTING.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="campaign-framework/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -255,8 +449,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="DEVELOPMENT.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
 
-                    <a rel="next prefetch" href="CONTRIBUTING.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="campaign-framework/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
