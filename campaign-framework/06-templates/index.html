@@ -35,10 +35,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-1a98ae45.js";
+            window.path_to_searchindex_js = "../../searchindex-ddaff003.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-59f74745.js"></script>
+        <script src="../../toc-e4b7bbf0.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -184,12 +184,12 @@
 <h2 id="key-terminology"><a class="header" href="#key-terminology">Key Terminology</a></h2>
 <p>To ensure clarity throughout these templates:</p>
 <ul>
-<li><strong>Session Outline</strong>: The template used during the 8-step prep process to capture your working notes</li>
-<li><strong>Session Plan</strong>: The polished one-page document you bring to the table, created from your outline</li>
-<li><strong>Module</strong>: A complete story unit of 3-6 sessions with beginning, middle, and end</li>
+<li><strong>Module</strong>: A complete, runnable adventure unit with encounters, NPCs, locations, and narrative structure. The atomic unit of campaign content.</li>
+<li><strong>Session</strong>: The actual play time when you and your players meet (3-4 hours typically). A module may span multiple sessions.</li>
 <li><strong>Arc</strong>: A narrative thread that may span multiple modules or run within a single module</li>
 <li><strong>Campaign</strong>: The overarching story containing multiple modules</li>
 <li><strong>Artifact</strong>: Any document, template, or tool used in campaign management</li>
+<li><strong>Front Matter</strong>: YAML metadata at the top of module files that links to catalog entries (monsters, NPCs, items)</li>
 </ul>
 <h2 id="quick-reference-table"><a class="header" href="#quick-reference-table">Quick Reference Table</a></h2>
 <div class="table-wrapper">
@@ -208,15 +208,15 @@
 <tr><td><strong>Major NPC Tracker</strong></td><td>Detailed NPC profiles</td><td>Campaign</td><td><a href="./templates/major-npc-tracker.html">Download</a></td></tr>
 <tr><td><strong>PC Arc Tracker</strong></td><td>Character development</td><td>Campaign</td><td><a href="./templates/pc-arc-tracker.html">Download</a></td></tr>
 <tr><td><strong>Character Integration</strong></td><td>Session Zero party building</td><td>Campaign</td><td><a href="./templates/character-integration.html">Download</a></td></tr>
-<tr><td><strong>Module Overview</strong></td><td>General module planning</td><td>Module</td><td><a href="./templates/module-overview.html">Download</a></td></tr>
-<tr><td><strong>Mystery Module</strong></td><td>Investigation adventures</td><td>Module</td><td><a href="./templates/module-mystery.html">Download</a></td></tr>
-<tr><td><strong>Dungeon Module</strong></td><td>Exploration &amp; combat</td><td>Module</td><td><a href="./templates/module-dungeon.html">Download</a></td></tr>
-<tr><td><strong>Heist Module</strong></td><td>Planning &amp; execution</td><td>Module</td><td><a href="./templates/module-heist.html">Download</a></td></tr>
-<tr><td><strong>Political Module</strong></td><td>Intrigue &amp; factions</td><td>Module</td><td><a href="./templates/module-political.html">Download</a></td></tr>
-<tr><td><strong>Horror Module</strong></td><td>Suspense &amp; fear</td><td>Module</td><td><a href="./templates/module-horror.html">Download</a></td></tr>
-<tr><td><strong>Session Outline</strong></td><td>8-step prep process</td><td>Session</td><td><a href="./templates/session-outline.html">Download</a></td></tr>
+<tr><td><strong>Module Overview</strong></td><td>General runnable adventure</td><td>Module</td><td><a href="./templates/module_overview.html">Download</a></td></tr>
+<tr><td><strong>Mystery Module</strong></td><td>Investigation adventures</td><td>Module</td><td><a href="./templates/module_mystery.html">Download</a></td></tr>
+<tr><td><strong>Dungeon Module</strong></td><td>Exploration &amp; combat</td><td>Module</td><td><a href="./templates/module_dungeon.html">Download</a></td></tr>
+<tr><td><strong>Heist Module</strong></td><td>Planning &amp; execution</td><td>Module</td><td><a href="./templates/module_heist.html">Download</a></td></tr>
+<tr><td><strong>Political Module</strong></td><td>Intrigue &amp; factions</td><td>Module</td><td><a href="./templates/module_political.html">Download</a></td></tr>
+<tr><td><strong>Horror Module</strong></td><td>Suspense &amp; fear</td><td>Module</td><td><a href="./templates/module_horror.html">Download</a></td></tr>
+<tr><td><strong>Play Notes</strong></td><td>Capture what happened</td><td>Session</td><td><a href="./templates/play_notes.html">Download</a></td></tr>
 <tr><td><strong>Quick NPC Reference</strong></td><td>Tonight’s NPCs</td><td>Session</td><td><a href="./templates/quick-npc-reference.html">Download</a></td></tr>
-<tr><td><strong>Clue Tracker</strong></td><td>Information flow</td><td>Session</td><td><a href="./templates/clue-tracker.html">Download</a></td></tr>
+<tr><td><strong>Clue Tracker</strong></td><td>Information flow</td><td>Module</td><td><a href="./templates/clue-tracker.html">Download</a></td></tr>
 <tr><td><strong>Document Tracker</strong></td><td>Master documentation index</td><td>All</td><td><a href="./templates/document-tracker.html">Download</a></td></tr>
 </tbody>
 </table>
@@ -228,7 +228,9 @@
 <h3 id="campaign-level"><a class="header" href="#campaign-level">Campaign Level</a></h3>
 <p>These artifacts track the big picture across your entire campaign:</p>
 <h4 id="campaign-bible"><a class="header" href="#campaign-bible">Campaign Bible</a></h4>
-<p><strong>Purpose</strong>: Master document tracking essential campaign truths<br><strong>Update Frequency</strong>: Monthly or after major events<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Master document tracking essential campaign truths
+<strong>Update Frequency</strong>: Monthly or after major events
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>Core concept and Big Three</li>
 <li>Major themes and timeline</li>
@@ -237,7 +239,9 @@
 </ul>
 <p><a href="./templates/campaign-bible.html">View Full Template</a></p>
 <h4 id="starting-scenario"><a class="header" href="#starting-scenario">Starting Scenario</a></h4>
-<p><strong>Purpose</strong>: Player-facing prologue that sets up character creation context<br><strong>Update Frequency</strong>: Created once during campaign genesis<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Player-facing prologue that sets up character creation context
+<strong>Update Frequency</strong>: Created once during campaign genesis
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>Current situation (what players observe)</li>
 <li>Starting location and circumstances</li>
@@ -247,7 +251,9 @@
 </ul>
 <p><a href="./templates/starting-scenario.html">View Full Template</a></p>
 <h4 id="major-npc-tracker"><a class="header" href="#major-npc-tracker">Major NPC Tracker</a></h4>
-<p><strong>Purpose</strong>: Detailed profiles for campaign-shaping NPCs<br><strong>Update Frequency</strong>: After each appearance<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Detailed profiles for campaign-shaping NPCs
+<strong>Update Frequency</strong>: After each appearance
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>Identity and characterization</li>
 <li>Motivations and resources</li>
@@ -256,7 +262,9 @@
 </ul>
 <p><a href="./templates/major-npc-tracker.html">View Full Template</a></p>
 <h4 id="player-character-arc-tracker"><a class="header" href="#player-character-arc-tracker">Player Character Arc Tracker</a></h4>
-<p><strong>Purpose</strong>: Monitor long-term character development<br><strong>Update Frequency</strong>: Every 3-4 sessions<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Monitor long-term character development
+<strong>Update Frequency</strong>: Every 3-4 sessions
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>Character core and personal arcs</li>
 <li>Mechanical milestones</li>
@@ -265,7 +273,9 @@
 </ul>
 <p><a href="./templates/pc-arc-tracker.html">View Full Template</a></p>
 <h4 id="campaign-pitch"><a class="header" href="#campaign-pitch">Campaign Pitch</a></h4>
-<p><strong>Purpose</strong>: One-page document to excite players about the campaign<br><strong>Update Frequency</strong>: Created once, refined during Session Zero<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: One-page document to excite players about the campaign
+<strong>Update Frequency</strong>: Created once, refined during Session Zero
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>The Hook and Big Three</li>
 <li>Campaign pillars and tone</li>
@@ -274,7 +284,9 @@
 </ul>
 <p><a href="./templates/campaign-pitch.html">View Full Template</a></p>
 <h4 id="document-tracker"><a class="header" href="#document-tracker">Document Tracker</a></h4>
-<p><strong>Purpose</strong>: Master index of all campaign documentation<br><strong>Update Frequency</strong>: Weekly review, monthly deep update<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Master index of all campaign documentation
+<strong>Update Frequency</strong>: Weekly review, monthly deep update
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>Document status tracking</li>
 <li>Update schedules</li>
@@ -283,27 +295,40 @@
 </ul>
 <p><a href="./templates/document-tracker.html">View Full Template</a></p>
 <h3 id="module-level"><a class="header" href="#module-level">Module Level</a></h3>
-<p>These artifacts manage your current 3-6 session story arc:</p>
-<h4 id="module-overview-sheet"><a class="header" href="#module-overview-sheet">Module Overview Sheet</a></h4>
-<p><strong>Purpose</strong>: Master planning document for the arc<br><strong>Update Frequency</strong>: During initial creation, then after completion<br><strong>Key Sections</strong>:</p>
+<p>Modules are complete, runnable adventures. Each module template includes:</p>
 <ul>
-<li>Core concept and hooks</li>
-<li>Key NPCs and locations</li>
-<li>Critical path and information flow</li>
-<li>Success/failure states</li>
+<li><strong>YAML Front Matter</strong>: Machine-readable references to monsters, NPCs, and items from your catalog</li>
+<li><strong>Adventure Content</strong>: Read-aloud text, encounters, and scene descriptions</li>
+<li><strong>DM Notes</strong>: Pacing, scaling, and troubleshooting guidance</li>
+<li><strong>Post-Module Notes</strong>: Checklists for tracking what happened</li>
 </ul>
-<p><a href="./templates/module-overview.html">View Full Template</a></p>
-<h4 id="character-integration-sheet"><a class="header" href="#character-integration-sheet">Character Integration Sheet</a></h4>
-<p><strong>Purpose</strong>: Build connected party during Session Zero<br><strong>Update Frequency</strong>: Created at Session Zero, referenced throughout<br><strong>Key Sections</strong>:</p>
+<h4 id="module-overview"><a class="header" href="#module-overview">Module Overview</a></h4>
+<p><strong>Purpose</strong>: General-purpose runnable adventure template
+<strong>Update Frequency</strong>: Created during planning, updated after completion
+<strong>Key Sections</strong>:</p>
 <ul>
-<li>Individual character hooks</li>
-<li>Party connection web</li>
-<li>Group identity</li>
-<li>Campaign integration notes</li>
+<li>Front matter with catalog references</li>
+<li>Overview, hook, and structure</li>
+<li>Locations and critical path</li>
+<li>Adventure content with encounters</li>
+<li>Puzzles, challenges, and DM notes</li>
 </ul>
-<p><a href="./templates/character-integration.html">View Full Template</a></p>
+<p><a href="./templates/module_overview.html">View Full Template</a></p>
+<h4 id="module-type-templates"><a class="header" href="#module-type-templates">Module Type Templates</a></h4>
+<p><strong>Purpose</strong>: Specialized templates for different adventure styles
+<strong>Available Types</strong>:</p>
+<ul>
+<li><a href="./templates/module_mystery.html">Mystery</a> - Investigation with clue structures and suspect tracking</li>
+<li><a href="./templates/module_dungeon.html">Dungeon</a> - Exploration with room-by-room content</li>
+<li><a href="./templates/module_heist.html">Heist</a> - Planning &amp; execution with heat mechanics</li>
+<li><a href="./templates/module_political.html">Political</a> - Intrigue with reputation tracking</li>
+<li><a href="./templates/module_horror.html">Horror</a> - Suspense with corruption mechanics</li>
+</ul>
+<p>Each type template includes the same front matter schema for catalog integration, plus type-specific mechanics and guidance.</p>
 <h4 id="clue-tracker"><a class="header" href="#clue-tracker">Clue Tracker</a></h4>
-<p><strong>Purpose</strong>: Manage information flow through the module<br><strong>Update Frequency</strong>: After each session<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Manage information flow through investigation-heavy modules
+<strong>Update Frequency</strong>: After each session
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>Essential clues with multiple sources</li>
 <li>Supporting information</li>
@@ -311,20 +336,35 @@
 <li>Player theories</li>
 </ul>
 <p><a href="./templates/clue-tracker.html">View Full Template</a></p>
-<h3 id="session-level"><a class="header" href="#session-level">Session Level</a></h3>
-<p>These artifacts support actual game-night execution:</p>
-<h4 id="session-outline"><a class="header" href="#session-outline">Session Outline</a></h4>
-<p><strong>Purpose</strong>: Your game-night roadmap<br><strong>Update Frequency</strong>: Created fresh each week<br><strong>Key Sections</strong>:</p>
+<h4 id="character-integration-sheet"><a class="header" href="#character-integration-sheet">Character Integration Sheet</a></h4>
+<p><strong>Purpose</strong>: Build connected party during Session Zero
+<strong>Update Frequency</strong>: Created at Session Zero, referenced throughout
+<strong>Key Sections</strong>:</p>
 <ul>
-<li>Opening recap and scene</li>
-<li>Development scenes with timing</li>
-<li>Climax encounter</li>
-<li>Closing and hooks</li>
-<li>Contingency plans</li>
+<li>Individual character hooks</li>
+<li>Party connection web</li>
+<li>Group identity</li>
+<li>Campaign integration notes</li>
 </ul>
-<p><a href="./templates/session-outline.html">View Full Template</a></p>
+<p><a href="./templates/character-integration.html">View Full Template</a></p>
+<h3 id="session-support"><a class="header" href="#session-support">Session Support</a></h3>
+<p>These artifacts support actual game-night execution:</p>
+<h4 id="play-notes"><a class="header" href="#play-notes">Play Notes</a></h4>
+<p><strong>Purpose</strong>: Capture what happened during play for continuity
+<strong>Update Frequency</strong>: After each session
+<strong>Key Sections</strong>:</p>
+<ul>
+<li>What happened (key events)</li>
+<li>Player reactions</li>
+<li>Dangling threads</li>
+<li>NPCs and loot</li>
+<li>Setup for next session</li>
+</ul>
+<p><a href="./templates/play_notes.html">View Full Template</a></p>
 <h4 id="quick-npc-reference"><a class="header" href="#quick-npc-reference">Quick NPC Reference</a></h4>
-<p><strong>Purpose</strong>: Tonight’s NPC stats and notes<br><strong>Update Frequency</strong>: Per session<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Tonight’s NPC stats and notes
+<strong>Update Frequency</strong>: Per session
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>Appearance and voice notes</li>
 <li>Immediate goals</li>
@@ -332,19 +372,12 @@
 <li>Combat stats if needed</li>
 </ul>
 <p><a href="./templates/quick-npc-reference.html">View Full Template</a></p>
-<h4 id="module-type-templates"><a class="header" href="#module-type-templates">Module Type Templates</a></h4>
-<p><strong>Purpose</strong>: Specialized templates for different adventure types<br><strong>Available Types</strong>:</p>
-<ul>
-<li><a href="./templates/module-mystery.html">Mystery</a> - Investigation adventures</li>
-<li><a href="./templates/module-dungeon.html">Dungeon</a> - Exploration focused</li>
-<li><a href="./templates/module-heist.html">Heist</a> - Planning &amp; execution</li>
-<li><a href="./templates/module-political.html">Political</a> - Intrigue &amp; factions</li>
-<li><a href="./templates/module-horror.html">Horror</a> - Suspense &amp; fear</li>
-</ul>
 <h3 id="world-building-templates"><a class="header" href="#world-building-templates">World Building Templates</a></h3>
 <p>Tools for creating your campaign setting:</p>
 <h4 id="world-overview"><a class="header" href="#world-overview">World Overview</a></h4>
-<p><strong>Purpose</strong>: Foundation document for your campaign world<br><strong>Update Frequency</strong>: As needed when new regions become relevant<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Foundation document for your campaign world
+<strong>Update Frequency</strong>: As needed when new regions become relevant
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>The Six Truths</li>
 <li>Geography and cosmology</li>
@@ -353,7 +386,9 @@
 </ul>
 <p><a href="./templates/world-overview.html">View Full Template</a></p>
 <h4 id="region-overview"><a class="header" href="#region-overview">Region Overview</a></h4>
-<p><strong>Purpose</strong>: Detailed area where adventures happen<br><strong>Update Frequency</strong>: When PCs enter new regions<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Detailed area where adventures happen
+<strong>Update Frequency</strong>: When PCs enter new regions
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>Regional character and identity</li>
 <li>Settlements and points of interest</li>
@@ -362,7 +397,9 @@
 </ul>
 <p><a href="./templates/region-overview.html">View Full Template</a></p>
 <h4 id="faction-template"><a class="header" href="#faction-template">Faction Template</a></h4>
-<p><strong>Purpose</strong>: Detailed power group documentation<br><strong>Update Frequency</strong>: When factions become plot-relevant<br><strong>Key Sections</strong>:</p>
+<p><strong>Purpose</strong>: Detailed power group documentation
+<strong>Update Frequency</strong>: When factions become plot-relevant
+<strong>Key Sections</strong>:</p>
 <ul>
 <li>Goals and methods</li>
 <li>Resources and structure</li>
@@ -372,17 +409,19 @@
 <p><a href="./templates/faction-template.html">View Full Template</a></p>
 <h3 id="quick-start-templates"><a class="header" href="#quick-start-templates">Quick Start Templates</a></h3>
 <h4 id="quick-start-kit"><a class="header" href="#quick-start-kit">Quick Start Kit</a></h4>
-<p><strong>Purpose</strong>: Everything needed to launch a campaign in 8 weeks<br><strong>Includes</strong>: Minimal versions of essential templates<br><strong>Perfect for</strong>: New DMs or quick campaign starts</p>
+<p><strong>Purpose</strong>: Everything needed to launch a campaign in 8 weeks
+<strong>Includes</strong>: Minimal versions of essential templates
+<strong>Perfect for</strong>: New DMs or quick campaign starts</p>
 <p><a href="./templates/quick-start-kit.html">View Full Template</a></p>
 <h2 id="using-the-templates"><a class="header" href="#using-the-templates">Using the Templates</a></h2>
 <h3 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h3>
 <ol>
 <li>
-<p><strong>Choose Your Core Set</strong>: Start with just 4-5 templates</p>
+<p><strong>Choose Your Core Set</strong>: Start with just 3-4 templates</p>
 <ul>
 <li>Campaign Bible (Strategic)</li>
 <li>Module Overview (Tactical)</li>
-<li>Session Outline (Operational)</li>
+<li>Play Notes (Operational)</li>
 <li>Quick NPC Reference (Operational)</li>
 </ul>
 </li>
@@ -400,7 +439,7 @@
 <ul>
 <li>Campaign templates: Monthly review</li>
 <li>Module templates: Arc planning</li>
-<li>Session templates: Weekly prep</li>
+<li>Session templates: After each game</li>
 </ul>
 </li>
 </ol>
@@ -426,16 +465,13 @@
     │       └── settlements/
     ├── modules/
     │   └── {number}_{name}/
-    │       ├── overview.md
-    │       ├── clue_tracker.md
-    │       ├── npcs/
-    │       └── locations/
-    ├── sessions/
-    │   └── session_{number}/
-    │       ├── prep.md          (8-step process output)
-    │       ├── recap.md
-    │       ├── quick_npcs.md
+    │       ├── overview.md       (The runnable module)
+    │       ├── monsters.md       (Synced from front matter)
+    │       ├── npcs.md          (Synced from front matter)
+    │       ├── items.md         (Synced from front matter)
     │       └── handouts/
+    ├── play_notes/
+    │   └── session_{number}.md   (What happened each session)
     ├── characters/
     │   ├── pc_arc_tracker.md
     │   └── {character_name}/
@@ -460,11 +496,10 @@
 <li><strong>Create</strong> new templates for your specific genre</li>
 </ul>
 <h2 id="the-minimal-viable-set"><a class="header" href="#the-minimal-viable-set">The Minimal Viable Set</a></h2>
-<p>If you’re overwhelmed, start with just these four:</p>
+<p>If you’re overwhelmed, start with just these three:</p>
 <ol>
-<li><strong>Quick Start Kit</strong> - Everything you need in simplified form</li>
-<li><strong>Module Overview</strong> - Plan your story arc</li>
-<li><strong>Session Outline</strong> - Weekly prep tool</li>
+<li><strong>Module Overview</strong> - Your runnable adventure content</li>
+<li><strong>Play Notes</strong> - Track what happened for continuity</li>
 <li><strong>Quick NPC Reference</strong> - Game night essentials</li>
 </ol>
 <p>You can always expand later as your needs grow.</p>
