@@ -35,7 +35,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-5750e9bc.js";
+            window.path_to_searchindex_js = "../searchindex-a18aeb90.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-aa677dde.js"></script>
@@ -180,7 +180,7 @@
 <ul>
 <li><a href="../../DEVELOPMENT.html">Main Development Guide</a> - Quick reference for development</li>
 <li><a href="CONTRIBUTING.html">Contributing Guide</a> - How to contribute to the project</li>
-<li><a href="https://github.com/mimir-dm/mimir">GitHub Repository</a></li>
+<li><a href="https://github.com/mimir/mimir">GitHub Repository</a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
 <ol>
@@ -325,24 +325,24 @@ brew install gh  # macOS
 <h2 id="building-and-running"><a class="header" href="#building-and-running">Building and Running</a></h2>
 <h3 id="initial-build"><a class="header" href="#initial-build">Initial Build</a></h3>
 <pre><code class="language-bash"># Clone repository
-git clone https://github.com/mimir-dm/mimir.git
+git clone https://github.com/mimir/mimir.git
 cd mimir
 
 # Build Rust workspace
 cargo build
 
 # Install frontend dependencies
-cd crates/mimir-dm/frontend
+cd crates/mimir/frontend
 npm install
 cd ../../..
 </code></pre>
 <h3 id="development-mode"><a class="header" href="#development-mode">Development Mode</a></h3>
 <pre><code class="language-bash"># Run with hot reload (from project root)
-cd crates/mimir-dm
+cd crates/mimir
 cargo tauri dev
 
 # Or using installed tauri-cli
-cd crates/mimir-dm
+cd crates/mimir
 tauri dev
 </code></pre>
 <p>This starts:</p>
@@ -353,7 +353,7 @@ tauri dev
 </ul>
 <h3 id="production-build"><a class="header" href="#production-build">Production Build</a></h3>
 <pre><code class="language-bash"># Build optimized release
-cd crates/mimir-dm
+cd crates/mimir
 cargo tauri build
 
 # Output locations:
@@ -366,10 +366,10 @@ cargo tauri build
 <pre><code>mimir/
 ├── Cargo.toml                 # Workspace configuration
 ├── crates/
-│   ├── mimir-dm/             # Main application
-│   ├── mimir-dm-core/        # Business logic
-│   ├── mimir-dm-llm/         # LLM abstraction
-│   └── mimir-5etools-splitter/ # Data processing
+│   ├── mimir/             # Main application
+│   ├── mimir-core/        # Business logic
+│   ├── mimir-mcp/         # MCP server for Claude Code
+│   └── mimir-print/       # PDF generation
 ├── docs/                      # Documentation
 ├── data/                      # D&amp;D reference data
 └── .metis/                   # Project management
@@ -388,7 +388,7 @@ cargo tauri build
 <li>Services: Application-level business logic</li>
 <li>State: Application state management</li>
 </ul>
-<p><strong>Domain Layer (mimir-dm-core)</strong></p>
+<p><strong>Domain Layer (mimir-core)</strong></p>
 <ul>
 <li>Models: Domain entities</li>
 <li>Services: Business logic</li>
@@ -429,15 +429,15 @@ Database
 <li><strong>Implement Feature</strong></li>
 </ol>
 <ul>
-<li>Add backend logic in <code>mimir-dm-core</code></li>
-<li>Add Tauri command in <code>mimir-dm/src/commands</code></li>
-<li>Add frontend UI in <code>mimir-dm/frontend/src</code></li>
+<li>Add backend logic in <code>mimir-core</code></li>
+<li>Add Tauri command in <code>mimir/src/commands</code></li>
+<li>Add frontend UI in <code>mimir/frontend/src</code></li>
 </ul>
 <ol start="3">
 <li><strong>Test Locally</strong></li>
 </ol>
 <pre><code class="language-bash">cargo test --workspace
-cd crates/mimir-dm/frontend &amp;&amp; npm test
+cd crates/mimir/frontend &amp;&amp; npm test
 </code></pre>
 <ol start="4">
 <li><strong>Commit and Push</strong></li>
@@ -475,13 +475,13 @@ git push origin feature/my-feature
 <ol>
 <li><strong>Create Vue Component</strong></li>
 </ol>
-<pre><code class="language-bash"># In crates/mimir-dm/frontend/src/views/
+<pre><code class="language-bash"># In crates/mimir/frontend/src/views/
 touch MyNewView.vue
 </code></pre>
 <ol start="2">
 <li><strong>Add Route</strong></li>
 </ol>
-<pre><code class="language-typescript">// In crates/mimir-dm/frontend/src/app/router.ts
+<pre><code class="language-typescript">// In crates/mimir/frontend/src/app/router.ts
 {
   path: '/my-new-page',
   name: 'MyNewPage',
@@ -500,7 +500,7 @@ touch MyNewView.vue
 </ol>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// In crates/mimir-dm/src/commands/my_commands.rs
+</span>// In crates/mimir/src/commands/my_commands.rs
 #[tauri::command]
 pub async fn my_new_command(
     db_service: State&lt;'_, Arc&lt;DatabaseService&gt;&gt;,
@@ -518,7 +518,7 @@ pub async fn my_new_command(
 </ol>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// In crates/mimir-dm/src/main.rs
+</span>// In crates/mimir/src/main.rs
 .invoke_handler(tauri::generate_handler![
     commands::my_new_command,
     // ... other commands
@@ -570,7 +570,7 @@ fn test_database_workflow() {
 cargo test --workspace
 
 # Specific crate
-cargo test -p mimir-dm-core
+cargo test -p mimir-core
 
 # Specific test
 cargo test test_campaign_creation
@@ -583,7 +583,7 @@ angreal test unit
 </code></pre>
 <h3 id="frontend-testing"><a class="header" href="#frontend-testing">Frontend Testing</a></h3>
 <h4 id="component-tests"><a class="header" href="#component-tests">Component Tests</a></h4>
-<pre><code class="language-typescript">// In crates/mimir-dm/frontend/src/components/__tests__/
+<pre><code class="language-typescript">// In crates/mimir/frontend/src/components/__tests__/
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import MyComponent from '../MyComponent.vue';
@@ -598,7 +598,7 @@ describe('MyComponent', () =&gt; {
 });
 </code></pre>
 <h4 id="running-frontend-tests"><a class="header" href="#running-frontend-tests">Running Frontend Tests</a></h4>
-<pre><code class="language-bash">cd crates/mimir-dm/frontend
+<pre><code class="language-bash">cd crates/mimir/frontend
 
 # Run tests
 npm test
@@ -637,7 +637,7 @@ error!("Operation failed: {}", err);
       "request": "launch",
       "name": "Debug Tauri",
       "cargo": {
-        "args": ["build", "--manifest-path=crates/mimir-dm/Cargo.toml"]
+        "args": ["build", "--manifest-path=crates/mimir/Cargo.toml"]
       },
       "cwd": "${workspaceFolder}"
     }
@@ -659,7 +659,7 @@ console.error('Error:', error);
 </code></pre>
 <h3 id="database-debugging"><a class="header" href="#database-debugging">Database Debugging</a></h3>
 <pre><code class="language-bash"># Open development database (macOS)
-sqlite3 ~/Library/Application\ Support/com.mimir.mimir-test/mimir.db
+sqlite3 ~/Library/Application\ Support/com.mimir.app/dev/mimir.db
 
 # Common commands
 .tables                # List tables
@@ -670,7 +670,7 @@ SELECT * FROM campaigns;  # Query data
 <h2 id="database-management"><a class="header" href="#database-management">Database Management</a></h2>
 <h3 id="migrations"><a class="header" href="#migrations">Migrations</a></h3>
 <h4 id="creating-a-migration"><a class="header" href="#creating-a-migration">Creating a Migration</a></h4>
-<pre><code class="language-bash">cd crates/mimir-dm-core
+<pre><code class="language-bash">cd crates/mimir-core
 diesel migration generate add_new_feature
 
 # Edit migrations/YYYY-MM-DD-HHMMSS_add_new_feature/up.sql
@@ -688,19 +688,19 @@ diesel migration redo
 </code></pre>
 <h4 id="development-database-location"><a class="header" href="#development-database-location">Development Database Location</a></h4>
 <ul>
-<li><strong>macOS</strong>: <code>~/Library/Application Support/com.mimir.mimir-test/mimir.db</code></li>
-<li><strong>Linux</strong>: <code>~/.local/share/com.mimir.mimir-test/mimir.db</code></li>
-<li><strong>Windows</strong>: <code>%APPDATA%\com.mimir.mimir-test\mimir.db</code></li>
+<li><strong>macOS</strong>: <code>~/Library/Application Support/com.mimir.app/dev/mimir.db</code></li>
+<li><strong>Linux</strong>: <code>~/.local/share/com.mimir.app/dev/mimir.db</code></li>
+<li><strong>Windows</strong>: <code>%APPDATA%\com.mimir.app/dev\mimir.db</code></li>
 </ul>
 <h3 id="resetting-development-database"><a class="header" href="#resetting-development-database">Resetting Development Database</a></h3>
 <pre><code class="language-bash"># macOS
-rm -rf ~/Library/Application\ Support/com.mimir.mimir-test/
+rm -rf ~/Library/Application\ Support/com.mimir.app/dev/
 
 # Linux
-rm -rf ~/.local/share/com.mimir.mimir-test/
+rm -rf ~/.local/share/com.mimir.app/dev/
 
 # Windows
-# Delete folder: %APPDATA%\com.mimir.mimir-test\
+# Delete folder: %APPDATA%\com.mimir.app/dev\
 
 # Restart app to recreate
 cargo tauri dev
@@ -773,7 +773,7 @@ await appWindow.maximize();
 cargo update
 
 # Frontend dependencies
-cd crates/mimir-dm/frontend
+cd crates/mimir/frontend
 npm update
 </code></pre>
 <h3 id="formatting-code"><a class="header" href="#formatting-code">Formatting Code</a></h3>
@@ -781,7 +781,7 @@ npm update
 cargo fmt
 
 # TypeScript/Vue
-cd crates/mimir-dm/frontend
+cd crates/mimir/frontend
 npm run lint
 </code></pre>
 <h3 id="running-clippy"><a class="header" href="#running-clippy">Running Clippy</a></h3>
@@ -791,7 +791,7 @@ npm run lint
 cargo clippy --fix
 </code></pre>
 <h3 id="type-checking-frontend"><a class="header" href="#type-checking-frontend">Type Checking Frontend</a></h3>
-<pre><code class="language-bash">cd crates/mimir-dm/frontend
+<pre><code class="language-bash">cd crates/mimir/frontend
 npm run type-check
 </code></pre>
 <h2 id="performance-optimization"><a class="header" href="#performance-optimization">Performance Optimization</a></h2>
@@ -816,7 +816,7 @@ npm run type-check
 <h2 id="getting-help"><a class="header" href="#getting-help">Getting Help</a></h2>
 <ul>
 <li>Check <a href="CONTRIBUTING.html">CONTRIBUTING.md</a> for contribution guidelines</li>
-<li>Search <a href="https://github.com/mimir-dm/mimir/issues">GitHub Issues</a></li>
+<li>Search <a href="https://github.com/mimir/mimir/issues">GitHub Issues</a></li>
 <li>Review crate READMEs for detailed architecture info</li>
 <li>Ask questions in pull request comments</li>
 </ul>

@@ -35,7 +35,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-5750e9bc.js";
+            window.path_to_searchindex_js = "../searchindex-a18aeb90.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-aa677dde.js"></script>
@@ -180,8 +180,8 @@
 <ul>
 <li><a href="../../CONTRIBUTING.html">Main Contributing Guide</a> - Quick reference for contributors</li>
 <li><a href="DEVELOPMENT.html">Development Setup</a> - Detailed development environment setup</li>
-<li><a href="https://github.com/mimir-dm/mimir">GitHub Repository</a></li>
-<li><a href="https://github.com/mimir-dm/mimir/issues">Issue Tracker</a></li>
+<li><a href="https://github.com/mimir/mimir">GitHub Repository</a></li>
+<li><a href="https://github.com/mimir/mimir/issues">Issue Tracker</a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
 <ol>
@@ -411,7 +411,7 @@ describe('CampaignCard', () =&gt; {
 <h3 id="running-tests"><a class="header" href="#running-tests">Running Tests</a></h3>
 <pre><code class="language-bash"># All tests
 cargo test --workspace
-cd crates/mimir-dm/frontend &amp;&amp; npm test
+cd crates/mimir/frontend &amp;&amp; npm test
 
 # Unit tests only
 angreal test unit
@@ -486,7 +486,7 @@ Related to #456
 └─────────────────┼───────────────────────┘
                   │
 ┌─────────────────▼───────────────────────┐
-│      mimir-dm-core (Business Logic)    │
+│      mimir-core (Business Logic)    │
 │  ┌──────────────────────────────────┐  │
 │  │ Services, DAL, Domain Models     │  │
 │  └──────────────┬───────────────────┘  │
@@ -498,12 +498,11 @@ Related to #456
 </code></pre>
 <h3 id="key-crates"><a class="header" href="#key-crates">Key Crates</a></h3>
 <ul>
-<li><strong>mimir-dm</strong> - Tauri app shell and command handlers</li>
-<li><strong>mimir-dm-core</strong> - Business logic, domain models, database</li>
-<li><strong>mimir-dm-llm</strong> - LLM provider abstraction</li>
-<li><strong>mimir-5etools-splitter</strong> - Data processing utility</li>
+<li><strong>mimir</strong> - Tauri app shell and command handlers</li>
+<li><strong>mimir-core</strong> - Business logic, domain models, database</li>
+<li><strong>mimir-mcp</strong> - MCP server for Claude Code integration</li>
+<li><strong>mimir-print</strong> - PDF generation via Typst</li>
 </ul>
-<p>See individual crate READMEs for detailed information.</p>
 <h2 id="design-principles"><a class="header" href="#design-principles">Design Principles</a></h2>
 <ol>
 <li><strong>Local-First</strong> - All data stored locally, no cloud dependencies</li>
