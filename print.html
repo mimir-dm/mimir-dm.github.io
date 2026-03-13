@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a18aeb90.js";
+            window.path_to_searchindex_js = "searchindex-ac4f52b4.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-aa677dde.js"></script>
@@ -9220,229 +9220,429 @@ npm run type-check
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="mimir-architecture"><a class="header" href="#mimir-architecture">Mimir Architecture</a></h1>
-<p>This document provides a high-level overview of the Mimir codebase architecture for developers.</p>
-<h2 id="crate-overview"><a class="header" href="#crate-overview">Crate Overview</a></h2>
-<p>Mimir is organized as a Cargo workspace with 4 crates:</p>
+<p>Architecture documentation following the <a href="https://c4model.com/">C4 model</a>: Context → Containers → Components → Code.</p>
+<h2 id="level-1-system-context"><a class="header" href="#level-1-system-context">Level 1: System Context</a></h2>
+<p>Mimir is a local-first desktop application for D&amp;D 5e campaign management. It has no cloud dependencies — all data stays on the user’s machine.</p>
+<pre><code>                                    ┌─────────────────────┐
+                                    │    Dungeon Master    │
+                                    │      (User)          │
+                                    └──────────┬──────────┘
+                                               │
+                          ┌────────────────────┼────────────────────┐
+                          │                    │                    │
+                          ▼                    ▼                    ▼
+                   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+                   │   Mimir     │     │  Claude Code │     │ Dungeondraft│
+                   │ Desktop App │     │  (via MCP)   │     │  (Map Tool) │
+                   └──────┬──────┘     └──────┬──────┘     └──────┬──────┘
+                          │                   │                    │
+                          │                   │                    │
+                          ▼                   ▼                    ▼
+                   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+                   │   SQLite    │     │  MCP Sidecar │     │ .dd2vtt /   │
+                   │  Database   │◀────│   Server     │     │ .uvtt files │
+                   └─────────────┘     └─────────────┘     └─────────────┘
+</code></pre>
+<p><strong>Users:</strong> Dungeon Masters preparing and running D&amp;D 5e campaigns.</p>
+<p><strong>External systems:</strong></p>
+<ul>
+<li><strong>Claude Code</strong> — AI assistant that manages campaigns via the MCP sidecar server</li>
+<li><strong>Dungeondraft</strong> — Map authoring tool; Mimir imports UVTT maps and generates <code>.dungeondraft_map</code> files</li>
+<li><strong>5etools</strong> — Source of D&amp;D 5e catalog data (monsters, spells, items, etc.), imported into the database at build time</li>
+</ul>
+<h2 id="level-2-container-diagram"><a class="header" href="#level-2-container-diagram">Level 2: Container Diagram</a></h2>
+<p>The system is a Cargo workspace with 5 crates, a Vue 3 frontend, and a SQLite database.</p>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│                    Mimir Desktop App                      │
+│  ┌────────────────────────┐  ┌────────────────────────┐  │
+│  │   Vue 3 Frontend       │  │   Tauri Shell (mimir)  │  │
+│  │   TypeScript + Pinia   │──│   Rust command handlers │  │
+│  │                        │  │                        │  │
+│  │   4 feature modules:   │  │   22 command modules   │  │
+│  │   campaigns, modules,  │  │   AppState management  │  │
+│  │   characters, sources  │  │                        │  │
+│  └────────────────────────┘  └───────────┬────────────┘  │
+│                                          │               │
+│              ┌───────────────────────────┼───────────┐   │
+│              │                           │           │   │
+│              ▼                           ▼           │   │
+│  ┌────────────────────────┐  ┌──────────────────┐    │   │
+│  │   mimir-core           │  │   mimir-print    │    │   │
+│  │   Domain logic, DAL,   │  │   Typst-based    │    │   │
+│  │   services, migrations │  │   PDF generation │    │   │
+│  └───────────┬────────────┘  └──────────────────┘    │   │
+│              │                                       │   │
+│              ▼                                       │   │
+│  ┌────────────────────────┐                          │   │
+│  │   SQLite Database      │                          │   │
+│  │   56 tables, WAL mode  │                          │   │
+│  └────────────────────────┘                          │   │
+└──────────────────────────────────────────────────────┘   │
+                                                           │
+┌──────────────────────────────────────────────────────┐   │
+│   MCP Sidecar (mimir-mcp)                            │   │
+│   Separate binary, launched by Tauri externalBin     │◀──┘
+│   142 tools across 10 categories                     │
+│   Depends on: mimir-core, mimir-mapgen               │
+└──────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────┐
+│   Map Generator CLI (mimir-mapgen)                   │
+│   Standalone binary + library                        │
+│   Procedural terrain, rooms, polygons → Dungeondraft │
+│   No database dependency                             │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="container-responsibilities"><a class="header" href="#container-responsibilities">Container responsibilities</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Container</th><th>Technology</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Vue 3 Frontend</strong></td><td>TypeScript, Pinia, Tiptap, Tailwind</td><td>UI: campaign dashboard, character sheets, play mode, player display</td></tr>
+<tr><td><strong>Tauri Shell (mimir)</strong></td><td>Rust, Tauri 2</td><td>IPC command handlers, AppState, window management</td></tr>
+<tr><td><strong>mimir-core</strong></td><td>Rust, Diesel ORM</td><td>Domain models, services, data access layer, migrations</td></tr>
+<tr><td><strong>mimir-print</strong></td><td>Rust, Typst</td><td>PDF generation: character sheets, spell cards, map prints</td></tr>
+<tr><td><strong>mimir-mcp</strong></td><td>Rust, rust-mcp-sdk</td><td>MCP server exposing campaign management to AI assistants</td></tr>
+<tr><td><strong>mimir-mapgen</strong></td><td>Rust, noise-rs, clap</td><td>Procedural map generation with YAML config or biome presets</td></tr>
+<tr><td><strong>SQLite Database</strong></td><td>SQLite 3, WAL mode</td><td>56 tables: campaigns, characters, maps, D&amp;D 5e catalog</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="crate-dependency-graph"><a class="header" href="#crate-dependency-graph">Crate dependency graph</a></h3>
+<pre><code>mimir ──────► mimir-core
+  │
+  └─────────► mimir-print
+
+mimir-mcp ──► mimir-core
+  │
+  └─────────► mimir-mapgen
+
+(mimir-core, mimir-print, mimir-mapgen have no internal crate dependencies)
+</code></pre>
+<h2 id="level-3-component-diagrams"><a class="header" href="#level-3-component-diagrams">Level 3: Component Diagrams</a></h2>
+<h3 id="mimir-core--domain-logic"><a class="header" href="#mimir-core--domain-logic">mimir-core — Domain Logic</a></h3>
+<p>The shared library containing all business logic and data access.</p>
 <pre><code>┌─────────────────────────────────────────────────────────┐
-│                    mimir (Main App)                      │
-│                   Tauri Desktop Application              │
-└─────────────────────────┬───────────────────────────────┘
-                          │
-        ┌─────────────────┼─────────────────┐
-        ▼                 ▼                 ▼
-┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│  mimir-core   │ │  mimir-mcp    │ │  mimir-print  │
-│  Core Logic   │ │  MCP Server   │ │  PDF Export   │
-└───────────────┘ └───────────────┘ └───────────────┘
+│                        mimir-core                        │
+│                                                          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
+│  │   Models     │  │   Services   │  │    DAL       │  │
+│  │              │  │              │  │              │  │
+│  │  campaign/   │  │  Campaign    │  │  Repository  │  │
+│  │  catalog/    │◀─│  Character   │──│  traits      │  │
+│  │  character/  │  │  Module      │  │              │  │
+│  │              │  │  Document    │  │  Diesel      │  │
+│  │  Domain      │  │  Map, Token  │  │  queries     │  │
+│  │  types and   │  │  Archive     │  │              │  │
+│  │  enums       │  │  Asset       │  └──────────────┘  │
+│  │              │  │  Homebrew    │                     │
+│  └──────────────┘  │              │  ┌──────────────┐  │
+│                    │  24 catalog  │  │  Migrations  │  │
+│                    │  services    │  │  29 migrations│  │
+│                    └──────────────┘  └──────────────┘  │
+└─────────────────────────────────────────────────────────┘
 </code></pre>
-<h3 id="mimir-core"><a class="header" href="#mimir-core">mimir-core</a></h3>
-<p>The heart of the system containing:</p>
-<ul>
-<li><strong>Models</strong>: Domain types for campaigns, characters, D&amp;D catalog data</li>
-<li><strong>Services</strong>: Business logic (28 services)</li>
-<li><strong>DAL</strong>: Data Access Layer with repository traits</li>
-<li><strong>Migrations</strong>: 35 Diesel migrations for SQLite schema</li>
-</ul>
-<h3 id="mimir-mcp"><a class="header" href="#mimir-mcp">mimir-mcp</a></h3>
-<p>MCP (Model Context Protocol) server for Claude Code integration:</p>
-<ul>
-<li>Campaign, module, character, and catalog tools</li>
-<li>Uses DAL directly for database access</li>
-</ul>
-<h3 id="mimir-print"><a class="header" href="#mimir-print">mimir-print</a></h3>
-<p>PDF generation using Typst:</p>
-<ul>
-<li>Character sheets</li>
-<li>Campaign documents</li>
-<li>Markdown to Typst conversion</li>
-</ul>
-<h3 id="mimir"><a class="header" href="#mimir">mimir</a></h3>
-<p>Tauri desktop application:</p>
-<ul>
-<li><strong>Commands</strong>: 50+ Tauri command handlers</li>
-<li><strong>Services</strong>: LLM integration, context management</li>
-<li><strong>State</strong>: Consolidated <code>AppState</code> struct</li>
-</ul>
-<h2 id="request-flow"><a class="header" href="#request-flow">Request Flow</a></h2>
-<pre><code>┌──────────┐    ┌─────────────┐    ┌─────────────┐    ┌──────────┐
-│ Frontend │───▶│   Tauri     │───▶│   Service   │───▶│ Database │
-│ (Vue 3)  │    │  Command    │    │   Layer     │    │ (SQLite) │
-└──────────┘    └─────────────┘    └─────────────┘    └──────────┘
-     ▲                │                   │
-     │                ▼                   │
-     │         ┌─────────────┐           │
-     └─────────│  AppState   │◀──────────┘
-               │  (db, paths) │
-               └─────────────┘
-</code></pre>
-<h3 id="typical-command-flow"><a class="header" href="#typical-command-flow">Typical Command Flow</a></h3>
-<ol>
-<li><strong>Frontend</strong> invokes Tauri command (e.g., <code>get_campaign</code>)</li>
-<li><strong>Tauri Command</strong> extracts <code>State&lt;AppState&gt;</code> and parameters</li>
-<li><strong>Service</strong> performs business logic, accesses database</li>
-<li><strong>Response</strong> returned to frontend as JSON</li>
-</ol>
-<p>Example:</p>
+<p><strong>Service layer pattern</strong> (per <a href="/.metis/adr/MIMIR-A-0005.html">ADR-0005</a>):</p>
+<p>Services are stateful structs that borrow a database connection:</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>#[tauri::command]
-pub async fn get_campaign(
-    campaign_id: i32,
-    state: State&lt;'_, AppState&gt;,
-) -&gt; Result&lt;ApiResponse&lt;Campaign&gt;, ApiError&gt; {
-    let mut conn = state.db.get_connection()?;
-    let campaign = CampaignService::get_by_id(&amp;mut conn, campaign_id)?;
-    Ok(ApiResponse::success(campaign))
-}
-<span class="boring">}</span></code></pre>
-<h2 id="database-design"><a class="header" href="#database-design">Database Design</a></h2>
-<p>See <a href="/.metis/adr/MIMIR-A-0001.html">ADR-0001</a> for denormalized design rationale.</p>
-<h3 id="key-design-decisions"><a class="header" href="#key-design-decisions">Key Design Decisions</a></h3>
-<ul>
-<li><strong>Denormalized</strong>: Child entities (subclasses, subraces) contain full parent data</li>
-<li><strong>JSON Columns</strong>: Complex/variable data stored as JSON (see <a href="/.metis/adr/MIMIR-A-0003.html">ADR-0003</a>)</li>
-<li><strong>Multi-Ruleset</strong>: Content organized by rule system and source (see <a href="/.metis/adr/MIMIR-A-0002.html">ADR-0002</a>)</li>
-</ul>
-<h3 id="schema-overview-37-tables"><a class="header" href="#schema-overview-37-tables">Schema Overview (37 tables)</a></h3>
-<p><strong>Campaign Management:</strong></p>
-<ul>
-<li><code>campaigns</code>, <code>modules</code>, <code>sessions</code></li>
-<li><code>documents</code>, <code>template_documents</code></li>
-<li><code>workflow_cards</code></li>
-</ul>
-<p><strong>D&amp;D Catalog:</strong></p>
-<ul>
-<li><code>catalog_*</code> tables for each entity type (spells, monsters, items, etc.)</li>
-<li><code>uploaded_books</code>, <code>catalog_sources</code></li>
-</ul>
-<p><strong>Characters:</strong></p>
-<ul>
-<li><code>players</code>, <code>characters</code>, <code>character_versions</code></li>
-<li><code>campaign_players</code> (links players to campaigns)</li>
-</ul>
-<h2 id="service-layer"><a class="header" href="#service-layer">Service Layer</a></h2>
-<p>Services follow the stateful pattern per <a href="/.metis/adr/MIMIR-A-0005.html">ADR-0005</a>:</p>
-<pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>pub struct SpellService&lt;'a&gt; {
+</span>pub struct CampaignService&lt;'a&gt; {
     pub conn: &amp;'a mut SqliteConnection,
 }
 
-impl&lt;'a&gt; SpellService&lt;'a&gt; {
+impl&lt;'a&gt; CampaignService&lt;'a&gt; {
     pub fn new(conn: &amp;'a mut SqliteConnection) -&gt; Self {
         Self { conn }
     }
 
-    pub fn search(&amp;mut self, filters: SpellFilters) -&gt; Result&lt;Vec&lt;SpellSummary&gt;&gt; {
-        // Query logic
+    pub fn create(&amp;mut self, input: CreateCampaignInput) -&gt; ServiceResult&lt;Campaign&gt; {
+        // Business logic + database access
     }
 }
 <span class="boring">}</span></code></pre>
-<h3 id="service-categories"><a class="header" href="#service-categories">Service Categories</a></h3>
+<p><strong>Service inventory:</strong></p>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Category</th><th>Services</th><th>Purpose</th></tr>
+<tr><th>Category</th><th>Services</th></tr>
 </thead>
 <tbody>
-<tr><td>Campaign</td><td>CampaignService, ModuleService, SessionService</td><td>Campaign management</td></tr>
-<tr><td>Catalog</td><td>SpellService, MonsterService, ItemService, etc.</td><td>D&amp;D reference data</td></tr>
-<tr><td>Character</td><td>CharacterService, CharacterCreationService</td><td>PC/NPC management</td></tr>
-<tr><td>Content</td><td>DocumentService, TemplateService</td><td>Document management</td></tr>
+<tr><td>Campaign</td><td>CampaignService, ModuleService, DocumentService, ArchiveService, AssetService</td></tr>
+<tr><td>Character</td><td>CharacterService, HomebrewService</td></tr>
+<tr><td>Map</td><td>MapService, TokenService</td></tr>
+<tr><td>Catalog (24)</td><td>SpellService, MonsterService, ItemService, ClassService, RaceService, BackgroundService, FeatService, ConditionService, SubclassService, and 15 more</td></tr>
 </tbody>
 </table>
 </div>
-<h2 id="key-patterns"><a class="header" href="#key-patterns">Key Patterns</a></h2>
-<h3 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h3>
-<pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// Application-level errors
-pub enum MimirError {
-    Database(DbError),
-    Print(String),
-    Llm(String),
-    NotFound(String),
-    // ...
-}
-
-// Database-level errors
-pub enum DbError {
-    NotFound { entity_type, id },
-    ConstraintViolation { field, message },
-    Query(diesel::result::Error),
-    // ...
-}
-<span class="boring">}</span></code></pre>
-<h3 id="state-management"><a class="header" href="#state-management">State Management</a></h3>
-<p><code>AppState</code> consolidates all shared state:</p>
-<pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>pub struct AppState {
-    pub db: Arc&lt;DatabaseService&gt;,       // Database connection pool
-    pub paths: Arc&lt;AppPaths&gt;,           // Application paths
-}
-<span class="boring">}</span></code></pre>
-<h2 id="directory-structure"><a class="header" href="#directory-structure">Directory Structure</a></h2>
-<pre><code>crates/
-├── mimir/                    # Main Tauri app
-│   ├── src/
-│   │   ├── main.rs             # Entry point
-│   │   ├── state.rs            # AppState
-│   │   ├── commands/           # Tauri commands
-│   │   │   ├── catalog/        # D&amp;D reference commands
-│   │   │   ├── campaign/       # Campaign management
-│   │   │   ├── character/      # Character operations
-│   │   │   └── chat/           # LLM chat commands
-│   │   └── services/           # Business logic
-│   │       ├── llm/            # LLM integration
-│   │       └── tools/          # LLM tool implementations
-│   └── frontend/               # Vue 3 frontend
-│
-├── mimir-core/              # Core business logic
-│   ├── src/
-│   │   ├── models/             # Domain models
-│   │   │   ├── catalog/        # D&amp;D entity types
-│   │   │   └── campaign/       # Campaign types
-│   │   ├── services/           # Business logic services
-│   │   ├── dal/                # Data access layer
-│   │   └── migrations/         # Database migrations
-│
-├── mimir-mcp/                  # MCP server for Claude Code
-│   ├── src/
-│   │   ├── context.rs          # Database context
-│   │   └── tools/              # MCP tool handlers
-│   └── plugin/                 # Claude Code plugin definition
-│
-└── mimir-print/                # PDF generation
-    └── src/
-        └── sections/           # PDF section renderers
+<h3 id="tauri-shell--command-layer"><a class="header" href="#tauri-shell--command-layer">Tauri Shell — Command Layer</a></h3>
+<p>The <code>mimir</code> crate bridges the Vue frontend to core services via Tauri IPC commands.</p>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│                      mimir (Tauri)                        │
+│                                                           │
+│  ┌─────────────┐    ┌──────────────────────────────────┐ │
+│  │  AppState    │    │         Commands (22 modules)    │ │
+│  │             │    │                                  │ │
+│  │  AppPaths   │    │  campaign     character    map   │ │
+│  │  (data_dir, │◀───│  module       document     print │ │
+│  │   db_path,  │    │  archive      homebrew*3   token │ │
+│  │   is_dev)   │    │  asset        source       dev   │ │
+│  │             │    │  dm_map       player_display     │ │
+│  └─────────────┘    │  catalog/ (8 sub-modules)        │ │
+│                     └──────────────────────────────────┘ │
+│                                                           │
+│  ┌──────────────────────────────────────────────────────┐ │
+│  │  Sidecar Management                                  │ │
+│  │  Launches mimir-mcp as externalBin process           │ │
+│  │  Configured in tauri.conf.json                       │ │
+│  └──────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────┘
 </code></pre>
-<h2 id="development-guidelines"><a class="header" href="#development-guidelines">Development Guidelines</a></h2>
-<h3 id="adding-a-new-catalog-entity"><a class="header" href="#adding-a-new-catalog-entity">Adding a New Catalog Entity</a></h3>
-<ol>
-<li>Create model in <code>mimir-core/src/models/catalog/</code></li>
-<li>Add migration in <code>mimir-core/migrations/</code></li>
-<li>Create service in <code>mimir-core/src/services/</code></li>
-<li>Add Tauri commands in <code>mimir/src/commands/catalog/</code></li>
-<li>Update schema.rs after migration</li>
-</ol>
-<h3 id="testing"><a class="header" href="#testing">Testing</a></h3>
-<pre><code class="language-bash"># Run all tests
-cargo test --workspace
-
-# Run core tests only
-cargo test -p mimir-core
-
-# Run specific test
-cargo test test_name
+<p><strong>Request flow:</strong></p>
+<pre><code>Vue Component
+    │  invoke('get_campaign', { id: 42 })
+    ▼
+Tauri IPC
+    │  Deserialize params, inject State&lt;AppState&gt;
+    ▼
+Command Handler (commands/campaign.rs)
+    │  let mut conn = state.get_connection()?;
+    │  let mut svc = CampaignService::new(&amp;mut conn);
+    ▼
+CampaignService (mimir-core)
+    │  svc.get_by_id(42)?
+    ▼
+Diesel Query → SQLite
+    │
+    ▼
+Result&lt;ApiResponse&lt;Campaign&gt;, ApiError&gt; → JSON → Frontend
 </code></pre>
-<h2 id="related-documentation"><a class="header" href="#related-documentation">Related Documentation</a></h2>
+<h3 id="vue-3-frontend"><a class="header" href="#vue-3-frontend">Vue 3 Frontend</a></h3>
+<p>Feature-based organization with 4 domain modules.</p>
+<pre><code>frontend/src/
+├── app/                    # App bootstrap, router, root layout
+├── features/
+│   ├── campaigns/          # Dashboard, module listing, homebrew tab
+│   │   ├── views/          # CampaignDashboardView, etc.
+│   │   ├── components/     # WorldTab, ModulesTab, PCsTab, NPCsTab, HomebrewTab
+│   │   └── composables/    # useDashboardState
+│   ├── characters/         # Creation wizard, character sheet, level-up
+│   │   ├── views/          # CharacterListView, CharacterSheetView
+│   │   └── components/     # CharacterCreationWizard, LevelUpDialog
+│   ├── modules/            # Module prep, play mode, player display
+│   │   ├── views/          # ModulePrepView, ModulePlayView
+│   │   └── components/     # ModuleMonsters, ModuleNPCs, ModuleMaps
+│   └── sources/            # D&amp;D 5e catalog browser
+│       └── composables/    # useCatalogSearch (instantiated 22×)
+├── components/             # Shared: TokenPalette, DmMapViewer, print dialogs
+├── stores/                 # Pinia: campaigns, characters, theme
+├── services/               # Tauri command wrappers
+└── types/                  # TypeScript interfaces (generated from Rust)
+</code></pre>
+<p><strong>Key architectural patterns:</strong></p>
 <ul>
-<li><a href="/.metis/adr/MIMIR-A-0001.html">ADR-0001: Denormalized Database Design</a></li>
-<li><a href="/.metis/adr/MIMIR-A-0002.html">ADR-0002: Multi-Ruleset Architecture</a></li>
-<li><a href="/.metis/adr/MIMIR-A-0003.html">ADR-0003: JSON Storage Strategy</a></li>
-<li><a href="/.metis/adr/MIMIR-A-0005.html">ADR-0005: Service Layer Pattern</a></li>
+<li>Composition API with <code>&lt;script setup&gt;</code> exclusively</li>
+<li>Pinia setup stores (function-based, not options-based)</li>
+<li>Tauri <code>invoke()</code> for all backend communication</li>
+<li><code>ApiResponse&lt;T&gt;</code> wrapper for consistent error handling</li>
+<li>3 themes: light, dark, hyper (CSS variables + Pinia persistence)</li>
 </ul>
+<h3 id="mimir-mcp--mcp-sidecar-server"><a class="header" href="#mimir-mcp--mcp-sidecar-server">mimir-mcp — MCP Sidecar Server</a></h3>
+<p>Runs as a separate process, sharing the same SQLite database.</p>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│                       mimir-mcp                           │
+│                                                           │
+│  ┌──────────────┐    ┌──────────────────────────────────┐ │
+│  │  MCP Server   │    │     Tools (142 total)            │ │
+│  │              │    │                                  │ │
+│  │  rust-mcp-   │    │  character (26)   campaign (20) │ │
+│  │  sdk 0.8     │    │  catalog (16)     map (16)      │ │
+│  │              │    │  module (16)      document (12) │ │
+│  │  stdio +     │◀───│  homebrew (10)    h_monster (10)│ │
+│  │  streamable  │    │  h_spell (10)     mapgen (6)    │ │
+│  │  HTTP        │    │                                  │ │
+│  └──────────────┘    └──────────────────────────────────┘ │
+│                                                           │
+│  ┌──────────────┐    ┌──────────────────────────────────┐ │
+│  │  Database     │    │  Claude Code Plugin              │ │
+│  │  Context      │    │  plugin/ directory with:         │ │
+│  │              │    │  - plugin.json (manifest)        │ │
+│  │  Shares same  │    │  - skills/ (mapgen, mimir-dm)   │ │
+│  │  SQLite DB    │    │  - agents/ (campaign authoring)  │ │
+│  │  as Tauri app │    │  - hooks/ (event handlers)       │ │
+│  └──────────────┘    └──────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Sidecar lifecycle:</strong></p>
+<ol>
+<li>Tauri launches <code>mimir-mcp</code> binary via <code>externalBin</code> configuration</li>
+<li>Binary built to <code>crates/mimir/binaries/mimir-mcp-{target-triple}</code></li>
+<li>Build scripts: <code>scripts/build-sidecar.{sh,ps1,mjs}</code></li>
+<li>Must be built before <code>cargo build -p mimir</code> (Tauri requirement)</li>
+</ol>
+<h3 id="mimir-mapgen--procedural-map-generator"><a class="header" href="#mimir-mapgen--procedural-map-generator">mimir-mapgen — Procedural Map Generator</a></h3>
+<p>Standalone library + CLI for generating Dungeondraft-compatible maps.</p>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│                      mimir-mapgen                         │
+│                                                           │
+│  CLI Interface (clap)          Pipeline                   │
+│  ┌──────────────────┐         ┌──────────────────────┐   │
+│  │ generate          │         │  YAML Config         │   │
+│  │   --config / --preset      │       │              │   │
+│  │   --output         │────────│       ▼              │   │
+│  │   --seed           │        │  Noise Generation    │   │
+│  │ validate           │        │       │              │   │
+│  │ list-presets        │        │       ▼              │   │
+│  └──────────────────┘         │  Terrain Blending    │   │
+│                               │       │              │   │
+│  Core Modules (15)            │       ▼              │   │
+│  ┌──────────────────┐         │  Object Placement    │   │
+│  │ noise_gen         │         │  (trees, clutter)    │   │
+│  │ terrain           │         │       │              │   │
+│  │ objects            │         │       ▼              │   │
+│  │ paths (roads,      │         │  Paths &amp; Water      │   │
+│  │   rivers, meander) │         │  (exclusion zones)  │   │
+│  │ water             │         │       │              │   │
+│  │ rooms             │         │       ▼              │   │
+│  │ polygons          │         │  Rooms / Polygons    │   │
+│  │ elevation         │         │       │              │   │
+│  │ contour           │         │       ▼              │   │
+│  │ biomes (12        │         │  Dungeondraft        │   │
+│  │   presets)         │         │  Format Output       │   │
+│  │ format            │         │  (.dungeondraft_map) │   │
+│  │ pipeline          │         └──────────────────────┘   │
+│  │ distribution      │                                    │
+│  │ curves            │                                    │
+│  │ assets            │                                    │
+│  └──────────────────┘                                    │
+└──────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>No database dependency.</strong> Operates entirely on YAML config input → file output.</p>
+<h3 id="mimir-print--pdf-generation"><a class="header" href="#mimir-print--pdf-generation">mimir-print — PDF Generation</a></h3>
+<p>Typst-based document builder with pluggable sections.</p>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│                       mimir-print                         │
+│                                                           │
+│  ┌──────────────┐    ┌──────────────────────────────────┐ │
+│  │ PrintService  │    │  Renderable Sections             │ │
+│  │              │    │                                  │ │
+│  │ Template     │    │  CharacterSection (2-page sheet) │ │
+│  │ resolution + │    │  CharacterBattleCardSection      │ │
+│  │ PDF compile  │    │  SpellCardsSection (3×3 grid)    │ │
+│  │              │    │  EquipmentCardsSection            │ │
+│  └──────────────┘    │  MonsterCardSection               │ │
+│                      │  TrapCardSection                  │ │
+│  ┌──────────────┐    │  TiledMapSection + MapPreview    │ │
+│  │ DocumentBuilder   │  TokenCutoutSection               │ │
+│  │              │    │  MarkdownSection                  │ │
+│  │ Assembles    │    └──────────────────────────────────┘ │
+│  │ sections into│                                        │
+│  │ multi-part   │    ┌──────────────────────────────────┐ │
+│  │ documents    │    │  Support Modules                  │ │
+│  └──────────────┘    │  markdown → Typst converter      │ │
+│                      │  map_renderer (grid, LOS, tokens) │ │
+│                      │  Typst World (font/file resolver) │ │
+│                      └──────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────┘
+</code></pre>
+<h2 id="level-4-key-design-decisions"><a class="header" href="#level-4-key-design-decisions">Level 4: Key Design Decisions</a></h2>
+<p>Detailed rationale lives in ADRs. Summary:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Decision</th><th>ADR</th><th>Rationale</th></tr>
+</thead>
+<tbody>
+<tr><td>Denormalized catalog data</td><td><a href="/.metis/adr/MIMIR-A-0001.html">ADR-0001</a></td><td>Child entities (subclasses, subraces) embed full parent data to avoid joins on read</td></tr>
+<tr><td>Multi-ruleset content</td><td><a href="/.metis/adr/MIMIR-A-0002.html">ADR-0002</a></td><td>Content organized by rule system and source for future expansion</td></tr>
+<tr><td>JSON columns</td><td><a href="/.metis/adr/MIMIR-A-0003.html">ADR-0003</a></td><td>Variable/complex fields (spell components, monster traits) stored as JSON</td></tr>
+<tr><td>Stateful services</td><td><a href="/.metis/adr/MIMIR-A-0005.html">ADR-0005</a></td><td>Services borrow <code>&amp;mut SqliteConnection</code> for lifetime-scoped transactions</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="database-schema-56-tables"><a class="header" href="#database-schema-56-tables">Database Schema (56 tables)</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Category</th><th>Tables</th><th>Examples</th></tr>
+</thead>
+<tbody>
+<tr><td>Campaign (7)</td><td>campaigns, modules, documents, campaign_sources, campaign_assets, campaign_homebrew_*</td><td>Core user data</td></tr>
+<tr><td>Character (8)</td><td>characters, character_classes, character_spells, character_inventory, character_feats, character_features, character_proficiencies, character_sources</td><td>PC/NPC data</td></tr>
+<tr><td>Map &amp; Tokens (8)</td><td>maps, token_placements, light_sources, fog_revealed_areas, map_pois, map_traps, module_monsters, module_npcs</td><td>Spatial data</td></tr>
+<tr><td>D&amp;D Catalog (28)</td><td>spells, monsters, items, classes, races, backgrounds, feats, conditions, subclasses, etc.</td><td>Immutable 5etools data</td></tr>
+<tr><td>Management (5)</td><td>catalog_sources, books, spell_classes, spell_subclasses, item_attunement_classes</td><td>Relationships &amp; metadata</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="data-paths"><a class="header" href="#data-paths">Data Paths</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Environment</th><th>Database</th><th>Assets</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Production</strong></td><td><code>~/Library/Application Support/com.mimir.app/data/mimir.db</code></td><td><code>~/Library/Application Support/com.mimir.app/assets/</code></td></tr>
+<tr><td><strong>Development</strong></td><td><code>~/Library/Application Support/com.mimir.app/dev/data/mimir.db</code></td><td><code>~/Library/Application Support/com.mimir.app/dev/assets/</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Dev mode activated by debug assertions or <code>MIMIR_DEV</code> environment variable. Paths shown are macOS; Linux uses <code>~/.local/share/</code>, Windows uses <code>%APPDATA%</code>.</p>
+<h2 id="directory-structure"><a class="header" href="#directory-structure">Directory Structure</a></h2>
+<pre><code>mimir/
+├── Cargo.toml                     # Workspace manifest (5 crates)
+├── crates/
+│   ├── mimir/                     # Tauri desktop application
+│   │   ├── src/
+│   │   │   ├── main.rs            # Entry point, plugin registration
+│   │   │   ├── state.rs           # AppState, AppPaths, dev/prod separation
+│   │   │   └── commands/          # 22 Tauri command modules
+│   │   │       └── catalog/       # 8 sub-modules for D&amp;D catalog queries
+│   │   ├── frontend/              # Vue 3 + TypeScript application
+│   │   │   └── src/
+│   │   │       ├── features/      # campaigns/, characters/, modules/, sources/
+│   │   │       ├── components/    # Shared: TokenPalette, DmMapViewer, print dialogs
+│   │   │       └── stores/        # Pinia: campaigns, characters, theme
+│   │   ├── binaries/              # Sidecar output (mimir-mcp-{target})
+│   │   └── tauri.conf.json        # Tauri config with externalBin sidecar
+│   │
+│   ├── mimir-core/                # Domain logic library
+│   │   └── src/
+│   │       ├── models/            # Domain types (catalog/, campaign/)
+│   │       ├── services/          # 9 core + 24 catalog services
+│   │       │   └── catalog/       # Spell, Monster, Item, Class, Race, etc.
+│   │       ├── dal/               # Data access layer
+│   │       └── migrations/        # 29 Diesel migrations
+│   │
+│   ├── mimir-mcp/                 # MCP sidecar server
+│   │   ├── src/
+│   │   │   ├── main.rs            # Server bootstrap (stdio + HTTP)
+│   │   │   └── tools/             # 10 tool modules (142 tools total)
+│   │   └── plugin/                # Claude Code plugin definition
+│   │       ├── plugin.json        # Manifest
+│   │       ├── skills/            # mapgen, mimir-dm, mimir-campaign
+│   │       └── agents/            # Campaign authoring agent
+│   │
+│   ├── mimir-print/               # PDF generation library
+│   │   └── src/
+│   │       ├── service.rs         # PrintService
+│   │       ├── builder.rs         # DocumentBuilder
+│   │       ├── sections/          # 9 renderable section types
+│   │       └── map_renderer.rs    # Map image rendering
+│   │
+│   └── mimir-mapgen/              # Map generation library + CLI
+│       ├── src/
+│       │   ├── main.rs            # CLI (generate, validate, list-presets)
+│       │   ├── pipeline.rs        # MapConfig, generation orchestration
+│       │   ├── biomes.rs          # 12 biome presets
+│       │   └── (13 more modules)  # noise, terrain, paths, water, rooms, etc.
+│       └── examples/              # YAML configs + generated maps
+│
+├── docs/                          # mdBook documentation
+├── scripts/                       # Build scripts (sidecar, CI)
+└── .metis/                        # Project management (ADRs, initiatives)
+</code></pre>
 
                     </main>
 
