@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ac4f52b4.js";
+            window.path_to_searchindex_js = "../searchindex-905ad687.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-aa677dde.js"></script>
+        <script src="../toc-5975c418.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -374,7 +374,6 @@ mod tests {
     fn test_campaign_creation() {
         let campaign = Campaign::new("Test Campaign");
         assert_eq!(campaign.name, "Test Campaign");
-        assert_eq!(campaign.stage, CampaignStage::Spark);
     }
 }
 <span class="boring">}</span></code></pre>
@@ -382,11 +381,11 @@ mod tests {
 Place in <code>tests/</code> directory:</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>use mimir_dm_core::{establish_connection, run_migrations};
+</span>use mimir_core::{create_connection, run_migrations};
 
 #[test]
 fn test_database_integration() {
-    let mut conn = establish_connection(":memory:").unwrap();
+    let mut conn = create_connection(":memory:").unwrap();
     run_migrations(&amp;mut conn).unwrap();
     // Test database operations
 }

@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ac4f52b4.js";
+            window.path_to_searchindex_js = "../searchindex-905ad687.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-aa677dde.js"></script>
+        <script src="../toc-5975c418.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -213,7 +213,7 @@
 │  │   Vue 3 Frontend       │  │   Tauri Shell (mimir)  │  │
 │  │   TypeScript + Pinia   │──│   Rust command handlers │  │
 │  │                        │  │                        │  │
-│  │   4 feature modules:   │  │   22 command modules   │  │
+│  │   4 feature modules:   │  │   16 command modules   │  │
 │  │   campaigns, modules,  │  │   AppState management  │  │
 │  │   characters, sources  │  │                        │  │
 │  └────────────────────────┘  └───────────┬────────────┘  │
@@ -237,7 +237,7 @@
 ┌──────────────────────────────────────────────────────┐   │
 │   MCP Sidecar (mimir-mcp)                            │   │
 │   Separate binary, launched by Tauri externalBin     │◀──┘
-│   142 tools across 10 categories                     │
+│   71 tools across 10 categories                      │
 │   Depends on: mimir-core, mimir-mapgen               │
 └──────────────────────────────────────────────────────┘
 
@@ -337,7 +337,7 @@ impl&lt;'a&gt; CampaignService&lt;'a&gt; {
 │                      mimir (Tauri)                        │
 │                                                           │
 │  ┌─────────────┐    ┌──────────────────────────────────┐ │
-│  │  AppState    │    │         Commands (22 modules)    │ │
+│  │  AppState    │    │         Commands (16 modules)    │ │
 │  │             │    │                                  │ │
 │  │  AppPaths   │    │  campaign     character    map   │ │
 │  │  (data_dir, │◀───│  module       document     print │ │
@@ -409,13 +409,13 @@ Result&lt;ApiResponse&lt;Campaign&gt;, ApiError&gt; → JSON → Frontend
 │                       mimir-mcp                           │
 │                                                           │
 │  ┌──────────────┐    ┌──────────────────────────────────┐ │
-│  │  MCP Server   │    │     Tools (142 total)            │ │
+│  │  MCP Server   │    │     Tools (71 total)             │ │
 │  │              │    │                                  │ │
-│  │  rust-mcp-   │    │  character (26)   campaign (20) │ │
-│  │  sdk 0.8     │    │  catalog (16)     map (16)      │ │
-│  │              │    │  module (16)      document (12) │ │
-│  │  stdio +     │◀───│  homebrew (10)    h_monster (10)│ │
-│  │  streamable  │    │  h_spell (10)     mapgen (6)    │ │
+│  │  rust-mcp-   │    │  character (13)   campaign (10) │ │
+│  │  sdk 0.8     │    │  catalog (8)      map (8)       │ │
+│  │              │    │  module (8)       document (6)  │ │
+│  │  stdio +     │◀───│  homebrew (5)     h_monster (5) │ │
+│  │  streamable  │    │  h_spell (5)      mapgen (3)    │ │
 │  │  HTTP        │    │                                  │ │
 │  └──────────────┘    └──────────────────────────────────┘ │
 │                                                           │
@@ -552,7 +552,7 @@ Result&lt;ApiResponse&lt;Campaign&gt;, ApiError&gt; → JSON → Frontend
 │   │   ├── src/
 │   │   │   ├── main.rs            # Entry point, plugin registration
 │   │   │   ├── state.rs           # AppState, AppPaths, dev/prod separation
-│   │   │   └── commands/          # 22 Tauri command modules
+│   │   │   └── commands/          # 16 Tauri command modules
 │   │   │       └── catalog/       # 8 sub-modules for D&amp;D catalog queries
 │   │   ├── frontend/              # Vue 3 + TypeScript application
 │   │   │   └── src/
@@ -573,7 +573,7 @@ Result&lt;ApiResponse&lt;Campaign&gt;, ApiError&gt; → JSON → Frontend
 │   ├── mimir-mcp/                 # MCP sidecar server
 │   │   ├── src/
 │   │   │   ├── main.rs            # Server bootstrap (stdio + HTTP)
-│   │   │   └── tools/             # 10 tool modules (142 tools total)
+│   │   │   └── tools/             # 10 tool modules (71 tools total)
 │   │   └── plugin/                # Claude Code plugin definition
 │   │       ├── plugin.json        # Manifest
 │   │       ├── skills/            # mapgen, mimir-dm, mimir-campaign

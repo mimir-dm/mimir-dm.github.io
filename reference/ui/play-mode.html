@@ -35,10 +35,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ac4f52b4.js";
+            window.path_to_searchindex_js = "../../searchindex-905ad687.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-aa677dde.js"></script>
+        <script src="../../toc-5975c418.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -178,7 +178,7 @@
 <p>Play Mode is the interface for running game sessions. It provides tactical map display, monster reference, and session tools.</p>
 <p><img src="../../images/reference/dm-view.png" alt="Play Mode"></p>
 <h2 id="entering-play-mode"><a class="header" href="#entering-play-mode">Entering Play Mode</a></h2>
-<p>From the Modules tab, click the <strong>Play</strong> button in the module’s table row.</p>
+<p>Select a module from the Modules tab, then click the <strong>Play</strong> button in the module header.</p>
 <h2 id="layout"><a class="header" href="#layout">Layout</a></h2>
 <h3 id="header-bar"><a class="header" href="#header-bar">Header Bar</a></h3>
 <ul>
@@ -222,18 +222,17 @@
 <tbody>
 <tr><td><strong>Zoom</strong></td><td>+/- buttons, percentage display</td></tr>
 <tr><td><strong>Reset</strong></td><td>Fit map to view</td></tr>
-<tr><td><strong>Add Token</strong></td><td>Quick-add monster to map</td></tr>
-<tr><td><strong>Add PCs</strong></td><td>Place all campaign PCs</td></tr>
+<tr><td><strong>Add PCs</strong></td><td>Place all campaign PCs on the map</td></tr>
 <tr><td><strong>Reveal Map</strong></td><td>Toggle to bypass fog of war</td></tr>
-<tr><td><strong>LOS Toggle</strong></td><td>Switch between Fog and Token modes</td></tr>
-<tr><td><strong>Debug</strong></td><td>Visualize line of sight</td></tr>
+<tr><td><strong>Print</strong></td><td>Export map to PDF</td></tr>
+<tr><td><strong>Fog</strong></td><td>Toggle fog of war (hide map outside PC vision)</td></tr>
+<tr><td><strong>LOS</strong></td><td>Toggle token line of sight (hide tokens outside PC vision)</td></tr>
+<tr><td><strong>Debug</strong></td><td>Toggle debug overlays (vision ranges, walls)</td></tr>
 <tr><td><strong>Ambient Light</strong></td><td>Bright, Dim, or Dark</td></tr>
-<tr><td><strong>Sync</strong></td><td>Auto-sync view to player display</td></tr>
-<tr><td><strong>Push View</strong></td><td>Manual sync to player display</td></tr>
 </tbody>
 </table>
 </div>
-<h3 id="session-notes-bottom"><a class="header" href="#session-notes-bottom">Session Notes (Bottom)</a></h3>
+<h3 id="play-notes-bottom"><a class="header" href="#play-notes-bottom">Play Notes (Bottom)</a></h3>
 <p>Collapsible notes panel:</p>
 <ul>
 <li>Auto-saves as you type</li>
@@ -264,8 +263,6 @@
 <p>When Player Display is open:</p>
 <ul>
 <li><strong>Blackout</strong> - Hide everything from players</li>
-<li><strong>Sync</strong> - Auto-mirror your view</li>
-<li><strong>Push View</strong> - Manual view update</li>
 </ul>
 <h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
 <ul>
