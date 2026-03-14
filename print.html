@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-905ad687.js";
+            window.path_to_searchindex_js = "searchindex-771f5ecf.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-5975c418.js"></script>
+        <script src="toc-f8369802.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1479,6 +1479,336 @@ roads:
 <li><a href="#mapgen-reference">Mapgen Reference</a> — Full YAML schema and configuration details</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="install-and-use-mapgen-as-a-standalone-tool"><a class="header" href="#install-and-use-mapgen-as-a-standalone-tool">Install and Use Mapgen as a Standalone Tool</a></h1>
+<p><code>mimir-mapgen</code> is a self-contained procedural map generator that creates <a href="https://dungeondraft.net/">Dungeondraft</a>-compatible <code>.dungeondraft_map</code> files. It has no dependency on Mimir’s database, UI, or MCP server — you can build it independently and use it as a command-line tool anywhere.</p>
+<h2 id="prerequisites-4"><a class="header" href="#prerequisites-4">Prerequisites</a></h2>
+<ul>
+<li><strong>Rust toolchain</strong> (1.75+) — install via <a href="https://rustup.rs/">rustup</a></li>
+<li><strong>Dungeondraft</strong> — to open and edit generated maps (or export to UVTT for Foundry VTT / Roll20)</li>
+</ul>
+<h2 id="installation"><a class="header" href="#installation">Installation</a></h2>
+<h3 id="from-source-recommended"><a class="header" href="#from-source-recommended">From Source (Recommended)</a></h3>
+<p>Clone the repository and build just the mapgen crate:</p>
+<pre><code class="language-bash">git clone https://github.com/mimir-dm/mimir.git
+cd mimir
+cargo build -p mimir-mapgen --release
+</code></pre>
+<p>The binary is at <code>target/release/mimir-mapgen</code>. Copy it somewhere on your <code>$PATH</code>:</p>
+<pre><code class="language-bash">cp target/release/mimir-mapgen /usr/local/bin/
+</code></pre>
+<h3 id="verify-installation"><a class="header" href="#verify-installation">Verify Installation</a></h3>
+<pre><code class="language-bash">mimir-mapgen --help
+</code></pre>
+<h2 id="quick-start-1"><a class="header" href="#quick-start-1">Quick Start</a></h2>
+<p>Generate a map from a built-in preset:</p>
+<pre><code class="language-bash">mimir-mapgen generate --preset forest -o forest.dungeondraft_map
+</code></pre>
+<p>Open <code>forest.dungeondraft_map</code> in Dungeondraft. Done.</p>
+<h2 id="commands"><a class="header" href="#commands">Commands</a></h2>
+<h3 id="generate--create-a-map"><a class="header" href="#generate--create-a-map"><code>generate</code> — Create a Map</a></h3>
+<p>From a biome preset:</p>
+<pre><code class="language-bash">mimir-mapgen generate --preset lake -o lake.dungeondraft_map
+</code></pre>
+<p>From a custom YAML config:</p>
+<pre><code class="language-bash">mimir-mapgen generate my-config.yaml -o my-map.dungeondraft_map
+</code></pre>
+<p>With a specific seed for reproducible output:</p>
+<pre><code class="language-bash">mimir-mapgen generate --preset forest --seed 42 -o forest.dungeondraft_map
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Short</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--output</code></td><td><code>-o</code></td><td>Output file path (default: <code>output.dungeondraft_map</code>)</td></tr>
+<tr><td><code>--seed</code></td><td><code>-s</code></td><td>Random seed (overrides config file seed)</td></tr>
+<tr><td><code>--preset</code></td><td><code>-p</code></td><td>Use a built-in biome preset (mutually exclusive with config file)</td></tr>
+</tbody>
+</table>
+</div>
+<p>You must provide either a config file <strong>or</strong> <code>--preset</code>, not both.</p>
+<h3 id="list-presets--show-available-presets"><a class="header" href="#list-presets--show-available-presets"><code>list-presets</code> — Show Available Presets</a></h3>
+<pre><code class="language-bash">mimir-mapgen list-presets
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Preset</th><th>Size</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>forest</code></td><td>32x32</td><td>Dense temperate forest with dirt paths, scattered rocks, and natural clearings</td></tr>
+<tr><td><code>grassland</code></td><td>32x32</td><td>Open rolling hills with sparse trees and wildflowers</td></tr>
+<tr><td><code>cave</code></td><td>24x24</td><td>Underground cavern with rocky terrain and dark ambient lighting</td></tr>
+<tr><td><code>desert</code></td><td>32x32</td><td>Arid sandy wasteland with rocky outcrops and sparse scrub</td></tr>
+<tr><td><code>lake</code></td><td>32x32</td><td>Tranquil woodland pond with grassy shores and scattered trees</td></tr>
+<tr><td><code>ice_lake</code></td><td>32x32</td><td>Frozen lake with cracked ice, snow-covered shores, and frigid water</td></tr>
+<tr><td><code>arctic</code></td><td>32x32</td><td>Frozen tundra with snow drifts, exposed rock, and harsh conditions</td></tr>
+<tr><td><code>island_tropical</code></td><td>32x32</td><td>Tropical island with sandy beaches, palm trees, and warm ocean</td></tr>
+<tr><td><code>island_forest</code></td><td>32x32</td><td>Forested island in a lake with dirt shores and dense tree cover</td></tr>
+<tr><td><code>island_arctic</code></td><td>32x32</td><td>Snow-covered island surrounded by frigid dark water</td></tr>
+<tr><td><code>swamp</code></td><td>32x32</td><td>Dark, murky wetland with stagnant water, dead trees, and dim lighting</td></tr>
+<tr><td><code>forest_river</code></td><td>32x32</td><td>Dense forest bisected by a meandering river with rocky banks</td></tr>
+</tbody>
+</table>
+</div>
+<p>Presets accept aliases: <code>lake</code>/<code>pond</code>, <code>swamp</code>/<code>marsh</code>/<code>bog</code>, <code>island_tropical</code>/<code>tropical_island</code>. Hyphens work too (<code>forest-river</code>).</p>
+<h3 id="validate--check-a-config-without-generating"><a class="header" href="#validate--check-a-config-without-generating"><code>validate</code> — Check a Config Without Generating</a></h3>
+<pre><code class="language-bash">mimir-mapgen validate config.yaml
+</code></pre>
+<p>Reports field-specific errors so you can fix issues before generation.</p>
+<h2 id="writing-a-custom-config"><a class="header" href="#writing-a-custom-config">Writing a Custom Config</a></h2>
+<p>Configs are YAML files. A minimal example:</p>
+<pre><code class="language-yaml">name: "Forest Clearing"
+width: 32
+height: 32
+
+terrain:
+  slots:
+    - texture: "res://textures/terrain/terrain_grass.png"
+      lower: 0.0
+      upper: 0.5
+    - texture: "res://textures/terrain/terrain_dirt.png"
+      lower: 0.4
+      upper: 0.7
+    - texture: "res://textures/terrain/terrain_stone.png"
+      lower: 0.6
+      upper: 0.9
+    - texture: "res://textures/terrain/terrain_gravel.png"
+      lower: 0.8
+      upper: 1.0
+</code></pre>
+<p>This produces a 32x32 grid map with blended terrain — no trees, roads, or rooms. Add sections to layer in features.</p>
+<h3 id="adding-trees-and-vegetation"><a class="header" href="#adding-trees-and-vegetation">Adding Trees and Vegetation</a></h3>
+<pre><code class="language-yaml">trees:
+  - tree:
+      textures:
+        - "res://textures/objects/more_trees/oak_01.png"
+        - "res://textures/objects/more_trees/oak_02.png"
+      min_distance: 500.0
+      noise_lower: 0.4
+      noise_upper: 0.75
+      probability: 0.5
+
+clutter:
+  - textures:
+      - "res://textures/objects/vegetation/grass/grass_01.png"
+    min_distance: 80.0
+    noise_lower: 0.2
+    noise_upper: 0.7
+    probability: 0.6
+</code></pre>
+<p>Trees are placed via Poisson Disc sampling — <code>min_distance</code> controls spacing, <code>noise_lower</code>/<code>noise_upper</code> restrict placement to specific terrain zones.</p>
+<h3 id="adding-a-road"><a class="header" href="#adding-a-road">Adding a Road</a></h3>
+<pre><code class="language-yaml">roads:
+  - from: Left
+    to: Right
+    width: 512.0
+    style: straight
+</code></pre>
+<p>All road fields have defaults, so even <code>roads: [{}]</code> produces a valid road. Style options: <code>straight</code> (noise-following) or <code>meandering</code> (sinusoidal S-curves). Roads automatically route around rooms.</p>
+<h3 id="adding-a-river"><a class="header" href="#adding-a-river">Adding a River</a></h3>
+<pre><code class="language-yaml">rivers:
+  - from: Top
+    to: Bottom
+    width: 120.0
+    style: meandering
+    deep_color: "ff3aa19a"
+    shallow_color: "ff3ac3b2"
+</code></pre>
+<p>Rivers generate a water polygon with bank paths on each side. Very wide rivers (1000+ pixels) can simulate coastlines.</p>
+<h3 id="adding-rooms-and-corridors"><a class="header" href="#adding-rooms-and-corridors">Adding Rooms and Corridors</a></h3>
+<pre><code class="language-yaml">rooms:
+  - id: "tavern"
+    x: 13
+    y: 13
+    width: 6
+    height: 5
+    terrain_slot: 0
+    portals:
+      - wall: south
+        position: 2
+        type: door
+
+  - id: "kitchen"
+    x: 19
+    y: 14
+    width: 4
+    height: 3
+    terrain_slot: 0
+
+corridors:
+  - from: "tavern"
+    from_wall: "east"
+    to: "kitchen"
+    to_wall: "west"
+    width: 2
+    portals:
+      - end: "from"
+        type: archway
+        width: 1
+</code></pre>
+<p>Coordinates are in grid squares. Outdoor features (trees, roads, rivers) automatically avoid room interiors.</p>
+<h3 id="adding-polygon-shapes"><a class="header" href="#adding-polygon-shapes">Adding Polygon Shapes</a></h3>
+<p>For irregular rooms (L-shapes, ovals, etc.), use polygons:</p>
+<pre><code class="language-yaml">polygons:
+  - id: "room_a"
+    points:         # clockwise vertex order
+      - [3, 6]
+      - [9, 6]
+      - [9, 14]
+      - [3, 14]
+    terrain_slot: 3
+    portals:
+      - edge: 0     # edge 0 = points[0] -&gt; points[1]
+        position: 0.5
+        type: door
+</code></pre>
+<p>Adjacent polygons that share an edge automatically get an open connection (shared wall removed). Overlapping polygons merge into a single outer wall.</p>
+<h3 id="adding-water-bodies"><a class="header" href="#adding-water-bodies">Adding Water Bodies</a></h3>
+<pre><code class="language-yaml">water:
+  threshold: 0.75
+  deep_color: "ff3aa19a"
+  shallow_color: "ff3ac3b2"
+  smooth_iterations: 2
+</code></pre>
+<p>Water fills areas where noise exceeds the threshold. Combine with <code>island_mode</code> for lake-surrounded islands.</p>
+<h3 id="elevation-contours"><a class="header" href="#elevation-contours">Elevation Contours</a></h3>
+<pre><code class="language-yaml">elevation:
+  levels:
+    - threshold: 0.65
+      texture: "res://textures/paths/path_rocks.png"
+      width: 12.0
+</code></pre>
+<h3 id="island-mode"><a class="header" href="#island-mode">Island Mode</a></h3>
+<p>Add <code>island_mode</code> to apply a radial falloff — center stays low, edges rise. Creates natural island or clearing shapes:</p>
+<pre><code class="language-yaml">island_mode: 1.5    # higher = steeper falloff at edges
+</code></pre>
+<h3 id="lighting"><a class="header" href="#lighting">Lighting</a></h3>
+<pre><code class="language-yaml">lighting:
+  ambient_light: "ffffffff"
+  ambient_energy: 1.0
+  shadow_color: "66000000"
+</code></pre>
+<p>Time-of-day presets for reference:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Preset</th><th>Ambient Color</th><th>Energy</th><th>Mood</th></tr>
+</thead>
+<tbody>
+<tr><td>Dawn</td><td>Warm gold</td><td>0.7</td><td>Early morning</td></tr>
+<tr><td>Day</td><td>White</td><td>1.0</td><td>Bright daylight</td></tr>
+<tr><td>Dusk</td><td>Orange-red</td><td>0.6</td><td>Sunset</td></tr>
+<tr><td>Night</td><td>Blue</td><td>0.3</td><td>Darkness</td></tr>
+<tr><td>Underground</td><td>Dark grey</td><td>0.2</td><td>Cave / dungeon</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="full-example-island-fort"><a class="header" href="#full-example-island-fort">Full Example: Island Fort</a></h2>
+<p>A config combining island mode, rooms, water, trees, and clutter:</p>
+<pre><code class="language-yaml">name: "Island Fort"
+width: 32
+height: 32
+seed: 42
+
+noise:
+  octaves: 5
+  persistence: 0.5
+  lacunarity: 2.0
+  scale: 0.035
+
+island_mode: 1.0
+
+terrain:
+  slots:
+    - texture: "res://textures/terrain/terrain_grass.png"
+      lower: 0.0
+      upper: 0.35
+    - texture: "res://textures/terrain/terrain_moss.png"
+      lower: 0.3
+      upper: 0.55
+    - texture: "res://textures/terrain/terrain_dry_grass.png"
+      lower: 0.5
+      upper: 0.75
+    - texture: "res://textures/terrain/terrain_sand.png"
+      lower: 0.7
+      upper: 1.0
+  blend_width: 0.06
+  smooth_blending: true
+
+rooms:
+  - id: "fort"
+    x: 12
+    y: 12
+    width: 8
+    height: 8
+    terrain_slot: 0
+    portals:
+      - wall: south
+        position: 3
+        type: door
+
+trees:
+  - tree:
+      textures:
+        - "res://textures/objects/more_trees/oak_01.png"
+        - "res://textures/objects/more_trees/oak_02.png"
+      min_distance: 350.0
+      noise_lower: 0.0
+      noise_upper: 0.5
+      probability: 0.6
+
+water:
+  threshold: 0.85
+  deep_color: "ff1a6b5a"
+  shallow_color: "ff30b89a"
+  blend_distance: 60.0
+  smooth_iterations: 5
+</code></pre>
+<p>Generate it:</p>
+<pre><code class="language-bash">mimir-mapgen generate island_fort.yaml -o island_fort.dungeondraft_map
+</code></pre>
+<h2 id="iterative-workflow"><a class="header" href="#iterative-workflow">Iterative Workflow</a></h2>
+<p>Maps are deterministic — the same seed + config always produces the same result. Use this for rapid iteration:</p>
+<ol>
+<li>Generate with a fixed seed</li>
+<li>Open in Dungeondraft and review</li>
+<li>Tweak config parameters (tree density, road width, room positions)</li>
+<li>Regenerate with the same seed to see only your changes</li>
+<li>Try different seeds to explore different terrain layouts</li>
+</ol>
+<h2 id="noise-tuning"><a class="header" href="#noise-tuning">Noise Tuning</a></h2>
+<p>The noise parameters control the foundation of everything — terrain blending, object placement, and path generation all read from the same noise field.</p>
+<pre><code class="language-yaml">noise:
+  octaves: 6        # more octaves = more fine detail
+  persistence: 0.5  # amplitude decay per octave (lower = smoother)
+  lacunarity: 2.0   # frequency multiplier per octave
+  scale: 0.03       # base frequency (lower = larger features)
+</code></pre>
+<p><strong>Tips:</strong></p>
+<ul>
+<li>Lower <code>scale</code> (0.01–0.02) for broad, sweeping terrain</li>
+<li>Higher <code>scale</code> (0.04–0.06) for choppy, varied terrain</li>
+<li>Reduce <code>octaves</code> to 3–4 for softer, less detailed maps</li>
+<li>Increase <code>persistence</code> toward 0.7 for rougher textures</li>
+</ul>
+<h2 id="output-format"><a class="header" href="#output-format">Output Format</a></h2>
+<p>Generated <code>.dungeondraft_map</code> files are JSON and open directly in Dungeondraft. From there you can:</p>
+<ul>
+<li>Fine-tune placement, add furniture, lighting, etc.</li>
+<li>Export to Universal VTT (<code>.dd2vtt</code>) for Foundry VTT, Roll20, or other platforms</li>
+<li>Export to PNG/JPEG images</li>
+</ul>
+<h2 id="example-configs"><a class="header" href="#example-configs">Example Configs</a></h2>
+<p>The <code>crates/mimir-mapgen/examples/</code> directory contains YAML configs and pre-generated maps for every biome preset plus multi-feature configs like <code>tavern_river.yaml</code> and <code>island_fort.yaml</code>.</p>
+<h2 id="see-also-9"><a class="header" href="#see-also-9">See Also</a></h2>
+<ul>
+<li><a href="#mapgen-reference">Mapgen Reference</a> — Full YAML schema with all fields documented</li>
+<li><a href="#dungeondraft-default-texture-catalog">Dungeondraft Texture Catalog</a> — Available <code>res://</code> texture paths</li>
+<li><a href="#generate-a-map">Generate Maps (Mimir Integration)</a> — Using mapgen through Mimir’s UI and MCP tools</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="characters"><a class="header" href="#characters">Characters</a></h1>
 <p>How-to guides for creating and managing characters.</p>
 <ul>
@@ -1559,7 +1889,7 @@ roads:
 <li>Quick-create for NPCs doesn’t need all steps</li>
 <li>Level up uses a separate dialog</li>
 </ul>
-<h2 id="see-also-9"><a class="header" href="#see-also-9">See Also</a></h2>
+<h2 id="see-also-10"><a class="header" href="#see-also-10">See Also</a></h2>
 <ul>
 <li><a href="#assign-to-campaign">Assign to Campaign</a></li>
 <li><a href="#print-character-sheet">Print Character Sheet</a></li>
@@ -1614,7 +1944,7 @@ roads:
 <li>Include one distinctive trait or quirk</li>
 <li>Link to relevant plot threads in notes</li>
 </ul>
-<h2 id="see-also-10"><a class="header" href="#see-also-10">See Also</a></h2>
+<h2 id="see-also-11"><a class="header" href="#see-also-11">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#assign-to-campaign">Assign to Campaign</a></li>
@@ -1675,7 +2005,7 @@ roads:
 <li>NPCs can belong to multiple modules</li>
 <li>Characters can be in multiple campaigns</li>
 </ul>
-<h2 id="see-also-11"><a class="header" href="#see-also-11">See Also</a></h2>
+<h2 id="see-also-12"><a class="header" href="#see-also-12">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#create-an-npc">Create an NPC</a></li>
@@ -1722,7 +2052,7 @@ roads:
 <li><strong>Copper (cp)</strong></li>
 </ul>
 <p>A total gold value is calculated and displayed below.</p>
-<h2 id="see-also-12"><a class="header" href="#see-also-12">See Also</a></h2>
+<h2 id="see-also-13"><a class="header" href="#see-also-13">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#print-character-sheet">Print Character Sheet</a> — Equipment Cards print option</li>
@@ -1763,7 +2093,7 @@ roads:
 <p>Mimir displays all possible spells for your class — spell preparation and selection is a table activity managed by the player during the game. The Spells tab serves as a complete reference so players can browse their full spell list and look up details on the fly.</p>
 <h2 id="homebrew-spells"><a class="header" href="#homebrew-spells">Homebrew Spells</a></h2>
 <p>Homebrew spells created in the campaign’s Homebrew tab automatically appear alongside catalog spells in the character’s spell list, tagged with <strong>HB</strong>.</p>
-<h2 id="see-also-13"><a class="header" href="#see-also-13">See Also</a></h2>
+<h2 id="see-also-14"><a class="header" href="#see-also-14">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#print-character-sheet">Print Character Sheet</a> — Spell Cards print option</li>
@@ -1812,7 +2142,7 @@ roads:
 <li>Use <strong>Back</strong> and <strong>Next</strong> to move between steps</li>
 <li><strong>Next</strong> is disabled until the current step is complete</li>
 </ul>
-<h2 id="see-also-14"><a class="header" href="#see-also-14">See Also</a></h2>
+<h2 id="see-also-15"><a class="header" href="#see-also-15">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#manage-character-spells">Manage Character Spells</a></li>
@@ -1873,7 +2203,7 @@ roads:
 <li>Update and reprint after level ups</li>
 <li>Keep a backup PDF</li>
 </ul>
-<h2 id="see-also-15"><a class="header" href="#see-also-15">See Also</a></h2>
+<h2 id="see-also-16"><a class="header" href="#see-also-16">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#export-campaign">Export Campaign</a></li>
@@ -1929,7 +2259,7 @@ roads:
 <li>Start with your first session’s content</li>
 <li>Add more modules as players progress</li>
 </ul>
-<h2 id="see-also-16"><a class="header" href="#see-also-16">See Also</a></h2>
+<h2 id="see-also-17"><a class="header" href="#see-also-17">See Also</a></h2>
 <ul>
 <li><a href="#add-monsters">Add Monsters</a></li>
 <li><a href="#module-documents">Module Documents</a></li>
@@ -1992,7 +2322,7 @@ roads:
 <li>Search by CR to find level-appropriate challenges</li>
 <li>Create homebrew monsters in the Homebrew tab if you need custom creatures</li>
 </ul>
-<h2 id="see-also-17"><a class="header" href="#see-also-17">See Also</a></h2>
+<h2 id="see-also-18"><a class="header" href="#see-also-18">See Also</a></h2>
 <ul>
 <li><a href="#create-a-module">Create a Module</a></li>
 <li><a href="#place-tokens">Place Tokens</a></li>
@@ -2039,7 +2369,7 @@ roads:
 <li>Session notes can be edited during play</li>
 <li>Export individual documents to PDF using the <strong>Export PDF</strong> button in the editor header</li>
 </ul>
-<h2 id="see-also-18"><a class="header" href="#see-also-18">See Also</a></h2>
+<h2 id="see-also-19"><a class="header" href="#see-also-19">See Also</a></h2>
 <ul>
 <li><a href="#create-a-module">Create a Module</a></li>
 <li><a href="#manage-documents">Manage Documents</a></li>
@@ -2056,7 +2386,7 @@ roads:
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="start-a-session"><a class="header" href="#start-a-session">Start a Session</a></h1>
 <p>Enter Play Mode to run your game session.</p>
-<h2 id="prerequisites-4"><a class="header" href="#prerequisites-4">Prerequisites</a></h2>
+<h2 id="prerequisites-5"><a class="header" href="#prerequisites-5">Prerequisites</a></h2>
 <ul>
 <li>A module with at least one map</li>
 <li>Tokens placed on the map (optional but recommended)</li>
@@ -2101,7 +2431,7 @@ roads:
 <li>Use Blackout mode while positioning tokens</li>
 <li>Save session notes as you play</li>
 </ul>
-<h2 id="see-also-19"><a class="header" href="#see-also-19">See Also</a></h2>
+<h2 id="see-also-20"><a class="header" href="#see-also-20">See Also</a></h2>
 <ul>
 <li><a href="#manage-encounters">Manage Encounters</a></li>
 <li><a href="#fog-of-war-2">Fog of War</a></li>
@@ -2153,7 +2483,7 @@ roads:
 <li>Use encounter tags to group monsters by room/area</li>
 <li>Position hidden tokens before players enter areas</li>
 </ul>
-<h2 id="see-also-20"><a class="header" href="#see-also-20">See Also</a></h2>
+<h2 id="see-also-21"><a class="header" href="#see-also-21">See Also</a></h2>
 <ul>
 <li><a href="#fog-of-war-2">Fog of War</a></li>
 <li><a href="#start-a-session">Start a Session</a></li>
@@ -2224,7 +2554,7 @@ roads:
 <li>Reveal Map for town maps where fog doesn’t make sense</li>
 <li>Use LOS mode for complex combat where you want tokens filtered but the map visible</li>
 </ul>
-<h2 id="see-also-21"><a class="header" href="#see-also-21">See Also</a></h2>
+<h2 id="see-also-22"><a class="header" href="#see-also-22">See Also</a></h2>
 <ul>
 <li><a href="#manage-light-sources">Manage Light Sources</a></li>
 <li><a href="#vision--lighting">Vision &amp; Lighting Reference</a></li>
@@ -2282,7 +2612,7 @@ roads:
 <li>Use Blackout liberally for reveals</li>
 <li>Disable sync when planning ahead secretly</li>
 </ul>
-<h2 id="see-also-22"><a class="header" href="#see-also-22">See Also</a></h2>
+<h2 id="see-also-23"><a class="header" href="#see-also-23">See Also</a></h2>
 <ul>
 <li><a href="#fog-of-war-2">Fog of War</a></li>
 <li><a href="#player-display-setup">Tutorial: Player Display Setup</a></li>
@@ -2382,7 +2712,7 @@ roads:
 <p>Click an item in the list, then click <strong>Edit</strong> to modify its fields.</p>
 <h2 id="deleting-items"><a class="header" href="#deleting-items">Deleting Items</a></h2>
 <p>Click <strong>Delete</strong> on a selected item. If any characters have the item in their inventory, a warning shows which characters are affected.</p>
-<h2 id="see-also-23"><a class="header" href="#see-also-23">See Also</a></h2>
+<h2 id="see-also-24"><a class="header" href="#see-also-24">See Also</a></h2>
 <ul>
 <li><a href="#manage-character-inventory">Manage Character Inventory</a></li>
 <li><a href="how-to/homebrew">Homebrew Overview</a></li>
@@ -2422,7 +2752,7 @@ roads:
 <p>They are tagged with an <strong>HB</strong> badge for identification.</p>
 <h2 id="deleting-monsters"><a class="header" href="#deleting-monsters">Deleting Monsters</a></h2>
 <p>Click <strong>Delete</strong> on a selected monster. If any modules reference the monster, a warning shows which modules are affected.</p>
-<h2 id="see-also-24"><a class="header" href="#see-also-24">See Also</a></h2>
+<h2 id="see-also-25"><a class="header" href="#see-also-25">See Also</a></h2>
 <ul>
 <li><a href="#add-monsters">Add Monsters to Module</a></li>
 <li><a href="how-to/homebrew">Homebrew Overview</a></li>
@@ -2457,7 +2787,7 @@ roads:
 <p>Homebrew spells appear automatically in character spell lists alongside catalog spells for spellcasting characters. They are tagged with an <strong>HB</strong> badge.</p>
 <h2 id="deleting-spells"><a class="header" href="#deleting-spells">Deleting Spells</a></h2>
 <p>Click <strong>Delete</strong> on a selected spell. A confirmation prompt appears before deletion.</p>
-<h2 id="see-also-25"><a class="header" href="#see-also-25">See Also</a></h2>
+<h2 id="see-also-26"><a class="header" href="#see-also-26">See Also</a></h2>
 <ul>
 <li><a href="#manage-character-spells">Manage Character Spells</a></li>
 <li><a href="how-to/homebrew">Homebrew Overview</a></li>
@@ -2467,7 +2797,7 @@ roads:
 <p>Use Mimir with Claude Code for AI-assisted campaign management via natural language.</p>
 <h2 id="what-it-does"><a class="header" href="#what-it-does">What It Does</a></h2>
 <p>Mimir includes an MCP (Model Context Protocol) server that exposes 70+ tools to Claude Code, enabling you to manage campaigns, search catalogs, generate maps, and prep sessions through conversation. Ask “create a forest map” or “find CR 5 undead monsters” and the assistant handles it.</p>
-<h2 id="prerequisites-5"><a class="header" href="#prerequisites-5">Prerequisites</a></h2>
+<h2 id="prerequisites-6"><a class="header" href="#prerequisites-6">Prerequisites</a></h2>
 <ul>
 <li>Mimir desktop app installed</li>
 <li><a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> installed</li>
@@ -2599,7 +2929,7 @@ roads:
 </tbody>
 </table>
 </div>
-<h2 id="see-also-26"><a class="header" href="#see-also-26">See Also</a></h2>
+<h2 id="see-also-27"><a class="header" href="#see-also-27">See Also</a></h2>
 <ul>
 <li><a href="#create-a-campaign">Create a Campaign</a></li>
 <li><a href="#campaign-dashboard">Campaign Dashboard</a></li>
@@ -2660,7 +2990,7 @@ roads:
 <li><strong>Spells</strong> — Clone and modify spells from the catalog</li>
 </ul>
 <p>See <a href="how-to/homebrew">Homebrew Content</a> for detailed guides.</p>
-<h2 id="see-also-27"><a class="header" href="#see-also-27">See Also</a></h2>
+<h2 id="see-also-28"><a class="header" href="#see-also-28">See Also</a></h2>
 <ul>
 <li><a href="#module-prep-view">Module Prep View</a></li>
 <li><a href="#manage-documents">Manage Documents</a></li>
@@ -2725,7 +3055,7 @@ roads:
 </tbody>
 </table>
 </div>
-<h2 id="see-also-28"><a class="header" href="#see-also-28">See Also</a></h2>
+<h2 id="see-also-29"><a class="header" href="#see-also-29">See Also</a></h2>
 <ul>
 <li><a href="#token-setup-modal">Token Setup Modal</a></li>
 <li><a href="#play-mode-2">Play Mode</a></li>
@@ -2822,7 +3152,7 @@ roads:
 <ul>
 <li><strong>Blackout</strong> - Hide everything from players</li>
 </ul>
-<h2 id="see-also-29"><a class="header" href="#see-also-29">See Also</a></h2>
+<h2 id="see-also-30"><a class="header" href="#see-also-30">See Also</a></h2>
 <ul>
 <li><a href="#player-display-2">Player Display</a></li>
 <li><a href="#start-a-session">Start a Session</a></li>
@@ -2921,7 +3251,7 @@ roads:
 <li>Add light sources as needed</li>
 <li>Close modal (×) - saves automatically</li>
 </ol>
-<h2 id="see-also-30"><a class="header" href="#see-also-30">See Also</a></h2>
+<h2 id="see-also-31"><a class="header" href="#see-also-31">See Also</a></h2>
 <ul>
 <li><a href="#add-monsters">Add Monsters</a></li>
 <li><a href="#place-tokens">Place Tokens</a></li>
@@ -3021,7 +3351,7 @@ roads:
 </tbody>
 </table>
 </div>
-<h2 id="see-also-31"><a class="header" href="#see-also-31">See Also</a></h2>
+<h2 id="see-also-32"><a class="header" href="#see-also-32">See Also</a></h2>
 <ul>
 <li><a href="#play-mode-2">Play Mode</a></li>
 <li><a href="#use-player-display">Use Player Display</a></li>
@@ -3485,7 +3815,7 @@ roads:
 </table>
 </div>
 <h2 id="claude-code-plugin"><a class="header" href="#claude-code-plugin">Claude Code Plugin</a></h2>
-<h3 id="installation"><a class="header" href="#installation">Installation</a></h3>
+<h3 id="installation-1"><a class="header" href="#installation-1">Installation</a></h3>
 <pre><code class="language-bash">claude plugin add /path/to/mimir/crates/mimir-mcp/plugin
 </code></pre>
 <h3 id="slash-commands-1"><a class="header" href="#slash-commands-1">Slash Commands</a></h3>
@@ -3521,7 +3851,7 @@ roads:
 </tbody>
 </table>
 </div>
-<h2 id="see-also-32"><a class="header" href="#see-also-32">See Also</a></h2>
+<h2 id="see-also-33"><a class="header" href="#see-also-33">See Also</a></h2>
 <ul>
 <li><a href="how-to/ai-assistant">AI Assistant How-To</a></li>
 <li><a href="#mapgen-reference">Mapgen Reference</a></li>
@@ -3532,7 +3862,7 @@ roads:
 <h2 id="cli-usage"><a class="header" href="#cli-usage">CLI Usage</a></h2>
 <pre><code class="language-bash">mimir-mapgen &lt;command&gt;
 </code></pre>
-<h3 id="commands"><a class="header" href="#commands">Commands</a></h3>
+<h3 id="commands-1"><a class="header" href="#commands-1">Commands</a></h3>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -3615,7 +3945,7 @@ seed: 42                        # u64, optional — random seed
   lacunarity: 2.0      # f64 — frequency multiplier per octave
   scale: 0.03          # f64 — base frequency (lower = larger features)
 </code></pre>
-<h3 id="island-mode"><a class="header" href="#island-mode">Island Mode</a></h3>
+<h3 id="island-mode-1"><a class="header" href="#island-mode-1">Island Mode</a></h3>
 <p>Optional radial falloff creating island/clearing shapes where the center is low and edges are high.</p>
 <pre><code class="language-yaml">island_mode: 1.5       # f64, optional — falloff strength (higher = steeper)
 </code></pre>
@@ -3768,7 +4098,7 @@ seed: 42                        # u64, optional — random seed
   pixels_per_cell: 64.0                  # f64 — coordinate scaling
   disable_border: false                  # bool — disable water border effect
 </code></pre>
-<h3 id="elevation-contours"><a class="header" href="#elevation-contours">Elevation Contours</a></h3>
+<h3 id="elevation-contours-1"><a class="header" href="#elevation-contours-1">Elevation Contours</a></h3>
 <p>Cliff and hill contour lines at noise thresholds.</p>
 <pre><code class="language-yaml">elevation:
   levels:
@@ -3852,7 +4182,7 @@ seed: 42                        # u64, optional — random seed
 </tbody>
 </table>
 </div>
-<h3 id="lighting"><a class="header" href="#lighting">Lighting</a></h3>
+<h3 id="lighting-1"><a class="header" href="#lighting-1">Lighting</a></h3>
 <p>Ambient lighting and shadow configuration.</p>
 <pre><code class="language-yaml">lighting:
   ambient_light: "ffffffff"              # string — ARGB hex ambient color
@@ -3902,11 +4232,839 @@ seed: 42                        # u64, optional — random seed
 <li><code>res://textures/portals/archway_00.png</code></li>
 <li><code>res://textures/portals/secret_00.png</code></li>
 </ul>
-<h2 id="see-also-33"><a class="header" href="#see-also-33">See Also</a></h2>
+<h2 id="see-also-34"><a class="header" href="#see-also-34">See Also</a></h2>
 <ul>
 <li><a href="#generate-a-map">Generate Maps How-To</a></li>
 <li><a href="#mcp-server-reference">MCP Server Reference</a></li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="dungeondraft-default-texture-catalog"><a class="header" href="#dungeondraft-default-texture-catalog">Dungeondraft Default Texture Catalog</a></h1>
+<p>Complete list of <code>res://</code> texture paths available in Dungeondraft’s default asset pack. Use these paths in map configuration YAML for terrain, objects, paths, walls, and other elements.</p>
+<h2 id="terrain-2"><a class="header" href="#terrain-2">Terrain</a></h2>
+<pre><code>res://textures/terrain/terrain_cracked_earth.png
+res://textures/terrain/terrain_dirt.png
+res://textures/terrain/terrain_dry_grass.png
+res://textures/terrain/terrain_grass.png
+res://textures/terrain/terrain_gravel.png
+res://textures/terrain/terrain_limestone.png
+res://textures/terrain/terrain_moss.png
+res://textures/terrain/terrain_rocky.png
+res://textures/terrain/terrain_sand.png
+res://textures/terrain/terrain_sandstone.png
+res://textures/terrain/terrain_snow.png
+res://textures/terrain/terrain_swamp.png
+res://textures/terrain/terrain_void.png
+</code></pre>
+<h2 id="tilesets-floor"><a class="header" href="#tilesets-floor">Tilesets (Floor)</a></h2>
+<pre><code>res://textures/tilesets/simple/tileset_brick_basketweave.png
+res://textures/tilesets/simple/tileset_brick_running.png
+res://textures/tilesets/simple/tileset_brick_worn.png
+res://textures/tilesets/simple/tileset_carpet.png
+res://textures/tilesets/simple/tileset_cave.png
+res://textures/tilesets/simple/tileset_cobble.png
+res://textures/tilesets/simple/tileset_concrete_large.png
+res://textures/tilesets/simple/tileset_concrete_slab.png
+res://textures/tilesets/simple/tileset_concrete.png
+res://textures/tilesets/simple/tileset_cut_stone.png
+res://textures/tilesets/simple/tileset_diamond_2.png
+res://textures/tilesets/simple/tileset_diamond.png
+res://textures/tilesets/simple/tileset_herringbone.png
+res://textures/tilesets/simple/tileset_ornate.png
+res://textures/tilesets/simple/tileset_plank_45.png
+res://textures/tilesets/simple/tileset_roman_tiles.png
+res://textures/tilesets/simple/tileset_roman_worn.png
+res://textures/tilesets/simple/tileset_sewers.png
+res://textures/tilesets/simple/tileset_straw.png
+res://textures/tilesets/simple/tileset_wood_damaged.png
+res://textures/tilesets/simple/tileset_wood_interlaced.png
+res://textures/tilesets/simple/tileset_worn_cobble.png
+res://textures/tilesets/smart_double/tileset_stone.png
+res://textures/tilesets/smart/tileset_wood_vertical.png
+</code></pre>
+<h2 id="walls-1"><a class="header" href="#walls-1">Walls</a></h2>
+<pre><code>res://textures/walls/battlements.png
+res://textures/walls/battlements_end.png
+res://textures/walls/cobble.png
+res://textures/walls/cobble_end.png
+res://textures/walls/concrete.png
+res://textures/walls/concrete_end.png
+res://textures/walls/stone.png
+res://textures/walls/stone_end.png
+res://textures/walls/stone_09.png
+res://textures/walls/stone_09_end.png
+res://textures/walls/stone_12.png
+res://textures/walls/stone_12_end.png
+res://textures/walls/wood.png
+res://textures/walls/wood_end.png
+res://textures/walls/wood_02.png
+res://textures/walls/wood_02_end.png
+res://textures/walls/wood_03.png
+res://textures/walls/wood_03_end.png
+res://textures/walls/wood_04.png
+res://textures/walls/wood_04_end.png
+</code></pre>
+<h2 id="paths"><a class="header" href="#paths">Paths</a></h2>
+<pre><code>res://textures/paths/battlements.png
+res://textures/paths/blood_trail.png
+res://textures/paths/bone_fence_01.png
+res://textures/paths/chain.png
+res://textures/paths/cliff.png
+res://textures/paths/cobble.png
+res://textures/paths/concrete.png
+res://textures/paths/log_fence.png
+res://textures/paths/path_black_line.png
+res://textures/paths/path_blender_01.png
+res://textures/paths/path_blender_02.png
+res://textures/paths/path_blender_03.png
+res://textures/paths/path_blender_04.png
+res://textures/paths/path_rocks.png
+res://textures/paths/rail.png
+res://textures/paths/rail_(without_ties).png
+res://textures/paths/rope.png
+res://textures/paths/rope_(thick).png
+res://textures/paths/shadow_(flat).png
+res://textures/paths/stairs_stone.png
+res://textures/paths/stairs_stone_2.png
+res://textures/paths/stairs_wood.png
+res://textures/paths/stairs_wood_2.png
+res://textures/paths/stone.png
+res://textures/paths/stone_09.png
+res://textures/paths/stone_12.png
+res://textures/paths/stone_fence_01.png
+res://textures/paths/stone_fence_02.png
+res://textures/paths/stone_fence_03.png
+res://textures/paths/stone_fence_04.png
+res://textures/paths/stone_fence_05.png
+res://textures/paths/wagon_trail.png
+res://textures/paths/wood.png
+res://textures/paths/wood_02.png
+res://textures/paths/wood_03.png
+res://textures/paths/wood_04.png
+res://textures/paths/wood_fence_01.png
+res://textures/paths/wood_fence_02.png
+res://textures/paths/wood_fence_03.png
+res://textures/paths/wood_fence_04.png
+res://textures/paths/wood_fence_05.png
+res://textures/paths/wood_fence_06.png
+res://textures/paths/wood_fence_07.png
+res://textures/paths/wooden_bridge.png
+res://textures/paths/wooden_fence.png
+</code></pre>
+<h2 id="portals-doors--windows"><a class="header" href="#portals-doors--windows">Portals (Doors &amp; Windows)</a></h2>
+<pre><code>res://textures/portals/door_00.png
+res://textures/portals/door_01.png
+res://textures/portals/door_02.png
+res://textures/portals/door_03.png
+res://textures/portals/door_04.png
+res://textures/portals/door_05.png
+res://textures/portals/door_06.png
+res://textures/portals/door_07.png
+res://textures/portals/door_08.png
+res://textures/portals/door_09.png
+res://textures/portals/door_10.png
+res://textures/portals/door_11.png
+res://textures/portals/door_12.png
+res://textures/portals/door_13.png
+res://textures/portals/door_16.png
+res://textures/portals/door_17.png
+res://textures/portals/door_18.png
+res://textures/portals/door_19.png
+res://textures/portals/door_20.png
+res://textures/portals/door_21.png
+res://textures/portals/portcullis_01.png
+res://textures/portals/portcullis_02.png
+res://textures/portals/threshold_01.png
+res://textures/portals/window_01.png — window_16.png
+</code></pre>
+<h2 id="caves"><a class="header" href="#caves">Caves</a></h2>
+<pre><code>res://textures/caves/colorable/floor.png
+res://textures/caves/colorable/wall.png
+res://textures/caves/rocky/floor.png
+res://textures/caves/rocky/wall.png
+</code></pre>
+<h2 id="materials-paint-textures"><a class="header" href="#materials-paint-textures">Materials (Paint Textures)</a></h2>
+<p>Each material has a <code>_tile</code> and <code>_border</code> variant.</p>
+<pre><code>acid, alien_infestation, cloverfield, cobblestone, gold, grass (+ _1, _2),
+ice, infestation, lava, rock, sludge_tar_pit
+</code></pre>
+<p>Pattern: <code>res://textures/materials/{name}_tile.png</code> and <code>res://textures/materials/{name}_border.png</code></p>
+<h2 id="roofs"><a class="header" href="#roofs">Roofs</a></h2>
+<p>Styles: <code>diamond_slate_gray</code>, <code>flat_clay_red</code>, <code>plank_mossy</code>, <code>plank_wood</code>, <code>round_slate_brown</code>, <code>round_slate_gray</code>, <code>scale_stone</code>, <code>thatched</code></p>
+<p>Each has: <code>edge.png</code>, <code>hip.png</code>, <code>ridge.png</code>, <code>tiles.png</code></p>
+<p>Pattern: <code>res://textures/roofs/{style}/{part}.png</code></p>
+<h2 id="water"><a class="header" href="#water">Water</a></h2>
+<pre><code>res://textures/water/water_distortion_slime.png
+res://textures/water/water_ripple.png
+</code></pre>
+<h2 id="wear--overlays"><a class="header" href="#wear--overlays">Wear / Overlays</a></h2>
+<pre><code>res://textures/wear/dust.png
+res://textures/wear/grime.png
+res://textures/wear/noise.png
+res://textures/wear/scratched.png
+</code></pre>
+<h2 id="grid"><a class="header" href="#grid">Grid</a></h2>
+<pre><code>res://textures/grid/dashes.png
+res://textures/grid/dotted_line.png
+res://textures/grid/narrow_line.png
+res://textures/grid/thick_line.png
+</code></pre>
+<h2 id="lights"><a class="header" href="#lights">Lights</a></h2>
+<pre><code>res://textures/lights/fragments.png
+res://textures/lights/point.png
+res://textures/lights/soft.png
+</code></pre>
+<h2 id="shadows"><a class="header" href="#shadows">Shadows</a></h2>
+<pre><code>res://textures/shadows/wall_shadow_flat.png
+res://textures/shadows/wall_shadow_smooth.png
+</code></pre>
+<h2 id="objects--trees"><a class="header" href="#objects--trees">Objects — Trees</a></h2>
+<h3 id="more-trees"><a class="header" href="#more-trees">More Trees</a></h3>
+<pre><code>res://textures/objects/more_trees/aspen_01.png — aspen_04.png
+res://textures/objects/more_trees/birch_01.png — birch_04.png
+res://textures/objects/more_trees/eucalyptus_01.png — eucalyptus_04.png
+res://textures/objects/more_trees/j_maple_01.png — j_maple_04.png
+res://textures/objects/more_trees/maple_tree_colorable_01.png — _03.png
+res://textures/objects/more_trees/mossy_trunks_01.png — _06.png
+res://textures/objects/more_trees/oak_01.png — oak_04.png
+res://textures/objects/more_trees/tree_flower_01.png — _04.png
+</code></pre>
+<h3 id="vegetation-trees"><a class="header" href="#vegetation-trees">Vegetation Trees</a></h3>
+<pre><code>res://textures/objects/vegetation/trees/autumn_tree_01.png — _04.png
+res://textures/objects/vegetation/trees/cherry_tree_01.png — _03.png
+res://textures/objects/vegetation/trees/dead_tree_01.png — _03.png
+res://textures/objects/vegetation/trees/palm_tree_01.png — _03.png
+res://textures/objects/vegetation/trees/pine_tree_01.png — _04.png
+res://textures/objects/vegetation/trees/stump_01.png — _05.png
+res://textures/objects/vegetation/trees/tree_big_green_01.png — _03.png
+res://textures/objects/vegetation/trees/tree_branch_01.png — _03.png
+res://textures/objects/vegetation/trees/tree_green_simple_01.png — _04.png
+res://textures/objects/vegetation/trees/tree_massive_green_01.png
+</code></pre>
+<h2 id="objects--vegetation"><a class="header" href="#objects--vegetation">Objects — Vegetation</a></h2>
+<h3 id="grass"><a class="header" href="#grass">Grass</a></h3>
+<p><code>res://textures/objects/vegetation/grass/grass_01.png</code> — <code>grass_26.png</code></p>
+<h3 id="shrubs"><a class="header" href="#shrubs">Shrubs</a></h3>
+<p><code>res://textures/objects/vegetation/shrubs/bush_flower_01.png</code> — <code>_05.png</code>
+<code>res://textures/objects/vegetation/shrubs/bush_green_simple_01.png</code> — <code>_13.png</code></p>
+<h3 id="ferns"><a class="header" href="#ferns">Ferns</a></h3>
+<p><code>res://textures/objects/vegetation/ferns/fern_01.png</code> — <code>fern_06.png</code></p>
+<h3 id="flowers"><a class="header" href="#flowers">Flowers</a></h3>
+<p><code>res://textures/objects/vegetation/flowers/flowers_01.png</code> — <code>flowers_05.png</code></p>
+<h3 id="mushrooms"><a class="header" href="#mushrooms">Mushrooms</a></h3>
+<p><code>res://textures/objects/vegetation/mushrooms/magic_mushrooms_01.png</code> — <code>_14.png</code>
+<code>res://textures/objects/vegetation/mushrooms/mushrooms_01.png</code> — <code>_05.png</code></p>
+<h3 id="roots"><a class="header" href="#roots">Roots</a></h3>
+<p><code>res://textures/objects/vegetation/roots/exposed_roots_01.png</code> — <code>_10.png</code>
+<code>res://textures/objects/vegetation/roots/exposed_roots_big_1.png</code> — <code>_8.png</code></p>
+<h3 id="thorns"><a class="header" href="#thorns">Thorns</a></h3>
+<p><code>res://textures/objects/vegetation/thorns/thorns_01.png</code> — <code>thorns_19.png</code></p>
+<h3 id="vines--tendrils"><a class="header" href="#vines--tendrils">Vines / Tendrils</a></h3>
+<p><code>res://textures/objects/vegetation/vines/tendrils_01.png</code> — <code>tendrils_13.png</code></p>
+<h3 id="aquatic-plants"><a class="header" href="#aquatic-plants">Aquatic Plants</a></h3>
+<pre><code>res://textures/objects/vegetation/aquatic/reeds_1.png — reeds_5.png
+res://textures/objects/vegetation/aquatic/waterlily_01.png — _06.png
+</code></pre>
+<h3 id="fallen--dead"><a class="header" href="#fallen--dead">Fallen / Dead</a></h3>
+<pre><code>res://textures/objects/vegetation/fallen/dead_leaves_01.png — _05.png
+res://textures/objects/vegetation/fallen/leaves_01.png — _04.png
+res://textures/objects/vegetation/fallen/log_01.png — _05.png
+res://textures/objects/vegetation/fallen/wood_burned_01.png — _06.png
+</code></pre>
+<h2 id="objects--swamp"><a class="header" href="#objects--swamp">Objects — Swamp</a></h2>
+<pre><code>res://textures/objects/swamp/mangrove_stomps_01.png — _07.png
+res://textures/objects/swamp/mangrove_tree_01.png — _09.png
+res://textures/objects/swamp/swamp_branch_01.png — _03.png
+res://textures/objects/swamp/swamp_flower_01.png — _07.png
+res://textures/objects/swamp/swamp_moss_01.png — _07.png
+res://textures/objects/swamp/swamp_puddle_01.png — _10.png
+res://textures/objects/swamp/swamp_rocks_01.png — _06.png
+res://textures/objects/swamp/water_stain_01.png — _07.png
+</code></pre>
+<h2 id="objects--environment"><a class="header" href="#objects--environment">Objects — Environment</a></h2>
+<pre><code>res://textures/objects/environment/ash_pile_01.png — _05.png
+res://textures/objects/environment/burned_wood_01.png — _04.png
+res://textures/objects/environment/dirt_pile_01.png — _10.png
+res://textures/objects/environment/fire_01.png — _08.png
+res://textures/objects/environment/smoke_01.png — _06.png
+res://textures/objects/environment/snow_01.png — _15.png
+</code></pre>
+<h2 id="objects--clutter"><a class="header" href="#objects--clutter">Objects — Clutter</a></h2>
+<h3 id="boulders"><a class="header" href="#boulders">Boulders</a></h3>
+<p><code>res://textures/objects/clutter/boulders/boulder_01.png</code> — <code>boulder_20.png</code></p>
+<h3 id="cavern"><a class="header" href="#cavern">Cavern</a></h3>
+<pre><code>res://textures/objects/clutter/cavern/cave_crystals_01.png — _10.png
+res://textures/objects/clutter/cavern/cave_hole_01.png — _05.png
+res://textures/objects/clutter/cavern/stalagmites_01.png — _06.png
+</code></pre>
+<h3 id="cobwebs"><a class="header" href="#cobwebs">Cobwebs</a></h3>
+<pre><code>res://textures/objects/clutter/cobwebs/cocoon_01.png — _02.png
+res://textures/objects/clutter/cobwebs/spider_01.png — _02.png
+res://textures/objects/clutter/cobwebs/spider_dead_01.png — _02.png
+res://textures/objects/clutter/cobwebs/spider_egg_01.png
+res://textures/objects/clutter/cobwebs/spiderweb_01.png — _21.png
+</code></pre>
+<h3 id="floor-clutter"><a class="header" href="#floor-clutter">Floor Clutter</a></h3>
+<pre><code>res://textures/objects/clutter/floor/broken_glass_01.png — _07.png
+res://textures/objects/clutter/floor/broken_pottery_01.png — _11.png
+res://textures/objects/clutter/floor/floor_cloth_01.png — _05.png
+res://textures/objects/clutter/floor/toy_01.png — _03.png
+</code></pre>
+<h3 id="games"><a class="header" href="#games">Games</a></h3>
+<p><code>res://textures/objects/clutter/games/cards_01.png</code> — <code>cards_11.png</code>
+<code>res://textures/objects/clutter/games/chess_01.png</code> — <code>chess_04.png</code></p>
+<h3 id="lava-rocks"><a class="header" href="#lava-rocks">Lava Rocks</a></h3>
+<p><code>res://textures/objects/clutter/lava_rocks/rock_lava_01.png</code> — <code>rock_lava_10.png</code></p>
+<h3 id="rubble"><a class="header" href="#rubble">Rubble</a></h3>
+<p><code>res://textures/objects/clutter/rubble/rubble_01.png</code> — <code>rubble_16.png</code></p>
+<h3 id="tools"><a class="header" href="#tools">Tools</a></h3>
+<pre><code>res://textures/objects/clutter/tools/broom_01.png — _02.png
+res://textures/objects/clutter/tools/pitchfork.png
+res://textures/objects/clutter/tools/rope_01.png — _02.png
+res://textures/objects/clutter/tools/shovel.png
+</code></pre>
+<h3 id="water-features"><a class="header" href="#water-features">Water Features</a></h3>
+<pre><code>res://textures/objects/clutter/water/drowned_body_01.png — _02.png
+res://textures/objects/clutter/water/floating_log_01.png — _04.png
+res://textures/objects/clutter/water/flotsam_01.png — _04.png
+res://textures/objects/clutter/water/water_bottle.png
+res://textures/objects/clutter/water/water_circle_01.png — _05.png
+res://textures/objects/clutter/water/waterfall_01.png
+res://textures/objects/clutter/water/waterfall_color_02.png — _09.png
+res://textures/objects/clutter/water/waterfall_wave_color_10.png — _16.png
+</code></pre>
+<h3 id="clothing"><a class="header" href="#clothing">Clothing</a></h3>
+<p><code>res://textures/objects/clutter/clothing/sailor_hat_01.png</code></p>
+<h2 id="objects--furniture"><a class="header" href="#objects--furniture">Objects — Furniture</a></h2>
+<h3 id="beds"><a class="header" href="#beds">Beds</a></h3>
+<pre><code>res://textures/objects/furniture/beds/bed_01.png — bed_14.png
+res://textures/objects/furniture/beds/cradle.png
+res://textures/objects/furniture/beds/egypt_bed_01.png — _02.png
+res://textures/objects/furniture/beds/egypt_pillow_01.png — _02.png
+res://textures/objects/furniture/beds/pillow_01.png — pillow_07.png
+</code></pre>
+<h3 id="chairs--seating"><a class="header" href="#chairs--seating">Chairs &amp; Seating</a></h3>
+<pre><code>res://textures/objects/furniture/chairs/arm_chair_01.png, _04.png, _05.png
+res://textures/objects/furniture/chairs/armchair_02.png — _03.png
+res://textures/objects/furniture/chairs/bar_chair.png
+res://textures/objects/furniture/chairs/bench_01.png — bench_16.png
+res://textures/objects/furniture/chairs/chair_01.png — chair_05.png
+res://textures/objects/furniture/chairs/egypt_chair_01.png — _03.png
+res://textures/objects/furniture/chairs/egypt_sofa_01.png — _03.png
+res://textures/objects/furniture/chairs/ottoman_01.png
+res://textures/objects/furniture/chairs/round_chair_01.png — _02.png
+res://textures/objects/furniture/chairs/sofa_01.png — sofa_04.png
+res://textures/objects/furniture/chairs/sofa_corner_01.png — _02.png
+res://textures/objects/furniture/chairs/sofa_sattee_01.png — _02.png
+res://textures/objects/furniture/chairs/throne_01.png — throne_08.png
+</code></pre>
+<h3 id="tables"><a class="header" href="#tables">Tables</a></h3>
+<pre><code>res://textures/objects/furniture/tables/bar_table.png
+res://textures/objects/furniture/tables/egypt_table_01.png — _03.png
+res://textures/objects/furniture/tables/end_table_01.png — _02.png
+res://textures/objects/furniture/tables/round_table_01.png — _04.png
+res://textures/objects/furniture/tables/small_table_01.png — _10.png
+res://textures/objects/furniture/tables/table_corner_stone_01.png — _08.png
+res://textures/objects/furniture/tables/table_corner_wood_01.png — _07.png
+</code></pre>
+<h3 id="desks"><a class="header" href="#desks">Desks</a></h3>
+<pre><code>res://textures/objects/furniture/desks/desk_01.png — _02.png
+res://textures/objects/furniture/desks/open_desk_01.png — _02.png
+</code></pre>
+<h3 id="storage"><a class="header" href="#storage">Storage</a></h3>
+<pre><code>res://textures/objects/furniture/storage/bookshelf_corner_01.png — _09.png
+res://textures/objects/furniture/storage/chest_01.png
+res://textures/objects/furniture/storage/chest_open_01.png — _02.png
+res://textures/objects/furniture/storage/merchant_shelf_01.png — _05.png
+res://textures/objects/furniture/storage/small_chest_01.png — _04.png
+res://textures/objects/furniture/storage/wardrobe_01.png — _05.png
+</code></pre>
+<h3 id="broken-furniture"><a class="header" href="#broken-furniture">Broken Furniture</a></h3>
+<pre><code>res://textures/objects/furniture/broken/armchair_broken_01.png — _03.png
+res://textures/objects/furniture/broken/bed_broken_01.png — _02.png
+res://textures/objects/furniture/broken/chair_broken_01.png — _05.png
+res://textures/objects/furniture/broken/chairleg_broken.png
+res://textures/objects/furniture/broken/pillar_broken_01.png — _13.png
+res://textures/objects/furniture/broken/table_broken_01.png — _03.png
+</code></pre>
+<h2 id="objects--structures"><a class="header" href="#objects--structures">Objects — Structures</a></h2>
+<h3 id="bridges"><a class="header" href="#bridges">Bridges</a></h3>
+<pre><code>res://textures/objects/structures/bridges/bridge_broken_01.png — _04.png
+res://textures/objects/structures/bridges/bridge01_downend.png
+res://textures/objects/structures/bridges/bridge01_middle1.png
+res://textures/objects/structures/bridges/bridge01_middle2.png
+res://textures/objects/structures/bridges/bridge01_upend.png
+res://textures/objects/structures/bridges/bridge02_downend.png — bridge02_upend.png
+res://textures/objects/structures/bridges/bridge03.png — bridge08.png
+res://textures/objects/structures/bridges/bridge07_corner.png
+res://textures/objects/structures/bridges/bridge07_middle.png
+res://textures/objects/structures/bridges/small_bridge_01.png
+</code></pre>
+<h3 id="doors"><a class="header" href="#doors">Doors</a></h3>
+<pre><code>res://textures/objects/structures/doors/door_00.png — door_21.png
+res://textures/objects/structures/doors/fallen_door_01.png — _14.png
+res://textures/objects/structures/doors/portcullis_01.png — _02.png
+res://textures/objects/structures/doors/threshold_01.png
+</code></pre>
+<h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
+<p><code>res://textures/objects/structures/windows/window_01.png</code> — <code>window_20_broken.png</code></p>
+<h3 id="stairs"><a class="header" href="#stairs">Stairs</a></h3>
+<pre><code>res://textures/objects/structures/stairs/small_steps_01.png
+res://textures/objects/structures/stairs/stairs_09.png — stairs_14.png
+res://textures/objects/structures/stairs/stairs_down_01.png — _02.png
+res://textures/objects/structures/stairs/stairs_end_01.png — _04.png
+res://textures/objects/structures/stairs/stairs_round_03.png — _10.png
+res://textures/objects/structures/stairs/stairs_square_05.png — _08.png
+res://textures/objects/structures/stairs/stairs_up_01.png — _04.png
+</code></pre>
+<h3 id="pillars"><a class="header" href="#pillars">Pillars</a></h3>
+<pre><code>res://textures/objects/structures/pillars/pillar_stone_23.png — _42.png
+res://textures/objects/structures/pillars/pillar_wood_01.png — _22.png
+</code></pre>
+<h3 id="chimneys"><a class="header" href="#chimneys">Chimneys</a></h3>
+<p><code>res://textures/objects/structures/chimneys/chimney_01.png</code> — <code>chimney_06.png</code></p>
+<h3 id="fountains"><a class="header" href="#fountains">Fountains</a></h3>
+<pre><code>res://textures/objects/structures/fountains/birdbath_01.png — _03.png
+res://textures/objects/structures/fountains/fountain_01.png — _09.png
+</code></pre>
+<h3 id="other-structures"><a class="header" href="#other-structures">Other Structures</a></h3>
+<pre><code>res://textures/objects/structures/bucket.png
+res://textures/objects/structures/fireplace_01.png — _04.png
+res://textures/objects/structures/flag_stand_01.png — _05.png
+res://textures/objects/structures/garden/flower_bed_01.png — _03.png
+res://textures/objects/structures/ladders/ladder_01.png — _05.png
+res://textures/objects/structures/road_sign_01.png — _04.png
+res://textures/objects/structures/sundials/sundial_01.png — _05.png
+res://textures/objects/structures/trap_door_01.png — _02.png
+res://textures/objects/structures/well_01.png — _02.png
+</code></pre>
+<h3 id="grates--pipes"><a class="header" href="#grates--pipes">Grates &amp; Pipes</a></h3>
+<pre><code>res://textures/objects/infrastructure/grates/grate_01.png — _08.png
+res://textures/objects/infrastructure/pipes/pipe_01.png — _09.png
+</code></pre>
+<h2 id="objects--decor"><a class="header" href="#objects--decor">Objects — Decor</a></h2>
+<h3 id="dungeon"><a class="header" href="#dungeon">Dungeon</a></h3>
+<pre><code>res://textures/objects/decor/dungeon/bone_pile.png — bone_pile_06.png
+res://textures/objects/decor/dungeon/coffin_01.png — _06.png
+res://textures/objects/decor/dungeon/corpse_01.png — _02.png
+res://textures/objects/decor/dungeon/dragon_skull_01.png — _06.png
+res://textures/objects/decor/dungeon/gem_pile_01.png — _05.png
+res://textures/objects/decor/dungeon/gold_pile_01.png — _06.png
+res://textures/objects/decor/dungeon/knight_01.png — _02.png
+res://textures/objects/decor/dungeon/monster_bones_01.png — _06.png
+res://textures/objects/decor/dungeon/mummy_01.png — _02.png
+res://textures/objects/decor/dungeon/sarcophagus_01.png — _04.png
+res://textures/objects/decor/dungeon/skeleton_01.png — _08.png
+res://textures/objects/decor/dungeon/skeleton_grave_01.png — _04.png
+res://textures/objects/decor/dungeon/skeleton_horse.png
+res://textures/objects/decor/dungeon/skull_01.png — _02.png
+res://textures/objects/decor/dungeon/treasure_chest_01.png — _03.png
+</code></pre>
+<h3 id="floor-decor"><a class="header" href="#floor-decor">Floor Decor</a></h3>
+<pre><code>res://textures/objects/decor/floor/bear_rug.png
+res://textures/objects/decor/floor/big_vase_01.png — _02.png
+res://textures/objects/decor/floor/carpet_01.png — _06.png
+res://textures/objects/decor/floor/rug_boar.png, rug_cow_01.png, rug_cow_02.png
+res://textures/objects/decor/floor/rug_fox.png, rug_lizard.png, rug_sheep.png, rug_wolf.png
+res://textures/objects/decor/floor/tiger_rug.png
+res://textures/objects/decor/floor/vase.png
+</code></pre>
+<h3 id="gargoyles"><a class="header" href="#gargoyles">Gargoyles</a></h3>
+<p><code>res://textures/objects/decor/gargoyles/gargoyle_01.png</code> — <code>gargoyle_08.png</code></p>
+<h3 id="instruments"><a class="header" href="#instruments">Instruments</a></h3>
+<pre><code>res://textures/objects/decor/instruments/flute.png
+res://textures/objects/decor/instruments/harp.png
+res://textures/objects/decor/instruments/lute.png
+res://textures/objects/decor/instruments/lyre_01.png — _02.png
+res://textures/objects/decor/instruments/organ.png
+res://textures/objects/decor/instruments/piano.png
+</code></pre>
+<h3 id="lighting-2"><a class="header" href="#lighting-2">Lighting</a></h3>
+<pre><code>res://textures/objects/decor/lighting/bowl_lamp_01.png — _02.png
+res://textures/objects/decor/lighting/chandelier_01.png — _02.png
+res://textures/objects/decor/lighting/lantern_01.png — _02.png
+res://textures/objects/decor/lighting/torch_01.png
+res://textures/objects/decor/lighting/wall_torch_01.png — _02.png
+</code></pre>
+<h3 id="statues"><a class="header" href="#statues">Statues</a></h3>
+<pre><code>res://textures/objects/decor/statues/gargoyle_01.png — _08.png
+res://textures/objects/decor/statues/statue_01.png — _08.png
+res://textures/objects/decor/statues/statue_animal_stone_01.png — _10.png
+res://textures/objects/decor/statues/statue_animal_wood_01.png — _10.png
+res://textures/objects/decor/statues/statue_gargoyle_stone_01.png — _03.png
+res://textures/objects/decor/statues/statue_gargoyle_wood_01.png — _03.png
+res://textures/objects/decor/statues/statue_stone_01.png — _13.png
+res://textures/objects/decor/statues/statue_wood_01.png — _20.png
+res://textures/objects/decor/statues/statue__wood_08.png
+</code></pre>
+<h3 id="wall-decor"><a class="header" href="#wall-decor">Wall Decor</a></h3>
+<pre><code>res://textures/objects/decor/wall/deer_head.png
+res://textures/objects/decor/wall/moose_head.png
+res://textures/objects/decor/wall/picture_frame_01.png — _02.png
+res://textures/objects/decor/wall/trophy_boar_head.png
+res://textures/objects/decor/wall/trophy_dragon_head.png
+res://textures/objects/decor/wall/trophy_falcon_stand.png
+res://textures/objects/decor/wall/trophy_fox_head.png
+res://textures/objects/decor/wall/trophy_lizard_head.png
+res://textures/objects/decor/wall/trophy_monster_head.png
+res://textures/objects/decor/wall/trophy_rhino_head.png
+res://textures/objects/decor/wall/trophy_skull_stand.png
+res://textures/objects/decor/wall/trophy_tiger_head.png
+res://textures/objects/decor/wall/trophy_wolf_head.png
+</code></pre>
+<h3 id="top-level-statues"><a class="header" href="#top-level-statues">Top-Level Statues</a></h3>
+<p><code>res://textures/objects/statues/statue_01.png</code> — <code>statue_25.png</code></p>
+<h2 id="objects--activities"><a class="header" href="#objects--activities">Objects — Activities</a></h2>
+<h3 id="administration"><a class="header" href="#administration">Administration</a></h3>
+<pre><code>res://textures/objects/activities/administration/atlas_globe_01.png — _03.png
+res://textures/objects/activities/administration/book_01.png — _06.png
+res://textures/objects/activities/administration/candle_01.png — _02.png
+res://textures/objects/activities/administration/candle_holder_02.png
+res://textures/objects/activities/administration/cloth_01.png — _02.png
+res://textures/objects/activities/administration/envelope_01.png — _03.png
+res://textures/objects/activities/administration/inker.png
+res://textures/objects/activities/administration/map_01.png
+res://textures/objects/activities/administration/map_table_02.png
+res://textures/objects/activities/administration/map_table_big_01.png
+res://textures/objects/activities/administration/paper_01.png — _05.png
+res://textures/objects/activities/administration/scroll_01.png — _07.png
+res://textures/objects/activities/administration/scroll_bowl_01.png — _04.png
+</code></pre>
+<h3 id="bathing"><a class="header" href="#bathing">Bathing</a></h3>
+<pre><code>res://textures/objects/activities/bathing/bathtub_01.png — _02.png
+res://textures/objects/activities/bathing/chair_bath.png
+res://textures/objects/activities/bathing/soap.png
+</code></pre>
+<h3 id="cooking"><a class="header" href="#cooking">Cooking</a></h3>
+<pre><code>res://textures/objects/activities/cooking/cutting_boards.png
+res://textures/objects/activities/cooking/food_carrot_05.png
+res://textures/objects/activities/cooking/food_chicleg_02.png
+res://textures/objects/activities/cooking/food_fish_01.png
+res://textures/objects/activities/cooking/food_greens_04.png
+res://textures/objects/activities/cooking/food_leek_05.png
+res://textures/objects/activities/cooking/food_onion_06.png — _07.png
+res://textures/objects/activities/cooking/food_roots_08.png
+res://textures/objects/activities/cooking/oven_01.png — _02.png
+res://textures/objects/activities/cooking/pan.png
+res://textures/objects/activities/cooking/pig_roast.png
+res://textures/objects/activities/cooking/pizza.png
+res://textures/objects/activities/cooking/potatoes.png
+res://textures/objects/activities/cooking/spit_roast_01.png — _02.png
+res://textures/objects/activities/cooking/stove_01.png — stove_04_detail.png
+</code></pre>
+<h3 id="dining"><a class="header" href="#dining">Dining</a></h3>
+<pre><code>res://textures/objects/activities/dining/berries.png
+res://textures/objects/activities/dining/big_bowl_01.png — _05.png
+res://textures/objects/activities/dining/bottle_01.png
+res://textures/objects/activities/dining/bottle.png
+res://textures/objects/activities/dining/cup.png
+res://textures/objects/activities/dining/food_bread_01.png — _02.png
+res://textures/objects/activities/dining/food_meat_leg_03.png
+res://textures/objects/activities/dining/fork.png
+res://textures/objects/activities/dining/knife_01.png — _02.png
+res://textures/objects/activities/dining/pitcher.png
+res://textures/objects/activities/dining/plate_01.png — _02.png, plate.png
+res://textures/objects/activities/dining/saucer_01.png — _04.png
+res://textures/objects/activities/dining/spoon.png
+</code></pre>
+<h3 id="farming"><a class="header" href="#farming">Farming</a></h3>
+<pre><code>res://textures/objects/activities/farming/beet_01.png — _04.png
+res://textures/objects/activities/farming/cabbage_01.png — _04.png
+res://textures/objects/activities/farming/root_01.png — _03.png
+res://textures/objects/activities/farming/scarecrow_01.png — _02.png
+</code></pre>
+<h3 id="logging"><a class="header" href="#logging">Logging</a></h3>
+<pre><code>res://textures/objects/activities/logging/log_cutter.png
+res://textures/objects/activities/logging/log_pile_01.png — _04.png
+</code></pre>
+<h3 id="mining"><a class="header" href="#mining">Mining</a></h3>
+<pre><code>res://textures/objects/activities/mining/mine_cart.png — mine_cart_02.png
+res://textures/objects/activities/mining/plank_01.png — _02.png
+</code></pre>
+<h3 id="smithing"><a class="header" href="#smithing">Smithing</a></h3>
+<pre><code>res://textures/objects/activities/smithing/anvil.png
+res://textures/objects/activities/smithing/bellows_big.png
+res://textures/objects/activities/smithing/bellows_small.png
+res://textures/objects/activities/smithing/blacksmith_tool_01.png
+res://textures/objects/activities/smithing/blacksmith_tool_05_anvil.png
+res://textures/objects/activities/smithing/chisel.png
+res://textures/objects/activities/smithing/coal_bag.png
+res://textures/objects/activities/smithing/design_table_01.png — _02.png
+res://textures/objects/activities/smithing/forge_small_01.png — _02.png
+res://textures/objects/activities/smithing/furnace.png
+res://textures/objects/activities/smithing/grinding_wheel.png
+res://textures/objects/activities/smithing/hammer.png
+res://textures/objects/activities/smithing/mandrel.png
+res://textures/objects/activities/smithing/metal_bar.png
+res://textures/objects/activities/smithing/slack_tub.png
+res://textures/objects/activities/smithing/tongs.png
+res://textures/objects/activities/smithing/workbench.png
+</code></pre>
+<h2 id="objects--themed-sets"><a class="header" href="#objects--themed-sets">Objects — Themed Sets</a></h2>
+<h3 id="dwarven-set"><a class="header" href="#dwarven-set">Dwarven Set</a></h3>
+<pre><code>res://textures/objects/dwarven_set/barrel_forge_01.png
+res://textures/objects/dwarven_set/dwarven_anvil.png
+res://textures/objects/dwarven_set/dwarven_armchair_01.png
+res://textures/objects/dwarven_set/dwarven_bed_double_01.png
+res://textures/objects/dwarven_set/dwarven_bed_single_01.png
+res://textures/objects/dwarven_set/dwarven_big_table_01.png — _02.png
+res://textures/objects/dwarven_set/dwarven_closet_01.png
+res://textures/objects/dwarven_set/dwarven_forge.png
+res://textures/objects/dwarven_set/dwarven_hammer.png
+res://textures/objects/dwarven_set/dwarven_horisontal_saw.png
+res://textures/objects/dwarven_set/dwarven_sarcophagus.png
+res://textures/objects/dwarven_set/dwarven_shelf_01.png
+res://textures/objects/dwarven_set/dwarven_shield_rack.png
+res://textures/objects/dwarven_set/dwarven_suit_of_armor.png
+res://textures/objects/dwarven_set/dwarven_sword.png
+res://textures/objects/dwarven_set/dwarven_table_01.png
+res://textures/objects/dwarven_set/dwarven_workstation.png
+res://textures/objects/dwarven_set/forge_fire.png
+res://textures/objects/dwarven_set/forge_hammer_mold.png
+res://textures/objects/dwarven_set/forge_hearth.png
+res://textures/objects/dwarven_set/forge_lever.png
+res://textures/objects/dwarven_set/forge_sword_mold.png
+res://textures/objects/dwarven_set/handwheel.png
+res://textures/objects/dwarven_set/ingot_01.png — _03.png
+res://textures/objects/dwarven_set/ore_piece_01.png — _03.png
+res://textures/objects/dwarven_set/pipe_piece_01.png — _07.png
+res://textures/objects/dwarven_set/pliers.png
+res://textures/objects/dwarven_set/quench_trough.png
+</code></pre>
+<h3 id="elven-set"><a class="header" href="#elven-set">Elven Set</a></h3>
+<pre><code>res://textures/objects/elven_set/elven_bed_01.png — _02.png
+res://textures/objects/elven_set/elven_bench_01.png — _02.png
+res://textures/objects/elven_set/elven_boat_01.png — _02.png
+res://textures/objects/elven_set/elven_bridge_01.png
+res://textures/objects/elven_set/elven_chair_01.png — _03.png
+res://textures/objects/elven_set/elven_harp.png
+res://textures/objects/elven_set/elven_pond.png
+res://textures/objects/elven_set/elven_rotonda.png
+res://textures/objects/elven_set/elven_sarcophagus.png
+res://textures/objects/elven_set/elven_stairs_01.png — _02.png
+res://textures/objects/elven_set/elven_statue_01.png
+res://textures/objects/elven_set/elven_table_01.png — _02.png
+res://textures/objects/elven_set/elven_throne_01.png
+res://textures/objects/elven_set/elven_well.png
+res://textures/objects/elven_set/ottoman_01.png — _02.png
+res://textures/objects/elven_set/vines_green_01.png — _07.png
+</code></pre>
+<h3 id="wizard-set"><a class="header" href="#wizard-set">Wizard Set</a></h3>
+<pre><code>res://textures/objects/wizard_set/alchemy_table.png
+res://textures/objects/wizard_set/arcane_clock.png
+res://textures/objects/wizard_set/arcane_summoning_circle_01.png — _03.png
+res://textures/objects/wizard_set/arcane_summoning_circle_glow_01.png — _03.png
+res://textures/objects/wizard_set/brazier_01.png — _02.png
+res://textures/objects/wizard_set/cage_01.png — _02.png
+res://textures/objects/wizard_set/candle_clusters_01.png — _04.png
+res://textures/objects/wizard_set/celestial_model.png
+res://textures/objects/wizard_set/celestial_rug.png
+res://textures/objects/wizard_set/chained_grimoire.png
+res://textures/objects/wizard_set/crystal_ball.png
+res://textures/objects/wizard_set/fire_01.png — _02.png
+res://textures/objects/wizard_set/magical_brazier_01.png — _02.png
+res://textures/objects/wizard_set/mana_orb_01.png — _02.png
+res://textures/objects/wizard_set/mirror_01.png — _02.png
+res://textures/objects/wizard_set/potion_rack.png
+res://textures/objects/wizard_set/ritual_dagger.png
+res://textures/objects/wizard_set/runed_podium.png
+res://textures/objects/wizard_set/scroll_shelf.png
+res://textures/objects/wizard_set/spellbook_open.png
+</code></pre>
+<h2 id="objects--military"><a class="header" href="#objects--military">Objects — Military</a></h2>
+<h3 id="blood"><a class="header" href="#blood">Blood</a></h3>
+<p><code>res://textures/objects/military/blood/blood_water_stain_01.png</code> — <code>_14.png</code></p>
+<h3 id="defense"><a class="header" href="#defense">Defense</a></h3>
+<pre><code>res://textures/objects/military/defense/barried_wood_01.png
+res://textures/objects/military/defense/barrier_sandbag_01.png — _04.png
+res://textures/objects/military/defense/cheval_de_frise_01.png
+</code></pre>
+<h3 id="gear"><a class="header" href="#gear">Gear</a></h3>
+<p><code>res://textures/objects/military/gear/shield_01.png</code> — <code>_02.png</code></p>
+<h3 id="machines"><a class="header" href="#machines">Machines</a></h3>
+<pre><code>res://textures/objects/military/machines/ballista.png — ballista_02.png
+res://textures/objects/military/machines/mangonel.png — mangonel_big.png
+res://textures/objects/military/machines/trebuchet.png
+</code></pre>
+<h3 id="training"><a class="header" href="#training">Training</a></h3>
+<pre><code>res://textures/objects/military/training/bowl_w_arrows.png
+res://textures/objects/military/training/bowl_w_swords.png
+res://textures/objects/military/training/target_01.png — _06.png
+</code></pre>
+<h3 id="weapons"><a class="header" href="#weapons">Weapons</a></h3>
+<pre><code>res://textures/objects/military/weapons/arrow_01.png
+res://textures/objects/military/weapons/arrow_tip.png
+res://textures/objects/military/weapons/bow_01.png — _02.png
+res://textures/objects/military/weapons/cannon_01.png — _02.png
+res://textures/objects/military/weapons/cannonball_01.png — _03.png
+res://textures/objects/military/weapons/crossbow.png
+res://textures/objects/military/weapons/sword_01.png — _05.png
+res://textures/objects/military/weapons/weapon_shelf_01.png — _02.png
+</code></pre>
+<h2 id="objects--miscellaneous"><a class="header" href="#objects--miscellaneous">Objects — Miscellaneous</a></h2>
+<h3 id="camp"><a class="header" href="#camp">Camp</a></h3>
+<pre><code>res://textures/objects/camp/camp_bed_01.png — _04.png
+res://textures/objects/camp/camp_mat_01.png — _02.png
+res://textures/objects/camp/campfire_01.png — _08.png
+res://textures/objects/camp/carnival_tent_01.png — _03.png
+res://textures/objects/camp/hammock_01.png — _05.png
+res://textures/objects/camp/tent_01.png — _06.png
+</code></pre>
+<h3 id="characters--seafolk"><a class="header" href="#characters--seafolk">Characters / Seafolk</a></h3>
+<p><code>res://textures/objects/characters/seafolk/seafolk_1.png</code> — <code>seafolk_11.png</code></p>
+<h3 id="corpses"><a class="header" href="#corpses">Corpses</a></h3>
+<p><code>res://textures/objects/corpses/corpse_01.png</code> — <code>corpse_16.png</code></p>
+<h3 id="creatures"><a class="header" href="#creatures">Creatures</a></h3>
+<pre><code>res://textures/objects/creatures/aquatic/fish_silhiettes.png
+res://textures/objects/creatures/aquatic/fish_underwater_01.png — _02.png
+res://textures/objects/creatures/aquatic/fish_underwater_eel_01.png — _02.png
+res://textures/objects/creatures/aquatic/fish_underwater_school_01.png — _03.png
+res://textures/objects/creatures/aquatic/fish_underwater_shark_01.png — _02.png
+res://textures/objects/creatures/aquatic/fish_underwater_whale_01.png
+res://textures/objects/creatures/aquatic/kraken_head.png
+res://textures/objects/creatures/aquatic/kraken_tentacle_01.png — _05.png
+res://textures/objects/creatures/bird_nest_01.png — _05.png
+res://textures/objects/creatures/domesticated/cat_01.png, cow_01.png, ox_01.png, pig_01.png, sheep_01.png
+res://textures/objects/creatures/egg_01.png — _04.png
+res://textures/objects/creatures/egg_big_01.png — _04.png
+res://textures/objects/creatures/mouse.png
+res://textures/objects/creatures/pigeon_01.png — _03.png
+res://textures/objects/creatures/raven_1.png — _4.png
+res://textures/objects/creatures/roe_01.png — _05.png
+</code></pre>
+<h3 id="crime"><a class="header" href="#crime">Crime</a></h3>
+<pre><code>res://textures/objects/crime/gallows.png
+res://textures/objects/crime/guillotine.png
+res://textures/objects/crime/hanging_cage_01.png — _02.png
+</code></pre>
+<h3 id="graveyard"><a class="header" href="#graveyard">Graveyard</a></h3>
+<pre><code>res://textures/objects/graveyard/funeral_pyre_01.png — _04.png
+res://textures/objects/graveyard/grave_01.png — _11.png
+res://textures/objects/graveyard/gravestone_01.png — _07.png
+</code></pre>
+<h3 id="hardware"><a class="header" href="#hardware">Hardware</a></h3>
+<pre><code>res://textures/objects/hardware/gears/gears_1.png — _10.png
+res://textures/objects/hardware/toilets/toilet_01.png — _06.png
+</code></pre>
+<h3 id="hazards"><a class="header" href="#hazards">Hazards</a></h3>
+<pre><code>res://textures/objects/hazards/bear_trap_01.png — _02.png
+res://textures/objects/hazards/blade_01.png — _06.png
+res://textures/objects/hazards/floor_spikes_01.png — _02.png
+res://textures/objects/hazards/hole_01.png
+res://textures/objects/hazards/monster_01.png
+res://textures/objects/hazards/pit_01.png
+res://textures/objects/hazards/spike_pit_dungeon_01.png
+res://textures/objects/hazards/spike_pit_wood_02.png
+res://textures/objects/hazards/statue_trap_01.png — _02.png
+res://textures/objects/hazards/statue_trap_flames_01.png — _03.png
+res://textures/objects/hazards/tar_pit_01.png — _06.png
+res://textures/objects/hazards/toxic_gas_01.png
+res://textures/objects/hazards/wall_spikes_01.png — _02.png
+res://textures/objects/hazards/wall_trap_01.png
+</code></pre>
+<h3 id="machines-1"><a class="header" href="#machines-1">Machines</a></h3>
+<pre><code>res://textures/objects/machines/ballista_01.png — _03.png
+res://textures/objects/machines/counterweight_crane.png
+res://textures/objects/machines/crane_01.png
+res://textures/objects/machines/elevator_01.png
+res://textures/objects/machines/machine_01.png
+res://textures/objects/machines/manual_conveyor.png — manual_conveyor_platform.png
+res://textures/objects/machines/mortar_01.png
+res://textures/objects/machines/portcullis_winch.png
+res://textures/objects/machines/pulley_lift.png
+res://textures/objects/machines/water_wheel_01.png
+</code></pre>
+<h3 id="magic"><a class="header" href="#magic">Magic</a></h3>
+<pre><code>res://textures/objects/magic/altar_01.png — _05.png
+res://textures/objects/magic/cauldron_01.png — _04.png
+res://textures/objects/magic/magic_portal_01.png — _04.png
+res://textures/objects/magic/standing_portal_01.png — _05.png
+res://textures/objects/magic/sum_circle_01.png — _09.png
+</code></pre>
+<h3 id="ruin-debris"><a class="header" href="#ruin-debris">Ruin Debris</a></h3>
+<p><code>res://textures/objects/object_ruin_debris/debris_01.png</code> — <code>debris_15.png</code></p>
+<h3 id="ships"><a class="header" href="#ships">Ships</a></h3>
+<pre><code>res://textures/objects/ships/anchor_01.png — _03.png
+res://textures/objects/ships/bowsprit_01.png — _03.png
+res://textures/objects/ships/capstan_01.png — _02.png
+res://textures/objects/ships/hatch_01.png — _05.png
+res://textures/objects/ships/mast_01.png — _19.png
+res://textures/objects/ships/sail_driver_01.png
+res://textures/objects/ships/sail_jib_large_01.png — _02.png
+res://textures/objects/ships/sail_jib_small_01.png — _03.png
+res://textures/objects/ships/sail_lateen_01.png — _06.png
+res://textures/objects/ships/sail_square_01.png — _02.png
+</code></pre>
+<h3 id="spiritual--totems"><a class="header" href="#spiritual--totems">Spiritual / Totems</a></h3>
+<pre><code>res://textures/objects/spiritual/totems/totem_01.png — _02.png
+res://textures/objects/spiritual/totems/totem_broken_01.png — _04.png
+</code></pre>
+<h3 id="stable"><a class="header" href="#stable">Stable</a></h3>
+<pre><code>res://textures/objects/stable/hay.png
+res://textures/objects/stable/hay_floor_01.png — _03.png
+res://textures/objects/stable/hay_pile.png
+res://textures/objects/stable/horse_01.png — _06.png
+res://textures/objects/stable/stable_01.png — _04.png
+res://textures/objects/stable/trough_barn.png — trough_barn_04.png
+res://textures/objects/stable/trough_stable.png — trough_stable_02.png
+</code></pre>
+<h3 id="supplies"><a class="header" href="#supplies">Supplies</a></h3>
+<pre><code>res://textures/objects/supplies/barrels/barrel_01.png — _05.png
+res://textures/objects/supplies/barrels/giant_barrel_01.png — _03.png
+res://textures/objects/supplies/cages/cage_03.png — _09.png
+res://textures/objects/supplies/cages/cage_dog_kennel_01.png — _02.png
+res://textures/objects/supplies/crates/crate_01.png — _04.png
+res://textures/objects/supplies/crates/fruit_box_01.png — _06.png
+res://textures/objects/supplies/sacks/grain-sack_01.png — _02.png
+res://textures/objects/supplies/sacks/sack_01.png — _15.png
+</code></pre>
+<h3 id="alchemy-tools"><a class="header" href="#alchemy-tools">Alchemy Tools</a></h3>
+<pre><code>res://textures/objects/tools_alchemy/alchemy_furnace_01.png
+res://textures/objects/tools_alchemy/alchemy_table_01.png — _02.png
+res://textures/objects/tools_alchemy/alchemy_tool_01.png — _04.png
+res://textures/objects/tools_alchemy/alembic_01.png — _07.png
+res://textures/objects/tools_alchemy/alembic_retort_flask_01.png
+res://textures/objects/tools_alchemy/crystal_ball_01.png
+res://textures/objects/tools_alchemy/crystal_generator_01.png
+res://textures/objects/tools_alchemy/glass_case_01.png — _02.png
+res://textures/objects/tools_alchemy/herbs_01.png — _06.png
+res://textures/objects/tools_alchemy/mandragora_root_01.png
+res://textures/objects/tools_alchemy/mixing_bowl_01.png
+res://textures/objects/tools_alchemy/mixing_plate_01.png
+res://textures/objects/tools_alchemy/mortar_and_pestle_.png
+res://textures/objects/tools_alchemy/notes_01.png
+res://textures/objects/tools_alchemy/powder_grinder_01.png
+res://textures/objects/tools_alchemy/preserves_01.png — _02.png
+</code></pre>
+<h3 id="traps"><a class="header" href="#traps">Traps</a></h3>
+<pre><code>res://textures/objects/traps/alchemical_gas_canister.png
+res://textures/objects/traps/animal_trap.png
+res://textures/objects/traps/gas_vent_trap.png
+res://textures/objects/traps/heavy_machinery_trap.png
+res://textures/objects/traps/hidden_magic_rune_trap.png
+res://textures/objects/traps/magic_animal_trap.png
+res://textures/objects/traps/mine_01.png — _02.png
+res://textures/objects/traps/pressure_plate_01.png — _02.png
+res://textures/objects/traps/spear_trap_01.png — _02.png
+res://textures/objects/traps/statue_needle_trap.png
+res://textures/objects/traps/trap_trigger.png
+</code></pre>
+<h3 id="vehicles"><a class="header" href="#vehicles">Vehicles</a></h3>
+<pre><code>res://textures/objects/vehicles/boat_sail_01.png — _04.png
+res://textures/objects/vehicles/cart_01.png — _03.png
+res://textures/objects/vehicles/paddle.png
+res://textures/objects/vehicles/rowboat_01.png — _02.png
+res://textures/objects/vehicles/wagon_wreckage_01.png — _02.png
+</code></pre>
+<h2 id="ui-internal"><a class="header" href="#ui-internal">UI (Internal)</a></h2>
+<pre><code>res://textures/ui/area.png
+res://textures/ui/blueprint.png
+res://textures/ui/null.png
+res://textures/ui/null_min.png
+</code></pre>
+<h2 id="borders--brushes-internal"><a class="header" href="#borders--brushes-internal">Borders / Brushes (Internal)</a></h2>
+<pre><code>res://textures/borders/default_border.png
+res://textures/brushes/soft_circle.png
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
 <p>Definitions of terms used in Mimir.</p>
@@ -3948,7 +5106,7 @@ seed: 42                        # u64, optional — random seed
 </dl>
 <h2 id="g"><a class="header" href="#g">G</a></h2>
 <dl>
-<dt id="grid"><a class="header" href="#grid"><strong>Grid</strong></a></dt>
+<dt id="grid-1"><a class="header" href="#grid-1"><strong>Grid</strong></a></dt>
 <dd>The square overlay on maps representing 5-foot spaces. Auto-detected from UVTT files; defaults to 70 pixels per square for image files.</dd>
 </dl>
 <h2 id="h"><a class="header" href="#h">H</a></h2>
@@ -4128,7 +5286,7 @@ seed: 42                        # u64, optional — random seed
 <li>New modules start fresh</li>
 <li>Campaign-level content evolves</li>
 </ul>
-<h2 id="see-also-34"><a class="header" href="#see-also-34">See Also</a></h2>
+<h2 id="see-also-35"><a class="header" href="#see-also-35">See Also</a></h2>
 <ul>
 <li><a href="#the-two-board-system">The Two-Board System</a></li>
 <li><a href="#create-a-campaign">Create a Campaign</a></li>
@@ -4261,7 +5419,7 @@ seed: 42                        # u64, optional — random seed
 <li>Add detail as needed</li>
 <li>Skip what you don’t need</li>
 </ul>
-<h2 id="see-also-35"><a class="header" href="#see-also-35">See Also</a></h2>
+<h2 id="see-also-36"><a class="header" href="#see-also-36">See Also</a></h2>
 <ul>
 <li><a href="#campaigns-vs-modules">Campaigns vs Modules</a></li>
 <li><a href="#document-workflow">Document Workflow</a></li>
@@ -4325,7 +5483,7 @@ seed: 42                        # u64, optional — random seed
 <p>Session notes in Play Mode auto-save as you type — use them for initiative tracking, HP, and events. Prepared documents are separate and remain unmodified.</p>
 <h3 id="after-sessions"><a class="header" href="#after-sessions">After Sessions</a></h3>
 <p>Add follow-up notes to campaign documents to track story developments and player decisions.</p>
-<h2 id="see-also-36"><a class="header" href="#see-also-36">See Also</a></h2>
+<h2 id="see-also-37"><a class="header" href="#see-also-37">See Also</a></h2>
 <ul>
 <li><a href="#the-two-board-system">The Two-Board System</a></li>
 <li><a href="#manage-documents">Manage Documents</a></li>
@@ -4374,7 +5532,7 @@ seed: 42                        # u64, optional — random seed
 <li>Monsters and spells use a JSON text editor</li>
 <li>All three types support the clone-from-catalog workflow</li>
 </ul>
-<h2 id="see-also-37"><a class="header" href="#see-also-37">See Also</a></h2>
+<h2 id="see-also-38"><a class="header" href="#see-also-38">See Also</a></h2>
 <ul>
 <li><a href="how-to/homebrew">Homebrew How-To Guides</a></li>
 <li><a href="#the-two-board-system">The Two-Board System</a></li>
@@ -4535,7 +5693,7 @@ Heavily obscured area. Results in:</p>
 <li>Bright = safety</li>
 <li>Sudden darkness = danger</li>
 </ul>
-<h2 id="see-also-38"><a class="header" href="#see-also-38">See Also</a></h2>
+<h2 id="see-also-39"><a class="header" href="#see-also-39">See Also</a></h2>
 <ul>
 <li><a href="#vision--lighting">Vision &amp; Lighting Reference</a></li>
 <li><a href="#manage-light-sources">Manage Light Sources</a></li>

@@ -1,0 +1,1061 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Dungeondraft Texture Catalog - Mimir - D&amp;D Campaign Assistant</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A local-first D&amp;D campaign assistant for Dungeon Masters">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-771f5ecf.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-f8369802.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Mimir - D&amp;D Campaign Assistant</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="dungeondraft-default-texture-catalog"><a class="header" href="#dungeondraft-default-texture-catalog">Dungeondraft Default Texture Catalog</a></h1>
+<p>Complete list of <code>res://</code> texture paths available in Dungeondraft’s default asset pack. Use these paths in map configuration YAML for terrain, objects, paths, walls, and other elements.</p>
+<h2 id="terrain"><a class="header" href="#terrain">Terrain</a></h2>
+<pre><code>res://textures/terrain/terrain_cracked_earth.png
+res://textures/terrain/terrain_dirt.png
+res://textures/terrain/terrain_dry_grass.png
+res://textures/terrain/terrain_grass.png
+res://textures/terrain/terrain_gravel.png
+res://textures/terrain/terrain_limestone.png
+res://textures/terrain/terrain_moss.png
+res://textures/terrain/terrain_rocky.png
+res://textures/terrain/terrain_sand.png
+res://textures/terrain/terrain_sandstone.png
+res://textures/terrain/terrain_snow.png
+res://textures/terrain/terrain_swamp.png
+res://textures/terrain/terrain_void.png
+</code></pre>
+<h2 id="tilesets-floor"><a class="header" href="#tilesets-floor">Tilesets (Floor)</a></h2>
+<pre><code>res://textures/tilesets/simple/tileset_brick_basketweave.png
+res://textures/tilesets/simple/tileset_brick_running.png
+res://textures/tilesets/simple/tileset_brick_worn.png
+res://textures/tilesets/simple/tileset_carpet.png
+res://textures/tilesets/simple/tileset_cave.png
+res://textures/tilesets/simple/tileset_cobble.png
+res://textures/tilesets/simple/tileset_concrete_large.png
+res://textures/tilesets/simple/tileset_concrete_slab.png
+res://textures/tilesets/simple/tileset_concrete.png
+res://textures/tilesets/simple/tileset_cut_stone.png
+res://textures/tilesets/simple/tileset_diamond_2.png
+res://textures/tilesets/simple/tileset_diamond.png
+res://textures/tilesets/simple/tileset_herringbone.png
+res://textures/tilesets/simple/tileset_ornate.png
+res://textures/tilesets/simple/tileset_plank_45.png
+res://textures/tilesets/simple/tileset_roman_tiles.png
+res://textures/tilesets/simple/tileset_roman_worn.png
+res://textures/tilesets/simple/tileset_sewers.png
+res://textures/tilesets/simple/tileset_straw.png
+res://textures/tilesets/simple/tileset_wood_damaged.png
+res://textures/tilesets/simple/tileset_wood_interlaced.png
+res://textures/tilesets/simple/tileset_worn_cobble.png
+res://textures/tilesets/smart_double/tileset_stone.png
+res://textures/tilesets/smart/tileset_wood_vertical.png
+</code></pre>
+<h2 id="walls"><a class="header" href="#walls">Walls</a></h2>
+<pre><code>res://textures/walls/battlements.png
+res://textures/walls/battlements_end.png
+res://textures/walls/cobble.png
+res://textures/walls/cobble_end.png
+res://textures/walls/concrete.png
+res://textures/walls/concrete_end.png
+res://textures/walls/stone.png
+res://textures/walls/stone_end.png
+res://textures/walls/stone_09.png
+res://textures/walls/stone_09_end.png
+res://textures/walls/stone_12.png
+res://textures/walls/stone_12_end.png
+res://textures/walls/wood.png
+res://textures/walls/wood_end.png
+res://textures/walls/wood_02.png
+res://textures/walls/wood_02_end.png
+res://textures/walls/wood_03.png
+res://textures/walls/wood_03_end.png
+res://textures/walls/wood_04.png
+res://textures/walls/wood_04_end.png
+</code></pre>
+<h2 id="paths"><a class="header" href="#paths">Paths</a></h2>
+<pre><code>res://textures/paths/battlements.png
+res://textures/paths/blood_trail.png
+res://textures/paths/bone_fence_01.png
+res://textures/paths/chain.png
+res://textures/paths/cliff.png
+res://textures/paths/cobble.png
+res://textures/paths/concrete.png
+res://textures/paths/log_fence.png
+res://textures/paths/path_black_line.png
+res://textures/paths/path_blender_01.png
+res://textures/paths/path_blender_02.png
+res://textures/paths/path_blender_03.png
+res://textures/paths/path_blender_04.png
+res://textures/paths/path_rocks.png
+res://textures/paths/rail.png
+res://textures/paths/rail_(without_ties).png
+res://textures/paths/rope.png
+res://textures/paths/rope_(thick).png
+res://textures/paths/shadow_(flat).png
+res://textures/paths/stairs_stone.png
+res://textures/paths/stairs_stone_2.png
+res://textures/paths/stairs_wood.png
+res://textures/paths/stairs_wood_2.png
+res://textures/paths/stone.png
+res://textures/paths/stone_09.png
+res://textures/paths/stone_12.png
+res://textures/paths/stone_fence_01.png
+res://textures/paths/stone_fence_02.png
+res://textures/paths/stone_fence_03.png
+res://textures/paths/stone_fence_04.png
+res://textures/paths/stone_fence_05.png
+res://textures/paths/wagon_trail.png
+res://textures/paths/wood.png
+res://textures/paths/wood_02.png
+res://textures/paths/wood_03.png
+res://textures/paths/wood_04.png
+res://textures/paths/wood_fence_01.png
+res://textures/paths/wood_fence_02.png
+res://textures/paths/wood_fence_03.png
+res://textures/paths/wood_fence_04.png
+res://textures/paths/wood_fence_05.png
+res://textures/paths/wood_fence_06.png
+res://textures/paths/wood_fence_07.png
+res://textures/paths/wooden_bridge.png
+res://textures/paths/wooden_fence.png
+</code></pre>
+<h2 id="portals-doors--windows"><a class="header" href="#portals-doors--windows">Portals (Doors &amp; Windows)</a></h2>
+<pre><code>res://textures/portals/door_00.png
+res://textures/portals/door_01.png
+res://textures/portals/door_02.png
+res://textures/portals/door_03.png
+res://textures/portals/door_04.png
+res://textures/portals/door_05.png
+res://textures/portals/door_06.png
+res://textures/portals/door_07.png
+res://textures/portals/door_08.png
+res://textures/portals/door_09.png
+res://textures/portals/door_10.png
+res://textures/portals/door_11.png
+res://textures/portals/door_12.png
+res://textures/portals/door_13.png
+res://textures/portals/door_16.png
+res://textures/portals/door_17.png
+res://textures/portals/door_18.png
+res://textures/portals/door_19.png
+res://textures/portals/door_20.png
+res://textures/portals/door_21.png
+res://textures/portals/portcullis_01.png
+res://textures/portals/portcullis_02.png
+res://textures/portals/threshold_01.png
+res://textures/portals/window_01.png — window_16.png
+</code></pre>
+<h2 id="caves"><a class="header" href="#caves">Caves</a></h2>
+<pre><code>res://textures/caves/colorable/floor.png
+res://textures/caves/colorable/wall.png
+res://textures/caves/rocky/floor.png
+res://textures/caves/rocky/wall.png
+</code></pre>
+<h2 id="materials-paint-textures"><a class="header" href="#materials-paint-textures">Materials (Paint Textures)</a></h2>
+<p>Each material has a <code>_tile</code> and <code>_border</code> variant.</p>
+<pre><code>acid, alien_infestation, cloverfield, cobblestone, gold, grass (+ _1, _2),
+ice, infestation, lava, rock, sludge_tar_pit
+</code></pre>
+<p>Pattern: <code>res://textures/materials/{name}_tile.png</code> and <code>res://textures/materials/{name}_border.png</code></p>
+<h2 id="roofs"><a class="header" href="#roofs">Roofs</a></h2>
+<p>Styles: <code>diamond_slate_gray</code>, <code>flat_clay_red</code>, <code>plank_mossy</code>, <code>plank_wood</code>, <code>round_slate_brown</code>, <code>round_slate_gray</code>, <code>scale_stone</code>, <code>thatched</code></p>
+<p>Each has: <code>edge.png</code>, <code>hip.png</code>, <code>ridge.png</code>, <code>tiles.png</code></p>
+<p>Pattern: <code>res://textures/roofs/{style}/{part}.png</code></p>
+<h2 id="water"><a class="header" href="#water">Water</a></h2>
+<pre><code>res://textures/water/water_distortion_slime.png
+res://textures/water/water_ripple.png
+</code></pre>
+<h2 id="wear--overlays"><a class="header" href="#wear--overlays">Wear / Overlays</a></h2>
+<pre><code>res://textures/wear/dust.png
+res://textures/wear/grime.png
+res://textures/wear/noise.png
+res://textures/wear/scratched.png
+</code></pre>
+<h2 id="grid"><a class="header" href="#grid">Grid</a></h2>
+<pre><code>res://textures/grid/dashes.png
+res://textures/grid/dotted_line.png
+res://textures/grid/narrow_line.png
+res://textures/grid/thick_line.png
+</code></pre>
+<h2 id="lights"><a class="header" href="#lights">Lights</a></h2>
+<pre><code>res://textures/lights/fragments.png
+res://textures/lights/point.png
+res://textures/lights/soft.png
+</code></pre>
+<h2 id="shadows"><a class="header" href="#shadows">Shadows</a></h2>
+<pre><code>res://textures/shadows/wall_shadow_flat.png
+res://textures/shadows/wall_shadow_smooth.png
+</code></pre>
+<h2 id="objects--trees"><a class="header" href="#objects--trees">Objects — Trees</a></h2>
+<h3 id="more-trees"><a class="header" href="#more-trees">More Trees</a></h3>
+<pre><code>res://textures/objects/more_trees/aspen_01.png — aspen_04.png
+res://textures/objects/more_trees/birch_01.png — birch_04.png
+res://textures/objects/more_trees/eucalyptus_01.png — eucalyptus_04.png
+res://textures/objects/more_trees/j_maple_01.png — j_maple_04.png
+res://textures/objects/more_trees/maple_tree_colorable_01.png — _03.png
+res://textures/objects/more_trees/mossy_trunks_01.png — _06.png
+res://textures/objects/more_trees/oak_01.png — oak_04.png
+res://textures/objects/more_trees/tree_flower_01.png — _04.png
+</code></pre>
+<h3 id="vegetation-trees"><a class="header" href="#vegetation-trees">Vegetation Trees</a></h3>
+<pre><code>res://textures/objects/vegetation/trees/autumn_tree_01.png — _04.png
+res://textures/objects/vegetation/trees/cherry_tree_01.png — _03.png
+res://textures/objects/vegetation/trees/dead_tree_01.png — _03.png
+res://textures/objects/vegetation/trees/palm_tree_01.png — _03.png
+res://textures/objects/vegetation/trees/pine_tree_01.png — _04.png
+res://textures/objects/vegetation/trees/stump_01.png — _05.png
+res://textures/objects/vegetation/trees/tree_big_green_01.png — _03.png
+res://textures/objects/vegetation/trees/tree_branch_01.png — _03.png
+res://textures/objects/vegetation/trees/tree_green_simple_01.png — _04.png
+res://textures/objects/vegetation/trees/tree_massive_green_01.png
+</code></pre>
+<h2 id="objects--vegetation"><a class="header" href="#objects--vegetation">Objects — Vegetation</a></h2>
+<h3 id="grass"><a class="header" href="#grass">Grass</a></h3>
+<p><code>res://textures/objects/vegetation/grass/grass_01.png</code> — <code>grass_26.png</code></p>
+<h3 id="shrubs"><a class="header" href="#shrubs">Shrubs</a></h3>
+<p><code>res://textures/objects/vegetation/shrubs/bush_flower_01.png</code> — <code>_05.png</code>
+<code>res://textures/objects/vegetation/shrubs/bush_green_simple_01.png</code> — <code>_13.png</code></p>
+<h3 id="ferns"><a class="header" href="#ferns">Ferns</a></h3>
+<p><code>res://textures/objects/vegetation/ferns/fern_01.png</code> — <code>fern_06.png</code></p>
+<h3 id="flowers"><a class="header" href="#flowers">Flowers</a></h3>
+<p><code>res://textures/objects/vegetation/flowers/flowers_01.png</code> — <code>flowers_05.png</code></p>
+<h3 id="mushrooms"><a class="header" href="#mushrooms">Mushrooms</a></h3>
+<p><code>res://textures/objects/vegetation/mushrooms/magic_mushrooms_01.png</code> — <code>_14.png</code>
+<code>res://textures/objects/vegetation/mushrooms/mushrooms_01.png</code> — <code>_05.png</code></p>
+<h3 id="roots"><a class="header" href="#roots">Roots</a></h3>
+<p><code>res://textures/objects/vegetation/roots/exposed_roots_01.png</code> — <code>_10.png</code>
+<code>res://textures/objects/vegetation/roots/exposed_roots_big_1.png</code> — <code>_8.png</code></p>
+<h3 id="thorns"><a class="header" href="#thorns">Thorns</a></h3>
+<p><code>res://textures/objects/vegetation/thorns/thorns_01.png</code> — <code>thorns_19.png</code></p>
+<h3 id="vines--tendrils"><a class="header" href="#vines--tendrils">Vines / Tendrils</a></h3>
+<p><code>res://textures/objects/vegetation/vines/tendrils_01.png</code> — <code>tendrils_13.png</code></p>
+<h3 id="aquatic-plants"><a class="header" href="#aquatic-plants">Aquatic Plants</a></h3>
+<pre><code>res://textures/objects/vegetation/aquatic/reeds_1.png — reeds_5.png
+res://textures/objects/vegetation/aquatic/waterlily_01.png — _06.png
+</code></pre>
+<h3 id="fallen--dead"><a class="header" href="#fallen--dead">Fallen / Dead</a></h3>
+<pre><code>res://textures/objects/vegetation/fallen/dead_leaves_01.png — _05.png
+res://textures/objects/vegetation/fallen/leaves_01.png — _04.png
+res://textures/objects/vegetation/fallen/log_01.png — _05.png
+res://textures/objects/vegetation/fallen/wood_burned_01.png — _06.png
+</code></pre>
+<h2 id="objects--swamp"><a class="header" href="#objects--swamp">Objects — Swamp</a></h2>
+<pre><code>res://textures/objects/swamp/mangrove_stomps_01.png — _07.png
+res://textures/objects/swamp/mangrove_tree_01.png — _09.png
+res://textures/objects/swamp/swamp_branch_01.png — _03.png
+res://textures/objects/swamp/swamp_flower_01.png — _07.png
+res://textures/objects/swamp/swamp_moss_01.png — _07.png
+res://textures/objects/swamp/swamp_puddle_01.png — _10.png
+res://textures/objects/swamp/swamp_rocks_01.png — _06.png
+res://textures/objects/swamp/water_stain_01.png — _07.png
+</code></pre>
+<h2 id="objects--environment"><a class="header" href="#objects--environment">Objects — Environment</a></h2>
+<pre><code>res://textures/objects/environment/ash_pile_01.png — _05.png
+res://textures/objects/environment/burned_wood_01.png — _04.png
+res://textures/objects/environment/dirt_pile_01.png — _10.png
+res://textures/objects/environment/fire_01.png — _08.png
+res://textures/objects/environment/smoke_01.png — _06.png
+res://textures/objects/environment/snow_01.png — _15.png
+</code></pre>
+<h2 id="objects--clutter"><a class="header" href="#objects--clutter">Objects — Clutter</a></h2>
+<h3 id="boulders"><a class="header" href="#boulders">Boulders</a></h3>
+<p><code>res://textures/objects/clutter/boulders/boulder_01.png</code> — <code>boulder_20.png</code></p>
+<h3 id="cavern"><a class="header" href="#cavern">Cavern</a></h3>
+<pre><code>res://textures/objects/clutter/cavern/cave_crystals_01.png — _10.png
+res://textures/objects/clutter/cavern/cave_hole_01.png — _05.png
+res://textures/objects/clutter/cavern/stalagmites_01.png — _06.png
+</code></pre>
+<h3 id="cobwebs"><a class="header" href="#cobwebs">Cobwebs</a></h3>
+<pre><code>res://textures/objects/clutter/cobwebs/cocoon_01.png — _02.png
+res://textures/objects/clutter/cobwebs/spider_01.png — _02.png
+res://textures/objects/clutter/cobwebs/spider_dead_01.png — _02.png
+res://textures/objects/clutter/cobwebs/spider_egg_01.png
+res://textures/objects/clutter/cobwebs/spiderweb_01.png — _21.png
+</code></pre>
+<h3 id="floor-clutter"><a class="header" href="#floor-clutter">Floor Clutter</a></h3>
+<pre><code>res://textures/objects/clutter/floor/broken_glass_01.png — _07.png
+res://textures/objects/clutter/floor/broken_pottery_01.png — _11.png
+res://textures/objects/clutter/floor/floor_cloth_01.png — _05.png
+res://textures/objects/clutter/floor/toy_01.png — _03.png
+</code></pre>
+<h3 id="games"><a class="header" href="#games">Games</a></h3>
+<p><code>res://textures/objects/clutter/games/cards_01.png</code> — <code>cards_11.png</code>
+<code>res://textures/objects/clutter/games/chess_01.png</code> — <code>chess_04.png</code></p>
+<h3 id="lava-rocks"><a class="header" href="#lava-rocks">Lava Rocks</a></h3>
+<p><code>res://textures/objects/clutter/lava_rocks/rock_lava_01.png</code> — <code>rock_lava_10.png</code></p>
+<h3 id="rubble"><a class="header" href="#rubble">Rubble</a></h3>
+<p><code>res://textures/objects/clutter/rubble/rubble_01.png</code> — <code>rubble_16.png</code></p>
+<h3 id="tools"><a class="header" href="#tools">Tools</a></h3>
+<pre><code>res://textures/objects/clutter/tools/broom_01.png — _02.png
+res://textures/objects/clutter/tools/pitchfork.png
+res://textures/objects/clutter/tools/rope_01.png — _02.png
+res://textures/objects/clutter/tools/shovel.png
+</code></pre>
+<h3 id="water-features"><a class="header" href="#water-features">Water Features</a></h3>
+<pre><code>res://textures/objects/clutter/water/drowned_body_01.png — _02.png
+res://textures/objects/clutter/water/floating_log_01.png — _04.png
+res://textures/objects/clutter/water/flotsam_01.png — _04.png
+res://textures/objects/clutter/water/water_bottle.png
+res://textures/objects/clutter/water/water_circle_01.png — _05.png
+res://textures/objects/clutter/water/waterfall_01.png
+res://textures/objects/clutter/water/waterfall_color_02.png — _09.png
+res://textures/objects/clutter/water/waterfall_wave_color_10.png — _16.png
+</code></pre>
+<h3 id="clothing"><a class="header" href="#clothing">Clothing</a></h3>
+<p><code>res://textures/objects/clutter/clothing/sailor_hat_01.png</code></p>
+<h2 id="objects--furniture"><a class="header" href="#objects--furniture">Objects — Furniture</a></h2>
+<h3 id="beds"><a class="header" href="#beds">Beds</a></h3>
+<pre><code>res://textures/objects/furniture/beds/bed_01.png — bed_14.png
+res://textures/objects/furniture/beds/cradle.png
+res://textures/objects/furniture/beds/egypt_bed_01.png — _02.png
+res://textures/objects/furniture/beds/egypt_pillow_01.png — _02.png
+res://textures/objects/furniture/beds/pillow_01.png — pillow_07.png
+</code></pre>
+<h3 id="chairs--seating"><a class="header" href="#chairs--seating">Chairs &amp; Seating</a></h3>
+<pre><code>res://textures/objects/furniture/chairs/arm_chair_01.png, _04.png, _05.png
+res://textures/objects/furniture/chairs/armchair_02.png — _03.png
+res://textures/objects/furniture/chairs/bar_chair.png
+res://textures/objects/furniture/chairs/bench_01.png — bench_16.png
+res://textures/objects/furniture/chairs/chair_01.png — chair_05.png
+res://textures/objects/furniture/chairs/egypt_chair_01.png — _03.png
+res://textures/objects/furniture/chairs/egypt_sofa_01.png — _03.png
+res://textures/objects/furniture/chairs/ottoman_01.png
+res://textures/objects/furniture/chairs/round_chair_01.png — _02.png
+res://textures/objects/furniture/chairs/sofa_01.png — sofa_04.png
+res://textures/objects/furniture/chairs/sofa_corner_01.png — _02.png
+res://textures/objects/furniture/chairs/sofa_sattee_01.png — _02.png
+res://textures/objects/furniture/chairs/throne_01.png — throne_08.png
+</code></pre>
+<h3 id="tables"><a class="header" href="#tables">Tables</a></h3>
+<pre><code>res://textures/objects/furniture/tables/bar_table.png
+res://textures/objects/furniture/tables/egypt_table_01.png — _03.png
+res://textures/objects/furniture/tables/end_table_01.png — _02.png
+res://textures/objects/furniture/tables/round_table_01.png — _04.png
+res://textures/objects/furniture/tables/small_table_01.png — _10.png
+res://textures/objects/furniture/tables/table_corner_stone_01.png — _08.png
+res://textures/objects/furniture/tables/table_corner_wood_01.png — _07.png
+</code></pre>
+<h3 id="desks"><a class="header" href="#desks">Desks</a></h3>
+<pre><code>res://textures/objects/furniture/desks/desk_01.png — _02.png
+res://textures/objects/furniture/desks/open_desk_01.png — _02.png
+</code></pre>
+<h3 id="storage"><a class="header" href="#storage">Storage</a></h3>
+<pre><code>res://textures/objects/furniture/storage/bookshelf_corner_01.png — _09.png
+res://textures/objects/furniture/storage/chest_01.png
+res://textures/objects/furniture/storage/chest_open_01.png — _02.png
+res://textures/objects/furniture/storage/merchant_shelf_01.png — _05.png
+res://textures/objects/furniture/storage/small_chest_01.png — _04.png
+res://textures/objects/furniture/storage/wardrobe_01.png — _05.png
+</code></pre>
+<h3 id="broken-furniture"><a class="header" href="#broken-furniture">Broken Furniture</a></h3>
+<pre><code>res://textures/objects/furniture/broken/armchair_broken_01.png — _03.png
+res://textures/objects/furniture/broken/bed_broken_01.png — _02.png
+res://textures/objects/furniture/broken/chair_broken_01.png — _05.png
+res://textures/objects/furniture/broken/chairleg_broken.png
+res://textures/objects/furniture/broken/pillar_broken_01.png — _13.png
+res://textures/objects/furniture/broken/table_broken_01.png — _03.png
+</code></pre>
+<h2 id="objects--structures"><a class="header" href="#objects--structures">Objects — Structures</a></h2>
+<h3 id="bridges"><a class="header" href="#bridges">Bridges</a></h3>
+<pre><code>res://textures/objects/structures/bridges/bridge_broken_01.png — _04.png
+res://textures/objects/structures/bridges/bridge01_downend.png
+res://textures/objects/structures/bridges/bridge01_middle1.png
+res://textures/objects/structures/bridges/bridge01_middle2.png
+res://textures/objects/structures/bridges/bridge01_upend.png
+res://textures/objects/structures/bridges/bridge02_downend.png — bridge02_upend.png
+res://textures/objects/structures/bridges/bridge03.png — bridge08.png
+res://textures/objects/structures/bridges/bridge07_corner.png
+res://textures/objects/structures/bridges/bridge07_middle.png
+res://textures/objects/structures/bridges/small_bridge_01.png
+</code></pre>
+<h3 id="doors"><a class="header" href="#doors">Doors</a></h3>
+<pre><code>res://textures/objects/structures/doors/door_00.png — door_21.png
+res://textures/objects/structures/doors/fallen_door_01.png — _14.png
+res://textures/objects/structures/doors/portcullis_01.png — _02.png
+res://textures/objects/structures/doors/threshold_01.png
+</code></pre>
+<h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
+<p><code>res://textures/objects/structures/windows/window_01.png</code> — <code>window_20_broken.png</code></p>
+<h3 id="stairs"><a class="header" href="#stairs">Stairs</a></h3>
+<pre><code>res://textures/objects/structures/stairs/small_steps_01.png
+res://textures/objects/structures/stairs/stairs_09.png — stairs_14.png
+res://textures/objects/structures/stairs/stairs_down_01.png — _02.png
+res://textures/objects/structures/stairs/stairs_end_01.png — _04.png
+res://textures/objects/structures/stairs/stairs_round_03.png — _10.png
+res://textures/objects/structures/stairs/stairs_square_05.png — _08.png
+res://textures/objects/structures/stairs/stairs_up_01.png — _04.png
+</code></pre>
+<h3 id="pillars"><a class="header" href="#pillars">Pillars</a></h3>
+<pre><code>res://textures/objects/structures/pillars/pillar_stone_23.png — _42.png
+res://textures/objects/structures/pillars/pillar_wood_01.png — _22.png
+</code></pre>
+<h3 id="chimneys"><a class="header" href="#chimneys">Chimneys</a></h3>
+<p><code>res://textures/objects/structures/chimneys/chimney_01.png</code> — <code>chimney_06.png</code></p>
+<h3 id="fountains"><a class="header" href="#fountains">Fountains</a></h3>
+<pre><code>res://textures/objects/structures/fountains/birdbath_01.png — _03.png
+res://textures/objects/structures/fountains/fountain_01.png — _09.png
+</code></pre>
+<h3 id="other-structures"><a class="header" href="#other-structures">Other Structures</a></h3>
+<pre><code>res://textures/objects/structures/bucket.png
+res://textures/objects/structures/fireplace_01.png — _04.png
+res://textures/objects/structures/flag_stand_01.png — _05.png
+res://textures/objects/structures/garden/flower_bed_01.png — _03.png
+res://textures/objects/structures/ladders/ladder_01.png — _05.png
+res://textures/objects/structures/road_sign_01.png — _04.png
+res://textures/objects/structures/sundials/sundial_01.png — _05.png
+res://textures/objects/structures/trap_door_01.png — _02.png
+res://textures/objects/structures/well_01.png — _02.png
+</code></pre>
+<h3 id="grates--pipes"><a class="header" href="#grates--pipes">Grates &amp; Pipes</a></h3>
+<pre><code>res://textures/objects/infrastructure/grates/grate_01.png — _08.png
+res://textures/objects/infrastructure/pipes/pipe_01.png — _09.png
+</code></pre>
+<h2 id="objects--decor"><a class="header" href="#objects--decor">Objects — Decor</a></h2>
+<h3 id="dungeon"><a class="header" href="#dungeon">Dungeon</a></h3>
+<pre><code>res://textures/objects/decor/dungeon/bone_pile.png — bone_pile_06.png
+res://textures/objects/decor/dungeon/coffin_01.png — _06.png
+res://textures/objects/decor/dungeon/corpse_01.png — _02.png
+res://textures/objects/decor/dungeon/dragon_skull_01.png — _06.png
+res://textures/objects/decor/dungeon/gem_pile_01.png — _05.png
+res://textures/objects/decor/dungeon/gold_pile_01.png — _06.png
+res://textures/objects/decor/dungeon/knight_01.png — _02.png
+res://textures/objects/decor/dungeon/monster_bones_01.png — _06.png
+res://textures/objects/decor/dungeon/mummy_01.png — _02.png
+res://textures/objects/decor/dungeon/sarcophagus_01.png — _04.png
+res://textures/objects/decor/dungeon/skeleton_01.png — _08.png
+res://textures/objects/decor/dungeon/skeleton_grave_01.png — _04.png
+res://textures/objects/decor/dungeon/skeleton_horse.png
+res://textures/objects/decor/dungeon/skull_01.png — _02.png
+res://textures/objects/decor/dungeon/treasure_chest_01.png — _03.png
+</code></pre>
+<h3 id="floor-decor"><a class="header" href="#floor-decor">Floor Decor</a></h3>
+<pre><code>res://textures/objects/decor/floor/bear_rug.png
+res://textures/objects/decor/floor/big_vase_01.png — _02.png
+res://textures/objects/decor/floor/carpet_01.png — _06.png
+res://textures/objects/decor/floor/rug_boar.png, rug_cow_01.png, rug_cow_02.png
+res://textures/objects/decor/floor/rug_fox.png, rug_lizard.png, rug_sheep.png, rug_wolf.png
+res://textures/objects/decor/floor/tiger_rug.png
+res://textures/objects/decor/floor/vase.png
+</code></pre>
+<h3 id="gargoyles"><a class="header" href="#gargoyles">Gargoyles</a></h3>
+<p><code>res://textures/objects/decor/gargoyles/gargoyle_01.png</code> — <code>gargoyle_08.png</code></p>
+<h3 id="instruments"><a class="header" href="#instruments">Instruments</a></h3>
+<pre><code>res://textures/objects/decor/instruments/flute.png
+res://textures/objects/decor/instruments/harp.png
+res://textures/objects/decor/instruments/lute.png
+res://textures/objects/decor/instruments/lyre_01.png — _02.png
+res://textures/objects/decor/instruments/organ.png
+res://textures/objects/decor/instruments/piano.png
+</code></pre>
+<h3 id="lighting"><a class="header" href="#lighting">Lighting</a></h3>
+<pre><code>res://textures/objects/decor/lighting/bowl_lamp_01.png — _02.png
+res://textures/objects/decor/lighting/chandelier_01.png — _02.png
+res://textures/objects/decor/lighting/lantern_01.png — _02.png
+res://textures/objects/decor/lighting/torch_01.png
+res://textures/objects/decor/lighting/wall_torch_01.png — _02.png
+</code></pre>
+<h3 id="statues"><a class="header" href="#statues">Statues</a></h3>
+<pre><code>res://textures/objects/decor/statues/gargoyle_01.png — _08.png
+res://textures/objects/decor/statues/statue_01.png — _08.png
+res://textures/objects/decor/statues/statue_animal_stone_01.png — _10.png
+res://textures/objects/decor/statues/statue_animal_wood_01.png — _10.png
+res://textures/objects/decor/statues/statue_gargoyle_stone_01.png — _03.png
+res://textures/objects/decor/statues/statue_gargoyle_wood_01.png — _03.png
+res://textures/objects/decor/statues/statue_stone_01.png — _13.png
+res://textures/objects/decor/statues/statue_wood_01.png — _20.png
+res://textures/objects/decor/statues/statue__wood_08.png
+</code></pre>
+<h3 id="wall-decor"><a class="header" href="#wall-decor">Wall Decor</a></h3>
+<pre><code>res://textures/objects/decor/wall/deer_head.png
+res://textures/objects/decor/wall/moose_head.png
+res://textures/objects/decor/wall/picture_frame_01.png — _02.png
+res://textures/objects/decor/wall/trophy_boar_head.png
+res://textures/objects/decor/wall/trophy_dragon_head.png
+res://textures/objects/decor/wall/trophy_falcon_stand.png
+res://textures/objects/decor/wall/trophy_fox_head.png
+res://textures/objects/decor/wall/trophy_lizard_head.png
+res://textures/objects/decor/wall/trophy_monster_head.png
+res://textures/objects/decor/wall/trophy_rhino_head.png
+res://textures/objects/decor/wall/trophy_skull_stand.png
+res://textures/objects/decor/wall/trophy_tiger_head.png
+res://textures/objects/decor/wall/trophy_wolf_head.png
+</code></pre>
+<h3 id="top-level-statues"><a class="header" href="#top-level-statues">Top-Level Statues</a></h3>
+<p><code>res://textures/objects/statues/statue_01.png</code> — <code>statue_25.png</code></p>
+<h2 id="objects--activities"><a class="header" href="#objects--activities">Objects — Activities</a></h2>
+<h3 id="administration"><a class="header" href="#administration">Administration</a></h3>
+<pre><code>res://textures/objects/activities/administration/atlas_globe_01.png — _03.png
+res://textures/objects/activities/administration/book_01.png — _06.png
+res://textures/objects/activities/administration/candle_01.png — _02.png
+res://textures/objects/activities/administration/candle_holder_02.png
+res://textures/objects/activities/administration/cloth_01.png — _02.png
+res://textures/objects/activities/administration/envelope_01.png — _03.png
+res://textures/objects/activities/administration/inker.png
+res://textures/objects/activities/administration/map_01.png
+res://textures/objects/activities/administration/map_table_02.png
+res://textures/objects/activities/administration/map_table_big_01.png
+res://textures/objects/activities/administration/paper_01.png — _05.png
+res://textures/objects/activities/administration/scroll_01.png — _07.png
+res://textures/objects/activities/administration/scroll_bowl_01.png — _04.png
+</code></pre>
+<h3 id="bathing"><a class="header" href="#bathing">Bathing</a></h3>
+<pre><code>res://textures/objects/activities/bathing/bathtub_01.png — _02.png
+res://textures/objects/activities/bathing/chair_bath.png
+res://textures/objects/activities/bathing/soap.png
+</code></pre>
+<h3 id="cooking"><a class="header" href="#cooking">Cooking</a></h3>
+<pre><code>res://textures/objects/activities/cooking/cutting_boards.png
+res://textures/objects/activities/cooking/food_carrot_05.png
+res://textures/objects/activities/cooking/food_chicleg_02.png
+res://textures/objects/activities/cooking/food_fish_01.png
+res://textures/objects/activities/cooking/food_greens_04.png
+res://textures/objects/activities/cooking/food_leek_05.png
+res://textures/objects/activities/cooking/food_onion_06.png — _07.png
+res://textures/objects/activities/cooking/food_roots_08.png
+res://textures/objects/activities/cooking/oven_01.png — _02.png
+res://textures/objects/activities/cooking/pan.png
+res://textures/objects/activities/cooking/pig_roast.png
+res://textures/objects/activities/cooking/pizza.png
+res://textures/objects/activities/cooking/potatoes.png
+res://textures/objects/activities/cooking/spit_roast_01.png — _02.png
+res://textures/objects/activities/cooking/stove_01.png — stove_04_detail.png
+</code></pre>
+<h3 id="dining"><a class="header" href="#dining">Dining</a></h3>
+<pre><code>res://textures/objects/activities/dining/berries.png
+res://textures/objects/activities/dining/big_bowl_01.png — _05.png
+res://textures/objects/activities/dining/bottle_01.png
+res://textures/objects/activities/dining/bottle.png
+res://textures/objects/activities/dining/cup.png
+res://textures/objects/activities/dining/food_bread_01.png — _02.png
+res://textures/objects/activities/dining/food_meat_leg_03.png
+res://textures/objects/activities/dining/fork.png
+res://textures/objects/activities/dining/knife_01.png — _02.png
+res://textures/objects/activities/dining/pitcher.png
+res://textures/objects/activities/dining/plate_01.png — _02.png, plate.png
+res://textures/objects/activities/dining/saucer_01.png — _04.png
+res://textures/objects/activities/dining/spoon.png
+</code></pre>
+<h3 id="farming"><a class="header" href="#farming">Farming</a></h3>
+<pre><code>res://textures/objects/activities/farming/beet_01.png — _04.png
+res://textures/objects/activities/farming/cabbage_01.png — _04.png
+res://textures/objects/activities/farming/root_01.png — _03.png
+res://textures/objects/activities/farming/scarecrow_01.png — _02.png
+</code></pre>
+<h3 id="logging"><a class="header" href="#logging">Logging</a></h3>
+<pre><code>res://textures/objects/activities/logging/log_cutter.png
+res://textures/objects/activities/logging/log_pile_01.png — _04.png
+</code></pre>
+<h3 id="mining"><a class="header" href="#mining">Mining</a></h3>
+<pre><code>res://textures/objects/activities/mining/mine_cart.png — mine_cart_02.png
+res://textures/objects/activities/mining/plank_01.png — _02.png
+</code></pre>
+<h3 id="smithing"><a class="header" href="#smithing">Smithing</a></h3>
+<pre><code>res://textures/objects/activities/smithing/anvil.png
+res://textures/objects/activities/smithing/bellows_big.png
+res://textures/objects/activities/smithing/bellows_small.png
+res://textures/objects/activities/smithing/blacksmith_tool_01.png
+res://textures/objects/activities/smithing/blacksmith_tool_05_anvil.png
+res://textures/objects/activities/smithing/chisel.png
+res://textures/objects/activities/smithing/coal_bag.png
+res://textures/objects/activities/smithing/design_table_01.png — _02.png
+res://textures/objects/activities/smithing/forge_small_01.png — _02.png
+res://textures/objects/activities/smithing/furnace.png
+res://textures/objects/activities/smithing/grinding_wheel.png
+res://textures/objects/activities/smithing/hammer.png
+res://textures/objects/activities/smithing/mandrel.png
+res://textures/objects/activities/smithing/metal_bar.png
+res://textures/objects/activities/smithing/slack_tub.png
+res://textures/objects/activities/smithing/tongs.png
+res://textures/objects/activities/smithing/workbench.png
+</code></pre>
+<h2 id="objects--themed-sets"><a class="header" href="#objects--themed-sets">Objects — Themed Sets</a></h2>
+<h3 id="dwarven-set"><a class="header" href="#dwarven-set">Dwarven Set</a></h3>
+<pre><code>res://textures/objects/dwarven_set/barrel_forge_01.png
+res://textures/objects/dwarven_set/dwarven_anvil.png
+res://textures/objects/dwarven_set/dwarven_armchair_01.png
+res://textures/objects/dwarven_set/dwarven_bed_double_01.png
+res://textures/objects/dwarven_set/dwarven_bed_single_01.png
+res://textures/objects/dwarven_set/dwarven_big_table_01.png — _02.png
+res://textures/objects/dwarven_set/dwarven_closet_01.png
+res://textures/objects/dwarven_set/dwarven_forge.png
+res://textures/objects/dwarven_set/dwarven_hammer.png
+res://textures/objects/dwarven_set/dwarven_horisontal_saw.png
+res://textures/objects/dwarven_set/dwarven_sarcophagus.png
+res://textures/objects/dwarven_set/dwarven_shelf_01.png
+res://textures/objects/dwarven_set/dwarven_shield_rack.png
+res://textures/objects/dwarven_set/dwarven_suit_of_armor.png
+res://textures/objects/dwarven_set/dwarven_sword.png
+res://textures/objects/dwarven_set/dwarven_table_01.png
+res://textures/objects/dwarven_set/dwarven_workstation.png
+res://textures/objects/dwarven_set/forge_fire.png
+res://textures/objects/dwarven_set/forge_hammer_mold.png
+res://textures/objects/dwarven_set/forge_hearth.png
+res://textures/objects/dwarven_set/forge_lever.png
+res://textures/objects/dwarven_set/forge_sword_mold.png
+res://textures/objects/dwarven_set/handwheel.png
+res://textures/objects/dwarven_set/ingot_01.png — _03.png
+res://textures/objects/dwarven_set/ore_piece_01.png — _03.png
+res://textures/objects/dwarven_set/pipe_piece_01.png — _07.png
+res://textures/objects/dwarven_set/pliers.png
+res://textures/objects/dwarven_set/quench_trough.png
+</code></pre>
+<h3 id="elven-set"><a class="header" href="#elven-set">Elven Set</a></h3>
+<pre><code>res://textures/objects/elven_set/elven_bed_01.png — _02.png
+res://textures/objects/elven_set/elven_bench_01.png — _02.png
+res://textures/objects/elven_set/elven_boat_01.png — _02.png
+res://textures/objects/elven_set/elven_bridge_01.png
+res://textures/objects/elven_set/elven_chair_01.png — _03.png
+res://textures/objects/elven_set/elven_harp.png
+res://textures/objects/elven_set/elven_pond.png
+res://textures/objects/elven_set/elven_rotonda.png
+res://textures/objects/elven_set/elven_sarcophagus.png
+res://textures/objects/elven_set/elven_stairs_01.png — _02.png
+res://textures/objects/elven_set/elven_statue_01.png
+res://textures/objects/elven_set/elven_table_01.png — _02.png
+res://textures/objects/elven_set/elven_throne_01.png
+res://textures/objects/elven_set/elven_well.png
+res://textures/objects/elven_set/ottoman_01.png — _02.png
+res://textures/objects/elven_set/vines_green_01.png — _07.png
+</code></pre>
+<h3 id="wizard-set"><a class="header" href="#wizard-set">Wizard Set</a></h3>
+<pre><code>res://textures/objects/wizard_set/alchemy_table.png
+res://textures/objects/wizard_set/arcane_clock.png
+res://textures/objects/wizard_set/arcane_summoning_circle_01.png — _03.png
+res://textures/objects/wizard_set/arcane_summoning_circle_glow_01.png — _03.png
+res://textures/objects/wizard_set/brazier_01.png — _02.png
+res://textures/objects/wizard_set/cage_01.png — _02.png
+res://textures/objects/wizard_set/candle_clusters_01.png — _04.png
+res://textures/objects/wizard_set/celestial_model.png
+res://textures/objects/wizard_set/celestial_rug.png
+res://textures/objects/wizard_set/chained_grimoire.png
+res://textures/objects/wizard_set/crystal_ball.png
+res://textures/objects/wizard_set/fire_01.png — _02.png
+res://textures/objects/wizard_set/magical_brazier_01.png — _02.png
+res://textures/objects/wizard_set/mana_orb_01.png — _02.png
+res://textures/objects/wizard_set/mirror_01.png — _02.png
+res://textures/objects/wizard_set/potion_rack.png
+res://textures/objects/wizard_set/ritual_dagger.png
+res://textures/objects/wizard_set/runed_podium.png
+res://textures/objects/wizard_set/scroll_shelf.png
+res://textures/objects/wizard_set/spellbook_open.png
+</code></pre>
+<h2 id="objects--military"><a class="header" href="#objects--military">Objects — Military</a></h2>
+<h3 id="blood"><a class="header" href="#blood">Blood</a></h3>
+<p><code>res://textures/objects/military/blood/blood_water_stain_01.png</code> — <code>_14.png</code></p>
+<h3 id="defense"><a class="header" href="#defense">Defense</a></h3>
+<pre><code>res://textures/objects/military/defense/barried_wood_01.png
+res://textures/objects/military/defense/barrier_sandbag_01.png — _04.png
+res://textures/objects/military/defense/cheval_de_frise_01.png
+</code></pre>
+<h3 id="gear"><a class="header" href="#gear">Gear</a></h3>
+<p><code>res://textures/objects/military/gear/shield_01.png</code> — <code>_02.png</code></p>
+<h3 id="machines"><a class="header" href="#machines">Machines</a></h3>
+<pre><code>res://textures/objects/military/machines/ballista.png — ballista_02.png
+res://textures/objects/military/machines/mangonel.png — mangonel_big.png
+res://textures/objects/military/machines/trebuchet.png
+</code></pre>
+<h3 id="training"><a class="header" href="#training">Training</a></h3>
+<pre><code>res://textures/objects/military/training/bowl_w_arrows.png
+res://textures/objects/military/training/bowl_w_swords.png
+res://textures/objects/military/training/target_01.png — _06.png
+</code></pre>
+<h3 id="weapons"><a class="header" href="#weapons">Weapons</a></h3>
+<pre><code>res://textures/objects/military/weapons/arrow_01.png
+res://textures/objects/military/weapons/arrow_tip.png
+res://textures/objects/military/weapons/bow_01.png — _02.png
+res://textures/objects/military/weapons/cannon_01.png — _02.png
+res://textures/objects/military/weapons/cannonball_01.png — _03.png
+res://textures/objects/military/weapons/crossbow.png
+res://textures/objects/military/weapons/sword_01.png — _05.png
+res://textures/objects/military/weapons/weapon_shelf_01.png — _02.png
+</code></pre>
+<h2 id="objects--miscellaneous"><a class="header" href="#objects--miscellaneous">Objects — Miscellaneous</a></h2>
+<h3 id="camp"><a class="header" href="#camp">Camp</a></h3>
+<pre><code>res://textures/objects/camp/camp_bed_01.png — _04.png
+res://textures/objects/camp/camp_mat_01.png — _02.png
+res://textures/objects/camp/campfire_01.png — _08.png
+res://textures/objects/camp/carnival_tent_01.png — _03.png
+res://textures/objects/camp/hammock_01.png — _05.png
+res://textures/objects/camp/tent_01.png — _06.png
+</code></pre>
+<h3 id="characters--seafolk"><a class="header" href="#characters--seafolk">Characters / Seafolk</a></h3>
+<p><code>res://textures/objects/characters/seafolk/seafolk_1.png</code> — <code>seafolk_11.png</code></p>
+<h3 id="corpses"><a class="header" href="#corpses">Corpses</a></h3>
+<p><code>res://textures/objects/corpses/corpse_01.png</code> — <code>corpse_16.png</code></p>
+<h3 id="creatures"><a class="header" href="#creatures">Creatures</a></h3>
+<pre><code>res://textures/objects/creatures/aquatic/fish_silhiettes.png
+res://textures/objects/creatures/aquatic/fish_underwater_01.png — _02.png
+res://textures/objects/creatures/aquatic/fish_underwater_eel_01.png — _02.png
+res://textures/objects/creatures/aquatic/fish_underwater_school_01.png — _03.png
+res://textures/objects/creatures/aquatic/fish_underwater_shark_01.png — _02.png
+res://textures/objects/creatures/aquatic/fish_underwater_whale_01.png
+res://textures/objects/creatures/aquatic/kraken_head.png
+res://textures/objects/creatures/aquatic/kraken_tentacle_01.png — _05.png
+res://textures/objects/creatures/bird_nest_01.png — _05.png
+res://textures/objects/creatures/domesticated/cat_01.png, cow_01.png, ox_01.png, pig_01.png, sheep_01.png
+res://textures/objects/creatures/egg_01.png — _04.png
+res://textures/objects/creatures/egg_big_01.png — _04.png
+res://textures/objects/creatures/mouse.png
+res://textures/objects/creatures/pigeon_01.png — _03.png
+res://textures/objects/creatures/raven_1.png — _4.png
+res://textures/objects/creatures/roe_01.png — _05.png
+</code></pre>
+<h3 id="crime"><a class="header" href="#crime">Crime</a></h3>
+<pre><code>res://textures/objects/crime/gallows.png
+res://textures/objects/crime/guillotine.png
+res://textures/objects/crime/hanging_cage_01.png — _02.png
+</code></pre>
+<h3 id="graveyard"><a class="header" href="#graveyard">Graveyard</a></h3>
+<pre><code>res://textures/objects/graveyard/funeral_pyre_01.png — _04.png
+res://textures/objects/graveyard/grave_01.png — _11.png
+res://textures/objects/graveyard/gravestone_01.png — _07.png
+</code></pre>
+<h3 id="hardware"><a class="header" href="#hardware">Hardware</a></h3>
+<pre><code>res://textures/objects/hardware/gears/gears_1.png — _10.png
+res://textures/objects/hardware/toilets/toilet_01.png — _06.png
+</code></pre>
+<h3 id="hazards"><a class="header" href="#hazards">Hazards</a></h3>
+<pre><code>res://textures/objects/hazards/bear_trap_01.png — _02.png
+res://textures/objects/hazards/blade_01.png — _06.png
+res://textures/objects/hazards/floor_spikes_01.png — _02.png
+res://textures/objects/hazards/hole_01.png
+res://textures/objects/hazards/monster_01.png
+res://textures/objects/hazards/pit_01.png
+res://textures/objects/hazards/spike_pit_dungeon_01.png
+res://textures/objects/hazards/spike_pit_wood_02.png
+res://textures/objects/hazards/statue_trap_01.png — _02.png
+res://textures/objects/hazards/statue_trap_flames_01.png — _03.png
+res://textures/objects/hazards/tar_pit_01.png — _06.png
+res://textures/objects/hazards/toxic_gas_01.png
+res://textures/objects/hazards/wall_spikes_01.png — _02.png
+res://textures/objects/hazards/wall_trap_01.png
+</code></pre>
+<h3 id="machines-1"><a class="header" href="#machines-1">Machines</a></h3>
+<pre><code>res://textures/objects/machines/ballista_01.png — _03.png
+res://textures/objects/machines/counterweight_crane.png
+res://textures/objects/machines/crane_01.png
+res://textures/objects/machines/elevator_01.png
+res://textures/objects/machines/machine_01.png
+res://textures/objects/machines/manual_conveyor.png — manual_conveyor_platform.png
+res://textures/objects/machines/mortar_01.png
+res://textures/objects/machines/portcullis_winch.png
+res://textures/objects/machines/pulley_lift.png
+res://textures/objects/machines/water_wheel_01.png
+</code></pre>
+<h3 id="magic"><a class="header" href="#magic">Magic</a></h3>
+<pre><code>res://textures/objects/magic/altar_01.png — _05.png
+res://textures/objects/magic/cauldron_01.png — _04.png
+res://textures/objects/magic/magic_portal_01.png — _04.png
+res://textures/objects/magic/standing_portal_01.png — _05.png
+res://textures/objects/magic/sum_circle_01.png — _09.png
+</code></pre>
+<h3 id="ruin-debris"><a class="header" href="#ruin-debris">Ruin Debris</a></h3>
+<p><code>res://textures/objects/object_ruin_debris/debris_01.png</code> — <code>debris_15.png</code></p>
+<h3 id="ships"><a class="header" href="#ships">Ships</a></h3>
+<pre><code>res://textures/objects/ships/anchor_01.png — _03.png
+res://textures/objects/ships/bowsprit_01.png — _03.png
+res://textures/objects/ships/capstan_01.png — _02.png
+res://textures/objects/ships/hatch_01.png — _05.png
+res://textures/objects/ships/mast_01.png — _19.png
+res://textures/objects/ships/sail_driver_01.png
+res://textures/objects/ships/sail_jib_large_01.png — _02.png
+res://textures/objects/ships/sail_jib_small_01.png — _03.png
+res://textures/objects/ships/sail_lateen_01.png — _06.png
+res://textures/objects/ships/sail_square_01.png — _02.png
+</code></pre>
+<h3 id="spiritual--totems"><a class="header" href="#spiritual--totems">Spiritual / Totems</a></h3>
+<pre><code>res://textures/objects/spiritual/totems/totem_01.png — _02.png
+res://textures/objects/spiritual/totems/totem_broken_01.png — _04.png
+</code></pre>
+<h3 id="stable"><a class="header" href="#stable">Stable</a></h3>
+<pre><code>res://textures/objects/stable/hay.png
+res://textures/objects/stable/hay_floor_01.png — _03.png
+res://textures/objects/stable/hay_pile.png
+res://textures/objects/stable/horse_01.png — _06.png
+res://textures/objects/stable/stable_01.png — _04.png
+res://textures/objects/stable/trough_barn.png — trough_barn_04.png
+res://textures/objects/stable/trough_stable.png — trough_stable_02.png
+</code></pre>
+<h3 id="supplies"><a class="header" href="#supplies">Supplies</a></h3>
+<pre><code>res://textures/objects/supplies/barrels/barrel_01.png — _05.png
+res://textures/objects/supplies/barrels/giant_barrel_01.png — _03.png
+res://textures/objects/supplies/cages/cage_03.png — _09.png
+res://textures/objects/supplies/cages/cage_dog_kennel_01.png — _02.png
+res://textures/objects/supplies/crates/crate_01.png — _04.png
+res://textures/objects/supplies/crates/fruit_box_01.png — _06.png
+res://textures/objects/supplies/sacks/grain-sack_01.png — _02.png
+res://textures/objects/supplies/sacks/sack_01.png — _15.png
+</code></pre>
+<h3 id="alchemy-tools"><a class="header" href="#alchemy-tools">Alchemy Tools</a></h3>
+<pre><code>res://textures/objects/tools_alchemy/alchemy_furnace_01.png
+res://textures/objects/tools_alchemy/alchemy_table_01.png — _02.png
+res://textures/objects/tools_alchemy/alchemy_tool_01.png — _04.png
+res://textures/objects/tools_alchemy/alembic_01.png — _07.png
+res://textures/objects/tools_alchemy/alembic_retort_flask_01.png
+res://textures/objects/tools_alchemy/crystal_ball_01.png
+res://textures/objects/tools_alchemy/crystal_generator_01.png
+res://textures/objects/tools_alchemy/glass_case_01.png — _02.png
+res://textures/objects/tools_alchemy/herbs_01.png — _06.png
+res://textures/objects/tools_alchemy/mandragora_root_01.png
+res://textures/objects/tools_alchemy/mixing_bowl_01.png
+res://textures/objects/tools_alchemy/mixing_plate_01.png
+res://textures/objects/tools_alchemy/mortar_and_pestle_.png
+res://textures/objects/tools_alchemy/notes_01.png
+res://textures/objects/tools_alchemy/powder_grinder_01.png
+res://textures/objects/tools_alchemy/preserves_01.png — _02.png
+</code></pre>
+<h3 id="traps"><a class="header" href="#traps">Traps</a></h3>
+<pre><code>res://textures/objects/traps/alchemical_gas_canister.png
+res://textures/objects/traps/animal_trap.png
+res://textures/objects/traps/gas_vent_trap.png
+res://textures/objects/traps/heavy_machinery_trap.png
+res://textures/objects/traps/hidden_magic_rune_trap.png
+res://textures/objects/traps/magic_animal_trap.png
+res://textures/objects/traps/mine_01.png — _02.png
+res://textures/objects/traps/pressure_plate_01.png — _02.png
+res://textures/objects/traps/spear_trap_01.png — _02.png
+res://textures/objects/traps/statue_needle_trap.png
+res://textures/objects/traps/trap_trigger.png
+</code></pre>
+<h3 id="vehicles"><a class="header" href="#vehicles">Vehicles</a></h3>
+<pre><code>res://textures/objects/vehicles/boat_sail_01.png — _04.png
+res://textures/objects/vehicles/cart_01.png — _03.png
+res://textures/objects/vehicles/paddle.png
+res://textures/objects/vehicles/rowboat_01.png — _02.png
+res://textures/objects/vehicles/wagon_wreckage_01.png — _02.png
+</code></pre>
+<h2 id="ui-internal"><a class="header" href="#ui-internal">UI (Internal)</a></h2>
+<pre><code>res://textures/ui/area.png
+res://textures/ui/blueprint.png
+res://textures/ui/null.png
+res://textures/ui/null_min.png
+</code></pre>
+<h2 id="borders--brushes-internal"><a class="header" href="#borders--brushes-internal">Borders / Brushes (Internal)</a></h2>
+<pre><code>res://textures/borders/default_border.png
+res://textures/brushes/soft_circle.png
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../reference/mapgen.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../reference/glossary.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../reference/mapgen.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../reference/glossary.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
