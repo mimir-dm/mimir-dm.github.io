@@ -35,10 +35,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-771f5ecf.js";
+            window.path_to_searchindex_js = "../../searchindex-10366547.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-f8369802.js"></script>
+        <script src="../../toc-723b2f28.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -174,23 +174,44 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="grid-alignment"><a class="header" href="#grid-alignment">Grid Alignment</a></h1>
-<p>How Mimir handles grid alignment for maps.</p>
-<h2 id="automatic-grid-detection"><a class="header" href="#automatic-grid-detection">Automatic Grid Detection</a></h2>
-<p><strong>UVTT files</strong> (from Dungeondraft, Foundry, and similar tools) include grid data embedded in the file. When you upload a UVTT file, Mimir reads the grid size and applies it automatically. No manual configuration is needed.</p>
-<h2 id="image-files"><a class="header" href="#image-files">Image Files</a></h2>
-<p>Standard image files (PNG, JPG, WebP) don’t include grid data. Mimir defaults to <strong>70 pixels per grid square</strong> for these files. The grid overlay in Token Setup uses this default for snapping tokens to positions.</p>
-<p>For best results with image maps, use files where the grid squares are approximately 70 pixels wide, or use UVTT format which includes precise grid information.</p>
-<h2 id="tips"><a class="header" href="#tips">Tips</a></h2>
+                        <h1 id="verify-grid-alignment"><a class="header" href="#verify-grid-alignment">Verify Grid Alignment</a></h1>
+<p>How to check that your map’s grid matches Mimir’s grid overlay, and what to do if it doesn’t.</p>
+<h2 id="goal"><a class="header" href="#goal">Goal</a></h2>
+<p>Ensure that tokens snap to the correct grid squares on your map.</p>
+<h2 id="steps"><a class="header" href="#steps">Steps</a></h2>
+<h3 id="for-uvtt-files"><a class="header" href="#for-uvtt-files">For UVTT Files</a></h3>
+<ol>
+<li>Upload your UVTT file (see <a href="./upload-map.html">Upload a Map</a>)</li>
+<li>Open Token Setup by clicking the map card</li>
+<li><strong>Verify:</strong> The grid overlay should align with the map’s drawn grid lines</li>
+<li>Place a test token — it should snap to the center of a grid square</li>
+</ol>
+<p>UVTT files embed grid data (cell size, offset, dimensions), so alignment is automatic. If the grid looks correct, you’re done.</p>
+<h3 id="for-image-files"><a class="header" href="#for-image-files">For Image Files</a></h3>
+<ol>
+<li>Upload your image file</li>
+<li>Open Token Setup by clicking the map card</li>
+<li><strong>Check alignment:</strong> Mimir defaults to 70 pixels per grid square, starting from the top-left corner</li>
+<li>If the overlay grid lines align with the map’s drawn grid, you’re ready to place tokens</li>
+</ol>
+<h3 id="if-the-grid-doesnt-align-image-files"><a class="header" href="#if-the-grid-doesnt-align-image-files">If the Grid Doesn’t Align (Image Files)</a></h3>
+<p>If your image uses a non-standard grid size (e.g., 100px squares), the overlay won’t match the map artwork. Options:</p>
+<ol>
+<li><strong>Obtain the UVTT version</strong> of the map if available — this is the best fix</li>
+<li><strong>Use the map as a visual backdrop</strong> and position tokens by eye rather than relying on snap-to-grid</li>
+</ol>
+<h2 id="how-token-snapping-works"><a class="header" href="#how-token-snapping-works">How Token Snapping Works</a></h2>
 <ul>
-<li>UVTT is the recommended format — it includes grid data, line-of-sight walls, and lighting information</li>
-<li>The grid overlay in Token Setup shows how tokens will snap to positions</li>
-<li>Token placement always snaps to the grid center of each square</li>
+<li>Tokens snap to grid centers when placed</li>
+<li>Token size respects the grid — a Large creature occupies a 2×2 area, Huge occupies 3×3</li>
+<li>The grid overlay in Token Setup shows exactly where tokens will land</li>
 </ul>
 <h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
 <ul>
-<li><a href="./upload-map.html">Upload a Map</a></li>
-<li><a href="./place-tokens.html">Place Tokens</a></li>
+<li><a href="./upload-map.html">Upload a Map</a> — Supported formats and upload steps</li>
+<li><a href="./place-tokens.html">Place Tokens</a> — Adding tokens to the grid</li>
+<li><a href="../play-mode/fog-of-war.html">Fog of War</a> — How fog interacts with grid and walls</li>
+<li><a href="../../explanation/map-formats.html">Map Formats</a> — Understanding UVTT and image formats</li>
 </ul>
 
                     </main>

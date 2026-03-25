@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-771f5ecf.js";
+            window.path_to_searchindex_js = "searchindex-10366547.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-f8369802.js"></script>
+        <script src="toc-723b2f28.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -183,10 +183,11 @@
 <h2 id="quick-start"><a class="header" href="#quick-start">Quick Start</a></h2>
 <p><strong>New to Mimir?</strong> Start with our tutorials:</p>
 <ol>
-<li><strong><a href="#your-first-campaign">Your First Campaign</a></strong> - Create a campaign and explore the dashboard</li>
-<li><strong><a href="#your-first-module">Your First Module</a></strong> - Build an adventure with maps and monsters</li>
-<li><strong><a href="#running-your-first-session">Running Your First Session</a></strong> - Use Play Mode to run an encounter</li>
-<li><strong><a href="#player-display-setup">Player Display Setup</a></strong> - Set up a second screen for players</li>
+<li><strong><a href="#your-first-campaign">Your First Campaign</a></strong> — Create a campaign and explore the dashboard</li>
+<li><strong><a href="#your-first-module">Your First Module</a></strong> — Build an adventure with maps and monsters</li>
+<li><strong><a href="#running-your-first-session">Running Your First Session</a></strong> — Use Play Mode to run an encounter</li>
+<li><strong><a href="#player-display-setup">Player Display Setup</a></strong> — Set up a second screen for players</li>
+<li><strong><a href="#creating-homebrew-content">Creating Homebrew Content</a></strong> — Make custom items, monsters, and spells</li>
 </ol>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
 <h3 id="campaign-management"><a class="header" href="#campaign-management">Campaign Management</a></h3>
@@ -1020,6 +1021,174 @@
 <hr>
 <p><em>Return to: <a href="tutorials/README.html">Tutorials Overview</a></em></p>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="creating-homebrew-content"><a class="header" href="#creating-homebrew-content">Creating Homebrew Content</a></h1>
+<p>This tutorial walks you through creating custom items, monsters, and spells for your campaign. By the end, you’ll have homebrew content integrated into your modules and character sheets.</p>
+<p><strong>Time to complete:</strong> 10-15 minutes</p>
+<p><strong>What you’ll learn:</strong></p>
+<ul>
+<li>Create a custom magic item from scratch</li>
+<li>Clone a catalog monster and modify it</li>
+<li>Clone a catalog spell and customize it</li>
+<li>Use homebrew content in modules and on characters</li>
+</ul>
+<h2 id="prerequisites-4"><a class="header" href="#prerequisites-4">Prerequisites</a></h2>
+<ul>
+<li>A campaign created (<a href="#your-first-campaign">Tutorial 1</a>)</li>
+<li>Catalog data imported (monsters, items, and spells should appear in Reference searches)</li>
+</ul>
+<h2 id="what-is-homebrew"><a class="header" href="#what-is-homebrew">What is Homebrew?</a></h2>
+<p>In D&amp;D, “homebrew” means custom content created by the DM. Mimir’s homebrew system lets you create items, monsters, and spells that live alongside the official catalog data. Homebrew content is scoped to a campaign — your custom sword in one campaign doesn’t appear in another.</p>
+<h2 id="step-1-open-the-homebrew-tab"><a class="header" href="#step-1-open-the-homebrew-tab">Step 1: Open the Homebrew Tab</a></h2>
+<ol>
+<li>Open your campaign from the Campaign Selector</li>
+<li>Click the <strong>Homebrew</strong> tab in the dashboard</li>
+</ol>
+<p>You’ll see three sub-tabs: <strong>Items</strong>, <strong>Monsters</strong>, and <strong>Spells</strong>.</p>
+<h2 id="step-2-create-a-custom-magic-item"><a class="header" href="#step-2-create-a-custom-magic-item">Step 2: Create a Custom Magic Item</a></h2>
+<p>Let’s create a unique magic sword for your campaign.</p>
+<ol>
+<li>
+<p>Click the <strong>Items</strong> sub-tab</p>
+</li>
+<li>
+<p>Fill in the item form on the right panel:</p>
+<ul>
+<li><strong>Name:</strong> “Frostbrand Falchion”</li>
+<li><strong>Item Type:</strong> weapon</li>
+<li><strong>Rarity:</strong> rare</li>
+<li><strong>Requires Attunement:</strong> checked</li>
+</ul>
+</li>
+<li>
+<p>The form expands to show weapon-specific fields:</p>
+<ul>
+<li><strong>Category:</strong> Martial</li>
+<li><strong>Bonus:</strong> +1</li>
+<li><strong>Damage:</strong> 2d4</li>
+<li><strong>Damage Type:</strong> Slashing</li>
+<li><strong>Properties:</strong> Select “Finesse” and “Light”</li>
+</ul>
+</li>
+<li>
+<p>In the <strong>Description</strong> field, write:</p>
+<blockquote>
+<p>This curved blade is forged from ice-steel mined in the Frostfell. On a hit, the target takes an additional 1d6 cold damage. While attuned, you have resistance to fire damage.</p>
+</blockquote>
+</li>
+<li>
+<p>Click <strong>Create Item</strong></p>
+</li>
+</ol>
+<p>Your item appears in the homebrew items list with an <strong>HB</strong> badge.</p>
+<h3 id="alternative-clone-from-catalog"><a class="header" href="#alternative-clone-from-catalog">Alternative: Clone from Catalog</a></h3>
+<p>If your custom item is similar to an existing one:</p>
+<ol>
+<li>Click <strong>Clone from Catalog</strong></li>
+<li>Search for “Longsword” (or whatever base item you want)</li>
+<li>Click the result — Mimir creates a copy immediately</li>
+<li>Click <strong>Edit</strong> to modify the cloned item</li>
+<li>Change the name, adjust properties, update the description</li>
+</ol>
+<p>Cloning is faster when you want a variant of something that already exists.</p>
+<h2 id="step-3-create-a-custom-monster"><a class="header" href="#step-3-create-a-custom-monster">Step 3: Create a Custom Monster</a></h2>
+<p>Monster stat blocks are complex, so Mimir uses a clone-only approach: you start from a catalog monster and modify it.</p>
+<ol>
+<li>Click the <strong>Monsters</strong> sub-tab</li>
+<li>Click <strong>Clone from Catalog</strong></li>
+<li>Search for “Goblin” — we’ll create a goblin variant</li>
+<li>Click “Goblin” in the results</li>
+</ol>
+<p>The cloned monster appears in your list immediately. The detail view shows “Based on Goblin.”</p>
+<ol start="5">
+<li>
+<p>Select the new monster and click <strong>Edit</strong></p>
+</li>
+<li>
+<p>Change the <strong>Name</strong> to “Goblin Firestarter”</p>
+</li>
+<li>
+<p>In the JSON data, you can modify:</p>
+<ul>
+<li>Hit points</li>
+<li>Armor class</li>
+<li>Actions and abilities</li>
+<li>Challenge rating</li>
+</ul>
+</li>
+<li>
+<p>Save your changes</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> You don’t need to understand the full JSON structure to make simple changes. Find the field you want to modify (like <code>"hp"</code> or <code>"ac"</code>) and update its value.</p>
+</blockquote>
+<h2 id="step-4-create-a-custom-spell"><a class="header" href="#step-4-create-a-custom-spell">Step 4: Create a Custom Spell</a></h2>
+<p>Like monsters, spells are cloned from the catalog.</p>
+<ol>
+<li>Click the <strong>Spells</strong> sub-tab</li>
+<li>Click <strong>Clone from Catalog</strong></li>
+<li>Search for “Burning Hands”</li>
+<li>Click it to create a homebrew copy</li>
+<li>Select the new spell and click <strong>Edit</strong></li>
+<li>Change the <strong>Name</strong> to “Freezing Hands”</li>
+<li>In the JSON data, change:
+<ul>
+<li>The damage type from fire to cold</li>
+<li>Update the description text accordingly</li>
+</ul>
+</li>
+<li>Save your changes</li>
+</ol>
+<h2 id="step-5-use-homebrew-in-your-module"><a class="header" href="#step-5-use-homebrew-in-your-module">Step 5: Use Homebrew in Your Module</a></h2>
+<p>Now let’s use the homebrew content you’ve created.</p>
+<h3 id="add-the-monster-to-a-module"><a class="header" href="#add-the-monster-to-a-module">Add the Monster to a Module</a></h3>
+<ol>
+<li>Go to the <strong>Modules</strong> tab and open a module</li>
+<li>Click a map to open <strong>Token Setup</strong></li>
+<li>In the Monster palette, search for “Goblin Firestarter”</li>
+<li>Your homebrew monster appears in the results with an <strong>HB</strong> badge</li>
+<li>Click it and place the token on the map</li>
+</ol>
+<h3 id="add-the-item-to-a-character"><a class="header" href="#add-the-item-to-a-character">Add the Item to a Character</a></h3>
+<ol>
+<li>Go to the <strong>PCs</strong> tab and open a character sheet</li>
+<li>Navigate to the <strong>Equipment</strong> tab</li>
+<li>Click <strong>Add Item</strong></li>
+<li>Search for “Frostbrand Falchion”</li>
+<li>Your homebrew item appears with an <strong>HB</strong> badge</li>
+<li>Add it to the character’s inventory</li>
+</ol>
+<h3 id="add-the-spell-to-a-character"><a class="header" href="#add-the-spell-to-a-character">Add the Spell to a Character</a></h3>
+<ol>
+<li>On a spellcasting character’s sheet, go to the <strong>Spells</strong> tab</li>
+<li>Click <strong>Add Spell</strong></li>
+<li>Search for “Freezing Hands”</li>
+<li>Your homebrew spell appears alongside catalog spells</li>
+<li>Add it to the character’s known spells</li>
+</ol>
+<h2 id="how-it-all-fits-together"><a class="header" href="#how-it-all-fits-together">How It All Fits Together</a></h2>
+<pre><code>Campaign: "The Frozen North"
+├── Homebrew Items: Frostbrand Falchion
+├── Homebrew Monsters: Goblin Firestarter
+├── Homebrew Spells: Freezing Hands
+├── Module: "The Ice Caves"
+│   └── Tokens: Goblin Firestarter × 3
+└── Characters
+    └── "Kira the Ranger"
+        ├── Inventory: Frostbrand Falchion (equipped, attuned)
+        └── Spells: Freezing Hands (prepared)
+</code></pre>
+<p>Homebrew content is campaign-scoped, so it travels with your campaign when you export it as an archive.</p>
+<h2 id="whats-next-2"><a class="header" href="#whats-next-2">What’s Next?</a></h2>
+<p>You’ve learned the three homebrew workflows. Continue exploring:</p>
+<ol>
+<li><strong><a href="#create-a-homebrew-item">Create more items</a></strong> — Full item field reference including armor types</li>
+<li><strong>Browse the catalog</strong> — Search Reference for inspiration on what to clone</li>
+<li><strong>Experiment</strong> — Clone a high-CR monster, reduce its stats, and create a weakened variant for lower-level play</li>
+</ol>
+<hr>
+<p><em>Previous tutorial: <a href="#player-display-setup">Player Display Setup</a></em></p>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="campaigns"><a class="header" href="#campaigns">Campaigns</a></h1>
 <p>How-to guides for creating and managing campaigns.</p>
 <ul>
@@ -1029,7 +1198,7 @@
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="create-a-campaign"><a class="header" href="#create-a-campaign">Create a Campaign</a></h1>
-<p>This guide shows you how to create a new campaign in Mimir.</p>
+<p>This guide shows you how to create a new campaign in Mimir and configure it for your game.</p>
 <p><img src="images/reference/home-screen.png" alt="Home Screen"></p>
 <h2 id="steps"><a class="header" href="#steps">Steps</a></h2>
 <ol>
@@ -1037,22 +1206,36 @@
 <li>Click <strong>+ New Campaign</strong></li>
 <li>Fill in the campaign details:
 <ul>
-<li><strong>Campaign Name</strong> (required) - A descriptive name</li>
-<li><strong>Description</strong> (optional) - Notes about your campaign</li>
+<li><strong>Campaign Name</strong> (required) — A descriptive name for your campaign</li>
+<li><strong>Description</strong> (optional) — Notes about your campaign concept, themes, or setting</li>
 </ul>
 </li>
 <li>Click <strong>Create Campaign</strong></li>
 </ol>
 <p>You’ll be redirected to your new campaign’s dashboard.</p>
+<h2 id="what-gets-created"><a class="header" href="#what-gets-created">What Gets Created</a></h2>
+<p>When you create a campaign, Mimir automatically generates <strong>11 template documents</strong> to give you a starting structure — Campaign Pitch, World Primer, Character Guidelines, Safety Tools, House Rules, and more. These appear in the Campaign tab of your dashboard. Edit or delete them as needed — they’re a starting point, not a requirement.</p>
+<h2 id="configure-campaign-sources"><a class="header" href="#configure-campaign-sources">Configure Campaign Sources</a></h2>
+<p>After creating your campaign, you’ll likely want to configure which D&amp;D source books are available:</p>
+<ol>
+<li>Click the <strong>Sources</strong> button in the dashboard header</li>
+<li>Enable the books your group owns or you want to use</li>
+<li>Close the modal</li>
+</ol>
+<p>Source filtering affects all catalog searches within this campaign — monster searches, spell lists in character creation, item lookups, and more. A “PHB only” campaign won’t show Xanathar’s Guide content.</p>
 <h2 id="tips"><a class="header" href="#tips">Tips</a></h2>
 <ul>
-<li>Use descriptive names that help you identify campaigns later</li>
-<li>The description is only visible to you - use it for notes about themes, players, or status</li>
+<li>Use descriptive names that help you identify campaigns later (e.g., “Curse of Strahd - Tuesday Group” rather than just “Campaign 1”)</li>
+<li>The description is only visible to you — use it for notes about themes, players, or campaign status</li>
+<li>Configure sources early — it controls what content appears throughout the campaign</li>
+<li>You can archive campaigns you’re no longer running to keep your list clean</li>
 </ul>
 <h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
 <ul>
 <li><a href="#your-first-campaign">Tutorial: Your First Campaign</a></li>
 <li><a href="#manage-documents">Manage Documents</a></li>
+<li><a href="#export-campaign">Export Campaign</a></li>
+<li><a href="#campaigns-vs-modules">Campaigns vs Modules</a> — Understanding the hierarchy</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="manage-documents"><a class="header" href="#manage-documents">Manage Documents</a></h1>
@@ -1110,6 +1293,94 @@
 <li><a href="#create-a-campaign">Create a Campaign</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="manage-campaign-sources"><a class="header" href="#manage-campaign-sources">Manage Campaign Sources</a></h1>
+<p>Configure which D&amp;D source books are available in your campaign.</p>
+<h2 id="import-source-data"><a class="header" href="#import-source-data">Import Source Data</a></h2>
+<p>Before you can use catalog content (monsters, spells, items), source data must be imported into Mimir.</p>
+<ol>
+<li>Click the <strong>Settings</strong> gear icon in the header bar</li>
+<li>In the <strong>Catalog</strong> section, click <strong>Import</strong></li>
+<li>Select a compatible data archive (<code>.zip</code> format)</li>
+<li>Wait for the import to complete — this may take a few minutes for large archives</li>
+</ol>
+<p>The import format follows the schema established by the <a href="https://5e.tools/">5etools</a> community project. Mimir reads structured JSON archives in this format to populate the catalog.</p>
+<p>After import, source books appear in the catalog management list where you can enable or disable individual books.</p>
+<h2 id="configure-sources-for-a-campaign"><a class="header" href="#configure-sources-for-a-campaign">Configure Sources for a Campaign</a></h2>
+<p>Each campaign can restrict which source books are available, letting you run a “PHB only” game or include supplements selectively.</p>
+<ol>
+<li>Open your campaign dashboard</li>
+<li>Click the <strong>Sources</strong> button in the header</li>
+<li>Toggle source books on or off</li>
+<li>Close the modal</li>
+</ol>
+<p>Changes take effect immediately — catalog searches within this campaign now filter by the enabled sources.</p>
+<h2 id="disable-or-remove-a-source"><a class="header" href="#disable-or-remove-a-source">Disable or Remove a Source</a></h2>
+<p>To disable a source book for a specific campaign:</p>
+<ol>
+<li>Open Campaign Sources (dashboard → Sources button)</li>
+<li>Toggle the book off</li>
+</ol>
+<p>To remove a source book entirely from Mimir:</p>
+<ol>
+<li>Open <strong>Settings</strong> → Catalog section</li>
+<li>Find the source book in the list</li>
+<li>Click <strong>Remove</strong> to delete it from the database</li>
+</ol>
+<p>Removing a source deletes all catalog entries from that book. Campaign data (characters, homebrew, documents) is not affected.</p>
+<h2 id="tips-1"><a class="header" href="#tips-1">Tips</a></h2>
+<ul>
+<li>Configure sources early when creating a campaign — it controls what appears in all catalog searches</li>
+<li>Characters can optionally have their own source restrictions, independent of the campaign (useful when players own different books)</li>
+<li>Imported data is stored locally in your SQLite database — no internet connection is needed after import</li>
+</ul>
+<h2 id="see-also-2"><a class="header" href="#see-also-2">See Also</a></h2>
+<ul>
+<li><a href="#create-a-campaign">Create a Campaign</a> — Initial campaign setup</li>
+<li><a href="#the-catalog-system">The Catalog System</a> — How source data works</li>
+<li><a href="#missing-catalog-data">Troubleshooting: Missing catalog data</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="archive-and-restore-campaigns"><a class="header" href="#archive-and-restore-campaigns">Archive and Restore Campaigns</a></h1>
+<p>Hide completed or inactive campaigns without deleting them.</p>
+<h2 id="archive-a-campaign"><a class="header" href="#archive-a-campaign">Archive a Campaign</a></h2>
+<ol>
+<li>Open the campaign you want to archive</li>
+<li>In the campaign dashboard header, click the <strong>Archive</strong> action</li>
+<li>Confirm the archive</li>
+</ol>
+<p>The campaign disappears from the default campaign list but all data is preserved.</p>
+<h2 id="view-archived-campaigns"><a class="header" href="#view-archived-campaigns">View Archived Campaigns</a></h2>
+<ol>
+<li>Open the <strong>Campaign Selector</strong> dropdown in the header</li>
+<li>Toggle the <strong>Show Archived</strong> option</li>
+<li>Archived campaigns appear in the list, marked as archived</li>
+</ol>
+<h2 id="restore-an-archived-campaign"><a class="header" href="#restore-an-archived-campaign">Restore an Archived Campaign</a></h2>
+<ol>
+<li>View archived campaigns (see above)</li>
+<li>Select the archived campaign</li>
+<li>Click <strong>Unarchive</strong> in the dashboard header</li>
+<li>The campaign returns to the active campaign list</li>
+</ol>
+<h2 id="archive-vs-delete"><a class="header" href="#archive-vs-delete">Archive vs Delete</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Action</th><th>Data Preserved</th><th>Reversible</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Archive</strong></td><td>All data intact, hidden from default views</td><td>Yes — unarchive at any time</td></tr>
+<tr><td><strong>Delete</strong></td><td>All data permanently removed (cascades to modules, characters, documents, maps)</td><td>No</td></tr>
+</tbody>
+</table>
+</div>
+<p>Archive first, delete only when you’re certain you no longer need the campaign.</p>
+<h2 id="see-also-3"><a class="header" href="#see-also-3">See Also</a></h2>
+<ul>
+<li><a href="#export-campaign">Export Campaign</a> — Create a portable backup before archiving</li>
+<li><a href="#create-a-campaign">Create a Campaign</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="export-campaign"><a class="header" href="#export-campaign">Export Campaign</a></h1>
 <p>Export your campaign as a portable archive for backup or transfer.</p>
 <h2 id="steps-1"><a class="header" href="#steps-1">Steps</a></h2>
@@ -1142,7 +1413,7 @@
 <li>Select the <code>.tar.gz</code> file</li>
 <li>The campaign appears in your campaign list</li>
 </ol>
-<h2 id="see-also-2"><a class="header" href="#see-also-2">See Also</a></h2>
+<h2 id="see-also-4"><a class="header" href="#see-also-4">See Also</a></h2>
 <ul>
 <li><a href="#create-a-campaign">Create a Campaign</a></li>
 <li><a href="#print-maps">Print Maps</a> - For PDF output</li>
@@ -1152,19 +1423,26 @@
 <p>How-to guides for working with battle maps.</p>
 <ul>
 <li><a href="#upload-a-map">Upload a Map</a> - Add map images and UVTT files</li>
-<li><a href="#grid-alignment">Configure Grid</a> - Align the grid overlay</li>
+<li><a href="#verify-grid-alignment">Configure Grid</a> - Align the grid overlay</li>
 <li><a href="#place-tokens">Place Tokens</a> - Add tokens to your map</li>
 <li><a href="#manage-light-sources">Manage Light Sources</a> - Set up dynamic lighting</li>
 <li><a href="#print-maps">Print Maps</a> - Export maps for printing</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="upload-a-map"><a class="header" href="#upload-a-map">Upload a Map</a></h1>
-<p>Add battle maps and area maps to your modules.</p>
+<p>Add battle maps and area maps to your campaign modules.</p>
 <h2 id="supported-formats"><a class="header" href="#supported-formats">Supported Formats</a></h2>
-<ul>
-<li><strong>Image files</strong> - PNG, JPG, WebP</li>
-<li><strong>UVTT files</strong> - Universal VTT format (includes grid and wall data)</li>
-</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Format</th><th>Extensions</th><th>Grid Data</th><th>Walls/Doors</th><th>Lighting</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>UVTT</strong></td><td><code>.dd2vtt</code>, <code>.uvtt</code></td><td>Embedded</td><td>Embedded</td><td>Embedded</td></tr>
+<tr><td><strong>Image</strong></td><td><code>.png</code>, <code>.jpg</code>, <code>.webp</code></td><td>Default (70px)</td><td>None</td><td>None</td></tr>
+</tbody>
+</table>
+</div>
 <h2 id="steps-2"><a class="header" href="#steps-2">Steps</a></h2>
 <ol>
 <li>Open a module from the Modules tab</li>
@@ -1174,44 +1452,64 @@
 <li>Enter a <strong>Name</strong> for the map</li>
 <li>Click <strong>Upload</strong></li>
 </ol>
-<h2 id="uvtt-files"><a class="header" href="#uvtt-files">UVTT Files</a></h2>
-<p>UVTT (Universal VTT) files from tools like Dungeondraft contain:</p>
-<ul>
-<li>Map image</li>
-<li>Grid configuration</li>
-<li>Wall and door data for line of sight</li>
-</ul>
-<p>When you upload a UVTT file, grid settings are imported automatically.</p>
+<p>The map appears as a card in the Maps section. Click it to open Token Setup.</p>
+<h2 id="uvtt-files-recommended"><a class="header" href="#uvtt-files-recommended">UVTT Files (Recommended)</a></h2>
+<p>UVTT files from tools like <a href="https://dungeondraft.net/">Dungeondraft</a> include grid, wall, door, and lighting data that Mimir imports automatically. This gives you line-of-sight fog of war, accurate token snapping, and dynamic lighting out of the box.</p>
+<p>See <a href="#map-formats-and-generation">Map Formats</a> for details on what UVTT files contain and why they’re preferred.</p>
 <h2 id="image-files"><a class="header" href="#image-files">Image Files</a></h2>
-<p>For standard image files, Mimir defaults to 70 pixels per grid square. UVTT files provide precise grid data automatically. See <a href="#grid-alignment">Grid Alignment</a> for details.</p>
-<h2 id="tips-1"><a class="header" href="#tips-1">Tips</a></h2>
-<ul>
-<li>Use UVTT files when available for best fog of war support</li>
-<li>Name maps descriptively (e.g., “Goblin Cave - Entrance”, “Boss Chamber”)</li>
-</ul>
-<h2 id="see-also-3"><a class="header" href="#see-also-3">See Also</a></h2>
-<ul>
-<li><a href="#grid-alignment">Configure Grid</a></li>
-<li><a href="#place-tokens">Place Tokens</a></li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="grid-alignment"><a class="header" href="#grid-alignment">Grid Alignment</a></h1>
-<p>How Mimir handles grid alignment for maps.</p>
-<h2 id="automatic-grid-detection"><a class="header" href="#automatic-grid-detection">Automatic Grid Detection</a></h2>
-<p><strong>UVTT files</strong> (from Dungeondraft, Foundry, and similar tools) include grid data embedded in the file. When you upload a UVTT file, Mimir reads the grid size and applies it automatically. No manual configuration is needed.</p>
-<h2 id="image-files-1"><a class="header" href="#image-files-1">Image Files</a></h2>
-<p>Standard image files (PNG, JPG, WebP) don’t include grid data. Mimir defaults to <strong>70 pixels per grid square</strong> for these files. The grid overlay in Token Setup uses this default for snapping tokens to positions.</p>
-<p>For best results with image maps, use files where the grid squares are approximately 70 pixels wide, or use UVTT format which includes precise grid information.</p>
+<p>Standard image files work for basic token placement but lack wall data, so fog of war operates as a simple grid reveal. Mimir defaults to 70 pixels per grid square. See <a href="#verify-grid-alignment">Configure Grid</a> for details.</p>
 <h2 id="tips-2"><a class="header" href="#tips-2">Tips</a></h2>
 <ul>
-<li>UVTT is the recommended format — it includes grid data, line-of-sight walls, and lighting information</li>
-<li>The grid overlay in Token Setup shows how tokens will snap to positions</li>
-<li>Token placement always snaps to the grid center of each square</li>
+<li><strong>Always prefer UVTT</strong> when available — the fog of war and lighting experience is dramatically better</li>
+<li>Maps can belong to a specific module or to the campaign at large</li>
+<li>You can upload multiple maps per module (one per room/area is common for dungeon crawls)</li>
 </ul>
-<h2 id="see-also-4"><a class="header" href="#see-also-4">See Also</a></h2>
+<h2 id="see-also-5"><a class="header" href="#see-also-5">See Also</a></h2>
 <ul>
-<li><a href="#upload-a-map">Upload a Map</a></li>
-<li><a href="#place-tokens">Place Tokens</a></li>
+<li><a href="#verify-grid-alignment">Configure Grid</a> — Grid alignment details</li>
+<li><a href="#place-tokens">Place Tokens</a> — Adding monsters and NPCs to maps</li>
+<li><a href="#map-formats-and-generation">Map Formats</a> — Understanding UVTT and alternatives</li>
+<li><a href="#generate-a-map">Generate Maps</a> — Create maps procedurally</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="verify-grid-alignment"><a class="header" href="#verify-grid-alignment">Verify Grid Alignment</a></h1>
+<p>How to check that your map’s grid matches Mimir’s grid overlay, and what to do if it doesn’t.</p>
+<h2 id="goal"><a class="header" href="#goal">Goal</a></h2>
+<p>Ensure that tokens snap to the correct grid squares on your map.</p>
+<h2 id="steps-3"><a class="header" href="#steps-3">Steps</a></h2>
+<h3 id="for-uvtt-files"><a class="header" href="#for-uvtt-files">For UVTT Files</a></h3>
+<ol>
+<li>Upload your UVTT file (see <a href="#upload-a-map">Upload a Map</a>)</li>
+<li>Open Token Setup by clicking the map card</li>
+<li><strong>Verify:</strong> The grid overlay should align with the map’s drawn grid lines</li>
+<li>Place a test token — it should snap to the center of a grid square</li>
+</ol>
+<p>UVTT files embed grid data (cell size, offset, dimensions), so alignment is automatic. If the grid looks correct, you’re done.</p>
+<h3 id="for-image-files"><a class="header" href="#for-image-files">For Image Files</a></h3>
+<ol>
+<li>Upload your image file</li>
+<li>Open Token Setup by clicking the map card</li>
+<li><strong>Check alignment:</strong> Mimir defaults to 70 pixels per grid square, starting from the top-left corner</li>
+<li>If the overlay grid lines align with the map’s drawn grid, you’re ready to place tokens</li>
+</ol>
+<h3 id="if-the-grid-doesnt-align-image-files"><a class="header" href="#if-the-grid-doesnt-align-image-files">If the Grid Doesn’t Align (Image Files)</a></h3>
+<p>If your image uses a non-standard grid size (e.g., 100px squares), the overlay won’t match the map artwork. Options:</p>
+<ol>
+<li><strong>Obtain the UVTT version</strong> of the map if available — this is the best fix</li>
+<li><strong>Use the map as a visual backdrop</strong> and position tokens by eye rather than relying on snap-to-grid</li>
+</ol>
+<h2 id="how-token-snapping-works"><a class="header" href="#how-token-snapping-works">How Token Snapping Works</a></h2>
+<ul>
+<li>Tokens snap to grid centers when placed</li>
+<li>Token size respects the grid — a Large creature occupies a 2×2 area, Huge occupies 3×3</li>
+<li>The grid overlay in Token Setup shows exactly where tokens will land</li>
+</ul>
+<h2 id="see-also-6"><a class="header" href="#see-also-6">See Also</a></h2>
+<ul>
+<li><a href="#upload-a-map">Upload a Map</a> — Supported formats and upload steps</li>
+<li><a href="#place-tokens">Place Tokens</a> — Adding tokens to the grid</li>
+<li><a href="#fog-of-war-2">Fog of War</a> — How fog interacts with grid and walls</li>
+<li><a href="#map-formats-and-generation">Map Formats</a> — Understanding UVTT and image formats</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="place-tokens"><a class="header" href="#place-tokens">Place Tokens</a></h1>
@@ -1267,10 +1565,10 @@
 <li>Use different colors to distinguish groups</li>
 <li>Hide tokens for surprise encounters</li>
 </ul>
-<h2 id="see-also-5"><a class="header" href="#see-also-5">See Also</a></h2>
+<h2 id="see-also-7"><a class="header" href="#see-also-7">See Also</a></h2>
 <ul>
 <li><a href="#manage-light-sources">Manage Light Sources</a></li>
-<li><a href="#grid-alignment">Configure Grid</a></li>
+<li><a href="#verify-grid-alignment">Configure Grid</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="manage-light-sources"><a class="header" href="#manage-light-sources">Manage Light Sources</a></h1>
@@ -1325,7 +1623,7 @@
 <li>Toggle lights during play for effect (torch goes out!)</li>
 <li>Combine with ambient light settings for atmosphere</li>
 </ul>
-<h2 id="see-also-6"><a class="header" href="#see-also-6">See Also</a></h2>
+<h2 id="see-also-8"><a class="header" href="#see-also-8">See Also</a></h2>
 <ul>
 <li><a href="#place-tokens">Place Tokens</a></li>
 <li><a href="#fog-of-war-2">Fog of War</a></li>
@@ -1334,7 +1632,7 @@
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="print-maps"><a class="header" href="#print-maps">Print Maps</a></h1>
 <p>Export maps to PDF for physical play or reference.</p>
-<h2 id="steps-3"><a class="header" href="#steps-3">Steps</a></h2>
+<h2 id="steps-4"><a class="header" href="#steps-4">Steps</a></h2>
 <ol>
 <li>Open Play Mode for your module</li>
 <li>Select the map you want to print</li>
@@ -1369,7 +1667,7 @@
 <li>Use the Play section with token cutouts for a complete physical play kit</li>
 <li>Enable both sections to get everything in one PDF</li>
 </ul>
-<h2 id="see-also-7"><a class="header" href="#see-also-7">See Also</a></h2>
+<h2 id="see-also-9"><a class="header" href="#see-also-9">See Also</a></h2>
 <ul>
 <li><a href="#upload-a-map">Upload a Map</a></li>
 <li><a href="#export-campaign">Export Campaign</a></li>
@@ -1473,7 +1771,7 @@ roads:
 </ol>
 <h2 id="using-via-ai-assistant"><a class="header" href="#using-via-ai-assistant">Using via AI Assistant</a></h2>
 <p>Mapgen is also available as an MCP tool (<code>generate_map</code>) through Mimir’s AI assistant integration. Describe the scene you want — “a misty forest clearing with a road” — and the assistant will build the YAML config and generate the map for you.</p>
-<h2 id="see-also-8"><a class="header" href="#see-also-8">See Also</a></h2>
+<h2 id="see-also-10"><a class="header" href="#see-also-10">See Also</a></h2>
 <ul>
 <li><a href="#upload-a-map">Upload a Map</a> — Import maps into Mimir modules</li>
 <li><a href="#mapgen-reference">Mapgen Reference</a> — Full YAML schema and configuration details</li>
@@ -1481,7 +1779,7 @@ roads:
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="install-and-use-mapgen-as-a-standalone-tool"><a class="header" href="#install-and-use-mapgen-as-a-standalone-tool">Install and Use Mapgen as a Standalone Tool</a></h1>
 <p><code>mimir-mapgen</code> is a self-contained procedural map generator that creates <a href="https://dungeondraft.net/">Dungeondraft</a>-compatible <code>.dungeondraft_map</code> files. It has no dependency on Mimir’s database, UI, or MCP server — you can build it independently and use it as a command-line tool anywhere.</p>
-<h2 id="prerequisites-4"><a class="header" href="#prerequisites-4">Prerequisites</a></h2>
+<h2 id="prerequisites-5"><a class="header" href="#prerequisites-5">Prerequisites</a></h2>
 <ul>
 <li><strong>Rust toolchain</strong> (1.75+) — install via <a href="https://rustup.rs/">rustup</a></li>
 <li><strong>Dungeondraft</strong> — to open and edit generated maps (or export to UVTT for Foundry VTT / Roll20)</li>
@@ -1802,7 +2100,7 @@ water:
 </ul>
 <h2 id="example-configs"><a class="header" href="#example-configs">Example Configs</a></h2>
 <p>The <code>crates/mimir-mapgen/examples/</code> directory contains YAML configs and pre-generated maps for every biome preset plus multi-feature configs like <code>tavern_river.yaml</code> and <code>island_fort.yaml</code>.</p>
-<h2 id="see-also-9"><a class="header" href="#see-also-9">See Also</a></h2>
+<h2 id="see-also-11"><a class="header" href="#see-also-11">See Also</a></h2>
 <ul>
 <li><a href="#mapgen-reference">Mapgen Reference</a> — Full YAML schema with all fields documented</li>
 <li><a href="#dungeondraft-default-texture-catalog">Dungeondraft Texture Catalog</a> — Available <code>res://</code> texture paths</li>
@@ -1889,7 +2187,7 @@ water:
 <li>Quick-create for NPCs doesn’t need all steps</li>
 <li>Level up uses a separate dialog</li>
 </ul>
-<h2 id="see-also-10"><a class="header" href="#see-also-10">See Also</a></h2>
+<h2 id="see-also-12"><a class="header" href="#see-also-12">See Also</a></h2>
 <ul>
 <li><a href="#assign-to-campaign">Assign to Campaign</a></li>
 <li><a href="#print-character-sheet">Print Character Sheet</a></li>
@@ -1897,7 +2195,7 @@ water:
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="create-an-npc"><a class="header" href="#create-an-npc">Create an NPC</a></h1>
 <p>Create non-player characters for your campaigns and modules.</p>
-<h2 id="steps-4"><a class="header" href="#steps-4">Steps</a></h2>
+<h2 id="steps-5"><a class="header" href="#steps-5">Steps</a></h2>
 <p>NPCs are created from the campaign dashboard:</p>
 <ol>
 <li>Open your campaign dashboard</li>
@@ -1944,7 +2242,7 @@ water:
 <li>Include one distinctive trait or quirk</li>
 <li>Link to relevant plot threads in notes</li>
 </ul>
-<h2 id="see-also-11"><a class="header" href="#see-also-11">See Also</a></h2>
+<h2 id="see-also-13"><a class="header" href="#see-also-13">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#assign-to-campaign">Assign to Campaign</a></li>
@@ -2005,7 +2303,7 @@ water:
 <li>NPCs can belong to multiple modules</li>
 <li>Characters can be in multiple campaigns</li>
 </ul>
-<h2 id="see-also-12"><a class="header" href="#see-also-12">See Also</a></h2>
+<h2 id="see-also-14"><a class="header" href="#see-also-14">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#create-an-npc">Create an NPC</a></li>
@@ -2052,7 +2350,7 @@ water:
 <li><strong>Copper (cp)</strong></li>
 </ul>
 <p>A total gold value is calculated and displayed below.</p>
-<h2 id="see-also-13"><a class="header" href="#see-also-13">See Also</a></h2>
+<h2 id="see-also-15"><a class="header" href="#see-also-15">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#print-character-sheet">Print Character Sheet</a> — Equipment Cards print option</li>
@@ -2093,7 +2391,7 @@ water:
 <p>Mimir displays all possible spells for your class — spell preparation and selection is a table activity managed by the player during the game. The Spells tab serves as a complete reference so players can browse their full spell list and look up details on the fly.</p>
 <h2 id="homebrew-spells"><a class="header" href="#homebrew-spells">Homebrew Spells</a></h2>
 <p>Homebrew spells created in the campaign’s Homebrew tab automatically appear alongside catalog spells in the character’s spell list, tagged with <strong>HB</strong>.</p>
-<h2 id="see-also-14"><a class="header" href="#see-also-14">See Also</a></h2>
+<h2 id="see-also-16"><a class="header" href="#see-also-16">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#print-character-sheet">Print Character Sheet</a> — Spell Cards print option</li>
@@ -2101,7 +2399,7 @@ water:
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="level-up-a-character"><a class="header" href="#level-up-a-character">Level Up a Character</a></h1>
 <p>Advance a character to the next level using the level-up dialog.</p>
-<h2 id="steps-5"><a class="header" href="#steps-5">Steps</a></h2>
+<h2 id="steps-6"><a class="header" href="#steps-6">Steps</a></h2>
 <ol>
 <li>Click <strong>Characters</strong> in the header</li>
 <li>Find your character in the list</li>
@@ -2142,7 +2440,7 @@ water:
 <li>Use <strong>Back</strong> and <strong>Next</strong> to move between steps</li>
 <li><strong>Next</strong> is disabled until the current step is complete</li>
 </ul>
-<h2 id="see-also-15"><a class="header" href="#see-also-15">See Also</a></h2>
+<h2 id="see-also-17"><a class="header" href="#see-also-17">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#manage-character-spells">Manage Character Spells</a></li>
@@ -2150,7 +2448,7 @@ water:
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="print-character-sheet"><a class="header" href="#print-character-sheet">Print Character Sheet</a></h1>
 <p>Export character sheets to PDF for printing.</p>
-<h2 id="steps-6"><a class="header" href="#steps-6">Steps</a></h2>
+<h2 id="steps-7"><a class="header" href="#steps-7">Steps</a></h2>
 <ol>
 <li>Click <strong>Characters</strong> in the header</li>
 <li>Find and click the character</li>
@@ -2203,7 +2501,7 @@ water:
 <li>Update and reprint after level ups</li>
 <li>Keep a backup PDF</li>
 </ul>
-<h2 id="see-also-16"><a class="header" href="#see-also-16">See Also</a></h2>
+<h2 id="see-also-18"><a class="header" href="#see-also-18">See Also</a></h2>
 <ul>
 <li><a href="#create-a-player-character">Create a Player Character</a></li>
 <li><a href="#export-campaign">Export Campaign</a></li>
@@ -2228,7 +2526,7 @@ water:
 </ul>
 <p>Each module has its own maps, monsters, NPCs, and documents.</p>
 <p><img src="images/reference/module-tab.png" alt="Modules Tab"></p>
-<h2 id="steps-7"><a class="header" href="#steps-7">Steps</a></h2>
+<h2 id="steps-8"><a class="header" href="#steps-8">Steps</a></h2>
 <ol>
 <li>Open your campaign dashboard</li>
 <li>Go to the <strong>Modules</strong> tab</li>
@@ -2259,7 +2557,7 @@ water:
 <li>Start with your first session’s content</li>
 <li>Add more modules as players progress</li>
 </ul>
-<h2 id="see-also-17"><a class="header" href="#see-also-17">See Also</a></h2>
+<h2 id="see-also-19"><a class="header" href="#see-also-19">See Also</a></h2>
 <ul>
 <li><a href="#add-monsters">Add Monsters</a></li>
 <li><a href="#module-documents">Module Documents</a></li>
@@ -2269,7 +2567,7 @@ water:
 <h1 id="add-monsters"><a class="header" href="#add-monsters">Add Monsters</a></h1>
 <p>Add monsters from the D&amp;D 5e catalog or your homebrew collection to your maps via Token Setup.</p>
 <p><img src="images/reference/token-setup.png" alt="Token Setup"></p>
-<h2 id="steps-8"><a class="header" href="#steps-8">Steps</a></h2>
+<h2 id="steps-9"><a class="header" href="#steps-9">Steps</a></h2>
 <ol>
 <li>Open a module from the Modules tab</li>
 <li>Click the <strong>Place Tokens</strong> button on a map card to open <strong>Token Setup</strong></li>
@@ -2322,7 +2620,7 @@ water:
 <li>Search by CR to find level-appropriate challenges</li>
 <li>Create homebrew monsters in the Homebrew tab if you need custom creatures</li>
 </ul>
-<h2 id="see-also-18"><a class="header" href="#see-also-18">See Also</a></h2>
+<h2 id="see-also-20"><a class="header" href="#see-also-20">See Also</a></h2>
 <ul>
 <li><a href="#create-a-module">Create a Module</a></li>
 <li><a href="#place-tokens">Place Tokens</a></li>
@@ -2369,7 +2667,7 @@ water:
 <li>Session notes can be edited during play</li>
 <li>Export individual documents to PDF using the <strong>Export PDF</strong> button in the editor header</li>
 </ul>
-<h2 id="see-also-19"><a class="header" href="#see-also-19">See Also</a></h2>
+<h2 id="see-also-21"><a class="header" href="#see-also-21">See Also</a></h2>
 <ul>
 <li><a href="#create-a-module">Create a Module</a></li>
 <li><a href="#manage-documents">Manage Documents</a></li>
@@ -2386,12 +2684,12 @@ water:
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="start-a-session"><a class="header" href="#start-a-session">Start a Session</a></h1>
 <p>Enter Play Mode to run your game session.</p>
-<h2 id="prerequisites-5"><a class="header" href="#prerequisites-5">Prerequisites</a></h2>
+<h2 id="prerequisites-6"><a class="header" href="#prerequisites-6">Prerequisites</a></h2>
 <ul>
 <li>A module with at least one map</li>
 <li>Tokens placed on the map (optional but recommended)</li>
 </ul>
-<h2 id="steps-9"><a class="header" href="#steps-9">Steps</a></h2>
+<h2 id="steps-10"><a class="header" href="#steps-10">Steps</a></h2>
 <ol>
 <li>Open your campaign</li>
 <li>Go to the <strong>Modules</strong> tab</li>
@@ -2431,7 +2729,7 @@ water:
 <li>Use Blackout mode while positioning tokens</li>
 <li>Save session notes as you play</li>
 </ul>
-<h2 id="see-also-20"><a class="header" href="#see-also-20">See Also</a></h2>
+<h2 id="see-also-22"><a class="header" href="#see-also-22">See Also</a></h2>
 <ul>
 <li><a href="#manage-encounters">Manage Encounters</a></li>
 <li><a href="#fog-of-war-2">Fog of War</a></li>
@@ -2483,7 +2781,7 @@ water:
 <li>Use encounter tags to group monsters by room/area</li>
 <li>Position hidden tokens before players enter areas</li>
 </ul>
-<h2 id="see-also-21"><a class="header" href="#see-also-21">See Also</a></h2>
+<h2 id="see-also-23"><a class="header" href="#see-also-23">See Also</a></h2>
 <ul>
 <li><a href="#fog-of-war-2">Fog of War</a></li>
 <li><a href="#start-a-session">Start a Session</a></li>
@@ -2554,7 +2852,7 @@ water:
 <li>Reveal Map for town maps where fog doesn’t make sense</li>
 <li>Use LOS mode for complex combat where you want tokens filtered but the map visible</li>
 </ul>
-<h2 id="see-also-22"><a class="header" href="#see-also-22">See Also</a></h2>
+<h2 id="see-also-24"><a class="header" href="#see-also-24">See Also</a></h2>
 <ul>
 <li><a href="#manage-light-sources">Manage Light Sources</a></li>
 <li><a href="#vision--lighting">Vision &amp; Lighting Reference</a></li>
@@ -2612,7 +2910,7 @@ water:
 <li>Use Blackout liberally for reveals</li>
 <li>Disable sync when planning ahead secretly</li>
 </ul>
-<h2 id="see-also-23"><a class="header" href="#see-also-23">See Also</a></h2>
+<h2 id="see-also-25"><a class="header" href="#see-also-25">See Also</a></h2>
 <ul>
 <li><a href="#fog-of-war-2">Fog of War</a></li>
 <li><a href="#player-display-setup">Tutorial: Player Display Setup</a></li>
@@ -2620,7 +2918,7 @@ water:
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="homebrew-content"><a class="header" href="#homebrew-content">Homebrew Content</a></h1>
 <p>Create custom items, monsters, and spells for your campaigns.</p>
-<h2 id="what-is-homebrew"><a class="header" href="#what-is-homebrew">What is Homebrew?</a></h2>
+<h2 id="what-is-homebrew-1"><a class="header" href="#what-is-homebrew-1">What is Homebrew?</a></h2>
 <p>Homebrew content is custom D&amp;D material you create for your campaign. When the official catalog doesn’t have what you need — a custom magic sword, a unique creature, or a modified spell — you create it as homebrew.</p>
 <h2 id="where-to-find-it"><a class="header" href="#where-to-find-it">Where to Find It</a></h2>
 <p>Homebrew is managed from the <strong>Homebrew</strong> tab on the Campaign Dashboard (the 5th tab). Each campaign has its own homebrew content.</p>
@@ -2712,7 +3010,7 @@ water:
 <p>Click an item in the list, then click <strong>Edit</strong> to modify its fields.</p>
 <h2 id="deleting-items"><a class="header" href="#deleting-items">Deleting Items</a></h2>
 <p>Click <strong>Delete</strong> on a selected item. If any characters have the item in their inventory, a warning shows which characters are affected.</p>
-<h2 id="see-also-24"><a class="header" href="#see-also-24">See Also</a></h2>
+<h2 id="see-also-26"><a class="header" href="#see-also-26">See Also</a></h2>
 <ul>
 <li><a href="#manage-character-inventory">Manage Character Inventory</a></li>
 <li><a href="how-to/homebrew">Homebrew Overview</a></li>
@@ -2752,7 +3050,7 @@ water:
 <p>They are tagged with an <strong>HB</strong> badge for identification.</p>
 <h2 id="deleting-monsters"><a class="header" href="#deleting-monsters">Deleting Monsters</a></h2>
 <p>Click <strong>Delete</strong> on a selected monster. If any modules reference the monster, a warning shows which modules are affected.</p>
-<h2 id="see-also-25"><a class="header" href="#see-also-25">See Also</a></h2>
+<h2 id="see-also-27"><a class="header" href="#see-also-27">See Also</a></h2>
 <ul>
 <li><a href="#add-monsters">Add Monsters to Module</a></li>
 <li><a href="how-to/homebrew">Homebrew Overview</a></li>
@@ -2787,7 +3085,7 @@ water:
 <p>Homebrew spells appear automatically in character spell lists alongside catalog spells for spellcasting characters. They are tagged with an <strong>HB</strong> badge.</p>
 <h2 id="deleting-spells"><a class="header" href="#deleting-spells">Deleting Spells</a></h2>
 <p>Click <strong>Delete</strong> on a selected spell. A confirmation prompt appears before deletion.</p>
-<h2 id="see-also-26"><a class="header" href="#see-also-26">See Also</a></h2>
+<h2 id="see-also-28"><a class="header" href="#see-also-28">See Also</a></h2>
 <ul>
 <li><a href="#manage-character-spells">Manage Character Spells</a></li>
 <li><a href="how-to/homebrew">Homebrew Overview</a></li>
@@ -2797,7 +3095,7 @@ water:
 <p>Use Mimir with Claude Code for AI-assisted campaign management via natural language.</p>
 <h2 id="what-it-does"><a class="header" href="#what-it-does">What It Does</a></h2>
 <p>Mimir includes an MCP (Model Context Protocol) server that exposes 70+ tools to Claude Code, enabling you to manage campaigns, search catalogs, generate maps, and prep sessions through conversation. Ask “create a forest map” or “find CR 5 undead monsters” and the assistant handles it.</p>
-<h2 id="prerequisites-6"><a class="header" href="#prerequisites-6">Prerequisites</a></h2>
+<h2 id="prerequisites-7"><a class="header" href="#prerequisites-7">Prerequisites</a></h2>
 <ul>
 <li>Mimir desktop app installed</li>
 <li><a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> installed</li>
@@ -2900,39 +3198,64 @@ water:
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="home-screen"><a class="header" href="#home-screen">Home Screen</a></h1>
-<p>The Home Screen is your starting point in Mimir. From here you can access campaigns, characters, and reference materials.</p>
+<p>The Home Screen is your starting point in Mimir. From here you can access campaigns, characters, reference materials, and application settings.</p>
 <p><img src="images/reference/home-screen.png" alt="Home Screen"></p>
 <h2 id="layout"><a class="header" href="#layout">Layout</a></h2>
 <h3 id="header-bar-1"><a class="header" href="#header-bar-1">Header Bar</a></h3>
-<p>The header bar is consistent across the application:</p>
+<p>The header bar is consistent across the entire application — it appears on every screen:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Element</th><th>Position</th><th>Function</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Mimir Logo</strong> (skull icon)</td><td>Left</td><td>Returns to the home screen from anywhere</td></tr>
+<tr><td><strong>Campaign Selector</strong></td><td>Left-center</td><td>Dropdown to switch campaigns or create new ones</td></tr>
+<tr><td><strong>Characters</strong></td><td>Center</td><td>Opens the character list (all campaigns)</td></tr>
+<tr><td><strong>Reference</strong></td><td>Center</td><td>Opens the D&amp;D 5e reference browser in a new window</td></tr>
+<tr><td><strong>Settings</strong> (gear icon)</td><td>Right</td><td>Application preferences and catalog management</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="campaign-selector"><a class="header" href="#campaign-selector">Campaign Selector</a></h3>
+<p>The campaign selector dropdown shows:</p>
 <ul>
-<li><strong>Mimir Logo</strong> (skull icon) - Returns to the home screen from anywhere</li>
-<li><strong>Campaign Selector</strong> - Switch between campaigns</li>
-<li><strong>Characters</strong> - View and manage all characters</li>
-<li><strong>Reference</strong> - D&amp;D 5e reference materials (monsters, spells, items)</li>
-<li><strong>Settings</strong> (gear icon) - Configure application preferences</li>
+<li>All active (non-archived) campaigns</li>
+<li><strong>+ New Campaign</strong> button at the bottom</li>
+<li><strong>Import Campaign</strong> option for loading archives</li>
 </ul>
+<p>Selecting a campaign navigates to its <a href="#campaign-dashboard">Campaign Dashboard</a>.</p>
 <h3 id="main-content"><a class="header" href="#main-content">Main Content</a></h3>
-<p>The home screen displays the Mimir landing with the floating skull and tagline.</p>
+<p>The home screen displays the Mimir landing with the floating skull and tagline. The skull artwork adapts to the active theme (light, dark, or hyper).</p>
 <h2 id="actions"><a class="header" href="#actions">Actions</a></h2>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Action</th><th>How To</th></tr>
+<tr><th>Action</th><th>Location</th></tr>
 </thead>
 <tbody>
-<tr><td>Open campaign</td><td>Campaign Selector dropdown → select campaign</td></tr>
-<tr><td>Create campaign</td><td>Campaign Selector → + New Campaign</td></tr>
-<tr><td>Access characters</td><td>Click “Characters” in header</td></tr>
-<tr><td>Access reference</td><td>Click “Reference” in header</td></tr>
-<tr><td>Open settings</td><td>Click gear icon in header</td></tr>
+<tr><td>Open a campaign</td><td>Campaign Selector dropdown</td></tr>
+<tr><td>Create a campaign</td><td>Campaign Selector → + New Campaign</td></tr>
+<tr><td>Import a campaign</td><td>Campaign Selector → Import Campaign</td></tr>
+<tr><td>Access characters</td><td>“Characters” link in header</td></tr>
+<tr><td>Open reference browser</td><td>“Reference” link in header (opens new window)</td></tr>
+<tr><td>Open settings</td><td>Gear icon in header</td></tr>
+<tr><td>Return home</td><td>Mimir skull icon</td></tr>
 </tbody>
 </table>
 </div>
-<h2 id="see-also-27"><a class="header" href="#see-also-27">See Also</a></h2>
+<h2 id="settings-screen"><a class="header" href="#settings-screen">Settings Screen</a></h2>
+<p>Accessible via the gear icon. The Settings screen provides:</p>
+<ul>
+<li><strong>Catalog Management</strong> — Import source data archives, enable/disable source books</li>
+<li><strong>Theme Selection</strong> — Light, Dark, or Hyper theme</li>
+<li><strong>Application Info</strong> — Version number, data paths, dev mode status</li>
+</ul>
+<h2 id="see-also-29"><a class="header" href="#see-also-29">See Also</a></h2>
 <ul>
 <li><a href="#create-a-campaign">Create a Campaign</a></li>
 <li><a href="#campaign-dashboard">Campaign Dashboard</a></li>
+<li><a href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="campaign-dashboard"><a class="header" href="#campaign-dashboard">Campaign Dashboard</a></h1>
@@ -2990,7 +3313,7 @@ water:
 <li><strong>Spells</strong> — Clone and modify spells from the catalog</li>
 </ul>
 <p>See <a href="how-to/homebrew">Homebrew Content</a> for detailed guides.</p>
-<h2 id="see-also-28"><a class="header" href="#see-also-28">See Also</a></h2>
+<h2 id="see-also-30"><a class="header" href="#see-also-30">See Also</a></h2>
 <ul>
 <li><a href="#module-prep-view">Module Prep View</a></li>
 <li><a href="#manage-documents">Manage Documents</a></li>
@@ -3055,7 +3378,7 @@ water:
 </tbody>
 </table>
 </div>
-<h2 id="see-also-29"><a class="header" href="#see-also-29">See Also</a></h2>
+<h2 id="see-also-31"><a class="header" href="#see-also-31">See Also</a></h2>
 <ul>
 <li><a href="#token-setup-modal">Token Setup Modal</a></li>
 <li><a href="#play-mode-2">Play Mode</a></li>
@@ -3152,7 +3475,7 @@ water:
 <ul>
 <li><strong>Blackout</strong> - Hide everything from players</li>
 </ul>
-<h2 id="see-also-30"><a class="header" href="#see-also-30">See Also</a></h2>
+<h2 id="see-also-32"><a class="header" href="#see-also-32">See Also</a></h2>
 <ul>
 <li><a href="#player-display-2">Player Display</a></li>
 <li><a href="#start-a-session">Start a Session</a></li>
@@ -3251,7 +3574,7 @@ water:
 <li>Add light sources as needed</li>
 <li>Close modal (×) - saves automatically</li>
 </ol>
-<h2 id="see-also-31"><a class="header" href="#see-also-31">See Also</a></h2>
+<h2 id="see-also-33"><a class="header" href="#see-also-33">See Also</a></h2>
 <ul>
 <li><a href="#add-monsters">Add Monsters</a></li>
 <li><a href="#place-tokens">Place Tokens</a></li>
@@ -3351,12 +3674,624 @@ water:
 </tbody>
 </table>
 </div>
-<h2 id="see-also-32"><a class="header" href="#see-also-32">See Also</a></h2>
+<h2 id="see-also-34"><a class="header" href="#see-also-34">See Also</a></h2>
 <ul>
 <li><a href="#play-mode-2">Play Mode</a></li>
 <li><a href="#use-player-display">Use Player Display</a></li>
 <li><a href="#fog-of-war-2">Fog of War</a></li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="sources-window"><a class="header" href="#sources-window">Sources Window</a></h1>
+<p>The Sources window is a standalone D&amp;D 5e reference browser that opens as a separate application window.</p>
+<h2 id="opening-the-sources-window"><a class="header" href="#opening-the-sources-window">Opening the Sources Window</a></h2>
+<p>Click <strong>Reference</strong> in the header bar. The Sources window opens independently from the main application, so you can keep it visible alongside the campaign dashboard or play mode.</p>
+<h2 id="layout-4"><a class="header" href="#layout-4">Layout</a></h2>
+<h3 id="book-library"><a class="header" href="#book-library">Book Library</a></h3>
+<p>The library view lists all imported source books with cover images. Click a book to open it.</p>
+<h3 id="book-reader"><a class="header" href="#book-reader">Book Reader</a></h3>
+<p>The reader displays book content organized by chapters and sections:</p>
+<ul>
+<li><strong>Navigation sidebar</strong> — Table of contents with chapter/section headings</li>
+<li><strong>Content area</strong> — Rendered book content with stat blocks, tables, and formatted text</li>
+<li><strong>Search</strong> — Full-text search across the current book</li>
+</ul>
+<h3 id="catalog-browser"><a class="header" href="#catalog-browser">Catalog Browser</a></h3>
+<p>Search and browse specific entity types:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Category</th><th>Content</th></tr>
+</thead>
+<tbody>
+<tr><td>Monsters</td><td>Stat blocks, CR, type, size</td></tr>
+<tr><td>Spells</td><td>Level, school, class lists, descriptions</td></tr>
+<tr><td>Items</td><td>Equipment, magic items, rarity</td></tr>
+<tr><td>Races</td><td>Racial traits and subraces</td></tr>
+<tr><td>Classes</td><td>Class features, subclasses, spell lists</td></tr>
+<tr><td>Backgrounds</td><td>Skills, languages, features</td></tr>
+<tr><td>Feats</td><td>Prerequisites and benefits</td></tr>
+<tr><td>Conditions</td><td>Mechanical effects</td></tr>
+</tbody>
+</table>
+</div>
+<p>Each category supports search and filtering by source book.</p>
+<h2 id="cross-references"><a class="header" href="#cross-references">Cross-References</a></h2>
+<p>Content in the Sources window is cross-linked. Monster stat blocks link to referenced spells, item descriptions link to conditions, and class features link to related rules. Click a reference to navigate to it.</p>
+<h2 id="theme"><a class="header" href="#theme">Theme</a></h2>
+<p>The Sources window respects the application theme (light, dark, hyper) and synchronizes theme changes with the main window.</p>
+<h2 id="see-also-35"><a class="header" href="#see-also-35">See Also</a></h2>
+<ul>
+<li><a href="#manage-campaign-sources">Manage Campaign Sources</a> — Import and configure source books</li>
+<li><a href="#the-catalog-system">The Catalog System</a> — How source data works</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="settings"><a class="header" href="#settings">Settings</a></h1>
+<p>The Settings screen provides application-wide configuration. Access it via the gear icon in the header bar.</p>
+<h2 id="sections"><a class="header" href="#sections">Sections</a></h2>
+<h3 id="theme-1"><a class="header" href="#theme-1">Theme</a></h3>
+<p>Choose between three visual themes:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Theme</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Light</strong></td><td>Light background, dark text</td></tr>
+<tr><td><strong>Dark</strong></td><td>Dark background, light text</td></tr>
+<tr><td><strong>Hyper</strong></td><td>High-contrast dark theme with vivid accent colors</td></tr>
+</tbody>
+</table>
+</div>
+<p>Theme changes apply to all open windows (main, DM map, player display, sources).</p>
+<h3 id="catalog-management"><a class="header" href="#catalog-management">Catalog Management</a></h3>
+<p>Manage the D&amp;D 5e source data that powers catalog searches:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Action</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Import</strong></td><td>Import a source data archive (<code>.zip</code>) to populate the catalog</td></tr>
+<tr><td><strong>Enable/Disable</strong></td><td>Toggle individual source books on or off globally</td></tr>
+<tr><td><strong>Remove</strong></td><td>Delete a source book and all its catalog entries from the database</td></tr>
+</tbody>
+</table>
+</div>
+<p>See <a href="#manage-campaign-sources">Manage Campaign Sources</a> for the import workflow.</p>
+<h3 id="application-info"><a class="header" href="#application-info">Application Info</a></h3>
+<p>Displays:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Version</strong></td><td>Current Mimir version</td></tr>
+<tr><td><strong>Data path</strong></td><td>Location of the database and assets</td></tr>
+<tr><td><strong>Dev mode</strong></td><td>Whether the app is running in development mode</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="see-also-36"><a class="header" href="#see-also-36">See Also</a></h2>
+<ul>
+<li><a href="#home-screen">Home Screen</a> — Navigation overview</li>
+<li><a href="#environment-variables">Environment Variables</a> — Advanced configuration</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="data-model"><a class="header" href="#data-model">Data Model</a></h1>
+<p>The hierarchy of entities in Mimir and how they relate to each other.</p>
+<h2 id="entity-hierarchy"><a class="header" href="#entity-hierarchy">Entity Hierarchy</a></h2>
+<pre><code>Campaign
+├── Documents (campaign-level)
+├── Maps (campaign-level)
+├── Characters (PCs and NPCs)
+│   ├── Classes (multiclass support)
+│   ├── Inventory
+│   ├── Spells
+│   ├── Proficiencies
+│   ├── Feats
+│   └── Features
+├── Modules
+│   ├── Documents (module-level)
+│   ├── Maps (module-level)
+│   ├── Module Monsters (catalog references)
+│   ├── Module NPCs
+│   └── Token Placements
+├── Homebrew Items
+├── Homebrew Monsters
+├── Homebrew Spells
+└── Campaign Sources (enabled books)
+</code></pre>
+<h2 id="campaigns-1"><a class="header" href="#campaigns-1">Campaigns</a></h2>
+<p>The top-level container. A campaign represents a complete D&amp;D game — the world, the story, the characters.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>UUID, auto-generated</td></tr>
+<tr><td><code>name</code></td><td>Campaign name (required)</td></tr>
+<tr><td><code>description</code></td><td>Optional notes</td></tr>
+<tr><td><code>archived_at</code></td><td>Soft-delete timestamp (null = active)</td></tr>
+<tr><td><code>created_at</code></td><td>Creation timestamp</td></tr>
+<tr><td><code>updated_at</code></td><td>Last modification timestamp</td></tr>
+</tbody>
+</table>
+</div>
+<p>Archiving a campaign hides it from the default list but preserves all data. Deleting a campaign is permanent and cascades to all children.</p>
+<p>When you create a campaign, Mimir automatically generates 11 template documents (Campaign Pitch, Starting Scenario, World Primer, Character Guidelines, Table Expectations, Character Integration, Campaign Bible, Safety Tools, House Rules, Player Secrets, Faction Overview).</p>
+<h2 id="characters-1"><a class="header" href="#characters-1">Characters</a></h2>
+<p>Both player characters (PCs) and non-player characters (NPCs) use the same data model. The <code>is_npc</code> flag distinguishes them.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>UUID</td></tr>
+<tr><td><code>campaign_id</code></td><td>Parent campaign</td></tr>
+<tr><td><code>name</code></td><td>Character name (required)</td></tr>
+<tr><td><code>is_npc</code></td><td>Integer: 0 = PC, 1 = NPC</td></tr>
+<tr><td><code>player_name</code></td><td>Real player name (PCs only)</td></tr>
+<tr><td><code>race_name</code></td><td>Race name (references catalog)</td></tr>
+<tr><td><code>race_source</code></td><td>Source book for the race</td></tr>
+<tr><td><code>background_name</code></td><td>Background name (references catalog)</td></tr>
+<tr><td><code>background_source</code></td><td>Source book for the background</td></tr>
+<tr><td><code>strength</code></td><td>Strength score (default 10)</td></tr>
+<tr><td><code>dexterity</code></td><td>Dexterity score (default 10)</td></tr>
+<tr><td><code>constitution</code></td><td>Constitution score (default 10)</td></tr>
+<tr><td><code>intelligence</code></td><td>Intelligence score (default 10)</td></tr>
+<tr><td><code>wisdom</code></td><td>Wisdom score (default 10)</td></tr>
+<tr><td><code>charisma</code></td><td>Charisma score (default 10)</td></tr>
+<tr><td><code>cp</code>, <code>sp</code>, <code>ep</code>, <code>gp</code>, <code>pp</code></td><td>Currency in 5 denominations</td></tr>
+<tr><td><code>traits</code></td><td>Personality traits</td></tr>
+<tr><td><code>ideals</code></td><td>Character ideals</td></tr>
+<tr><td><code>bonds</code></td><td>Character bonds</td></tr>
+<tr><td><code>flaws</code></td><td>Character flaws</td></tr>
+<tr><td><code>role</code></td><td>NPC role (NPC only)</td></tr>
+<tr><td><code>location</code></td><td>NPC location (NPC only)</td></tr>
+<tr><td><code>faction</code></td><td>NPC faction (NPC only)</td></tr>
+<tr><td><code>created_at</code>, <code>updated_at</code></td><td>Timestamps</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="character-classes"><a class="header" href="#character-classes">Character Classes</a></h3>
+<p>Characters support multiclassing. Each class entry tracks:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>character_id</code></td><td>Parent character</td></tr>
+<tr><td><code>class_name</code></td><td>Class name (e.g., “Fighter”)</td></tr>
+<tr><td><code>class_source</code></td><td>Source book for the class</td></tr>
+<tr><td><code>level</code></td><td>Levels in this class</td></tr>
+<tr><td><code>subclass_name</code></td><td>Subclass (e.g., “Champion”)</td></tr>
+<tr><td><code>subclass_source</code></td><td>Source book for the subclass</td></tr>
+<tr><td><code>starting_class</code></td><td>Whether this is the character’s first class (for multiclass proficiency rules)</td></tr>
+</tbody>
+</table>
+</div>
+<p>A level 5 Fighter / level 3 Wizard has two entries.</p>
+<h3 id="character-inventory"><a class="header" href="#character-inventory">Character Inventory</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>item_name</code></td><td>Item name (may reference catalog)</td></tr>
+<tr><td><code>item_source</code></td><td>Source book for the item</td></tr>
+<tr><td><code>quantity</code></td><td>Number of items</td></tr>
+<tr><td><code>equipped</code></td><td>Whether the item is worn/held (integer: 0/1)</td></tr>
+<tr><td><code>attuned</code></td><td>Whether the item is attuned (integer: 0/1, max 3 per character)</td></tr>
+<tr><td><code>notes</code></td><td>Optional notes about the item</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="character-spells"><a class="header" href="#character-spells">Character Spells</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>spell_name</code></td><td>Spell name (references catalog)</td></tr>
+<tr><td><code>spell_source</code></td><td>Source book for the spell</td></tr>
+<tr><td><code>prepared</code></td><td>Whether currently prepared (integer: 0/1)</td></tr>
+<tr><td><code>source_class</code></td><td>Which class grants this spell</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="character-proficiencies"><a class="header" href="#character-proficiencies">Character Proficiencies</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>proficiency_type</code></td><td>skill, tool, language, or saving_throw</td></tr>
+<tr><td><code>name</code></td><td>Proficiency name (e.g., “Perception”)</td></tr>
+<tr><td><code>expertise</code></td><td>Whether the character has expertise (integer: 0/1)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="character-feats"><a class="header" href="#character-feats">Character Feats</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>feat_name</code></td><td>Feat name</td></tr>
+<tr><td><code>feat_source</code></td><td>Source book for the feat</td></tr>
+<tr><td><code>source_type</code></td><td>How the feat was acquired (e.g., class feature, ASI)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="character-features"><a class="header" href="#character-features">Character Features</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>feature_type</code></td><td>Type of feature (class, subclass, racial, etc.)</td></tr>
+<tr><td><code>feature_name</code></td><td>Feature name</td></tr>
+<tr><td><code>feature_source</code></td><td>Source book</td></tr>
+<tr><td><code>source_class</code></td><td>Which class grants the feature</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="character-sources"><a class="header" href="#character-sources">Character Sources</a></h3>
+<p>Optional per-character source filtering, separate from campaign sources.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>character_id</code></td><td>Parent character</td></tr>
+<tr><td><code>source_code</code></td><td>Enabled source book code</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="modules-1"><a class="header" href="#modules-1">Modules</a></h2>
+<p>Modules are adventure containers within a campaign — a dungeon, a town, a story arc.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>UUID</td></tr>
+<tr><td><code>campaign_id</code></td><td>Parent campaign</td></tr>
+<tr><td><code>name</code></td><td>Module name (required)</td></tr>
+<tr><td><code>description</code></td><td>Optional description</td></tr>
+<tr><td><code>module_number</code></td><td>Display order</td></tr>
+<tr><td><code>created_at</code>, <code>updated_at</code></td><td>Timestamps</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="module-monsters"><a class="header" href="#module-monsters">Module Monsters</a></h3>
+<p>References to catalog monsters (or homebrew monsters) used in this module’s encounters.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>module_id</code></td><td>Parent module</td></tr>
+<tr><td><code>monster_name</code></td><td>Catalog monster name</td></tr>
+<tr><td><code>monster_source</code></td><td>Source book for the monster</td></tr>
+<tr><td><code>homebrew_monster_id</code></td><td>Alternative: reference to a homebrew monster</td></tr>
+<tr><td><code>display_name</code></td><td>Optional custom name (e.g., “Goblin Boss Grix”)</td></tr>
+<tr><td><code>quantity</code></td><td>Number of creatures</td></tr>
+<tr><td><code>notes</code></td><td>DM notes about this monster’s role</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="module-npcs"><a class="header" href="#module-npcs">Module NPCs</a></h3>
+<p>NPCs created specifically for this module (distinct from campaign-level characters).</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>NPC name</td></tr>
+<tr><td><code>role</code></td><td>Role in the module</td></tr>
+<tr><td><code>description</code></td><td>Background and behavior</td></tr>
+<tr><td><code>appearance</code></td><td>Physical description</td></tr>
+<tr><td><code>personality</code></td><td>Personality traits</td></tr>
+<tr><td><code>motivation</code></td><td>What drives this NPC</td></tr>
+<tr><td><code>secrets</code></td><td>Hidden information about the NPC</td></tr>
+<tr><td><code>stat_block</code></td><td>Optional JSON stat block</td></tr>
+<tr><td><code>token_asset_id</code></td><td>Optional custom token art</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="documents-1"><a class="header" href="#documents-1">Documents</a></h2>
+<p>Flexible text content at either the campaign or module level.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>UUID</td></tr>
+<tr><td><code>campaign_id</code></td><td>Parent campaign</td></tr>
+<tr><td><code>module_id</code></td><td>Parent module (null for campaign-level docs)</td></tr>
+<tr><td><code>title</code></td><td>Document title</td></tr>
+<tr><td><code>doc_type</code></td><td>Type identifier (e.g., <code>campaign_pitch</code>, <code>world_primer</code>, <code>character_guidelines</code>, <code>user_document</code>)</td></tr>
+<tr><td><code>content</code></td><td>Full text content</td></tr>
+<tr><td><code>sort_order</code></td><td>Display ordering</td></tr>
+<tr><td><code>created_at</code>, <code>updated_at</code></td><td>Timestamps</td></tr>
+</tbody>
+</table>
+</div>
+<p>A document belongs to a campaign, and optionally to a specific module within that campaign.</p>
+<h2 id="maps-2"><a class="header" href="#maps-2">Maps</a></h2>
+<p>Battle maps with optional grid, wall, and lighting data.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>UUID</td></tr>
+<tr><td><code>campaign_id</code></td><td>Parent campaign</td></tr>
+<tr><td><code>module_id</code></td><td>Optional parent module</td></tr>
+<tr><td><code>name</code></td><td>Map name</td></tr>
+<tr><td><code>description</code></td><td>Optional description</td></tr>
+<tr><td><code>sort_order</code></td><td>Display ordering</td></tr>
+<tr><td><code>uvtt_asset_id</code></td><td>Reference to the uploaded map asset</td></tr>
+<tr><td><code>lighting_mode</code></td><td>bright, dim, or dark</td></tr>
+<tr><td><code>fog_enabled</code></td><td>Whether fog of war is active (integer: 0/1)</td></tr>
+<tr><td><code>created_at</code>, <code>updated_at</code></td><td>Timestamps</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="map-overlays"><a class="header" href="#map-overlays">Map Overlays</a></h3>
+<p>Maps support several overlay types:</p>
+<p><strong>Light Sources</strong> (<code>light_sources</code> table) — Dynamic lights with grid position, bright/dim radius, color, and active state.</p>
+<p><strong>Fog Revealed Areas</strong> (<code>fog_revealed_areas</code> table) — Rectangles tracking which map areas have been revealed to players (x, y, width, height).</p>
+<p><strong>Points of Interest</strong> (<code>map_pois</code> table) — Named markers with descriptions, icons, colors, and visibility at specific grid positions.</p>
+<p><strong>Traps</strong> (<code>map_traps</code> table) — Trap markers with name, description, trigger/effect descriptions, detection DC, triggered state, and visibility.</p>
+<p><strong>Token Placements</strong> (<code>token_placements</code> table) — Monster and NPC positions on the map.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>map_id</code></td><td>Parent map</td></tr>
+<tr><td><code>module_monster_id</code></td><td>Reference to module monster (or null)</td></tr>
+<tr><td><code>module_npc_id</code></td><td>Reference to module NPC (or null)</td></tr>
+<tr><td><code>grid_x</code>, <code>grid_y</code></td><td>Grid position</td></tr>
+<tr><td><code>label</code></td><td>Optional display label</td></tr>
+<tr><td><code>faction_color</code></td><td>Token border color</td></tr>
+<tr><td><code>hidden</code></td><td>Whether hidden from players (integer: 0/1)</td></tr>
+<tr><td><code>vision_bright_ft</code></td><td>Bright vision range in feet</td></tr>
+<tr><td><code>vision_dim_ft</code></td><td>Dim vision range in feet</td></tr>
+<tr><td><code>vision_dark_ft</code></td><td>Darkvision range in feet</td></tr>
+<tr><td><code>light_radius_ft</code></td><td>Light emitted by this token</td></tr>
+<tr><td><code>created_at</code></td><td>Placement timestamp</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="homebrew-content-1"><a class="header" href="#homebrew-content-1">Homebrew Content</a></h2>
+<p>Custom content scoped to a campaign. Three types:</p>
+<h3 id="homebrew-items"><a class="header" href="#homebrew-items">Homebrew Items</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>Item name</td></tr>
+<tr><td><code>item_type</code></td><td>weapon, armor, potion, etc.</td></tr>
+<tr><td><code>rarity</code></td><td>common through legendary</td></tr>
+<tr><td><code>data</code></td><td>Full item data as JSON</td></tr>
+<tr><td><code>cloned_from_name</code></td><td>Original catalog item name (if cloned)</td></tr>
+<tr><td><code>cloned_from_source</code></td><td>Original catalog item source (if cloned)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="homebrew-monsters"><a class="header" href="#homebrew-monsters">Homebrew Monsters</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>Monster name</td></tr>
+<tr><td><code>cr</code></td><td>Challenge rating</td></tr>
+<tr><td><code>creature_type</code></td><td>beast, fiend, undead, etc.</td></tr>
+<tr><td><code>size</code></td><td>Tiny through Gargantuan</td></tr>
+<tr><td><code>data</code></td><td>Full stat block as JSON</td></tr>
+<tr><td><code>cloned_from_name</code></td><td>Original catalog monster name (if cloned)</td></tr>
+<tr><td><code>cloned_from_source</code></td><td>Original catalog monster source (if cloned)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="homebrew-spells-1"><a class="header" href="#homebrew-spells-1">Homebrew Spells</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>Spell name</td></tr>
+<tr><td><code>level</code></td><td>Spell level (0 for cantrips)</td></tr>
+<tr><td><code>school</code></td><td>Spell school</td></tr>
+<tr><td><code>data</code></td><td>Full spell data as JSON</td></tr>
+<tr><td><code>cloned_from_name</code></td><td>Original catalog spell name (if cloned)</td></tr>
+<tr><td><code>cloned_from_source</code></td><td>Original catalog spell source (if cloned)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="campaign-sources"><a class="header" href="#campaign-sources">Campaign Sources</a></h2>
+<p>Controls which D&amp;D source books are active for a campaign.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>campaign_id</code></td><td>Campaign this applies to</td></tr>
+<tr><td><code>source_code</code></td><td>Source book abbreviation (e.g., “PHB”, “MM”, “XGE”)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Catalog searches filter results by the campaign’s enabled sources.</p>
+<h2 id="campaign-assets"><a class="header" href="#campaign-assets">Campaign Assets</a></h2>
+<p>Uploaded files (map images, token art) stored as binary blobs.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>UUID</td></tr>
+<tr><td><code>campaign_id</code></td><td>Parent campaign (optional)</td></tr>
+<tr><td><code>module_id</code></td><td>Parent module (optional)</td></tr>
+<tr><td><code>filename</code></td><td>Original filename</td></tr>
+<tr><td><code>description</code></td><td>Optional description</td></tr>
+<tr><td><code>mime_type</code></td><td>File MIME type</td></tr>
+<tr><td><code>blob_path</code></td><td>Storage path relative to assets directory</td></tr>
+<tr><td><code>file_size</code></td><td>File size in bytes</td></tr>
+<tr><td><code>uploaded_at</code></td><td>Upload timestamp</td></tr>
+</tbody>
+</table>
+</div>
+<p>Assets are stored in the <code>assets/</code> directory within the application data folder.</p>
+<h2 id="catalog-data"><a class="header" href="#catalog-data">Catalog Data</a></h2>
+<p>Read-only D&amp;D 5e reference data imported from external sources. Key tables:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Table</th><th>Contents</th></tr>
+</thead>
+<tbody>
+<tr><td><code>monsters</code></td><td>Creature stat blocks with CR, type, size, token image path, full JSON</td></tr>
+<tr><td><code>items</code></td><td>Equipment and magic items with type, rarity</td></tr>
+<tr><td><code>spells</code></td><td>Spells with level, school, ritual/concentration flags</td></tr>
+<tr><td><code>races</code></td><td>Playable races with traits</td></tr>
+<tr><td><code>classes</code></td><td>Classes with feature data</td></tr>
+<tr><td><code>subclasses</code></td><td>Subclasses linked to parent classes</td></tr>
+<tr><td><code>class_features</code></td><td>Class features by level</td></tr>
+<tr><td><code>subclass_features</code></td><td>Subclass features by level</td></tr>
+<tr><td><code>backgrounds</code></td><td>Backgrounds with proficiencies</td></tr>
+<tr><td><code>feats</code></td><td>Feats with prerequisites</td></tr>
+<tr><td><code>conditions</code></td><td>Status conditions (blinded, charmed, etc.)</td></tr>
+<tr><td><code>languages</code></td><td>Languages with type classification</td></tr>
+<tr><td><code>deities</code></td><td>Deities with pantheon grouping</td></tr>
+<tr><td><code>diseases</code></td><td>Diseases and afflictions</td></tr>
+<tr><td><code>hazards</code></td><td>Environmental hazards</td></tr>
+<tr><td><code>traps</code></td><td>Trap definitions with tier</td></tr>
+<tr><td><code>senses</code></td><td>Sense types</td></tr>
+<tr><td><code>skills</code></td><td>Skills with associated ability</td></tr>
+<tr><td><code>objects</code></td><td>Interactive objects</td></tr>
+<tr><td><code>vehicles</code></td><td>Vehicles with type</td></tr>
+<tr><td><code>rewards</code></td><td>Rewards with type</td></tr>
+<tr><td><code>psionics</code></td><td>Psionic abilities</td></tr>
+<tr><td><code>optional_features</code></td><td>Optional class features (invocations, maneuvers, etc.)</td></tr>
+<tr><td><code>variant_rules</code></td><td>Variant and optional rules</td></tr>
+<tr><td><code>actions</code></td><td>Standard actions</td></tr>
+<tr><td><code>cults</code></td><td>Cults and supernatural boons</td></tr>
+<tr><td><code>books</code></td><td>Source book metadata with cover images</td></tr>
+<tr><td><code>catalog_sources</code></td><td>Source book registry with enabled/disabled state</td></tr>
+<tr><td><code>spell_classes</code></td><td>Join table: which classes have access to which spells</td></tr>
+<tr><td><code>spell_subclasses</code></td><td>Join table: subclass spell lists</td></tr>
+<tr><td><code>item_attunement_classes</code></td><td>Join table: class-restricted attunement</td></tr>
+<tr><td><code>catalog_tables</code></td><td>Reference tables from source books</td></tr>
+</tbody>
+</table>
+</div>
+<p>A full-text search index (<code>catalog_fts</code>, an FTS5 virtual table) provides fast search across all catalog entity types.</p>
+<p>See <a href="#the-catalog-system">The Catalog System</a> for how this data is used.</p>
+<h2 id="see-also-37"><a class="header" href="#see-also-37">See Also</a></h2>
+<ul>
+<li><a href="#campaigns-vs-modules">Campaigns vs Modules</a> — Why the hierarchy exists</li>
+<li><a href="#the-homebrew-system">The Homebrew System</a> — Creating custom content</li>
+<li><a href="#architecture-overview">Architecture Overview</a> — How data flows through the system</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="character-and-npc-management"><a class="header" href="#character-and-npc-management">Character and NPC Management</a></h1>
+<p>Mimir provides a comprehensive character management system for tracking player characters and non-player characters within campaigns. The system handles the full lifecycle of D&amp;D 5e characters, from creation through leveling, spell slot tracking, and version history.</p>
+<h2 id="data-model-1"><a class="header" href="#data-model-1">Data Model</a></h2>
+<p>Players represent the real people at your table. Each player record stores a name and optional email address, and can be associated with multiple characters across different campaigns through the campaign_players relationship table.</p>
+<p>Characters are the in-game personas controlled by players or the DM. A character record contains the character name, race, class, and level alongside the six ability scores. The system tracks current, maximum, and temporary hit points separately to support combat scenarios. Each character also maintains armor class, movement speed, proficiency selections, class features, known and prepared spells with slot tracking, and a complete inventory.</p>
+<p>The distinction between player characters and NPCs is handled through the player_id field. When this field is null, the character is treated as an NPC. When it references a valid player record, the character appears in player-specific views and receives full character sheet treatment.</p>
+<h2 id="spell-slot-calculation"><a class="header" href="#spell-slot-calculation">Spell Slot Calculation</a></h2>
+<p>The spell slot system automatically calculates available slots based on class and level. Full casters such as Wizard, Cleric, Druid, Bard, and Sorcerer follow the standard progression table. Half casters including Paladin and Ranger gain slots at half the rate, while third casters like Eldritch Knight and Arcane Trickster progress even more slowly. Warlocks use the separate Pact Magic system with fewer slots that recover on short rest.</p>
+<p>Multiclass characters have their slots calculated according to the multiclassing rules, summing effective caster levels from each class before consulting the appropriate progression table. The system stores both the calculated slot maximums and current availability, updating the latter when spells are cast or rests are taken.</p>
+<h2 id="character-versioning"><a class="header" href="#character-versioning">Character Versioning</a></h2>
+<p>Significant character changes create version snapshots in the database. These snapshots capture the complete character state at moments like level advancement, major stat modifications, or class feature acquisitions. The version history allows reviewing a character’s progression over time and can help resolve questions about when particular changes occurred.</p>
+<h2 id="tauri-commands"><a class="header" href="#tauri-commands">Tauri Commands</a></h2>
+<p>The character system exposes its functionality through Tauri commands that the frontend invokes via IPC. These commands follow a consistent pattern of accepting structured parameters and returning ApiResponse wrappers containing either the requested data or an error message.</p>
+<h3 id="player-commands"><a class="header" href="#player-commands">Player Commands</a></h3>
+<p>The <code>create_player</code> command accepts a name and optional email, returning the newly created player record. The <code>get_player</code> command retrieves a single player by ID, while <code>list_players</code> returns all registered players. Updates are handled through <code>update_player</code> which accepts the player ID and a partial update object. The <code>delete_player</code> command removes a player and cascades to remove their campaign associations.</p>
+<h3 id="character-commands"><a class="header" href="#character-commands">Character Commands</a></h3>
+<p>Character creation is handled by <code>create_character</code> for full character data or <code>create_minimal_character</code> for quick stubs that can be fleshed out later. The <code>create_npc</code> command provides a streamlined path for NPCs that skips player association.</p>
+<p>Retrieval commands include <code>get_character</code> for a single character by ID and three listing commands scoped to campaigns: <code>list_characters_for_campaign</code> returns all characters, <code>list_pcs_for_campaign</code> filters to player characters only, and <code>list_npcs_for_campaign</code> returns NPCs exclusively.</p>
+<p>The <code>update_character</code> command accepts a character ID and partial update object for modifying existing characters. The <code>level_up_character</code> command handles level advancement including hit point recalculation, proficiency bonus updates, and spell slot adjustments. Characters are linked to campaigns through <code>assign_character_to_campaign</code>.</p>
+<h3 id="spell-commands"><a class="header" href="#spell-commands">Spell Commands</a></h3>
+<p>The <code>get_character_spell_slots</code> command returns current slot status including both maximums and remaining uses. The <code>add_spell_to_known</code> command adds a spell to the character’s repertoire by spell ID. Prepared spell selection is handled through <code>prepare_spells</code> which accepts a list of spell IDs from the known spells.</p>
+<p>Casting uses the <code>cast_spell</code> command with character ID, spell ID, and the slot level being expended. The command validates slot availability before marking the slot as used. Resource recovery happens through <code>take_rest</code> which accepts the rest type (short or long) and restores appropriate slots and features.</p>
+<h2 id="frontend-integration"><a class="header" href="#frontend-integration">Frontend Integration</a></h2>
+<p>The frontend provides a character creation wizard that guides users through race and class selection, ability score assignment, and initial equipment choices. The character sheet view displays all statistics, abilities, and equipment in a format familiar to tabletop players. Spell management includes a preparation interface supporting drag-and-drop organization of known spells into prepared slots.</p>
+<h2 id="mcp-integration"><a class="header" href="#mcp-integration">MCP Integration</a></h2>
+<p>Character data is accessible through the Mimir MCP server for Claude Code integration. The MCP tools support listing characters, viewing details, creating PCs and NPCs, and managing inventory. See the <a href="https://github.com/mimir-dm/mimir/tree/main/crates/mimir-mcp/plugin">MCP Plugin README</a> for setup instructions.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="books-and-sources"><a class="header" href="#books-and-sources">Books and Sources</a></h1>
+<p>Mimir supports importing D&amp;D 5e source books for reference and catalog population. The source system allows you to browse book content, search the extracted catalog data, and navigate cross-references between game elements.</p>
+<h2 id="book-data-files"><a class="header" href="#book-data-files">Book Data Files</a></h2>
+<p>Book data files are available from the <a href="https://github.com/mimir-dm/resources/releases">Mimir Resources</a> repository. These archives contain structured JSON representations of book content including chapter text, images, and extracted game data like spells and monsters. The repository organizes books into three categories: core rulebooks (PHB, DMG, MM), supplements (XGE, TCE, FTD), and setting guides (ERLW, EGW, VRGR).</p>
+<p>Each book archive follows a consistent structure with a metadata.json file describing the book, a book/ directory containing chapter content, and an img/ directory with cover art and interior illustrations. Books that contain game mechanics also include directories for that content type, such as spells/ for spellcasting sourcebooks or bestiary/ for monster compendiums.</p>
+<h2 id="catalog-population"><a class="header" href="#catalog-population">Catalog Population</a></h2>
+<p>When you import a book, Mimir extracts game content into the catalog database for searching. The extraction process reads content-specific JSON files and populates the appropriate catalog tables. Spells go into catalog_spells, monsters into catalog_monsters, and items into catalog_items. The system also extracts classes, races, feats, backgrounds, conditions, and actions when present.</p>
+<p>The catalog tables store both summary information for search results and complete details for individual entries. This denormalized approach allows fast searching across thousands of entries while still providing full stat blocks and descriptions when viewing a specific item.</p>
+<h2 id="cross-reference-system"><a class="header" href="#cross-reference-system">Cross-Reference System</a></h2>
+<p>Book content contains tagged references using the <code>{@type name|source}</code> syntax. A reference like <code>{@spell fireball|PHB}</code> identifies a spell named “fireball” from the Player’s Handbook. The content renderer converts these tags into clickable links that display tooltips on hover and full details in a modal on click.</p>
+<p>The cross-reference system supports spells, creatures, items, conditions, actions, classes, races, feats, and backgrounds. When you click a reference, the system queries the catalog database for the matching entry and displays its complete information. References to content from books you haven’t imported will appear as plain text rather than links.</p>
+<h2 id="storage-location"><a class="header" href="#storage-location">Storage Location</a></h2>
+<p>Imported books are stored in the application data directory alongside the SQLite database. On macOS this is <code>~/Library/Application Support/com.mimir.app/</code>, with equivalent locations on Windows and Linux. Each book occupies its own subdirectory under books/, preserving the original archive structure for image serving and content retrieval.</p>
+<h2 id="tauri-commands-1"><a class="header" href="#tauri-commands-1">Tauri Commands</a></h2>
+<p>The source system exposes library and content commands through Tauri IPC.</p>
+<h3 id="library-commands"><a class="header" href="#library-commands">Library Commands</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>upload_book_archive</code></td><td>file_path</td><td>Import a book from a .tar.gz archive</td></tr>
+<tr><td><code>list_library_books</code></td><td>—</td><td>List all imported books with metadata</td></tr>
+<tr><td><code>remove_book_from_library</code></td><td>book_id</td><td>Remove a book and its catalog entries</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="content-commands"><a class="header" href="#content-commands">Content Commands</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>get_book_content</code></td><td>book_id, section</td><td>Retrieve chapter content by section path</td></tr>
+<tr><td><code>serve_book_image</code></td><td>book_id, image_path</td><td>Serve an image from the book’s img directory</td></tr>
+<tr><td><code>lookup_reference</code></td><td>ref_type, ref_name, source</td><td>Resolve a cross-reference to catalog data</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="troubleshooting-2"><a class="header" href="#troubleshooting-2">Troubleshooting</a></h2>
+<p>Import failures typically result from invalid archive format or missing required files. The archive must be a valid gzip-compressed tar file containing the expected directory structure with metadata.json at the root. Permission errors can occur if the application data directory is not writable.</p>
+<p>Missing cross-references usually indicate the referenced content comes from a book that hasn’t been imported. Some references point to SRD content that Mimir includes by default, but references to non-SRD material require importing the source book.</p>
+<p>Images that fail to load are served on-demand from the book’s img/ directory. Verify the directory exists and contains the expected files by checking the book’s storage location in the application data directory.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="keyboard-shortcuts"><a class="header" href="#keyboard-shortcuts">Keyboard Shortcuts</a></h1>
 <p>Quick reference for keyboard shortcuts in Mimir.</p>
@@ -3426,7 +4361,7 @@ water:
 <h1 id="file-formats"><a class="header" href="#file-formats">File Formats</a></h1>
 <p>Supported file formats in Mimir.</p>
 <h2 id="map-formats"><a class="header" href="#map-formats">Map Formats</a></h2>
-<h3 id="image-files-2"><a class="header" href="#image-files-2">Image Files</a></h3>
+<h3 id="image-files-1"><a class="header" href="#image-files-1">Image Files</a></h3>
 <p>Standard image formats for battle maps:</p>
 <div class="table-wrapper">
 <table>
@@ -3626,6 +4561,314 @@ water:
 <li>LOS for combat focus (tokens filtered, map visible)</li>
 <li>Fog for exploration (map hidden outside vision)</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="environment-variables"><a class="header" href="#environment-variables">Environment Variables</a></h1>
+<p>All environment variables recognized by Mimir and its components.</p>
+<h2 id="application"><a class="header" href="#application">Application</a></h2>
+<h3 id="mimir_dev"><a class="header" href="#mimir_dev"><code>MIMIR_DEV</code></a></h3>
+<p>Forces development mode regardless of build type. When set (any value), Mimir uses the dev database directory instead of production.</p>
+<pre><code class="language-bash">export MIMIR_DEV=1
+</code></pre>
+<p><strong>Effect:</strong> Database and assets are read from <code>{app_dir}/dev/data/</code> instead of <code>{app_dir}/data/</code>. This prevents development from modifying production campaign data.</p>
+<p><strong>Default:</strong> Not set. Dev mode is normally detected automatically via Rust’s <code>cfg!(debug_assertions)</code> — debug builds use dev paths, release builds use production paths.</p>
+<h3 id="rust_log"><a class="header" href="#rust_log"><code>RUST_LOG</code></a></h3>
+<p>Controls log verbosity using the <a href="https://docs.rs/tracing-subscriber/latest/tracing_subscriber/filter/struct.EnvFilter.html">tracing</a> filter syntax.</p>
+<pre><code class="language-bash"># Show debug logs for all Mimir crates
+export RUST_LOG=mimir=debug,mimir_core=debug
+
+# Trace-level for the core crate only
+export RUST_LOG=mimir_core=trace
+
+# Quiet mode — errors only
+export RUST_LOG=mimir=error
+</code></pre>
+<p><strong>Default:</strong> <code>mimir=info,mimir_core=info</code> (all builds)</p>
+<p><strong>Log output:</strong> Written to files in the logs directory:</p>
+<ul>
+<li><strong>macOS:</strong> <code>~/Library/Application Support/com.mimir.app/logs/</code></li>
+<li><strong>Linux:</strong> <code>~/.local/share/com.mimir.app/logs/</code></li>
+<li><strong>Windows:</strong> <code>%APPDATA%/com.mimir.app/logs/</code></li>
+</ul>
+<h2 id="mcp-server"><a class="header" href="#mcp-server">MCP Server</a></h2>
+<h3 id="mimir_database_path"><a class="header" href="#mimir_database_path"><code>MIMIR_DATABASE_PATH</code></a></h3>
+<p>Overrides the database path for the MCP sidecar server. Useful when running the MCP server outside of Tauri (e.g., as a standalone process for Claude Code).</p>
+<pre><code class="language-bash">export MIMIR_DATABASE_PATH=~/Library/Application\ Support/com.mimir.app/data/mimir.db
+</code></pre>
+<p><strong>Default:</strong> Platform-specific:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Platform</th><th>Default Path</th></tr>
+</thead>
+<tbody>
+<tr><td>macOS</td><td><code>~/Library/Application Support/com.mimir.app/data/mimir.db</code></td></tr>
+<tr><td>Linux</td><td><code>$XDG_DATA_HOME/com.mimir.app/data/mimir.db</code> (falls back to <code>~/.local/share/...</code>)</td></tr>
+<tr><td>Windows</td><td>No default — <code>MIMIR_DATABASE_PATH</code> must be set explicitly</td></tr>
+</tbody>
+</table>
+</div>
+<p>The path supports <code>~</code> and <code>$HOME</code> expansion.</p>
+<blockquote>
+<p><strong>Note on Linux:</strong> The MCP server respects the <code>XDG_DATA_HOME</code> environment variable. If unset, it falls back to <code>~/.local/share/</code>.</p>
+</blockquote>
+<h2 id="build-system"><a class="header" href="#build-system">Build System</a></h2>
+<h3 id="tauri_env_target_triple"><a class="header" href="#tauri_env_target_triple"><code>TAURI_ENV_TARGET_TRIPLE</code></a></h3>
+<p>Set by Tauri during builds. Used by the sidecar build scripts to determine the target architecture.</p>
+<pre><code class="language-bash"># Set automatically by Tauri, but can be overridden for cross-compilation
+export TAURI_ENV_TARGET_TRIPLE=aarch64-apple-darwin
+</code></pre>
+<p><strong>Supported values:</strong></p>
+<ul>
+<li><code>aarch64-apple-darwin</code> (macOS ARM64)</li>
+<li><code>x86_64-apple-darwin</code> (macOS Intel)</li>
+<li><code>x86_64-unknown-linux-gnu</code> (Linux x86_64)</li>
+<li><code>aarch64-unknown-linux-gnu</code> (Linux ARM64)</li>
+<li><code>x86_64-pc-windows-msvc</code> (Windows x86_64)</li>
+<li><code>aarch64-pc-windows-msvc</code> (Windows ARM64)</li>
+</ul>
+<p><strong>Default:</strong> Auto-detected from the current platform when not set.</p>
+<h3 id="cargo_term_color"><a class="header" href="#cargo_term_color"><code>CARGO_TERM_COLOR</code></a></h3>
+<p>Standard Cargo variable for controlling colored output. Set to <code>always</code> in CI workflows.</p>
+<pre><code class="language-bash">export CARGO_TERM_COLOR=always
+</code></pre>
+<h2 id="platform-directories"><a class="header" href="#platform-directories">Platform Directories</a></h2>
+<p>Mimir uses platform-appropriate directories following OS conventions. These aren’t environment variables, but they’re the default paths that environment variables override:</p>
+<h3 id="macos"><a class="header" href="#macos">macOS</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Purpose</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td>App directory</td><td><code>~/Library/Application Support/com.mimir.app/</code></td></tr>
+<tr><td>Database</td><td><code>{app_dir}/data/mimir.db</code></td></tr>
+<tr><td>Assets</td><td><code>{app_dir}/assets/</code></td></tr>
+<tr><td>Logs</td><td><code>{app_dir}/logs/</code></td></tr>
+<tr><td>Config</td><td><code>{app_dir}/config/</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="linux"><a class="header" href="#linux">Linux</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Purpose</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td>App directory</td><td><code>~/.local/share/com.mimir.app/</code></td></tr>
+<tr><td>Database</td><td><code>{app_dir}/data/mimir.db</code></td></tr>
+<tr><td>Assets</td><td><code>{app_dir}/assets/</code></td></tr>
+<tr><td>Logs</td><td><code>{app_dir}/logs/</code></td></tr>
+<tr><td>Config</td><td><code>{app_dir}/config/</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Purpose</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td>App directory</td><td><code>%APPDATA%/com.mimir.app/</code></td></tr>
+<tr><td>Database</td><td><code>{app_dir}/data/mimir.db</code></td></tr>
+<tr><td>Assets</td><td><code>{app_dir}/assets/</code></td></tr>
+<tr><td>Logs</td><td><code>{app_dir}/logs/</code></td></tr>
+<tr><td>Config</td><td><code>{app_dir}/config/</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="see-also-38"><a class="header" href="#see-also-38">See Also</a></h2>
+<ul>
+<li><a href="#troubleshooting-4">Troubleshooting</a> — Common issues related to paths and configuration</li>
+<li><a href="#development-setup-and-guide">Development Setup</a> — Setting up a development environment</li>
+<li><a href="#mcp-server-reference">MCP Server Reference</a> — MCP server configuration</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="campaign-archive-format"><a class="header" href="#campaign-archive-format">Campaign Archive Format</a></h1>
+<p>Technical reference for Mimir’s campaign export/import archive format.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>Campaign archives are <code>.tar.gz</code> files containing a complete snapshot of a campaign — metadata, modules, characters, documents, maps, homebrew, and assets. Archives are self-contained and portable between machines and Mimir installations.</p>
+<h2 id="archive-structure"><a class="header" href="#archive-structure">Archive Structure</a></h2>
+<pre><code>campaign-export/
+├── manifest.json           # Archive metadata
+├── campaign.json           # Campaign data
+├── characters/
+│   ├── {character-id}.json # One file per character
+│   └── ...
+├── modules/
+│   ├── {module-id}.json    # One file per module
+│   └── ...
+├── documents/
+│   ├── {document-id}.json  # One file per document
+│   └── ...
+├── maps/
+│   ├── {map-id}.json       # Map metadata and overlays
+│   └── ...
+├── homebrew/
+│   ├── items/
+│   │   └── {item-id}.json
+│   ├── monsters/
+│   │   └── {monster-id}.json
+│   └── spells/
+│       └── {spell-id}.json
+└── assets/
+    ├── {file-hash}         # Binary assets (maps, images)
+    └── ...
+</code></pre>
+<h2 id="manifest"><a class="header" href="#manifest">Manifest</a></h2>
+<p>The <code>manifest.json</code> file contains archive metadata:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>version</code></td><td>string</td><td>Archive format version</td></tr>
+<tr><td><code>created_at</code></td><td>string</td><td>ISO 8601 export timestamp</td></tr>
+<tr><td><code>campaign_id</code></td><td>string</td><td>Original campaign UUID</td></tr>
+<tr><td><code>campaign_name</code></td><td>string</td><td>Campaign name at export time</td></tr>
+<tr><td><code>mimir_version</code></td><td>string</td><td>Mimir version that created the archive</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="campaign-data"><a class="header" href="#campaign-data">Campaign Data</a></h2>
+<p>The <code>campaign.json</code> file contains:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>string</td><td>Campaign UUID</td></tr>
+<tr><td><code>name</code></td><td>string</td><td>Campaign name</td></tr>
+<tr><td><code>description</code></td><td>string</td><td>Campaign description</td></tr>
+<tr><td><code>sources</code></td><td>string[]</td><td>Enabled source book codes</td></tr>
+<tr><td><code>created_at</code></td><td>string</td><td>Original creation timestamp</td></tr>
+<tr><td><code>updated_at</code></td><td>string</td><td>Last modification timestamp</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="character-files"><a class="header" href="#character-files">Character Files</a></h2>
+<p>Each character is a separate JSON file containing:</p>
+<ul>
+<li>Base character data (name, race, class, ability scores, HP, AC)</li>
+<li>Class entries (multiclass levels and subclasses)</li>
+<li>Inventory items with quantity, equipped, and attuned state</li>
+<li>Known spells with prepared state and granting class</li>
+<li>Proficiencies (skills, tools, languages, saving throws)</li>
+<li>Feats and class features</li>
+</ul>
+<h2 id="module-files"><a class="header" href="#module-files">Module Files</a></h2>
+<p>Each module JSON file contains:</p>
+<ul>
+<li>Module metadata (name, description, type, sort order)</li>
+<li>Monster references (catalog monster names, quantities, notes)</li>
+<li>NPC data (name, role, description, stat block)</li>
+<li>Token placements (positions, visibility, faction colors)</li>
+</ul>
+<h2 id="document-files"><a class="header" href="#document-files">Document Files</a></h2>
+<p>Each document JSON file contains:</p>
+<ul>
+<li>Document metadata (title, type, sort order)</li>
+<li>Parent reference (campaign_id or module_id)</li>
+<li>Full text content</li>
+</ul>
+<h2 id="map-files"><a class="header" href="#map-files">Map Files</a></h2>
+<p>Each map JSON file contains:</p>
+<ul>
+<li>Map metadata (name, lighting mode, fog state)</li>
+<li>Light source definitions (positions, colors, radii)</li>
+<li>Fog of war state (revealed areas)</li>
+<li>Points of interest (positions, descriptions)</li>
+<li>Trap placements (positions, detection info)</li>
+<li>Reference to the map asset file (by hash)</li>
+</ul>
+<h2 id="asset-files"><a class="header" href="#asset-files">Asset Files</a></h2>
+<p>Binary files (map images, token art) stored by their SHA-256 content hash. This deduplicates assets — if two maps use the same image, it’s stored once.</p>
+<h2 id="import-behavior"><a class="header" href="#import-behavior">Import Behavior</a></h2>
+<p>When importing an archive:</p>
+<ol>
+<li><strong>New UUIDs</strong> are generated for all entities to avoid conflicts with existing data</li>
+<li><strong>Internal references</strong> (e.g., module_id on documents) are remapped to the new UUIDs</li>
+<li><strong>Assets</strong> are copied to the importing machine’s assets directory</li>
+<li><strong>Campaign sources</strong> are restored but only take effect if the corresponding catalog data has been imported</li>
+<li>The imported campaign appears in the campaign list as a new entry</li>
+</ol>
+<p>Importing the same archive twice creates two independent copies of the campaign.</p>
+<h2 id="preview-1"><a class="header" href="#preview-1">Preview</a></h2>
+<p>The <code>preview_archive</code> tool/command reads the manifest and entity counts without performing a full import. Use this to inspect an archive before importing:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>Campaign name</td><td>From manifest</td></tr>
+<tr><td>Module count</td><td>Number of module files</td></tr>
+<tr><td>Character count</td><td>Number of character files</td></tr>
+<tr><td>Document count</td><td>Number of document files</td></tr>
+<tr><td>Map count</td><td>Number of map files</td></tr>
+<tr><td>Homebrew counts</td><td>Items, monsters, spells</td></tr>
+<tr><td>Archive size</td><td>Total file size</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="see-also-39"><a class="header" href="#see-also-39">See Also</a></h2>
+<ul>
+<li><a href="#export-campaign">Export Campaign</a> — How to create archives</li>
+<li><a href="#data-model">Data Model</a> — Entity relationships</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="pdf-export-3"><a class="header" href="#pdf-export-3">PDF Export</a></h1>
+<p>Mimir generates PDF documents from campaign data using <a href="https://typst.app/">Typst</a>, a modern typesetting system. The PDF export functionality lives in the mimir-print crate and supports character sheets, spell cards, and campaign documents.</p>
+<h2 id="template-system"><a class="header" href="#template-system">Template System</a></h2>
+<p>The export system uses Typst templates that define document layout and styling. Each template is a <code>.typ</code> file that receives JSON data from the application and renders it into a formatted PDF. Templates are organized by content type into character/, spells/, and campaign/ directories, with shared components in a components/ directory.</p>
+<p>Character templates include a full sheet format for comprehensive character reference, a condensed summary for quick lookup, and a combined sheet-with-spells variant for spellcasters. Spell templates support individual cards, multi-up layouts for printing decks, and compact list formats. Campaign templates handle single documents like session notes as well as combined bundles that compile multiple documents into one PDF.</p>
+<h2 id="rendering-pipeline"><a class="header" href="#rendering-pipeline">Rendering Pipeline</a></h2>
+<p>When you request a PDF export, the application serializes the relevant data to JSON and passes it to the PrintService along with the template path. The service writes the JSON to a temporary file, invokes the Typst compiler with the template, and captures the resulting PDF bytes. These bytes can be returned as base64 for display or written directly to a file.</p>
+<p>The template accesses its data through Typst’s <code>json()</code> function, reading from a data.json file that the service creates in the compilation directory. This approach keeps templates portable and testable independent of the application.</p>
+<h2 id="data-format"><a class="header" href="#data-format">Data Format</a></h2>
+<p>Templates expect JSON data matching the Rust structs being exported. A character export includes character_name, level, race, and class strings alongside an abilities object containing the six scores. Hit point data arrives as separate current_hp and max_hp fields. The exact schema varies by template, but follows the patterns established in the domain model.</p>
+<pre><code class="language-json">{
+  "character_name": "Thorin Ironforge",
+  "level": 5,
+  "race": "Dwarf",
+  "class": "Cleric",
+  "abilities": {
+    "strength": 14,
+    "dexterity": 10,
+    "constitution": 16,
+    "intelligence": 12,
+    "wisdom": 18,
+    "charisma": 8
+  },
+  "current_hp": 38,
+  "max_hp": 45
+}
+</code></pre>
+<h2 id="tauri-commands-2"><a class="header" href="#tauri-commands-2">Tauri Commands</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>generate_pdf</code></td><td>template_path, data</td><td>Render a template to PDF and return base64</td></tr>
+<tr><td><code>list_templates</code></td><td>—</td><td>List available templates with metadata</td></tr>
+<tr><td><code>save_pdf</code></td><td>path, pdf_base64</td><td>Write base64 PDF data to a file</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="printservice-api"><a class="header" href="#printservice-api">PrintService API</a></h2>
+<p>The Rust PrintService provides the underlying functionality that the Tauri commands wrap. Creating a service requires passing the templates root directory. The <code>render_to_pdf</code> method accepts a template path relative to that root and a serializable data reference, returning PDF bytes on success. The <code>save_pdf</code> method writes those bytes to a specified path. The <code>list_templates</code> method scans the templates directory and returns metadata for each discovered template. The <code>template_exists</code> method provides a quick check for template availability.</p>
+<h2 id="custom-templates"><a class="header" href="#custom-templates">Custom Templates</a></h2>
+<p>Adding custom templates requires creating a new <code>.typ</code> file in the appropriate templates subdirectory. The template should read its data using <code>json("data.json")</code> and use Typst markup to define the document structure. Once saved, the template appears automatically in the <code>list_templates</code> output and can be used with <code>generate_pdf</code>.</p>
+<p>Typst documentation at <a href="https://typst.app/docs/">typst.app/docs</a> covers the markup language, styling options, and available functions. Templates can import shared components and use Typst’s full typesetting capabilities including custom fonts, vector graphics, and complex layouts.</p>
+<h2 id="troubleshooting-3"><a class="header" href="#troubleshooting-3">Troubleshooting</a></h2>
+<p>PDF generation failures usually stem from template syntax errors or missing data fields. Verify the template compiles independently using the Typst CLI before integrating with the application. Check that all fields referenced in the template exist in the provided data.</p>
+<p>Font rendering issues occur when templates reference fonts not available on the system. Typst uses system fonts by default, so either install the required fonts or modify templates to use bundled alternatives. Font names must match exactly including capitalization.</p>
+<p>Large PDFs typically result from embedded raster images. Optimize images before including them in exports, prefer vector graphics where possible, and consider splitting very large documents into multiple PDFs.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="mcp-server-reference"><a class="header" href="#mcp-server-reference">MCP Server Reference</a></h1>
 <p>Technical reference for Mimir’s Model Context Protocol (MCP) server — the sidecar that enables AI assistant integration.</p>
@@ -3851,7 +5094,7 @@ water:
 </tbody>
 </table>
 </div>
-<h2 id="see-also-33"><a class="header" href="#see-also-33">See Also</a></h2>
+<h2 id="see-also-40"><a class="header" href="#see-also-40">See Also</a></h2>
 <ul>
 <li><a href="how-to/ai-assistant">AI Assistant How-To</a></li>
 <li><a href="#mapgen-reference">Mapgen Reference</a></li>
@@ -4232,7 +5475,7 @@ seed: 42                        # u64, optional — random seed
 <li><code>res://textures/portals/archway_00.png</code></li>
 <li><code>res://textures/portals/secret_00.png</code></li>
 </ul>
-<h2 id="see-also-34"><a class="header" href="#see-also-34">See Also</a></h2>
+<h2 id="see-also-41"><a class="header" href="#see-also-41">See Also</a></h2>
 <ul>
 <li><a href="#generate-a-map">Generate Maps How-To</a></li>
 <li><a href="#mcp-server-reference">MCP Server Reference</a></li>
@@ -4605,7 +5848,7 @@ res://textures/objects/structures/doors/fallen_door_01.png — _14.png
 res://textures/objects/structures/doors/portcullis_01.png — _02.png
 res://textures/objects/structures/doors/threshold_01.png
 </code></pre>
-<h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
+<h3 id="windows-1"><a class="header" href="#windows-1">Windows</a></h3>
 <p><code>res://textures/objects/structures/windows/window_01.png</code> — <code>window_20_broken.png</code></p>
 <h3 id="stairs"><a class="header" href="#stairs">Stairs</a></h3>
 <pre><code>res://textures/objects/structures/stairs/small_steps_01.png
@@ -5066,6 +6309,179 @@ res://textures/ui/null_min.png
 res://textures/brushes/soft_circle.png
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="troubleshooting-4"><a class="header" href="#troubleshooting-4">Troubleshooting</a></h1>
+<p>Known issues, their causes, and resolutions.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Symptom</th><th>Category</th><th>Likely Cause</th></tr>
+</thead>
+<tbody>
+<tr><td>“Database is locked”</td><td><a href="#database-is-locked-errors">Database</a></td><td>Lingering process holding lock</td></tr>
+<tr><td>No catalog results</td><td><a href="#missing-catalog-data">Database</a></td><td>Data not imported or sources not enabled</td></tr>
+<tr><td>Wrong data showing</td><td><a href="#dev-vs-production-database">Database</a></td><td>Dev build using dev database</td></tr>
+<tr><td>Fog doesn’t follow walls</td><td><a href="#fog-of-war-doesnt-follow-walls">Maps</a></td><td>Image file instead of UVTT</td></tr>
+<tr><td>Tokens misaligned</td><td><a href="#tokens-dont-snap-to-grid">Maps</a></td><td>Non-standard grid size</td></tr>
+<tr><td>Map image blank</td><td><a href="#map-image-doesnt-display">Maps</a></td><td>Asset file missing</td></tr>
+<tr><td>Player display won’t open</td><td><a href="#player-display-window-wont-open">Display</a></td><td>No map loaded in play mode</td></tr>
+<tr><td>Player display black</td><td><a href="#player-display-shows-black-screen">Display</a></td><td>Blackout mode enabled</td></tr>
+<tr><td>MCP can’t find campaigns</td><td><a href="#claude-code-cant-find-campaigns">MCP</a></td><td>Database path mismatch</td></tr>
+<tr><td>MCP sidecar won’t start</td><td><a href="#mcp-sidecar-wont-start">MCP</a></td><td>Binary not built</td></tr>
+<tr><td>Blank character PDF</td><td><a href="#character-sheet-export-is-blank">PDF</a></td><td>Missing character data</td></tr>
+<tr><td>App won’t launch</td><td><a href="#app-wont-launch">Application</a></td><td>Check logs for details</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="database-issues"><a class="header" href="#database-issues">Database Issues</a></h2>
+<h3 id="database-is-locked-errors"><a class="header" href="#database-is-locked-errors">“Database is locked” errors</a></h3>
+<p><strong>Cause:</strong> Another process has an exclusive lock on the SQLite database. This can happen if a previous Mimir instance didn’t shut down cleanly, or if you’re accessing the database with an external tool like <code>sqlite3</code> while Mimir is running.</p>
+<p><strong>Fix:</strong></p>
+<ol>
+<li>Close all Mimir windows</li>
+<li>Check for lingering processes: look for <code>mimir</code> or <code>mimir-mcp</code> processes and quit them</li>
+<li>Relaunch Mimir</li>
+</ol>
+<h3 id="missing-catalog-data"><a class="header" href="#missing-catalog-data">Missing catalog data</a></h3>
+<p><strong>Cause:</strong> Source data hasn’t been imported, or the desired source books aren’t enabled for the campaign.</p>
+<p><strong>Fix:</strong></p>
+<ol>
+<li>Check if any data exists: open the Reference browser (header bar) and search for a common monster like “Goblin”</li>
+<li>If no results at all, you need to import catalog data via Settings</li>
+<li>If some results appear but specific content is missing, check Campaign Sources — the source book may not be enabled for this campaign</li>
+</ol>
+<h3 id="dev-vs-production-database"><a class="header" href="#dev-vs-production-database">Dev vs production database</a></h3>
+<p>Mimir uses separate databases for development and production builds:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Build</th><th>Database Path (macOS)</th></tr>
+</thead>
+<tbody>
+<tr><td>Production</td><td><code>~/Library/Application Support/com.mimir.app/data/mimir.db</code></td></tr>
+<tr><td>Development</td><td><code>~/Library/Application Support/com.mimir.app/dev/data/mimir.db</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Linux paths:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Build</th><th>Database Path</th></tr>
+</thead>
+<tbody>
+<tr><td>Production</td><td><code>~/.local/share/com.mimir.app/data/mimir.db</code></td></tr>
+<tr><td>Development</td><td><code>~/.local/share/com.mimir.app/dev/data/mimir.db</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Windows paths:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Build</th><th>Database Path</th></tr>
+</thead>
+<tbody>
+<tr><td>Production</td><td><code>%APPDATA%/com.mimir.app/data/mimir.db</code></td></tr>
+<tr><td>Development</td><td><code>%APPDATA%/com.mimir.app/dev/data/mimir.db</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>If you’re seeing different data than expected, you may be running a dev build that points to the dev database.</p>
+<h2 id="maps-3"><a class="header" href="#maps-3">Maps</a></h2>
+<h3 id="fog-of-war-doesnt-follow-walls"><a class="header" href="#fog-of-war-doesnt-follow-walls">Fog of war doesn’t follow walls</a></h3>
+<p><strong>Cause:</strong> The map was uploaded as a plain image (PNG/JPG) rather than a UVTT file. Image maps don’t contain wall data, so fog of war operates as a simple grid reveal instead of line-of-sight.</p>
+<p><strong>Fix:</strong> Re-upload the map in UVTT format (<code>.dd2vtt</code> or <code>.uvtt</code>) if available. Only UVTT files include the wall geometry needed for true line-of-sight fog of war.</p>
+<h3 id="tokens-dont-snap-to-grid"><a class="header" href="#tokens-dont-snap-to-grid">Tokens don’t snap to grid</a></h3>
+<p><strong>Cause:</strong> Grid alignment mismatch. Image files default to 70 pixels per grid square. If the map image uses a different grid size, tokens won’t align.</p>
+<p><strong>Fix:</strong> Use UVTT format maps, which embed precise grid data. For image maps, ensure the grid squares are approximately 70 pixels wide.</p>
+<h3 id="map-image-doesnt-display"><a class="header" href="#map-image-doesnt-display">Map image doesn’t display</a></h3>
+<p><strong>Cause:</strong> The map asset file may have been moved or deleted from the assets directory.</p>
+<p><strong>Fix:</strong> Check that the file exists at <code>~/Library/Application Support/com.mimir.app/assets/</code> (or the platform-equivalent). If the asset is missing, re-upload the map.</p>
+<h2 id="player-display-3"><a class="header" href="#player-display-3">Player Display</a></h2>
+<h3 id="player-display-window-wont-open"><a class="header" href="#player-display-window-wont-open">Player display window won’t open</a></h3>
+<p><strong>Cause:</strong> The player display is a separate Tauri window. It requires the main application to be running and a map to be loaded in play mode.</p>
+<p><strong>Fix:</strong></p>
+<ol>
+<li>Enter Play Mode from a module (click the play button on a module)</li>
+<li>Load a map in the play view</li>
+<li>Click the player display button in the play mode toolbar</li>
+</ol>
+<h3 id="player-display-shows-black-screen"><a class="header" href="#player-display-shows-black-screen">Player display shows black screen</a></h3>
+<p><strong>Cause:</strong> Blackout mode is enabled, or no map has been sent to the display.</p>
+<p><strong>Fix:</strong></p>
+<ol>
+<li>Check the blackout toggle in the play mode toolbar — if active, toggle it off</li>
+<li>Ensure a map is loaded and has been sent to the player display</li>
+</ol>
+<h3 id="player-display-is-out-of-sync"><a class="header" href="#player-display-is-out-of-sync">Player display is out of sync</a></h3>
+<p><strong>Cause:</strong> The display viewport hasn’t been updated after the DM moved the view.</p>
+<p><strong>Fix:</strong> The DM viewport updates are sent to the player display via Tauri events. If the display falls behind, toggle the player display closed and reopen it.</p>
+<h2 id="mcp-server-1"><a class="header" href="#mcp-server-1">MCP Server</a></h2>
+<h3 id="claude-code-cant-find-campaigns"><a class="header" href="#claude-code-cant-find-campaigns">Claude Code can’t find campaigns</a></h3>
+<p><strong>Cause:</strong> The MCP server connects to a database path that may differ from what the main app uses.</p>
+<p><strong>Fix:</strong></p>
+<ol>
+<li>Verify the database path: the MCP server uses <code>MIMIR_DATABASE_PATH</code> if set, otherwise platform defaults</li>
+<li>If you’re using a non-standard database location, set the environment variable:
+<pre><code class="language-bash">export MIMIR_DATABASE_PATH=/path/to/your/mimir.db
+</code></pre>
+</li>
+<li>Ensure you’ve called <code>set_active_campaign</code> — most MCP tools require an active campaign</li>
+</ol>
+<h3 id="mcp-sidecar-wont-start"><a class="header" href="#mcp-sidecar-wont-start">MCP sidecar won’t start</a></h3>
+<p><strong>Cause:</strong> The sidecar binary may not be built or may be missing from the expected path.</p>
+<p><strong>Fix:</strong></p>
+<ol>
+<li>Check that the binary exists at <code>crates/mimir/binaries/mimir-mcp-{target-triple}</code> (e.g., <code>mimir-mcp-aarch64-apple-darwin</code>)</li>
+<li>Rebuild: <code>bash scripts/build-sidecar.sh</code></li>
+<li>If running from a release build, the sidecar should be bundled automatically</li>
+</ol>
+<h2 id="pdf-export-4"><a class="header" href="#pdf-export-4">PDF Export</a></h2>
+<h3 id="character-sheet-export-is-blank"><a class="header" href="#character-sheet-export-is-blank">Character sheet export is blank</a></h3>
+<p><strong>Cause:</strong> The character may not have enough data populated (class, level, ability scores).</p>
+<p><strong>Fix:</strong> Ensure the character has at least a name, one class with a level, and ability scores set. The PDF template requires these fields to render.</p>
+<h3 id="pdf-export-is-slow"><a class="header" href="#pdf-export-is-slow">PDF export is slow</a></h3>
+<p><strong>Cause:</strong> Typst compilation for complex documents (especially those with many monster stat blocks or maps) takes time.</p>
+<p><strong>Fix:</strong> This is expected for large exports. Campaign document PDFs with many pages take longer than individual character sheets.</p>
+<h2 id="application-1"><a class="header" href="#application-1">Application</a></h2>
+<h3 id="app-wont-launch"><a class="header" href="#app-wont-launch">App won’t launch</a></h3>
+<p><strong>Cause:</strong> Could be a missing dependency, corrupted installation, or port conflict.</p>
+<p><strong>Fix:</strong></p>
+<ol>
+<li>Try launching from the terminal to see error output</li>
+<li>Check logs at:
+<ul>
+<li><strong>macOS:</strong> <code>~/Library/Application Support/com.mimir.app/logs/</code></li>
+<li><strong>Linux:</strong> <code>~/.local/share/com.mimir.app/logs/</code></li>
+<li><strong>Windows:</strong> <code>%APPDATA%/com.mimir.app/logs/</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="vite-dev-server-issues-development"><a class="header" href="#vite-dev-server-issues-development">Vite dev server issues (development)</a></h3>
+<p><strong>Cause:</strong> <code>cargo tauri dev</code> runs <code>npm run dev</code> from the wrong directory (<code>crates/</code> instead of <code>crates/mimir/frontend</code>).</p>
+<p><strong>Fix:</strong> Run the Vite dev server manually, then start the Rust backend separately:</p>
+<pre><code class="language-bash"># Terminal 1: Start Vite
+cd crates/mimir/frontend
+npm run dev
+
+# Terminal 2: Start Rust backend
+cargo run -p mimir --no-default-features
+</code></pre>
+<p>Or use the angreal helper if available:</p>
+<pre><code class="language-bash">angreal dev launch
+</code></pre>
+<h2 id="log-files"><a class="header" href="#log-files">Log Files</a></h2>
+<p>Mimir writes logs to platform-specific directories. Default log level is <code>mimir=info,mimir_core=info</code>.</p>
+<p>Override with the <code>RUST_LOG</code> environment variable:</p>
+<pre><code class="language-bash">RUST_LOG=mimir=debug,mimir_core=trace cargo run -p mimir
+</code></pre>
+<h2 id="see-also-42"><a class="header" href="#see-also-42">See Also</a></h2>
+<ul>
+<li><a href="#development-setup-and-guide">Development Setup</a> — For build and development issues</li>
+<li><a href="#environment-variables">Environment Variables</a> — All configuration options</li>
+<li><a href="#mcp-server-reference">MCP Server Reference</a> — MCP setup and tools</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
 <p>Definitions of terms used in Mimir.</p>
 <h2 id="a"><a class="header" href="#a">A</a></h2>
@@ -5145,7 +6561,7 @@ res://textures/brushes/soft_circle.png
 <dd>A character controlled by a player. Created with full stats using the character wizard.</dd>
 <dt id="play-mode-3"><a class="header" href="#play-mode-3"><strong>Play Mode</strong></a></dt>
 <dd>The interface for running game sessions. Includes map display, monster stats, and session notes.</dd>
-<dt id="player-display-3"><a class="header" href="#player-display-3"><strong>Player Display</strong></a></dt>
+<dt id="player-display-4"><a class="header" href="#player-display-4"><strong>Player Display</strong></a></dt>
 <dd>A second window showing what players see. Applies fog of war and hides DM information.</dd>
 </dl>
 <h2 id="r"><a class="header" href="#r">R</a></h2>
@@ -5181,6 +6597,102 @@ res://textures/brushes/soft_circle.png
 <dt id="viewport"><a class="header" href="#viewport"><strong>Viewport</strong></a></dt>
 <dd>The visible area of the map. The DM and player display each have independent viewports.</dd>
 </dl>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="architecture-overview"><a class="header" href="#architecture-overview">Architecture Overview</a></h1>
+<p>How Mimir is built and why its architecture looks the way it does.</p>
+<h2 id="the-stack"><a class="header" href="#the-stack">The Stack</a></h2>
+<p>Mimir is a desktop application built with <a href="https://v2.tauri.app/">Tauri v2</a>, combining a Rust backend with a Vue 3 frontend. This hybrid approach gives you the performance and reliability of native code for data-heavy operations (database queries, PDF generation, map processing) while using web technologies for the UI layer where rapid iteration and rich interactivity matter.</p>
+<pre><code>┌────────────────────────────────┐
+│        Vue 3 Frontend          │  TypeScript, Tailwind CSS
+│   (Campaigns, Maps, Sheets)    │
+├────────────────────────────────┤
+│        Tauri IPC Bridge        │  invoke() / events
+├────────────────────────────────┤
+│        Rust Backend            │  Commands, Services, DAL
+│   (mimir, mimir-core, ...)     │
+├────────────────────────────────┤
+│        SQLite (WAL mode)       │  Diesel ORM
+└────────────────────────────────┘
+         ↕ (shared database)
+┌────────────────────────────────┐
+│     MCP Sidecar (mimir-mcp)    │  Claude Code integration
+└────────────────────────────────┘
+</code></pre>
+<h2 id="why-a-desktop-app"><a class="header" href="#why-a-desktop-app">Why a Desktop App?</a></h2>
+<p>Mimir is intentionally local-first:</p>
+<ul>
+<li><strong>Your data stays on your machine.</strong> No cloud accounts, no subscriptions, no telemetry.</li>
+<li><strong>Works offline.</strong> Prep sessions at the coffee shop, run games at a venue with spotty wifi.</li>
+<li><strong>Performance.</strong> SQLite with WAL mode handles concurrent reads without a server process.</li>
+<li><strong>Multi-window support.</strong> The DM sees the full prep view while players see only what you reveal on a second display — something web apps struggle with.</li>
+</ul>
+<h2 id="the-five-crates"><a class="header" href="#the-five-crates">The Five Crates</a></h2>
+<p>Mimir’s Rust backend is organized as a Cargo workspace with five crates, each with a clear responsibility:</p>
+<h3 id="mimir--the-tauri-application"><a class="header" href="#mimir--the-tauri-application"><code>mimir</code> — The Tauri Application</a></h3>
+<p>The main application crate. Contains ~200 Tauri command handlers that the frontend calls via IPC. Each command is a thin wrapper that validates input, calls the appropriate service, and returns a structured response.</p>
+<p>This crate also manages application state: database connections, file paths, and the active campaign.</p>
+<h3 id="mimir-core--models-services-and-data-access"><a class="header" href="#mimir-core--models-services-and-data-access"><code>mimir-core</code> — Models, Services, and Data Access</a></h3>
+<p>The heart of the system. Three layers:</p>
+<ul>
+<li><strong>Models</strong> define the data structures (Campaign, Character, Module, Map, Document) as Rust structs that map directly to database tables via Diesel.</li>
+<li><strong>DAL (Data Access Layer)</strong> provides low-level CRUD operations — one function per database operation, using Diesel query builders.</li>
+<li><strong>Services</strong> implement business logic. When you create a character, the CharacterService looks up racial proficiencies from the catalog, calculates starting equipment, and wraps everything in a database transaction. Services are where the D&amp;D rules live.</li>
+</ul>
+<p>This separation means the MCP server and the Tauri app share the same business logic — they both call into <code>mimir-core</code> services.</p>
+<h3 id="mimir-mcp--mcp-sidecar-server"><a class="header" href="#mimir-mcp--mcp-sidecar-server"><code>mimir-mcp</code> — MCP Sidecar Server</a></h3>
+<p>A standalone binary that implements the <a href="https://modelcontextprotocol.io/">Model Context Protocol</a>. It connects to the same SQLite database as the main app and exposes campaign management tools for AI assistants like Claude Code.</p>
+<p>Runs as a Tauri sidecar process — launched automatically alongside the main app, communicating over stdio.</p>
+<h3 id="mimir-mapgen--procedural-map-generation"><a class="header" href="#mimir-mapgen--procedural-map-generation"><code>mimir-mapgen</code> — Procedural Map Generation</a></h3>
+<p>Generates Dungeondraft-compatible maps from YAML configuration or biome presets. Uses Perlin noise for terrain, supports room/corridor generation, and outputs the <code>.dungeondraft_map</code> format.</p>
+<p>Can be used as a standalone CLI tool or through the MCP server.</p>
+<h3 id="mimir-print--pdf-generation"><a class="header" href="#mimir-print--pdf-generation"><code>mimir-print</code> — PDF Generation</a></h3>
+<p>Produces character sheets, spell cards, monster cards, and campaign document exports using the <a href="https://typst.app/">Typst</a> typesetting engine. Typst was chosen over LaTeX for its speed and Rust-native integration.</p>
+<h2 id="data-flow"><a class="header" href="#data-flow">Data Flow</a></h2>
+<p>A typical operation flows through these layers:</p>
+<pre><code>Frontend (Vue)
+  → invoke('create_character', { name: "Gandalf", ... })
+    → Tauri IPC
+      → Command handler (validates input)
+        → CharacterService::create()
+          → Look up race/class from catalog
+          → Calculate proficiencies
+          → Transaction:
+            → DAL: insert_character()
+            → DAL: insert_character_class()
+            → DAL: insert_character_proficiencies()
+          → Return CharacterResponse
+        → ApiResponse { success: true, data: character }
+      → Tauri IPC
+    → Frontend receives response
+  → Pinia store updates
+→ Vue reactivity triggers UI update
+</code></pre>
+<p>Every backend response uses the same envelope:</p>
+<pre><code class="language-typescript">interface ApiResponse&lt;T&gt; {
+  success: boolean
+  data?: T
+  error?: string
+}
+</code></pre>
+<h2 id="the-database"><a class="header" href="#the-database">The Database</a></h2>
+<p>Mimir uses SQLite with Write-Ahead Logging (WAL mode). This is a deliberate choice:</p>
+<ul>
+<li><strong>No server process.</strong> The database is a single file — easy to back up, move, or inspect.</li>
+<li><strong>WAL mode</strong> allows concurrent reads while writing, which matters when the MCP sidecar and the main app access the database simultaneously.</li>
+<li><strong>Embedded migrations</strong> run automatically on startup, so the schema is always current.</li>
+</ul>
+<p>Database connections are created on-demand rather than pooled. With SQLite WAL, this is efficient and avoids the complexity of connection pool management.</p>
+<h3 id="dev-vs-production"><a class="header" href="#dev-vs-production">Dev vs Production</a></h3>
+<p>In development builds, Mimir uses a separate database directory (<code>dev/data/</code>) to protect production campaign data from development experiments. This separation is automatic — debug builds use the dev path, release builds use production.</p>
+<h2 id="type-safety-across-the-stack"><a class="header" href="#type-safety-across-the-stack">Type Safety Across the Stack</a></h2>
+<p>Rust model structs are the source of truth. The <code>ts-rs</code> crate generates TypeScript type definitions from Rust structs, which are written to <code>frontend/src/types/generated/</code>. This means the frontend’s TypeScript types always match the backend’s Rust types — a mismatch is a compile error, not a runtime bug.</p>
+<h2 id="see-also-43"><a class="header" href="#see-also-43">See Also</a></h2>
+<ul>
+<li><a href="#the-multi-window-system">Multi-Window System</a> — How the four application windows work together</li>
+<li><a href="#campaigns-vs-modules">Campaigns vs Modules</a> — The data hierarchy</li>
+<li><a href="#the-catalog-system">The Catalog System</a> — How reference data works</li>
+<li><a href="#mimir-architecture">Developer Architecture Guide</a> — Detailed technical reference</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="campaigns-vs-modules"><a class="header" href="#campaigns-vs-modules">Campaigns vs Modules</a></h1>
 <p>Understanding Mimir’s two-level hierarchy for organizing your D&amp;D games.</p>
@@ -5286,7 +6798,7 @@ res://textures/brushes/soft_circle.png
 <li>New modules start fresh</li>
 <li>Campaign-level content evolves</li>
 </ul>
-<h2 id="see-also-35"><a class="header" href="#see-also-35">See Also</a></h2>
+<h2 id="see-also-44"><a class="header" href="#see-also-44">See Also</a></h2>
 <ul>
 <li><a href="#the-two-board-system">The Two-Board System</a></li>
 <li><a href="#create-a-campaign">Create a Campaign</a></li>
@@ -5336,7 +6848,7 @@ res://textures/brushes/soft_circle.png
 </ul>
 <h2 id="module-board"><a class="header" href="#module-board">Module Board</a></h2>
 <p>Each module has its own preparation space:</p>
-<h3 id="documents-1"><a class="header" href="#documents-1">Documents</a></h3>
+<h3 id="documents-2"><a class="header" href="#documents-2">Documents</a></h3>
 <p>Session-specific prep:</p>
 <ul>
 <li>Encounter plans</li>
@@ -5350,7 +6862,7 @@ res://textures/brushes/soft_circle.png
 <li>Shopkeepers</li>
 <li>Informants</li>
 </ul>
-<h3 id="maps-2"><a class="header" href="#maps-2">Maps</a></h3>
+<h3 id="maps-4"><a class="header" href="#maps-4">Maps</a></h3>
 <p>Battle and area maps:</p>
 <ul>
 <li>Dungeon layouts</li>
@@ -5419,10 +6931,187 @@ res://textures/brushes/soft_circle.png
 <li>Add detail as needed</li>
 <li>Skip what you don’t need</li>
 </ul>
-<h2 id="see-also-36"><a class="header" href="#see-also-36">See Also</a></h2>
+<h2 id="see-also-45"><a class="header" href="#see-also-45">See Also</a></h2>
 <ul>
 <li><a href="#campaigns-vs-modules">Campaigns vs Modules</a></li>
 <li><a href="#document-workflow">Document Workflow</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="the-multi-window-system"><a class="header" href="#the-multi-window-system">The Multi-Window System</a></h1>
+<p>Why Mimir uses four separate windows and how they communicate.</p>
+<h2 id="the-problem-1"><a class="header" href="#the-problem-1">The Problem</a></h2>
+<p>Running a D&amp;D session with a digital tool presents a tension: the DM needs full control of maps, monsters, and notes — but players should only see what’s been revealed. A single window can’t serve both needs at once.</p>
+<h2 id="four-windows-four-roles"><a class="header" href="#four-windows-four-roles">Four Windows, Four Roles</a></h2>
+<p>Mimir solves this with four distinct application windows, each built as a separate Vite entrypoint with its own HTML file and Vue app instance:</p>
+<h3 id="main-window"><a class="header" href="#main-window">Main Window</a></h3>
+<p>The primary interface. Campaign management, character sheets, module prep, settings — everything you do outside of active play happens here. This is a full Vue Router application with navigation between campaigns, modules, characters, and reference materials.</p>
+<h3 id="dm-map-window"><a class="header" href="#dm-map-window">DM Map Window</a></h3>
+<p>A dedicated map view for the DM during play sessions. Shows the full map with all tokens (including hidden ones), fog of war controls, and light source management. Opens as a separate window so the DM can position it on their screen while the player display runs on a projector or TV.</p>
+<h3 id="player-display-window"><a class="header" href="#player-display-window">Player Display Window</a></h3>
+<p>What your players see. Shows only the revealed portions of the map — fog of war hides unexplored areas, hidden tokens are invisible, and the viewport is controlled by the DM. Designed for a second monitor, projector, or TV facing the players.</p>
+<p>The player display has no interactive controls. Players can’t pan, zoom, or click on anything. The DM controls exactly what appears.</p>
+<h3 id="sources-window-1"><a class="header" href="#sources-window-1">Sources Window</a></h3>
+<p>A standalone D&amp;D 5e reference browser. Monster stat blocks, spell descriptions, item properties — all searchable and browsable. Opens as a separate window so you can keep reference material visible while working in the main window or running a session.</p>
+<h2 id="why-separate-windows"><a class="header" href="#why-separate-windows">Why Separate Windows?</a></h2>
+<h3 id="independent-positioning"><a class="header" href="#independent-positioning">Independent Positioning</a></h3>
+<p>Each window can live on a different monitor. A typical two-monitor setup:</p>
+<ul>
+<li><strong>Monitor 1 (DM)</strong>: Main window + DM Map Window side by side</li>
+<li><strong>Monitor 2 (Players)</strong>: Player Display full-screen</li>
+</ul>
+<p>Or with three monitors:</p>
+<ul>
+<li><strong>Monitor 1</strong>: Main window (prep, notes)</li>
+<li><strong>Monitor 2</strong>: DM Map Window (tactical view)</li>
+<li><strong>Monitor 3</strong>: Player Display (player-facing)</li>
+</ul>
+<h3 id="isolation"><a class="header" href="#isolation">Isolation</a></h3>
+<p>Each window is a separate Vue application instance. A crash or heavy rendering in one window doesn’t affect the others. The player display stays smooth even while the DM is loading a complex map in another window.</p>
+<h3 id="focused-ui"><a class="header" href="#focused-ui">Focused UI</a></h3>
+<p>The player display strips away everything players shouldn’t see — no toolbars, no sidebars, no token lists. The DM map view shows everything. Same data, different presentations.</p>
+<h2 id="communication-between-windows"><a class="header" href="#communication-between-windows">Communication Between Windows</a></h2>
+<p>The windows share data through two mechanisms:</p>
+<h3 id="shared-database"><a class="header" href="#shared-database">Shared Database</a></h3>
+<p>All windows read from the same SQLite database. When the DM places a token in the main window, it’s written to the database. When the DM map window loads, it reads the current state.</p>
+<h3 id="tauri-events"><a class="header" href="#tauri-events">Tauri Events</a></h3>
+<p>Real-time synchronization uses Tauri’s event system. When the DM:</p>
+<ul>
+<li>Reveals fog of war → the player display updates immediately</li>
+<li>Moves a token → both map windows reflect the change</li>
+<li>Changes the viewport → the player display pans to match</li>
+<li>Toggles blackout → the player display goes dark instantly</li>
+</ul>
+<p>Events are typed and scoped — the player display only receives events it needs to render, never internal DM state.</p>
+<h3 id="theme-synchronization"><a class="header" href="#theme-synchronization">Theme Synchronization</a></h3>
+<p>When you change the application theme (light, dark, or hyper), a Tauri event broadcasts to all windows so they switch together. The DM map and player display default to dark theme regardless, since they’re typically used in dimly lit game rooms.</p>
+<h2 id="the-blackout-feature"><a class="header" href="#the-blackout-feature">The Blackout Feature</a></h2>
+<p>A small but critical feature: the DM can instantly black out the player display with a single toggle. This is essential for:</p>
+<ul>
+<li>Switching maps between encounters without spoiling the next area</li>
+<li>Pausing to set up tokens before revealing a new room</li>
+<li>“Theater of the mind” moments where you want players focused on narration, not the screen</li>
+</ul>
+<h2 id="see-also-46"><a class="header" href="#see-also-46">See Also</a></h2>
+<ul>
+<li><a href="#player-display-setup">Tutorial: Player Display Setup</a> — Hands-on guide to configuring the display</li>
+<li><a href="#use-player-display">Use Player Display</a> — How-to for common display tasks</li>
+<li><a href="#architecture-overview">Architecture Overview</a> — The technical stack behind the windows</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="the-catalog-system"><a class="header" href="#the-catalog-system">The Catalog System</a></h1>
+<p>How Mimir manages D&amp;D 5e reference data and why the catalog works the way it does.</p>
+<h2 id="two-kinds-of-data"><a class="header" href="#two-kinds-of-data">Two Kinds of Data</a></h2>
+<p>Mimir’s database holds two fundamentally different kinds of content:</p>
+<p><strong>Catalog data</strong> is reference material — monsters, spells, items, races, classes, backgrounds, feats, conditions, and more. This data is read-only within Mimir. You search it, browse it, and reference it, but you don’t edit it directly.</p>
+<p><strong>Campaign data</strong> is your content — campaigns, modules, characters, documents, maps, homebrew. This is fully editable and belongs to you.</p>
+<p>The catalog exists to support the campaign. When you add a monster to a module, you’re creating a reference from your campaign data to the catalog. When you add a spell to a character, same thing. The catalog is the shared dictionary; your campaign is the story you write with it.</p>
+<h2 id="import-not-distribution"><a class="header" href="#import-not-distribution">Import, Not Distribution</a></h2>
+<p>Mimir doesn’t ship with D&amp;D content — it can’t, for licensing reasons. Instead, it provides an import system that reads structured data archives and populates the catalog tables.</p>
+<p>The import format follows the schema established by the <a href="https://5e.tools/">5etools</a> community project. If you have a compatible data archive, Mimir can import it. The importer handles:</p>
+<ul>
+<li>Monsters with full stat blocks, traits, and actions</li>
+<li>Spells with casting details and class lists</li>
+<li>Items including weapons, armor, and magic items with variant generation</li>
+<li>Races, classes, subclasses, backgrounds, feats</li>
+<li>Conditions, languages, deities, and many other entity types</li>
+<li>Token images and creature artwork</li>
+<li>Source book metadata and publication information</li>
+</ul>
+<p>After import, all data lives in your local SQLite database. Mimir never phones home or downloads content.</p>
+<h2 id="source-filtering"><a class="header" href="#source-filtering">Source Filtering</a></h2>
+<p>Not every campaign uses every sourcebook. A “Player’s Handbook only” game shouldn’t show Xanathar’s Guide spells in character creation.</p>
+<p>Mimir’s source filtering works at two levels:</p>
+<p><strong>Campaign sources</strong> control which books are active for a campaign. When you open Campaign Sources and enable only PHB and MM, catalog searches within that campaign only return content from those books.</p>
+<p><strong>Character sources</strong> optionally restrict further. A character can have their own source list — useful when one player owns different books than another.</p>
+<p>This filtering is consistent everywhere: spell searches, monster searches, item searches, and character creation all respect the active source configuration.</p>
+<h2 id="full-text-search"><a class="header" href="#full-text-search">Full-Text Search</a></h2>
+<p>The catalog uses SQLite’s FTS5 (Full-Text Search) engine. When you search for “fire,” it matches:</p>
+<ul>
+<li>Monster names: “Fire Elemental”, “Fire Giant”</li>
+<li>Spell names: “Fireball”, “Fire Bolt”</li>
+<li>Item descriptions: a sword with fire damage</li>
+<li>Monster abilities that mention fire resistance</li>
+</ul>
+<p>The FTS index covers both rule text and flavor text, using the Porter stemming algorithm so “casting” matches “cast” and “dragons” matches “dragon.”</p>
+<h2 id="homebrew-integration"><a class="header" href="#homebrew-integration">Homebrew Integration</a></h2>
+<p>Homebrew content (custom items, monsters, spells) lives alongside catalog data in search results. When you search for monsters to add to a module, homebrew monsters from the active campaign appear in the same results list, marked with an <strong>HB</strong> badge.</p>
+<p>This blending is intentional — you shouldn’t have to remember whether that custom dragon variant is homebrew or catalog. It just shows up where you need it.</p>
+<p>See <a href="#the-homebrew-system">The Homebrew System</a> for details on creating custom content.</p>
+<h2 id="data-structure"><a class="header" href="#data-structure">Data Structure</a></h2>
+<p>Catalog entities are stored as structured JSON in the database, following the schema conventions of the source data format. This means:</p>
+<ul>
+<li>Monster stat blocks include everything: abilities, actions, legendary actions, lair actions, regional effects</li>
+<li>Spells include casting components, duration, scaling behavior</li>
+<li>Items include variant generation rules for magic items (a +1/+2/+3 weapon generates three entries)</li>
+</ul>
+<p>The JSON is parsed on-demand by the frontend formatters, which render stat blocks, spell descriptions, and item cards in familiar D&amp;D presentation style.</p>
+<h2 id="why-not-a-bundled-database"><a class="header" href="#why-not-a-bundled-database">Why Not a Bundled Database?</a></h2>
+<p>You might wonder why Mimir doesn’t ship with a pre-populated catalog. Three reasons:</p>
+<ol>
+<li><strong>Licensing.</strong> D&amp;D content is owned by Wizards of the Coast. Distributing it would require a license Mimir doesn’t have.</li>
+<li><strong>Freshness.</strong> The community data format is actively maintained and updated. Importing lets you use the latest corrections and additions.</li>
+<li><strong>Choice.</strong> You control exactly which sources are in your database. No bloat from content you don’t use.</li>
+</ol>
+<h2 id="see-also-47"><a class="header" href="#see-also-47">See Also</a></h2>
+<ul>
+<li><a href="#create-a-campaign">Manage Campaign Sources</a> — Configuring which books are active</li>
+<li><a href="#the-homebrew-system">The Homebrew System</a> — Creating custom content</li>
+<li><a href="#file-formats">File Formats</a> — Technical details on data formats</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="map-formats-and-generation"><a class="header" href="#map-formats-and-generation">Map Formats and Generation</a></h1>
+<p>How Mimir handles battle maps — from uploaded files to procedurally generated terrain.</p>
+<h2 id="two-ways-to-get-maps"><a class="header" href="#two-ways-to-get-maps">Two Ways to Get Maps</a></h2>
+<p>Mimir supports two approaches to maps:</p>
+<ol>
+<li><strong>Upload</strong> an existing map file (UVTT or image)</li>
+<li><strong>Generate</strong> a map procedurally from a biome preset or YAML configuration</li>
+</ol>
+<p>Both produce maps you can use in play mode with tokens, fog of war, and lighting.</p>
+<h2 id="the-uvtt-format"><a class="header" href="#the-uvtt-format">The UVTT Format</a></h2>
+<p>UVTT (Universal Virtual Tabletop) is the preferred map format. Created by <a href="https://dungeondraft.net/">Dungeondraft</a> and adopted by other tools, a <code>.dd2vtt</code> or <code>.uvtt</code> file bundles:</p>
+<ul>
+<li><strong>Map image</strong> — The rendered map as a PNG</li>
+<li><strong>Grid data</strong> — Cell size, offset, and dimensions so tokens snap correctly</li>
+<li><strong>Walls</strong> — Line segments that block line of sight for fog of war</li>
+<li><strong>Doors</strong> — Interactive wall segments that can be opened/closed</li>
+<li><strong>Lights</strong> — Light source positions with color and intensity</li>
+</ul>
+<p>When you upload a UVTT file, Mimir extracts all of this automatically. Fog of war, line-of-sight calculations, and lighting all work out of the box because the wall data is embedded in the file.</p>
+<h2 id="image-files-2"><a class="header" href="#image-files-2">Image Files</a></h2>
+<p>You can also upload plain images (PNG, JPG, WebP) as maps. These work for basic token placement but lack wall data, so fog of war operates as a simple reveal grid rather than true line-of-sight.</p>
+<p>Mimir defaults to 70 pixels per grid square for image files. If your map image uses a different grid size, token snapping may not align perfectly. For best results, use UVTT format.</p>
+<h2 id="procedural-map-generation"><a class="header" href="#procedural-map-generation">Procedural Map Generation</a></h2>
+<p>Mimir includes a map generator (<code>mimir-mapgen</code>) that creates Dungeondraft-compatible maps from a declarative configuration. Rather than hand-drawing every map, you describe what you want and the generator builds it.</p>
+<h3 id="biome-presets-1"><a class="header" href="#biome-presets-1">Biome Presets</a></h3>
+<p>The fastest path: choose a biome like “forest,” “cave,” “desert,” or “arctic” and the generator produces terrain with appropriate textures, vegetation, and features. Presets encode the decisions a map artist would make — which materials to blend, how terrain should transition, what vegetation density looks natural.</p>
+<h3 id="yaml-configuration"><a class="header" href="#yaml-configuration">YAML Configuration</a></h3>
+<p>For full control, write a YAML configuration that describes the map you want declaratively — dimensions, terrain layers, room layouts, features, and lighting. The generator translates this into the output format. See the <a href="#mapgen-reference">Mapgen Reference</a> for the complete YAML schema.</p>
+<h3 id="output-format-1"><a class="header" href="#output-format-1">Output Format</a></h3>
+<p>The generator outputs <code>.dungeondraft_map</code> files — the same format Dungeondraft uses natively. This means generated maps can be:</p>
+<ul>
+<li>Used directly in Mimir with full fog of war and lighting support</li>
+<li>Opened in Dungeondraft for hand-editing and polish</li>
+<li>Shared with other tools that support the format</li>
+</ul>
+<h3 id="standalone-cli"><a class="header" href="#standalone-cli">Standalone CLI</a></h3>
+<p>The map generator also works as a standalone command-line tool, independent of the main Mimir application. This is useful for batch generation or scripting.</p>
+<h2 id="why-dungeondraft-format"><a class="header" href="#why-dungeondraft-format">Why Dungeondraft Format?</a></h2>
+<p>Mimir chose the Dungeondraft format for several reasons:</p>
+<ul>
+<li><strong>Rich metadata.</strong> Walls, doors, lights, and grid data are all part of the format — exactly what a VTT needs.</li>
+<li><strong>Ecosystem.</strong> Dungeondraft is widely used in the TTRPG community, so maps created there work in Mimir and vice versa.</li>
+<li><strong>Editability.</strong> Generated maps can be refined in Dungeondraft before use, bridging procedural and hand-crafted approaches.</li>
+</ul>
+<h2 id="the-trade-offs"><a class="header" href="#the-trade-offs">The Trade-Offs</a></h2>
+<p>Each approach has different strengths. UVTT files give the richest play experience (fog of war, lighting, doors) but require a map-making tool. Images are the most accessible — any map image works — but lose advanced features. Procedural generation is fastest for outdoor terrain and random encounters, but produces maps that may need hand-editing in Dungeondraft for complex interior layouts.</p>
+<p>The choice often depends on the encounter: a carefully planned boss fight deserves a hand-crafted UVTT map; a random wilderness encounter can use a generated biome; a map from an online artist works fine as an image with basic fog of war.</p>
+<h2 id="see-also-48"><a class="header" href="#see-also-48">See Also</a></h2>
+<ul>
+<li><a href="#upload-a-map">Upload a Map</a> — Step-by-step upload guide</li>
+<li><a href="#generate-a-map">Generate Maps</a> — Using the map generator</li>
+<li><a href="#mapgen-reference">Mapgen Reference</a> — Full YAML configuration reference</li>
+<li><a href="#vision--lighting">Vision &amp; Lighting</a> — How fog of war and light sources work</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="document-workflow"><a class="header" href="#document-workflow">Document Workflow</a></h1>
@@ -5470,7 +7159,7 @@ res://textures/brushes/soft_circle.png
 <h2 id="organization-1"><a class="header" href="#organization-1">Organization</a></h2>
 <h3 id="reordering"><a class="header" href="#reordering">Reordering</a></h3>
 <p>Use the <strong>up/down arrow buttons</strong> (visible on hover) to reorder documents in the sidebar.</p>
-<h3 id="pdf-export-3"><a class="header" href="#pdf-export-3">PDF Export</a></h3>
+<h3 id="pdf-export-5"><a class="header" href="#pdf-export-5">PDF Export</a></h3>
 <p>Click <strong>Export PDF</strong> in the editor header to export a document as a PDF.</p>
 <h2 id="practical-tips"><a class="header" href="#practical-tips">Practical Tips</a></h2>
 <h3 id="before-first-session"><a class="header" href="#before-first-session">Before First Session</a></h3>
@@ -5483,7 +7172,7 @@ res://textures/brushes/soft_circle.png
 <p>Session notes in Play Mode auto-save as you type — use them for initiative tracking, HP, and events. Prepared documents are separate and remain unmodified.</p>
 <h3 id="after-sessions"><a class="header" href="#after-sessions">After Sessions</a></h3>
 <p>Add follow-up notes to campaign documents to track story developments and player decisions.</p>
-<h2 id="see-also-37"><a class="header" href="#see-also-37">See Also</a></h2>
+<h2 id="see-also-49"><a class="header" href="#see-also-49">See Also</a></h2>
 <ul>
 <li><a href="#the-two-board-system">The Two-Board System</a></li>
 <li><a href="#manage-documents">Manage Documents</a></li>
@@ -5532,7 +7221,7 @@ res://textures/brushes/soft_circle.png
 <li>Monsters and spells use a JSON text editor</li>
 <li>All three types support the clone-from-catalog workflow</li>
 </ul>
-<h2 id="see-also-38"><a class="header" href="#see-also-38">See Also</a></h2>
+<h2 id="see-also-50"><a class="header" href="#see-also-50">See Also</a></h2>
 <ul>
 <li><a href="how-to/homebrew">Homebrew How-To Guides</a></li>
 <li><a href="#the-two-board-system">The Two-Board System</a></li>
@@ -5693,7 +7382,7 @@ Heavily obscured area. Results in:</p>
 <li>Bright = safety</li>
 <li>Sudden darkness = danger</li>
 </ul>
-<h2 id="see-also-39"><a class="header" href="#see-also-39">See Also</a></h2>
+<h2 id="see-also-51"><a class="header" href="#see-also-51">See Also</a></h2>
 <ul>
 <li><a href="#vision--lighting">Vision &amp; Lighting Reference</a></li>
 <li><a href="#manage-light-sources">Manage Light Sources</a></li>
@@ -6109,7 +7798,7 @@ Once per month. Are player arcs getting spotlight time? Has the campaign drifted
 <li><strong>Time</strong>: 6-9 hours across a week</li>
 <li><strong>Output</strong>: Ready-to-run first session</li>
 </ul>
-<h3 id="phase-5-campaign-conclusion-when-ready"><a class="header" href="#phase-5-campaign-conclusion-when-ready"><a href="campaign-framework/02-campaign-genesis/phase-5-conclusion.html">Phase 5: Campaign Conclusion</a> (When Ready)</a></h3>
+<h3 id="phase-5-campaign-conclusion-when-ready"><a class="header" href="#phase-5-campaign-conclusion-when-ready"><a href="#phase-5-campaign-conclusion">Phase 5: Campaign Conclusion</a> (When Ready)</a></h3>
 <p>Bring your campaign to a satisfying close:</p>
 <ul>
 <li>Recognizing when to conclude</li>
@@ -7025,6 +8714,145 @@ Lisa (Cleric):
 <p>The genesis is complete. The real adventure begins now.</p>
 <p>Welcome to your new campaign. May it bring years of unforgettable stories.</p>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="phase-5-campaign-conclusion"><a class="header" href="#phase-5-campaign-conclusion">Phase 5: Campaign Conclusion</a></h1>
+<p>Every great story deserves a meaningful ending. This phase guides you through bringing your campaign to a satisfying close, whether after months or years of play.</p>
+<h2 id="recognizing-the-right-time"><a class="header" href="#recognizing-the-right-time">Recognizing the Right Time</a></h2>
+<p>Campaigns naturally conclude when:</p>
+<ul>
+<li><strong>Main Quest Complete</strong>: The primary antagonist is defeated or the central quest fulfilled</li>
+<li><strong>Character Arcs Resolved</strong>: Each PC has achieved or definitively failed their personal goals</li>
+<li><strong>Story Escalation Peaked</strong>: The stakes can’t meaningfully go higher</li>
+<li><strong>Natural Breaking Point</strong>: Real-world changes (graduation, moves, life events) create a stopping point</li>
+<li><strong>Energy Depletion</strong>: Better to end on a high note than let the campaign fade</li>
+</ul>
+<h2 id="planning-your-finale"><a class="header" href="#planning-your-finale">Planning Your Finale</a></h2>
+<p>A well-crafted ending requires preparation. Work backwards from your intended conclusion:</p>
+<h3 id="the-8-session-countdown"><a class="header" href="#the-8-session-countdown">The 8-Session Countdown</a></h3>
+<p><strong>8 Sessions Before the End</strong></p>
+<ul>
+<li>Announce to players that the campaign is entering its final arc</li>
+<li>Begin identifying which story threads need resolution</li>
+<li>Start thinking about the climactic confrontation</li>
+</ul>
+<p><strong>6 Sessions Before</strong></p>
+<ul>
+<li>Begin resolving secondary storylines and subplots</li>
+<li>Close out minor character arcs that won’t be central to the finale</li>
+<li>Narrow the focus toward the main conflict</li>
+</ul>
+<p><strong>4 Sessions Before</strong></p>
+<ul>
+<li>Focus entirely on the primary story arc</li>
+<li>Bring back important NPCs from earlier in the campaign</li>
+<li>Begin callbacks to Session 1 and early adventures</li>
+</ul>
+<p><strong>2 Sessions Before</strong></p>
+<ul>
+<li>Set up the climactic confrontation</li>
+<li>Ensure all PCs have personal stakes in the finale</li>
+<li>Create urgency that drives toward the conclusion</li>
+</ul>
+<p><strong>Final Session</strong></p>
+<ul>
+<li>The climax—consider extending this session to 5-6 hours</li>
+<li>Give each PC at least one spotlight moment</li>
+<li>Make callbacks to the campaign’s beginning</li>
+<li>Let player choices determine the outcome</li>
+</ul>
+<p><strong>Epilogue Session (Optional but Recommended)</strong></p>
+<ul>
+<li>Jump forward in time (months or years)</li>
+<li>Let each player describe their character’s future</li>
+<li>Show how the PCs’ actions changed the world</li>
+<li>Provide emotional closure for the journey</li>
+</ul>
+<h2 id="what-needs-resolution"><a class="header" href="#what-needs-resolution">What Needs Resolution</a></h2>
+<p>Not every thread needs tying up, but be intentional about what you resolve:</p>
+<h3 id="must-resolve"><a class="header" href="#must-resolve">Must Resolve</a></h3>
+<ul>
+<li><strong>Primary Conflict</strong>: The main quest or antagonist</li>
+<li><strong>PC Personal Arcs</strong>: Each character’s individual story</li>
+<li><strong>Major NPCs</strong>: Show their fate or final status</li>
+<li><strong>World Changes</strong>: How the PCs’ actions affected the setting</li>
+</ul>
+<h3 id="can-leave-open"><a class="header" href="#can-leave-open">Can Leave Open</a></h3>
+<ul>
+<li><strong>Minor Mysteries</strong>: Seeds for potential future campaigns</li>
+<li><strong>Secondary NPCs</strong>: Unless players are invested in them</li>
+<li><strong>World Events</strong>: Background happenings not central to the PCs</li>
+<li><strong>Sequel Hooks</strong>: Deliberately open questions for next campaigns</li>
+</ul>
+<h2 id="designing-the-final-module"><a class="header" href="#designing-the-final-module">Designing the Final Module</a></h2>
+<p>Your concluding module should:</p>
+<ul>
+<li><strong>Callback Earlier Events</strong>: Bring back NPCs, reference old decisions</li>
+<li><strong>Showcase Growth</strong>: Include challenges the PCs can now handle easily</li>
+<li><strong>Make It Personal</strong>: Focus on characters, not just the world</li>
+<li><strong>Provide Agency</strong>: Let player choices shape the ending</li>
+<li><strong>Allow Sacrifice</strong>: Meaningful victory might require meaningful cost</li>
+</ul>
+<h2 id="common-pitfalls-to-avoid"><a class="header" href="#common-pitfalls-to-avoid">Common Pitfalls to Avoid</a></h2>
+<h3 id="dont-introduce-new-elements"><a class="header" href="#dont-introduce-new-elements">Don’t Introduce New Elements</a></h3>
+<p>Stick with established story elements. The finale isn’t the time for plot twists that invalidate the journey.</p>
+<h3 id="avoid-deus-ex-machina"><a class="header" href="#avoid-deus-ex-machina">Avoid Deus Ex Machina</a></h3>
+<p>Let the PCs be the heroes. They’ve earned the right to save (or doom) the world themselves.</p>
+<h3 id="dont-rush"><a class="header" href="#dont-rush">Don’t Rush</a></h3>
+<p>Take the time needed for satisfaction. If the finale needs three sessions instead of one, take them.</p>
+<h3 id="remember-the-characters"><a class="header" href="#remember-the-characters">Remember the Characters</a></h3>
+<p>The plot serves the characters, not the other way around. Their personal journeys matter more than the world-ending threat.</p>
+<h2 id="preserving-the-campaign"><a class="header" href="#preserving-the-campaign">Preserving the Campaign</a></h2>
+<p>While concluding, capture the campaign for posterity:</p>
+<ul>
+<li><strong>Campaign Summary</strong>: 2-3 pages of major events and outcomes</li>
+<li><strong>Character Epilogues</strong>: Document each PC’s ending</li>
+<li><strong>Key Moments</strong>: List 10-15 defining campaign moments</li>
+<li><strong>Lessons Learned</strong>: What worked, what didn’t, what surprised you</li>
+<li><strong>Reusable Elements</strong>: Identify modules and NPCs worth preserving</li>
+</ul>
+<h2 id="after-the-end"><a class="header" href="#after-the-end">After the End</a></h2>
+<h3 id="taking-a-break"><a class="header" href="#taking-a-break">Taking a Break</a></h3>
+<p>Don’t immediately jump into a new campaign. Let this one settle into memory. Give yourself and your players time to process the journey’s end.</p>
+<h3 id="the-debrief"><a class="header" href="#the-debrief">The Debrief</a></h3>
+<p>Consider having a casual discussion about the campaign:</p>
+<ul>
+<li>What were everyone’s favorite moments?</li>
+<li>Which NPCs were most memorable?</li>
+<li>What surprised the players? What surprised you?</li>
+<li>What would people want to see in a future campaign?</li>
+</ul>
+<h3 id="future-campaigns"><a class="header" href="#future-campaigns">Future Campaigns</a></h3>
+<p>Your completed campaign becomes a resource:</p>
+<ul>
+<li><strong>Sequel Potential</strong>: Same world, new heroes</li>
+<li><strong>Reusable Modules</strong>: Successful adventures for other campaigns</li>
+<li><strong>Learned Preferences</strong>: Now you know what your group enjoys</li>
+<li><strong>Shared History</strong>: Inside jokes and references that bind your group</li>
+</ul>
+<h2 id="the-achievement"><a class="header" href="#the-achievement">The Achievement</a></h2>
+<p>Completing a campaign is rare in tabletop gaming. Many campaigns start; few reach meaningful conclusions. You’ve given your players something precious: a complete story with beginning, middle, and end. That shared narrative creates bonds that last years.</p>
+<p>Some groups frame character sheets. Others create photo books. Many simply share one last meal together. However you mark it, take time to appreciate what you’ve accomplished together.</p>
+<h2 id="checklist-ready-to-conclude"><a class="header" href="#checklist-ready-to-conclude">Checklist: Ready to Conclude?</a></h2>
+<p>Before entering your final arc:</p>
+<ul>
+<li><input disabled="" type="checkbox"> All players know the campaign is ending</li>
+<li><input disabled="" type="checkbox"> You’ve identified which plots need resolution</li>
+<li><input disabled="" type="checkbox"> Each PC has personal stakes in the finale</li>
+<li><input disabled="" type="checkbox"> You’ve planned callbacks to early sessions</li>
+<li><input disabled="" type="checkbox"> The climax focuses on PC agency</li>
+<li><input disabled="" type="checkbox"> You’ve considered an epilogue session</li>
+<li><input disabled="" type="checkbox"> You have a plan to preserve campaign memories</li>
+</ul>
+<h2 id="next-steps-2"><a class="header" href="#next-steps-2">Next Steps</a></h2>
+<p>With your campaign complete, you might:</p>
+<ul>
+<li>Take a well-deserved break from DMing</li>
+<li>Run one-shots in the same world</li>
+<li>Start planning your next Campaign Genesis</li>
+<li>Let another player take the DM chair</li>
+<li>Try a different game system entirely</li>
+</ul>
+<p>The end of one story is just the beginning of another. When you’re ready, <a href="#phase-1-the-spark">Phase 1: The Spark</a> awaits your next adventure.</p>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="module-creation-overview"><a class="header" href="#module-creation-overview">Module Creation Overview</a></h1>
 <h2 id="building-sustainable-story-arcs"><a class="header" href="#building-sustainable-story-arcs">Building Sustainable Story Arcs</a></h2>
 <p>Modules are the backbone of sustainable campaign management—self-contained story arcs spanning 2-6 sessions that advance your campaign while maintaining creative flexibility. Think of them as episodes in a television series: complete stories that contribute to the larger narrative without requiring the entire series to be written in advance.</p>
@@ -7154,7 +8982,7 @@ Lisa (Cleric):
 <li>Complex module: 12-16 hours for 5-6 sessions</li>
 </ul>
 <p>Each hour of prep typically yields 2-3 hours of gameplay, improving with experience.</p>
-<h2 id="next-steps-2"><a class="header" href="#next-steps-2">Next Steps</a></h2>
+<h2 id="next-steps-3"><a class="header" href="#next-steps-3">Next Steps</a></h2>
 <p>With modules as your campaign’s building blocks, the next chapter covers <a href="campaign-framework/04-session-management/README.html">Session Management</a>—the week-to-week process of bringing your modules to life at the table.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="the-module-creation-process"><a class="header" href="#the-module-creation-process">The Module Creation Process</a></h1>
@@ -7358,7 +9186,7 @@ What happens when:</p>
 </ol>
 <p>Total: 8-12 hours for a complete module</p>
 <p>Remember: Theory becomes practice through repetition. Each module you create becomes easier as you develop your own templates and understand your players better.</p>
-<h2 id="next-steps-3"><a class="header" href="#next-steps-3">Next Steps</a></h2>
+<h2 id="next-steps-4"><a class="header" href="#next-steps-4">Next Steps</a></h2>
 <p>With your module created, the next chapter covers specific templates for different module types, from mysteries to heists to political intrigue. The final chapters address running modules effectively and creating your first 2-session module after Session Zero.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="module-types-and-templates"><a class="header" href="#module-types-and-templates">Module Types and Templates</a></h1>
@@ -8286,7 +10114,7 @@ When time runs short:</p>
 <h2 id="conclusion-1"><a class="header" href="#conclusion-1">Conclusion</a></h2>
 <p>These module types and templates provide frameworks, not prescriptions. The best modules often blend elements from multiple types, adjusted for your specific players and campaign. Use these patterns as starting points, then customize ruthlessly based on what you learn about your group.</p>
 <p>Remember: The perfect module is one that engages your specific players in your unique campaign. These templates help you build that faster, not replace your creativity.</p>
-<h2 id="next-steps-4"><a class="header" href="#next-steps-4">Next Steps</a></h2>
+<h2 id="next-steps-5"><a class="header" href="#next-steps-5">Next Steps</a></h2>
 <p>With templates chosen and customized, the next chapter covers running modules effectively—managing pacing, handling derailments, and transitioning between modules smoothly.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="running-your-module"><a class="header" href="#running-your-module">Running Your Module</a></h1>
@@ -9417,7 +11245,7 @@ Culprit Found →
 <p><strong>Energy management matters</strong> - Both yours and your players’ energy must be sustained.</p>
 <h2 id="start-here-1"><a class="header" href="#start-here-1">Start Here</a></h2>
 <p>To see these principles in action, we’ll follow a complete example throughout this section:</p>
-<p><strong><a href="campaign-framework/04-session-management/session-interlude.html">Interlude: Session 1 Play-Through</a></strong> - See what happened in Session 1 of our Brittle Steel mystery module, establishing the foundation we’ll build on.</p>
+<p><strong><a href="#interlude-session-1-play-through">Interlude: Session 1 Play-Through</a></strong> - See what happened in Session 1 of our Brittle Steel mystery module, establishing the foundation we’ll build on.</p>
 <p>New DMs: After reading the interlude, begin with <a href="#pre-session-preparation-1">Pre-Session Preparation</a> to build sustainable habits.</p>
 <p>Experienced DMs: Jump to whichever phase challenges you most.</p>
 <p>The three phases work together—master all three for consistently excellent sessions.</p>
@@ -10337,6 +12165,264 @@ You feel anxiety when players make unexpected choices. You find yourself steerin
 </ul>
 <p>This investment pays dividends in campaign coherence and player engagement. Your future self will thank you.</p>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="interlude-session-1-play-through"><a class="header" href="#interlude-session-1-play-through">Interlude: Session 1 Play-Through</a></h1>
+<p><em>Before we dive into the mechanics of session management, let’s see what actually happened in Session 1 that sets up our Session 2 planning example.</em></p>
+<hr>
+<h2 id="the-brittle-steel-mystery-begins"><a class="header" href="#the-brittle-steel-mystery-begins">The Brittle Steel Mystery Begins</a></h2>
+<h3 id="opening-scene-the-broken-blade"><a class="header" href="#opening-scene-the-broken-blade">Opening Scene: The Broken Blade</a></h3>
+<p>The party gathered at the Bronze Dragon Inn in Greyhold, each drawn by different threads—Marcus seeking redemption through heroic deeds, Thora investigating unusual ore shipments, Elara following whispers of ancient magic, and Torin simply needing honest work.</p>
+<p>Their separate purposes converged when Garrett the innkeeper demonstrated his problem: a two-month-old sword that crumbled like chalk when struck against his cutting board. “Third one this week,” he muttered. “The smith swears his technique hasn’t changed, but the steel…”</p>
+<p><strong>What the Players Did:</strong></p>
+<ul>
+<li>Thora immediately examined the metal (Investigation: 18), noting crystalline patterns she’d never seen</li>
+<li>Elara detected faint traces of corrupted magic (Arcana: 21)</li>
+<li>Marcus interviewed the angry customer, learning this affected the town guard’s weapons</li>
+<li>Torin offered to speak with the local smiths, having worked with many</li>
+</ul>
+<h3 id="investigation-the-smiths-confession"><a class="header" href="#investigation-the-smiths-confession">Investigation: The Smith’s Confession</a></h3>
+<p>At the Hammer &amp; Tongs, they found Brendan the smith near tears. His demonstration was dramatic—a freshly forged horseshoe shattered when dropped. “It’s not just my work,” he confided. “Every smith in town. Started eight weeks ago. The metal’s cursed, I tell you.”</p>
+<p>The party learned:</p>
+<ul>
+<li>The brittle steel problem began suddenly</li>
+<li>All iron from the Irondeep Mines was affected</li>
+<li>The Miners’ Guild was staying suspiciously quiet</li>
+<li>Shipments were still going out to neighboring towns (Thora was alarmed by this)</li>
+</ul>
+<p><strong>Player Theories Emerged:</strong></p>
+<ul>
+<li>Marcus: “Sabotage by enemies of Greyhold”</li>
+<li>Thora: “Someone’s poisoning the ore supply”</li>
+<li>Elara: “This corruption feels ancient, not recent”</li>
+<li>Torin: “The miners know more than they’re saying”</li>
+</ul>
+<h3 id="the-goldbeard-connection"><a class="header" href="#the-goldbeard-connection">The Goldbeard Connection</a></h3>
+<p>Their investigation led to the Miners’ Guildhall, where they encountered Goldbeard—a red-bearded dwarf who clearly hadn’t expected visitors. His nervous energy peaked when Thora mentioned she was a weapons merchant.</p>
+<p>“The mines are closed!” he blurted. “Official guild business. No visitors. The iron’s fine, just a bad batch. We’re handling it internally.” His protests rang hollow.</p>
+<p>When pressed, Goldbeard let slip: “If you think you can do better than us, talk to Morak yourself! He’s the only one who… I mean…” He clamped his mouth shut, but the damage was done.</p>
+<h3 id="choice-point-three-paths"><a class="header" href="#choice-point-three-paths">Choice Point: Three Paths</a></h3>
+<p>The party faced a decision on how to pursue Morak:</p>
+<ol>
+<li><strong>The Official Route</strong>: Request formal permission from the Miners’ Guild</li>
+<li><strong>The Stealthy Approach</strong>: Sneak into the closed mines</li>
+<li><strong>The Research Path</strong>: Investigate the Deepguard Archive first</li>
+</ol>
+<p>After debate (and Elara’s strong advocacy for knowledge before action), they chose the Archive. Torin’s practical nature won out: “Better to know what we’re walking into.”</p>
+<h3 id="the-deepguard-archive"><a class="header" href="#the-deepguard-archive">The Deepguard Archive</a></h3>
+<p>Sister Catherine, the archive keeper, granted them access to the restricted historical section after Elara demonstrated her sincere scholarly interest (and the party donated to the temple).</p>
+<p>Hours of research revealed:</p>
+<ul>
+<li><strong>Ancient records</strong>: References to “deep seals” and “imprisoned corruption”</li>
+<li><strong>Dwarven texts</strong>: Warnings about “that which gnaws at the world’s bones”</li>
+<li><strong>Recent logs</strong>: Morak had been here six weeks ago, reading the same texts</li>
+<li><strong>A crucial map</strong>: Showing old sealed tunnels in the Irondeep Mines</li>
+</ul>
+<p>Thora discovered margin notes in Morak’s handwriting: “The ancestors were wrong. Containment is not purification. The corruption must be released to be cleansed.”</p>
+<h3 id="cliffhanger-into-the-depths"><a class="header" href="#cliffhanger-into-the-depths">Cliffhanger: Into the Depths</a></h3>
+<p>Armed with knowledge and growing concern, the party decided to enter the mines immediately. At the supposedly sealed entrance, they found:</p>
+<ul>
+<li>Fresh footprints despite the “closed” status</li>
+<li>The seal broken from the inside</li>
+<li>Echoes of chanting from deep below</li>
+<li>A faint, rhythmic pulsing of purple light</li>
+</ul>
+<p>As they descended into the darkness, Elara’s magical senses screamed warnings. The corruption wasn’t just in the iron—it permeated the very air. Somewhere below, Morak was attempting something that had been forbidden for centuries.</p>
+<p>The session ended with the party at the threshold of the ancient section, purple light growing stronger, and the sound of Morak’s voice raised in ritual chant: “Rise, corruption! Show them their steel is as weak as their faith!”</p>
+<hr>
+<h2 id="what-this-session-established"><a class="header" href="#what-this-session-established">What This Session Established</a></h2>
+<h3 id="world-building"><a class="header" href="#world-building">World Building</a></h3>
+<ul>
+<li>Greyhold depends on iron mining and smithing</li>
+<li>The Miners’ Guild has significant autonomy</li>
+<li>Ancient dwarven ruins exist beneath current mines</li>
+<li>The Deepguard Archive preserves dangerous knowledge</li>
+</ul>
+<h3 id="character-moments"><a class="header" href="#character-moments">Character Moments</a></h3>
+<ul>
+<li>Marcus established himself as the face of the party</li>
+<li>Thora’s merchant connections provided context</li>
+<li>Elara’s scholarly approach opened doors</li>
+<li>Torin’s practical wisdom guided decisions</li>
+</ul>
+<h3 id="mystery-elements"><a class="header" href="#mystery-elements">Mystery Elements</a></h3>
+<ul>
+<li><strong>The Problem</strong>: Brittle steel threatening the economy</li>
+<li><strong>The Suspect</strong>: Morak, driven by corrupted logic</li>
+<li><strong>The Truth</strong>: Ancient sealed corruption being “released to cleanse”</li>
+<li><strong>The Stakes</strong>: A town’s survival and possibly more</li>
+</ul>
+<h3 id="player-engagement"><a class="header" href="#player-engagement">Player Engagement</a></h3>
+<p>The players showed clear interest in:</p>
+<ul>
+<li>The historical mystery (especially Elara’s player)</li>
+<li>The economic implications (Thora’s concern)</li>
+<li>The heroic angle (Marcus’s motivation)</li>
+<li>The practical challenges (Torin’s focus)</li>
+</ul>
+<h3 id="threads-for-session-2"><a class="header" href="#threads-for-session-2">Threads for Session 2</a></h3>
+<ul>
+<li>Immediate: Stop Morak’s ritual</li>
+<li>Short-term: Deal with corrupted mines</li>
+<li>Long-term: Investigate other seals</li>
+<li>Character: Each PC has personal stakes now</li>
+</ul>
+<hr>
+<h2 id="session-1-metrics"><a class="header" href="#session-1-metrics">Session 1 Metrics</a></h2>
+<p><strong>Duration</strong>: 3.5 hours<br><strong>Combat</strong>: One brief encounter with corrupted rats (10 minutes)<br><strong>Investigation</strong>: 60% of session<br><strong>Roleplay</strong>: 30% of session<br><strong>Exploration</strong>: 10% of session</p>
+<p><strong>Player Engagement</strong>:</p>
+<ul>
+<li>All players contributed to investigation</li>
+<li>Natural leadership dynamics emerged</li>
+<li>Character voices became distinct</li>
+<li>Investment in mystery achieved</li>
+</ul>
+<p><strong>DM Notes</strong>:</p>
+<ul>
+<li>Players more interested in research than expected</li>
+<li>Goldbeard became more important through improv</li>
+<li>Archive scene ran long but was worth it</li>
+<li>Need stat block for Morak ready for Session 2</li>
+</ul>
+<p>This established foundation is what we’ll build on in our Session 2 preparation example…</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="scaling-the-system"><a class="header" href="#scaling-the-system">Scaling the System</a></h1>
+<p>The Campaign Generation Framework is designed for full campaigns, but its processes scale to match your game’s scope. This chapter shows how to apply the right amount of planning for different game types.</p>
+<h2 id="core-principle"><a class="header" href="#core-principle">Core Principle</a></h2>
+<p>The framework consists of three nested processes:</p>
+<ol>
+<li><strong>Campaign Genesis</strong> - Establishing the world and context</li>
+<li><strong>Module Creation</strong> - Designing story arcs</li>
+<li><strong>Session Management</strong> - Running individual games</li>
+</ol>
+<p>For shorter games, you simply start at the appropriate level and assume the context from higher levels.</p>
+<h2 id="one-shot-games"><a class="header" href="#one-shot-games">One-Shot Games</a></h2>
+<p><strong>Process</strong>: Session planning only</p>
+<p>For a single 3-4 hour game, jump directly to session management:</p>
+<ul>
+<li>Use the 8-step session prep process</li>
+<li>Assume all context (setting, characters, backstories)</li>
+<li>Provide pre-generated characters or quick builds</li>
+<li>Start in media res: “You’ve been hired to clear out the demon goat farm”</li>
+</ul>
+<p><strong>Time Investment</strong>: 1-2 hours prep for 4 hours play</p>
+<p><strong>What You Skip</strong>:</p>
+<ul>
+<li>All campaign-level planning</li>
+<li>Module structure and arcs</li>
+<li>Character integration and backstories</li>
+<li>Long-term consequences</li>
+</ul>
+<h2 id="short-adventures-2-6-sessions"><a class="header" href="#short-adventures-2-6-sessions">Short Adventures (2-6 sessions)</a></h2>
+<p><strong>Process</strong>: Module planning → Session planning</p>
+<p>For a complete story told over several sessions:</p>
+<ul>
+<li>Start with the module creation process</li>
+<li>Design beginning, middle, and end</li>
+<li>Build in meaningful decision points</li>
+<li>Use session management for each game</li>
+</ul>
+<p><strong>Time Investment</strong>:</p>
+<ul>
+<li>Module creation: 6-8 hours total</li>
+<li>Session prep: 1 hour per session</li>
+</ul>
+<p><strong>What You Skip</strong>:</p>
+<ul>
+<li>Campaign-level world building</li>
+<li>Long-term character arcs</li>
+<li>Faction development</li>
+<li>Campaign health tracking</li>
+</ul>
+<p><strong>Example</strong>: Run “The Brittle Steel Mystery” as a standalone adventure without the broader Ironhold campaign context.</p>
+<h2 id="mini-campaigns-2-3-months"><a class="header" href="#mini-campaigns-2-3-months">Mini-Campaigns (2-3 months)</a></h2>
+<p><strong>Process</strong>: Light campaign genesis → Module planning → Session planning</p>
+<p>For focused campaigns with definite endpoints:</p>
+<ul>
+<li>Run abbreviated Session Zero (2 hours instead of 4)</li>
+<li>Create minimal framework: pitch + starting scenario</li>
+<li>Plan 2-3 connected modules</li>
+<li>Use full session management</li>
+</ul>
+<p><strong>Time Investment</strong>:</p>
+<ul>
+<li>Initial setup: 4-6 hours</li>
+<li>Module creation: 6-8 hours each</li>
+<li>Weekly session prep: 1 hour</li>
+</ul>
+<p><strong>Simplifications</strong>:</p>
+<ul>
+<li>Limit to one region/city</li>
+<li>Focus on single major conflict</li>
+<li>Streamline to 3-5 key NPCs</li>
+<li>Skip comprehensive world building</li>
+</ul>
+<h2 id="full-campaigns-6-months"><a class="header" href="#full-campaigns-6-months">Full Campaigns (6+ months)</a></h2>
+<p><strong>Process</strong>: Complete system as designed</p>
+<p>For ongoing campaigns with evolving stories:</p>
+<ul>
+<li>Full campaign genesis process (4 phases)</li>
+<li>Module creation for each story arc</li>
+<li>Weekly session management</li>
+<li>Monthly campaign reviews</li>
+<li>Player character arc tracking</li>
+</ul>
+<p><strong>Time Investment</strong>:</p>
+<ul>
+<li>Campaign genesis: 20-30 hours over 3 weeks</li>
+<li>Module creation: 8-12 hours per module</li>
+<li>Weekly session prep: 1-2 hours</li>
+<li>Monthly reviews: 30 minutes</li>
+</ul>
+<p><strong>Full System Benefits</strong>:</p>
+<ul>
+<li>Deep world consistency</li>
+<li>Meaningful player agency</li>
+<li>Evolving storylines</li>
+<li>Sustainable prep habits</li>
+</ul>
+<h2 id="conventiondemo-games"><a class="header" href="#conventiondemo-games">Convention/Demo Games</a></h2>
+<p><strong>Process</strong>: Pre-generated everything</p>
+<p>For showcasing the game or teaching new players:</p>
+<ul>
+<li>Skip all planning processes</li>
+<li>Provide complete pre-gens with established relationships</li>
+<li>Start in the middle of action</li>
+<li>Focus on core gameplay demonstration</li>
+</ul>
+<p><strong>Preparation</strong>: Use existing materials or published adventures</p>
+<p><strong>Key Differences</strong>:</p>
+<ul>
+<li>No player investment needed</li>
+<li>Pure gameplay focus</li>
+<li>Simplified rules demonstrations</li>
+<li>Clear win conditions</li>
+</ul>
+<h2 id="scaling-guidelines-1"><a class="header" href="#scaling-guidelines-1">Scaling Guidelines</a></h2>
+<h3 id="when-to-scale-up"><a class="header" href="#when-to-scale-up">When to Scale Up</a></h3>
+<ul>
+<li>Players want deeper investment</li>
+<li>Story needs more context</li>
+<li>Characters develop personal goals</li>
+<li>World consequences matter</li>
+</ul>
+<h3 id="when-to-scale-down"><a class="header" href="#when-to-scale-down">When to Scale Down</a></h3>
+<ul>
+<li>Limited time commitment</li>
+<li>Trying new systems</li>
+<li>Teaching new players</li>
+<li>Testing campaign concepts</li>
+</ul>
+<h3 id="mixing-scales"><a class="header" href="#mixing-scales">Mixing Scales</a></h3>
+<p>You can mix approaches:</p>
+<ul>
+<li>Start with one-shots, expand to mini-campaign</li>
+<li>Run modules between full campaigns</li>
+<li>Use one-shots to test new regions</li>
+<li>Create mini-campaigns as character backstories</li>
+</ul>
+<h2 id="the-key-insight"><a class="header" href="#the-key-insight">The Key Insight</a></h2>
+<p>The framework isn’t about using every tool—it’s about applying the right level of planning for your game’s needs. Templates and artifacts support the process; they don’t define it.</p>
+<p>Start where makes sense. Scale when needed. The goal is great games, not perfect documentation.</p>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="developer-documentation"><a class="header" href="#developer-documentation">Developer Documentation</a></h1>
 <p>This section contains documentation for developers who want to contribute to Mimir or understand its technical architecture.</p>
 <h2 id="getting-started-1"><a class="header" href="#getting-started-1">Getting Started</a></h2>
@@ -10372,7 +12458,7 @@ You feel anxiety when players make unexpected choices. You find yourself steerin
 <li><a href="#code-style-and-standards">Code Style and Standards</a></li>
 <li><a href="#testing-guidelines">Testing Guidelines</a></li>
 <li><a href="#pull-request-process">Pull Request Process</a></li>
-<li><a href="#architecture-overview">Architecture Overview</a></li>
+<li><a href="#architecture-overview-1">Architecture Overview</a></li>
 <li><a href="#design-principles-1">Design Principles</a></li>
 <li><a href="#release-process">Release Process</a></li>
 </ol>
@@ -10649,7 +12735,7 @@ Related to #456
 <li>Your contribution will be included in the next release</li>
 <li>Thank you for contributing!</li>
 </ul>
-<h2 id="architecture-overview"><a class="header" href="#architecture-overview">Architecture Overview</a></h2>
+<h2 id="architecture-overview-1"><a class="header" href="#architecture-overview-1">Architecture Overview</a></h2>
 <h3 id="system-architecture"><a class="header" href="#system-architecture">System Architecture</a></h3>
 <p>Mimir follows a clean architecture pattern with clear separation of concerns:</p>
 <pre><code>┌─────────────────────────────────────────┐
@@ -10972,7 +13058,7 @@ cargo tauri build
 <li>Database: SQLite with Diesel ORM</li>
 <li>File System: Campaign data storage</li>
 </ul>
-<h3 id="data-flow"><a class="header" href="#data-flow">Data Flow</a></h3>
+<h3 id="data-flow-1"><a class="header" href="#data-flow-1">Data Flow</a></h3>
 <pre><code>User Interaction
       ↓
 Vue Component
@@ -11621,7 +13707,7 @@ Result&lt;ApiResponse&lt;Campaign&gt;, ApiError&gt; → JSON → Frontend
 <li><code>ApiResponse&lt;T&gt;</code> wrapper for consistent error handling</li>
 <li>3 themes: light, dark, hyper (CSS variables + Pinia persistence)</li>
 </ul>
-<h3 id="mimir-mcp--mcp-sidecar-server"><a class="header" href="#mimir-mcp--mcp-sidecar-server">mimir-mcp — MCP Sidecar Server</a></h3>
+<h3 id="mimir-mcp--mcp-sidecar-server-1"><a class="header" href="#mimir-mcp--mcp-sidecar-server-1">mimir-mcp — MCP Sidecar Server</a></h3>
 <p>Runs as a separate process, sharing the same SQLite database.</p>
 <pre><code>┌──────────────────────────────────────────────────────────┐
 │                       mimir-mcp                           │
@@ -11692,7 +13778,7 @@ Result&lt;ApiResponse&lt;Campaign&gt;, ApiError&gt; → JSON → Frontend
 └──────────────────────────────────────────────────────────┘
 </code></pre>
 <p><strong>No database dependency.</strong> Operates entirely on YAML config input → file output.</p>
-<h3 id="mimir-print--pdf-generation"><a class="header" href="#mimir-print--pdf-generation">mimir-print — PDF Generation</a></h3>
+<h3 id="mimir-print--pdf-generation-1"><a class="header" href="#mimir-print--pdf-generation-1">mimir-print — PDF Generation</a></h3>
 <p>Typst-based document builder with pluggable sections.</p>
 <pre><code>┌──────────────────────────────────────────────────────────┐
 │                       mimir-print                         │
