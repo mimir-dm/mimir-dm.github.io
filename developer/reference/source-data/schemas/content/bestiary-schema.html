@@ -1,0 +1,894 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bestiary Schema - Mimir - D&amp;D Campaign Assistant</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A local-first D&amp;D campaign assistant for Dungeon Masters">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../../../css/general-0392ca55.css">
+        <link rel="stylesheet" href="../../../../../css/chrome-fc474251.css">
+        <link rel="stylesheet" href="../../../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../../../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../../../searchindex-a592f85d.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../../../toc-fd563564.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Mimir - D&amp;D Campaign Assistant</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/mimir-dm/mimir" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/mimir-dm/mimir/edit/main/docs/src/developer/reference/source-data/schemas/content/bestiary-schema.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="bestiary-schema-documentation"><a class="header" href="#bestiary-schema-documentation">Bestiary Schema Documentation</a></h1>
+<p>This document defines the JSON schema for monster and creature data in the D&amp;D 5etools format.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The bestiary schema represents all creatures and monsters in D&amp;D including NPCs, beasts, dragons, aberrations, and other creature types. Monsters are stored in JSON files with the root key <code>"monster"</code> containing an array of creature objects.</p>
+<h2 id="file-location"><a class="header" href="#file-location">File Location</a></h2>
+<ul>
+<li>Path: <code>{book}/bestiary/bestiary-{source}.json</code></li>
+<li>Fluff: <code>{book}/bestiary/fluff-bestiary-{source}.json</code></li>
+</ul>
+<h2 id="root-structure"><a class="header" href="#root-structure">Root Structure</a></h2>
+<pre><code class="language-json">{
+  "monster": [
+    {
+      // Monster objects
+    }
+  ]
+}
+</code></pre>
+<h2 id="core-monster-object"><a class="header" href="#core-monster-object">Core Monster Object</a></h2>
+<p>Every monster object contains these required fields:</p>
+<pre><code class="language-json">{
+  "name": "string",           // Monster name
+  "source": "string",         // Source book abbreviation (MM, VGM, etc.)
+  "page": "number",           // Page number in source book
+  "size": ["string"],         // Size category array
+  "type": "string|object",    // Creature type
+  "alignment": ["string"],    // Alignment array
+  "ac": ["number|object"],    // Armor class array
+  "hp": "object",             // Hit points
+  "speed": "object",          // Movement speeds
+  "str": "number",            // Strength score
+  "dex": "number",            // Dexterity score
+  "con": "number",            // Constitution score
+  "int": "number",            // Intelligence score
+  "wis": "number",            // Wisdom score
+  "cha": "number"             // Charisma score
+}
+</code></pre>
+<h2 id="size-categories"><a class="header" href="#size-categories">Size Categories</a></h2>
+<p>The <code>size</code> field is an array containing one or more size codes:</p>
+<ul>
+<li><code>T</code> - Tiny</li>
+<li><code>S</code> - Small</li>
+<li><code>M</code> - Medium</li>
+<li><code>L</code> - Large</li>
+<li><code>H</code> - Huge</li>
+<li><code>G</code> - Gargantuan</li>
+</ul>
+<p>Example: <code>["M"]</code> for Medium, <code>["L", "H"]</code> for Large or Huge</p>
+<h2 id="creature-type"><a class="header" href="#creature-type">Creature Type</a></h2>
+<p>The <code>type</code> field can be a string or complex object:</p>
+<h3 id="simple-type"><a class="header" href="#simple-type">Simple Type</a></h3>
+<pre><code class="language-json">"type": "humanoid"
+</code></pre>
+<h3 id="complex-type-with-tags"><a class="header" href="#complex-type-with-tags">Complex Type with Tags</a></h3>
+<pre><code class="language-json">"type": {
+  "type": "humanoid",
+  "tags": ["goblinoid"]
+}
+</code></pre>
+<h3 id="swarm-type"><a class="header" href="#swarm-type">Swarm Type</a></h3>
+<pre><code class="language-json">"type": {
+  "type": "swarm",
+  "swarmSize": "T",
+  "tags": ["beast"]
+}
+</code></pre>
+<h3 id="creature-type-values"><a class="header" href="#creature-type-values">Creature Type Values</a></h3>
+<ul>
+<li><code>aberration</code></li>
+<li><code>beast</code></li>
+<li><code>celestial</code></li>
+<li><code>construct</code></li>
+<li><code>dragon</code></li>
+<li><code>elemental</code></li>
+<li><code>fey</code></li>
+<li><code>fiend</code></li>
+<li><code>giant</code></li>
+<li><code>humanoid</code></li>
+<li><code>monstrosity</code></li>
+<li><code>ooze</code></li>
+<li><code>plant</code></li>
+<li><code>undead</code></li>
+</ul>
+<h2 id="alignment"><a class="header" href="#alignment">Alignment</a></h2>
+<p>The <code>alignment</code> field is an array of alignment objects or codes:</p>
+<pre><code class="language-json">// Single alignment
+["L", "E"]  // Lawful Evil
+
+// Multiple alignments
+["L", "NX", "C", "E"]  // Lawful/Neutral/Chaotic Evil
+
+// Special alignments
+["U"]  // Unaligned
+["A"]  // Any alignment
+["N"]  // Neutral
+
+// Complex alignment
+[{
+  "alignment": ["C", "E"],
+  "chance": 50
+}]
+</code></pre>
+<h3 id="alignment-codes"><a class="header" href="#alignment-codes">Alignment Codes</a></h3>
+<ul>
+<li><code>L</code> - Lawful</li>
+<li><code>N</code> - Neutral</li>
+<li><code>C</code> - Chaotic</li>
+<li><code>G</code> - Good</li>
+<li><code>E</code> - Evil</li>
+<li><code>U</code> - Unaligned</li>
+<li><code>A</code> - Any</li>
+<li><code>NX</code> - Neutral (on law/chaos axis)</li>
+<li><code>NY</code> - Neutral (on good/evil axis)</li>
+</ul>
+<h2 id="armor-class"><a class="header" href="#armor-class">Armor Class</a></h2>
+<p>The <code>ac</code> field is an array of AC values or objects:</p>
+<pre><code class="language-json">// Simple AC
+[15]
+
+// AC with armor type
+[{
+  "ac": 15,
+  "from": ["natural armor"]
+}]
+
+// Multiple AC values
+[
+  {
+    "ac": 15,
+    "from": ["leather armor", "shield"]
+  },
+  {
+    "ac": 18,
+    "from": ["plate armor"],
+    "condition": "with armor"
+  }
+]
+
+// AC with bonus
+[{
+  "ac": 13,
+  "from": ["{@spell mage armor}"],
+  "condition": "with {@spell mage armor}"
+}]
+</code></pre>
+<h2 id="hit-points"><a class="header" href="#hit-points">Hit Points</a></h2>
+<p>The <code>hp</code> field defines creature health:</p>
+<pre><code class="language-json">{
+  "average": 45,
+  "formula": "7d8 + 14"
+}
+
+// Special HP
+{
+  "special": "equal to the summoner's hit point maximum"
+}
+</code></pre>
+<h2 id="speed"><a class="header" href="#speed">Speed</a></h2>
+<p>The <code>speed</code> field defines movement types and distances:</p>
+<pre><code class="language-json">{
+  "walk": 30
+}
+
+// Multiple movement types
+{
+  "walk": 30,
+  "fly": 60,
+  "swim": 40,
+  "climb": 30,
+  "burrow": 20
+}
+
+// Conditional speeds
+{
+  "walk": 30,
+  "fly": {
+    "number": 60,
+    "condition": "(hover)"
+  }
+}
+
+// Alternative forms
+{
+  "walk": 30,
+  "alternate": {
+    "walk": [
+      {
+        "number": 40,
+        "condition": "in wolf form"
+      }
+    ]
+  }
+}
+</code></pre>
+<h2 id="ability-scores"><a class="header" href="#ability-scores">Ability Scores</a></h2>
+<p>Six required ability scores (1-30):</p>
+<pre><code class="language-json">{
+  "str": 18,
+  "dex": 14,
+  "con": 16,
+  "int": 10,
+  "wis": 12,
+  "cha": 8
+}
+</code></pre>
+<h2 id="saving-throws"><a class="header" href="#saving-throws">Saving Throws</a></h2>
+<p>The <code>save</code> field defines proficient saving throws:</p>
+<pre><code class="language-json">{
+  "str": "+7",
+  "con": "+10",
+  "wis": "+6",
+  "cha": "+5"
+}
+</code></pre>
+<h2 id="skills"><a class="header" href="#skills">Skills</a></h2>
+<p>The <code>skill</code> field defines skill proficiencies:</p>
+<pre><code class="language-json">{
+  "perception": "+4",
+  "stealth": "+6",
+  "athletics": "+7",
+  "deception": "+5"
+}
+
+// With special modifiers
+{
+  "perception": {
+    "mod": "+9",
+    "condition": "while in dim light or darkness"
+  }
+}
+</code></pre>
+<h2 id="damage-interactions"><a class="header" href="#damage-interactions">Damage Interactions</a></h2>
+<h3 id="damage-vulnerabilities"><a class="header" href="#damage-vulnerabilities">Damage Vulnerabilities</a></h3>
+<pre><code class="language-json">"vulnerable": ["fire", "radiant"]
+</code></pre>
+<h3 id="damage-resistances"><a class="header" href="#damage-resistances">Damage Resistances</a></h3>
+<pre><code class="language-json">"resist": [
+  "cold",
+  "necrotic",
+  {
+    "resist": ["bludgeoning", "piercing", "slashing"],
+    "note": "from nonmagical attacks"
+  }
+]
+</code></pre>
+<h3 id="damage-immunities"><a class="header" href="#damage-immunities">Damage Immunities</a></h3>
+<pre><code class="language-json">"immune": [
+  "poison",
+  "psychic",
+  {
+    "immune": ["bludgeoning", "piercing", "slashing"],
+    "note": "from nonmagical attacks that aren't silvered"
+  }
+]
+</code></pre>
+<h3 id="condition-immunities"><a class="header" href="#condition-immunities">Condition Immunities</a></h3>
+<pre><code class="language-json">"conditionImmune": ["charmed", "frightened", "paralyzed", "poisoned"]
+</code></pre>
+<h2 id="senses"><a class="header" href="#senses">Senses</a></h2>
+<p>The <code>senses</code> field lists special senses:</p>
+<pre><code class="language-json">[
+  "darkvision 60 ft.",
+  "blindsight 30 ft.",
+  "truesight 120 ft.",
+  "tremorsense 60 ft."
+]
+
+// With passive Perception
+[
+  "darkvision 60 ft.",
+  "passive Perception 14"
+]
+</code></pre>
+<h2 id="languages"><a class="header" href="#languages">Languages</a></h2>
+<p>The <code>languages</code> field lists known languages:</p>
+<pre><code class="language-json">["Common", "Goblin"]
+
+// With telepathy
+["Common", "telepathy 120 ft."]
+
+// Special cases
+["—"]  // No languages
+["all", "telepathy 120 ft."]
+</code></pre>
+<h2 id="challenge-rating"><a class="header" href="#challenge-rating">Challenge Rating</a></h2>
+<p>The <code>cr</code> field defines difficulty and XP:</p>
+<pre><code class="language-json">// Standard CR
+"cr": "5"
+
+// Fractional CR
+"cr": "1/4"
+"cr": "1/2"
+
+// Zero CR
+"cr": "0"
+
+// Complex CR
+"cr": {
+  "cr": "13",
+  "lair": "14"
+}
+
+// Unknown CR
+"cr": "Unknown"
+</code></pre>
+<h2 id="traits"><a class="header" href="#traits">Traits</a></h2>
+<p>The <code>trait</code> field is an array of special abilities:</p>
+<pre><code class="language-json">[
+  {
+    "name": "Keen Smell",
+    "entries": [
+      "The wolf has advantage on Wisdom (Perception) checks that rely on smell."
+    ]
+  },
+  {
+    "name": "Pack Tactics",
+    "entries": [
+      "The wolf has advantage on an attack roll against a creature if at least one of the wolf's allies is within 5 feet of the creature and the ally isn't {@condition incapacitated}."
+    ]
+  }
+]
+</code></pre>
+<h2 id="spellcasting"><a class="header" href="#spellcasting">Spellcasting</a></h2>
+<p>The <code>spellcasting</code> field defines spellcasting abilities:</p>
+<pre><code class="language-json">[
+  {
+    "name": "Spellcasting",
+    "headerEntries": [
+      "The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save {@dc 14}, {@hit 6} to hit with spell attacks). The mage has the following wizard spells prepared:"
+    ],
+    "spells": {
+      "0": {
+        "spells": ["{@spell fire bolt}", "{@spell light}", "{@spell mage hand}", "{@spell prestidigitation}"]
+      },
+      "1": {
+        "slots": 4,
+        "spells": ["{@spell detect magic}", "{@spell mage armor}", "{@spell magic missile}", "{@spell shield}"]
+      },
+      "2": {
+        "slots": 3,
+        "spells": ["{@spell misty step}", "{@spell suggestion}"]
+      },
+      "3": {
+        "slots": 3,
+        "spells": ["{@spell counterspell}", "{@spell fireball}", "{@spell fly}"]
+      },
+      "4": {
+        "slots": 3,
+        "spells": ["{@spell greater invisibility}", "{@spell ice storm}"]
+      },
+      "5": {
+        "slots": 1,
+        "spells": ["{@spell cone of cold}"]
+      }
+    },
+    "ability": "int",
+    "type": "spellcasting"
+  }
+]
+
+// Innate Spellcasting
+[
+  {
+    "name": "Innate Spellcasting",
+    "headerEntries": [
+      "The deva's spellcasting ability is Charisma (spell save {@dc 17}). The deva can innately cast the following spells, requiring only verbal components:"
+    ],
+    "will": [
+      "{@spell detect evil and good}",
+      "{@spell detect thoughts}"
+    ],
+    "daily": {
+      "1": ["{@spell commune}", "{@spell raise dead}"],
+      "3": ["{@spell cure wounds}", "{@spell lesser restoration}"]
+    },
+    "ability": "cha",
+    "type": "innate"
+  }
+]
+</code></pre>
+<h2 id="actions"><a class="header" href="#actions">Actions</a></h2>
+<p>The <code>action</code> field defines standard actions:</p>
+<pre><code class="language-json">[
+  {
+    "name": "Multiattack",
+    "entries": [
+      "The creature makes two attacks: one with its bite and one with its claws."
+    ]
+  },
+  {
+    "name": "Bite",
+    "entries": [
+      "{@atk mw} {@hit 7} to hit, reach 5 ft., one target. {@h}11 ({@damage 2d6 + 4}) piercing damage."
+    ]
+  },
+  {
+    "name": "Fire Breath {@recharge 5}",
+    "entries": [
+      "The dragon exhales fire in a 15-foot cone. Each creature in that area must make a {@dc 13} Dexterity saving throw, taking 24 ({@damage 7d6}) fire damage on a failed save, or half as much damage on a successful one."
+    ]
+  }
+]
+</code></pre>
+<h2 id="bonus-actions"><a class="header" href="#bonus-actions">Bonus Actions</a></h2>
+<p>The <code>bonus</code> field defines bonus actions:</p>
+<pre><code class="language-json">[
+  {
+    "name": "Nimble Escape",
+    "entries": [
+      "The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
+    ]
+  }
+]
+</code></pre>
+<h2 id="reactions"><a class="header" href="#reactions">Reactions</a></h2>
+<p>The <code>reaction</code> field defines reactions:</p>
+<pre><code class="language-json">[
+  {
+    "name": "Parry",
+    "entries": [
+      "The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
+    ]
+  }
+]
+</code></pre>
+<h2 id="legendary-actions"><a class="header" href="#legendary-actions">Legendary Actions</a></h2>
+<p>The <code>legendary</code> field defines legendary actions:</p>
+<pre><code class="language-json">[
+  {
+    "name": "Detect",
+    "entries": [
+      "The dragon makes a Wisdom (Perception) check."
+    ]
+  },
+  {
+    "name": "Tail Attack",
+    "entries": [
+      "The dragon makes a tail attack."
+    ]
+  },
+  {
+    "name": "Wing Attack (Costs 2 Actions)",
+    "entries": [
+      "The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a {@dc 19} Dexterity saving throw or take 13 ({@damage 2d6 + 6}) bludgeoning damage and be knocked {@condition prone}. The dragon can then fly up to half its flying speed."
+    ]
+  }
+]
+
+// With header text
+{
+  "legendaryHeader": [
+    "The dragon can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The dragon regains spent legendary actions at the start of its turn."
+  ],
+  "legendary": [...]
+}
+</code></pre>
+<h2 id="mythic-actions"><a class="header" href="#mythic-actions">Mythic Actions</a></h2>
+<p>The <code>mythic</code> field defines mythic encounter mechanics:</p>
+<pre><code class="language-json">{
+  "mythicHeader": [
+    "If the creature's mythic trait is active, it can use the options below as legendary actions."
+  ],
+  "mythic": [
+    {
+      "name": "Mythic Action",
+      "entries": ["Description of mythic action"]
+    }
+  ]
+}
+</code></pre>
+<h2 id="lair-actions"><a class="header" href="#lair-actions">Lair Actions</a></h2>
+<p>The <code>legendaryGroup</code> field links to lair actions and regional effects:</p>
+<pre><code class="language-json">{
+  "legendaryGroup": {
+    "name": "Ancient Red Dragon",
+    "source": "MM"
+  }
+}
+</code></pre>
+<h2 id="variants"><a class="header" href="#variants">Variants</a></h2>
+<p>The <code>variant</code> field defines creature variants:</p>
+<pre><code class="language-json">[
+  {
+    "type": "variant",
+    "name": "Devil's Sight",
+    "entries": [
+      "Magical darkness doesn't impede the imp's darkvision."
+    ]
+  },
+  {
+    "type": "variant",
+    "name": "Familiar",
+    "entries": [
+      "The imp can serve another creature as a familiar, forming a telepathic bond with its willing master..."
+    ]
+  }
+]
+</code></pre>
+<h2 id="alternate-versions"><a class="header" href="#alternate-versions">Alternate Versions</a></h2>
+<p>The <code>altArt</code> field references alternate artwork:</p>
+<pre><code class="language-json">[
+  {
+    "name": "Goblin (b)",
+    "source": "MM"
+  }
+]
+</code></pre>
+<h2 id="environment"><a class="header" href="#environment">Environment</a></h2>
+<p>The <code>environment</code> field lists suitable environments:</p>
+<pre><code class="language-json">["forest", "swamp", "underdark"]
+
+// All environments
+["arctic", "coastal", "desert", "forest", "grassland", "hill", "mountain", "swamp", "underdark", "underwater", "urban"]
+</code></pre>
+<h2 id="sound-clips"><a class="header" href="#sound-clips">Sound Clips</a></h2>
+<p>The <code>soundClip</code> field links to audio:</p>
+<pre><code class="language-json">{
+  "type": "external",
+  "url": "https://example.com/roar.mp3"
+}
+</code></pre>
+<h2 id="token-information"><a class="header" href="#token-information">Token Information</a></h2>
+<p>The <code>token</code> field provides VTT token data:</p>
+<pre><code class="language-json">{
+  "name": "Goblin",
+  "source": "MM"
+}
+</code></pre>
+<h2 id="formatting-tags-in-text"><a class="header" href="#formatting-tags-in-text">Formatting Tags in Text</a></h2>
+<p>Monster descriptions use 5etools formatting tags:</p>
+<ul>
+<li><code>{@atk mw}</code> - Melee weapon attack</li>
+<li><code>{@atk rw}</code> - Ranged weapon attack</li>
+<li><code>{@atk ms}</code> - Melee spell attack</li>
+<li><code>{@atk rs}</code> - Ranged spell attack</li>
+<li><code>{@hit 5}</code> - Attack bonus</li>
+<li><code>{@h}</code> - Hit text</li>
+<li><code>{@damage 2d6 + 3}</code> - Damage rolls</li>
+<li><code>{@dc 15}</code> - Difficulty class</li>
+<li><code>{@recharge 5}</code> - Recharge notation</li>
+<li><code>{@condition poisoned}</code> - Conditions</li>
+<li><code>{@spell fireball}</code> - Spell references</li>
+<li><code>{@creature goblin}</code> - Creature references</li>
+<li><code>{@item longsword}</code> - Item references</li>
+<li><code>{@dice 1d20}</code> - Dice rolls</li>
+<li><code>{@chance 25}</code> - Percentage chance</li>
+</ul>
+<h2 id="complete-monster-example"><a class="header" href="#complete-monster-example">Complete Monster Example</a></h2>
+<pre><code class="language-json">{
+  "name": "Goblin",
+  "source": "MM",
+  "page": 166,
+  "size": ["S"],
+  "type": {
+    "type": "humanoid",
+    "tags": ["goblinoid"]
+  },
+  "alignment": ["N", "E"],
+  "ac": [
+    {
+      "ac": 15,
+      "from": ["leather armor", "shield"]
+    }
+  ],
+  "hp": {
+    "average": 7,
+    "formula": "2d6"
+  },
+  "speed": {
+    "walk": 30
+  },
+  "str": 8,
+  "dex": 14,
+  "con": 10,
+  "int": 10,
+  "wis": 8,
+  "cha": 8,
+  "skill": {
+    "stealth": "+6"
+  },
+  "senses": [
+    "darkvision 60 ft.",
+    "passive Perception 9"
+  ],
+  "languages": ["Common", "Goblin"],
+  "cr": "1/4",
+  "trait": [
+    {
+      "name": "Nimble Escape",
+      "entries": [
+        "The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
+      ]
+    }
+  ],
+  "action": [
+    {
+      "name": "Scimitar",
+      "entries": [
+        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}5 ({@damage 1d6 + 2}) slashing damage."
+      ]
+    },
+    {
+      "name": "Shortbow",
+      "entries": [
+        "{@atk rw} {@hit 4} to hit, range 80/320 ft., one target. {@h}5 ({@damage 1d6 + 2}) piercing damage."
+      ]
+    }
+  ],
+  "environment": ["forest", "grassland", "hill", "underdark"],
+  "soundClip": {
+    "type": "external",
+    "url": "https://5e.tools/audio/bestiary/goblin.mp3"
+  },
+  "hasFluff": true,
+  "hasFluffImages": true,
+  "token": {
+    "name": "Goblin",
+    "source": "MM"
+  }
+}
+</code></pre>
+<h2 id="special-monster-types"><a class="header" href="#special-monster-types">Special Monster Types</a></h2>
+<h3 id="npcs"><a class="header" href="#npcs">NPCs</a></h3>
+<p>NPCs often have additional fields:</p>
+<ul>
+<li><code>isNpc</code>: true - Marks as an NPC</li>
+<li><code>group</code>: [“Knights of Solamnia”] - Organization affiliations</li>
+</ul>
+<h3 id="named-npcs"><a class="header" href="#named-npcs">Named NPCs</a></h3>
+<p>Named creatures may have:</p>
+<ul>
+<li><code>isNamedCreature</code>: true - Marks as unique individual</li>
+<li><code>familiar</code>: true - Can serve as a familiar</li>
+</ul>
+<h3 id="swarms"><a class="header" href="#swarms">Swarms</a></h3>
+<p>Swarm creatures include swarmSize in their type object</p>
+<h3 id="summoned-creatures"><a class="header" href="#summoned-creatures">Summoned Creatures</a></h3>
+<p>Summoned creatures may have:</p>
+<ul>
+<li><code>summonedBySpell</code>: true - Created by spell effects</li>
+<li><code>summonedByClass</code>: “Druid” - Class that can summon</li>
+</ul>
+<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
+<ul>
+<li>All numeric values should be treated as either integers or floats</li>
+<li>Text fields support D&amp;D formatting tags (see formatting section)</li>
+<li>Monster references use the format <code>"creature name|source"</code> for cross-linking</li>
+<li>Boolean fields default to <code>false</code> when omitted</li>
+<li>Arrays default to empty <code>[]</code> when omitted</li>
+<li>The <code>page</code> field may be a number or object with <code>start</code> and <code>end</code> for multi-page entries</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../../../developer/reference/source-data/schemas/class-schema.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../../../developer/reference/source-data/schemas/content/class-schema.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../../../developer/reference/source-data/schemas/class-schema.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../../../developer/reference/source-data/schemas/content/class-schema.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../../../searcher-09f2665d.js"></script>
+
+        <script src="../../../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../../../highlight-abc7f01d.js"></script>
+        <script src="../../../../../book-c22b7243.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../../../../mermaid-eefea253.min.js"></script>
+        <script src="../../../../../mermaid-init-025d9952.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
