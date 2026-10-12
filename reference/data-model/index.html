@@ -1,0 +1,1058 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Data Model | Mimir</title><link rel="canonical" href="https://mimir-dm.github.io/reference/data-model/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.3.8"/><meta name="generator" content="Starlight v0.42.6"/><meta property="og:title" content="Data Model"/><meta property="og:type" content="article"/><meta property="og:url" content="https://mimir-dm.github.io/reference/data-model/"/><meta property="og:locale" content="en"/><meta property="og:description" content="A local-first D&amp;D campaign assistant for Dungeon Masters"/><meta property="og:site_name" content="Mimir"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="A local-first D&amp;D campaign assistant for Dungeon Masters"/><script>
+	window.StarlightThemeProvider = (() => {
+		const stored = typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme =
+			theme === 'light' || theme === 'hyper' ? theme : 'dark';
+
+		// Expressive Code knows only light and dark, and gives every root theme
+		// but 'dark' its light code theme. Under hyper, each code block gets
+		// data-theme="dark", which Expressive Code honours per block. The
+		// attribute data-aurora-code marks the blocks that this script changed.
+		const syncCode = (shown) => {
+			document.querySelectorAll('.expressive-code').forEach((el) => {
+				if (shown === 'hyper') {
+					if (!el.dataset.theme) {
+						el.dataset.theme = 'dark';
+						el.dataset.auroraCode = '';
+					}
+				} else if ('auroraCode' in el.dataset) {
+					delete el.dataset.theme;
+					delete el.dataset.auroraCode;
+				}
+			});
+		};
+		// Mark the blocks while the page parses, so that no light code shows.
+		if (theme === 'hyper') {
+			const observer = new MutationObserver(() => syncCode('hyper'));
+			observer.observe(document.documentElement, { childList: true, subtree: true });
+			document.addEventListener('DOMContentLoaded', () => {
+				observer.disconnect();
+				syncCode(document.documentElement.dataset.theme);
+			});
+		}
+
+		return {
+			syncCode,
+			updatePickers(theme = stored || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					const tmpl = document.querySelector('#theme-icons');
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="hyper astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M22 9.67a1 1 0 0 0-.86-.67l-5.69-.83L12.9 3a1 1 0 0 0-1.8 0L8.55 8.16 2.86 9a1 1 0 0 0-.81.68 1 1 0 0 0 .25 1l4.13 4-1 5.68a1 1 0 0 0 1.45 1.07L12 18.76l5.1 2.68c.14.08.3.12.46.12a1 1 0 0 0 .99-1.19l-1-5.68 4.13-4A1 1 0 0 0 22 9.67Zm-6.15 4a1 1 0 0 0-.29.89l.72 4.19-3.76-2a1 1 0 0 0-.94 0l-3.76 2 .72-4.19a1 1 0 0 0-.29-.89l-3-3 4.21-.61a1 1 0 0 0 .76-.55L12 5.7l1.88 3.82a1 1 0 0 0 .76.55l4.21.61-3 2.99Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/_astro/common.BQvBIK4A.css"><script type="module" src="/_astro/page.DAtlxyFt.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Skip to content</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/" class="site-title sl-flex astro-6rvad3va"><span class="astro-6rvad3va" translate="no">Mimir</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Ctrl</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Cancel</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.BOTS06Pe.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/mimir-dm/mimir" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="light" class="astro-2z5xp7gb">Light</option><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="hyper" class="astro-2z5xp7gb">Hyper</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`||e===`hyper`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`auto`?``:t)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e);let t=e===`auto`?i():e;document.documentElement.dataset.theme=t,StarlightThemeProvider.syncCode(t),r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="1kbi99b" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/" class="large astro-rmhv4bp6"><span class="astro-rmhv4bp6">Welcome</span></a></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Tutorials</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/tutorials/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/tutorials/01-first-campaign/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Your First Campaign</span></a></li><li class="astro-rmhv4bp6"><a href="/tutorials/02-first-module/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Your First Module</span></a></li><li class="astro-rmhv4bp6"><a href="/tutorials/03-first-session/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Running Your First Session</span></a></li><li class="astro-rmhv4bp6"><a href="/tutorials/04-player-display/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Player Display Setup</span></a></li><li class="astro-rmhv4bp6"><a href="/tutorials/05-homebrew-content/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Creating Homebrew Content</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">How-To Guides</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/how-to/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Campaigns</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/how-to/campaigns/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/campaigns/create-campaign/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Create a Campaign</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/campaigns/manage-documents/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Manage Documents</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/campaigns/manage-sources/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Manage Sources</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/campaigns/archive-campaign/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Archive &amp; Restore</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/campaigns/export-campaign/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Export Campaign</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Maps</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/how-to/maps/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/maps/upload-map/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Upload a Map</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/maps/configure-grid/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Configure Grid</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/maps/place-tokens/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Place Tokens</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/maps/manage-light-sources/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Manage Light Sources</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/maps/print-map/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Print Maps</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/maps/generate-map/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Generate Maps</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/maps/mapgen-standalone/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Mapgen Standalone Tool</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Characters</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/how-to/characters/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/characters/create-pc/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Create a Player Character</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/characters/create-npc/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Create an NPC</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/characters/assign-to-campaign/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Assign to Campaign</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/characters/manage-inventory/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Manage Inventory</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/characters/manage-spells/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Manage Spells</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/characters/level-up/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Level Up</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/characters/print-character-sheet/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Print Character Sheet</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Modules</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/how-to/modules/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/modules/create-module/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Create a Module</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/modules/add-monsters/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Add Monsters</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/modules/module-documents/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Module Documents</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Play Mode</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/how-to/play-mode/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/play-mode/start-session/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Start a Session</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/play-mode/manage-encounters/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Manage Encounters</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/play-mode/fog-of-war/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Fog of War</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/play-mode/manage-traps-and-pois/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Manage Traps &amp; POIs</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/play-mode/use-player-display/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Use Player Display</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Homebrew</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="7"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/how-to/homebrew/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/homebrew/create-item/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Create Items</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/homebrew/create-monster/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Create Monsters</span></a></li><li class="astro-rmhv4bp6"><a href="/how-to/homebrew/create-spell/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Create Spells</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><a href="/how-to/ai-assistant/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI Assistant</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Reference</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="8"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/reference/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">UI Reference</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="9"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/reference/ui/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/ui/home-screen/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Home Screen</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/ui/campaign-dashboard/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Campaign Dashboard</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/ui/module-prep-view/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Module Prep View</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/ui/play-mode/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Play Mode</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/ui/dm-map-window/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">DM Map Window</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/ui/token-setup-modal/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Token Setup Modal</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/ui/player-display/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Player Display</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/ui/sources-window/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sources Window</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/ui/settings/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Settings</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><a href="/reference/data-model/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Data Model</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/characters/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Characters</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/sources/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sources &amp; Catalog</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/keyboard-shortcuts/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Keyboard Shortcuts</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/file-formats/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">File Formats</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/vision-and-lighting/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Vision &amp; Lighting</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/environment-variables/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Environment Variables</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/campaign-archive-format/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Campaign Archive Format</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/pdf-export/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">PDF Export</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/mcp-server/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">MCP Server</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/mapgen/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Mapgen</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/dd-texture-catalog/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Dungeondraft Texture Catalog</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/troubleshooting/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Troubleshooting</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/glossary/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Glossary</span></a></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Developer Documentation</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="10"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/reference/developer/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/contributing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Contributing</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/development/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Development Setup</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/architecture/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Architecture</span></a></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Internal Reference</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="11"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Source Data Format</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="12"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/archive-structure/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Archive Structure</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/class-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Class Schema Documentation</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/bestiary-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Bestiary Schema</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/class-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Class Schema Reference</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/spell-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Spell Schema</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/equipment-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Equipment Schema</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/magic-items-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Magic Items Schema</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/background-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Background Schema</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/race-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Race Schema</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/feat-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Feat Schema</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/condition-schema/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Condition &amp; Disease Schema</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/source-data/schemas/content/additional-schemas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Additional Content Schemas</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/frontend/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Frontend Architecture</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/llm-tools/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">LLM Tools (Removed)</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/5e-tools-processing/5etools-item-processing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">5etools Item Processing</span></a></li><li class="astro-rmhv4bp6"><a href="/reference/developer/reference/5e-tools-processing/magic-variant-implementation/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Magic Variant Implementation</span></a></li></ul></details></li></ul></details></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Understanding Mimir</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="13"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/explanation/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/architecture-overview/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Architecture Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-vs-module/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Campaigns vs Modules</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/two-board-system/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">The Two-Board System</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/multi-window-system/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">The Multi-Window System</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/catalog-system/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">The Catalog System</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/map-formats/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Map Formats</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/document-workflow/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Document Workflow</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/homebrew-system/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">The Homebrew System</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/vision-system/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Vision System</span></a></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Campaign Framework</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="14"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Introduction</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/cheat-sheet/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Cheat Sheet</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/board-workflow-guide/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Board Workflow Guide</span></a></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Framework Philosophy</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="15"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/01-foundations/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/01-foundations/three-board-system/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">The Two-Board Method</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Campaign Genesis</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="16"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/02-campaign-genesis/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/02-campaign-genesis/phase-1-spark/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Phase 1: The Spark</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/02-campaign-genesis/phase-2-session-zero-prep/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Phase 2: Session Zero Prep</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/02-campaign-genesis/phase-3-session-zero/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Phase 3: Session Zero</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/02-campaign-genesis/phase-4-integration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Phase 4: Integration &amp; Launch</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/02-campaign-genesis/phase-5-conclusion/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Phase 5: Conclusion</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Module Creation</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="17"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/03-module-creation/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/03-module-creation/module-creation-process/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Creation Process</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/03-module-creation/module-types-templates/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Module Types &amp; Templates</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/03-module-creation/module-running/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Running Your Module</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/03-module-creation/module-first/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Your First Module</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Running the Game</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="18"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/04-session-management/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/04-session-management/session-before/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Pre-Session Preparation</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/04-session-management/session-during/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Running the Session</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/04-session-management/session-after/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Post-Session &amp; Continuity</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/04-session-management/session-interlude/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Between Sessions</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/05-scaling/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Scaling Your Campaign</span></a></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Templates</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="19"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><details class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Template Library</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="20"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/campaign_pitch/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Campaign Pitch</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/campaign_bible/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Campaign Bible</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/document_tracker/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Campaign Document Tracker</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/character_guidelines/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Character Guidelines</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/character_integration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Character Integration Sheet</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/clue_tracker/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Clue Tracker</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/faction_overview/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Faction Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/faction_template/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Faction Template</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/house_rules/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">House Rules</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/major_npc_tracker/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Major NPC Tracker</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/module_overview/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Module Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/module_dungeon/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Dungeon Module</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/module_heist/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Heist Module</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/module_horror/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Horror Module</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/module_mystery/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Mystery Module</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/module_political/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Political Module</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/pc_arc_tracker/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">PC Arc Tracker</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/play_notes/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Play Notes</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/player_secrets/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Player Secrets</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/quick_npc_reference/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Quick NPC Reference</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/quick_start_kit/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Quick Start Kit</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/region_overview/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Region Overview</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/safety_tools/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Safety Tools &amp; Boundaries</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/starting_scenario/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Starting Scenario</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/table_expectations/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Table Expectations &amp; Logistics</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/world_events_timeline/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">World Events Timeline</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/world_primer/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">World Primer</span></a></li><li class="astro-rmhv4bp6"><a href="/explanation/campaign-framework/06-templates/templates/archived/session_outline/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Session Outline (Archived)</span></a></li></ul></details></li></ul></details></li></ul></details></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/mimir-dm/mimir" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="light" class="astro-2z5xp7gb">Light</option><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="hyper" class="astro-2z5xp7gb">Hyper</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">On this page<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#entity-hierarchy" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Entity Hierarchy</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#campaigns" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Campaigns</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#characters" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Characters</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-classes" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Classes</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-inventory" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Inventory</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-spells" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Spells</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-proficiencies" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Proficiencies</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-feats" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Feats</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-features" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Features</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-sources" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Sources</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#modules" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Modules</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#module-monsters" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Module Monsters</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#module-npcs" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Module NPCs</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#documents" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Documents</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#maps" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Maps</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#map-overlays" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Map Overlays</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#homebrew-content" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Homebrew Content</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#homebrew-items" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Homebrew Items</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#homebrew-monsters" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Homebrew Monsters</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#homebrew-spells" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Homebrew Spells</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#campaign-sources" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Campaign Sources</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#campaign-assets" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Campaign Assets</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#catalog-data" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Catalog Data</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#see-also" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">See Also</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#entity-hierarchy" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Entity Hierarchy</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#campaigns" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Campaigns</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#characters" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Characters</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-classes" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Classes</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-inventory" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Inventory</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-spells" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Spells</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-proficiencies" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Proficiencies</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-feats" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Feats</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-features" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Features</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#character-sources" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Character Sources</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#modules" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Modules</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#module-monsters" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Module Monsters</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#module-npcs" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Module NPCs</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#documents" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Documents</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#maps" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Maps</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#map-overlays" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Map Overlays</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#homebrew-content" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Homebrew Content</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#homebrew-items" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Homebrew Items</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#homebrew-monsters" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Homebrew Monsters</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#homebrew-spells" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Homebrew Spells</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#campaign-sources" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Campaign Sources</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#campaign-assets" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Campaign Assets</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#catalog-data" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Catalog Data</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#see-also" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">See Also</span></a></li></ul></nav></starlight-toc><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">Data Model</h1></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><p>The hierarchy of entities in Mimir and how they relate to each other.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="entity-hierarchy">Entity Hierarchy</h2><a class="sl-anchor-link" href="#entity-hierarchy"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Entity Hierarchy”</span></a></div>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.7aduy.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">Campaign</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── Documents (campaign-level)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── Maps (campaign-level)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── Characters (PCs and NPCs)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── Classes (multiclass support)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── Inventory</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── Spells</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── Proficiencies</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── Feats</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   └── Features</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── Modules</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── Documents (module-level)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── Maps (module-level)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── Module Monsters (catalog references)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   ├── Module NPCs</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">│   └── Token Placements</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── Homebrew Items</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── Homebrew Monsters</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">├── Homebrew Spells</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">└── Campaign Sources (enabled books)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="Campaign├── Documents (campaign-level)├── Maps (campaign-level)├── Characters (PCs and NPCs)│   ├── Classes (multiclass support)│   ├── Inventory│   ├── Spells│   ├── Proficiencies│   ├── Feats│   └── Features├── Modules│   ├── Documents (module-level)│   ├── Maps (module-level)│   ├── Module Monsters (catalog references)│   ├── Module NPCs│   └── Token Placements├── Homebrew Items├── Homebrew Monsters├── Homebrew Spells└── Campaign Sources (enabled books)"><div></div></button></div></figure></div>
+<div class="sl-heading-wrapper level-h2"><h2 id="campaigns">Campaigns</h2><a class="sl-anchor-link" href="#campaigns"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Campaigns”</span></a></div>
+<p>The top-level container. A campaign represents a complete D&amp;D game — the world, the story, the characters.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">id</code></td>
+<td>UUID, auto-generated</td>
+</tr>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>Campaign name (required)</td>
+</tr>
+<tr>
+<td><code dir="auto">description</code></td>
+<td>Optional notes</td>
+</tr>
+<tr>
+<td><code dir="auto">archived_at</code></td>
+<td>Soft-delete timestamp (null = active)</td>
+</tr>
+<tr>
+<td><code dir="auto">created_at</code></td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td><code dir="auto">updated_at</code></td>
+<td>Last modification timestamp</td>
+</tr>
+</tbody>
+</table>
+<p>Archiving a campaign hides it from the default list but preserves all data. Deleting a campaign is permanent and cascades to all children.</p>
+<p>When you create a campaign, Mimir automatically generates 11 template documents (Campaign Pitch, Starting Scenario, World Primer, Character Guidelines, Table Expectations, Character Integration, Campaign Bible, Safety Tools, House Rules, Player Secrets, Faction Overview).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="characters">Characters</h2><a class="sl-anchor-link" href="#characters"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Characters”</span></a></div>
+<p>Both player characters (PCs) and non-player characters (NPCs) use the same data model. The <code dir="auto">is_npc</code> flag distinguishes them.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">id</code></td>
+<td>UUID</td>
+</tr>
+<tr>
+<td><code dir="auto">campaign_id</code></td>
+<td>Parent campaign</td>
+</tr>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>Character name (required)</td>
+</tr>
+<tr>
+<td><code dir="auto">is_npc</code></td>
+<td>Integer: 0 = PC, 1 = NPC</td>
+</tr>
+<tr>
+<td><code dir="auto">player_name</code></td>
+<td>Real player name (PCs only)</td>
+</tr>
+<tr>
+<td><code dir="auto">race_name</code></td>
+<td>Race name (references catalog)</td>
+</tr>
+<tr>
+<td><code dir="auto">race_source</code></td>
+<td>Source book for the race</td>
+</tr>
+<tr>
+<td><code dir="auto">background_name</code></td>
+<td>Background name (references catalog)</td>
+</tr>
+<tr>
+<td><code dir="auto">background_source</code></td>
+<td>Source book for the background</td>
+</tr>
+<tr>
+<td><code dir="auto">strength</code></td>
+<td>Strength score (default 10)</td>
+</tr>
+<tr>
+<td><code dir="auto">dexterity</code></td>
+<td>Dexterity score (default 10)</td>
+</tr>
+<tr>
+<td><code dir="auto">constitution</code></td>
+<td>Constitution score (default 10)</td>
+</tr>
+<tr>
+<td><code dir="auto">intelligence</code></td>
+<td>Intelligence score (default 10)</td>
+</tr>
+<tr>
+<td><code dir="auto">wisdom</code></td>
+<td>Wisdom score (default 10)</td>
+</tr>
+<tr>
+<td><code dir="auto">charisma</code></td>
+<td>Charisma score (default 10)</td>
+</tr>
+<tr>
+<td><code dir="auto">cp</code>, <code dir="auto">sp</code>, <code dir="auto">ep</code>, <code dir="auto">gp</code>, <code dir="auto">pp</code></td>
+<td>Currency in 5 denominations</td>
+</tr>
+<tr>
+<td><code dir="auto">traits</code></td>
+<td>Personality traits</td>
+</tr>
+<tr>
+<td><code dir="auto">ideals</code></td>
+<td>Character ideals</td>
+</tr>
+<tr>
+<td><code dir="auto">bonds</code></td>
+<td>Character bonds</td>
+</tr>
+<tr>
+<td><code dir="auto">flaws</code></td>
+<td>Character flaws</td>
+</tr>
+<tr>
+<td><code dir="auto">role</code></td>
+<td>NPC role (NPC only)</td>
+</tr>
+<tr>
+<td><code dir="auto">location</code></td>
+<td>NPC location (NPC only)</td>
+</tr>
+<tr>
+<td><code dir="auto">faction</code></td>
+<td>NPC faction (NPC only)</td>
+</tr>
+<tr>
+<td><code dir="auto">created_at</code>, <code dir="auto">updated_at</code></td>
+<td>Timestamps</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="character-classes">Character Classes</h3><a class="sl-anchor-link" href="#character-classes"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Character Classes”</span></a></div>
+<p>Characters support multiclassing. Each class entry tracks:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">character_id</code></td>
+<td>Parent character</td>
+</tr>
+<tr>
+<td><code dir="auto">class_name</code></td>
+<td>Class name (e.g., “Fighter”)</td>
+</tr>
+<tr>
+<td><code dir="auto">class_source</code></td>
+<td>Source book for the class</td>
+</tr>
+<tr>
+<td><code dir="auto">level</code></td>
+<td>Levels in this class</td>
+</tr>
+<tr>
+<td><code dir="auto">subclass_name</code></td>
+<td>Subclass (e.g., “Champion”)</td>
+</tr>
+<tr>
+<td><code dir="auto">subclass_source</code></td>
+<td>Source book for the subclass</td>
+</tr>
+<tr>
+<td><code dir="auto">starting_class</code></td>
+<td>Whether this is the character’s first class (for multiclass proficiency rules)</td>
+</tr>
+</tbody>
+</table>
+<p>A level 5 Fighter / level 3 Wizard has two entries.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="character-inventory">Character Inventory</h3><a class="sl-anchor-link" href="#character-inventory"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Character Inventory”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">item_name</code></td>
+<td>Item name (may reference catalog)</td>
+</tr>
+<tr>
+<td><code dir="auto">item_source</code></td>
+<td>Source book for the item</td>
+</tr>
+<tr>
+<td><code dir="auto">quantity</code></td>
+<td>Number of items</td>
+</tr>
+<tr>
+<td><code dir="auto">equipped</code></td>
+<td>Whether the item is worn/held (integer: 0/1)</td>
+</tr>
+<tr>
+<td><code dir="auto">attuned</code></td>
+<td>Whether the item is attuned (integer: 0/1). Mimir counts attuned items but does not enforce the D&amp;D 5e three-attunement rule</td>
+</tr>
+<tr>
+<td><code dir="auto">notes</code></td>
+<td>Optional notes about the item</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="character-spells">Character Spells</h3><a class="sl-anchor-link" href="#character-spells"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Character Spells”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">spell_name</code></td>
+<td>Spell name (references catalog)</td>
+</tr>
+<tr>
+<td><code dir="auto">spell_source</code></td>
+<td>Source book for the spell</td>
+</tr>
+<tr>
+<td><code dir="auto">prepared</code></td>
+<td>Whether currently prepared (integer: 0/1)</td>
+</tr>
+<tr>
+<td><code dir="auto">source_class</code></td>
+<td>Which class grants this spell</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="character-proficiencies">Character Proficiencies</h3><a class="sl-anchor-link" href="#character-proficiencies"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Character Proficiencies”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">proficiency_type</code></td>
+<td><code dir="auto">skill</code>, <code dir="auto">save</code>, <code dir="auto">tool</code>, <code dir="auto">weapon</code>, <code dir="auto">armor</code>, or <code dir="auto">language</code></td>
+</tr>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>Proficiency name (e.g., “Perception”)</td>
+</tr>
+<tr>
+<td><code dir="auto">expertise</code></td>
+<td>Whether the character has expertise (integer: 0/1)</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="character-feats">Character Feats</h3><a class="sl-anchor-link" href="#character-feats"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Character Feats”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">feat_name</code></td>
+<td>Feat name</td>
+</tr>
+<tr>
+<td><code dir="auto">feat_source</code></td>
+<td>Source book for the feat</td>
+</tr>
+<tr>
+<td><code dir="auto">source_type</code></td>
+<td>How the feat was acquired: <code dir="auto">asi</code>, <code dir="auto">race</code>, <code dir="auto">class</code>, or <code dir="auto">bonus</code></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="character-features">Character Features</h3><a class="sl-anchor-link" href="#character-features"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Character Features”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">feature_type</code></td>
+<td><code dir="auto">fighting_style</code>, <code dir="auto">metamagic</code>, <code dir="auto">maneuver</code>, <code dir="auto">invocation</code>, or <code dir="auto">pact_boon</code> (see <a href="../characters/">Characters</a>)</td>
+</tr>
+<tr>
+<td><code dir="auto">feature_name</code></td>
+<td>Feature name</td>
+</tr>
+<tr>
+<td><code dir="auto">feature_source</code></td>
+<td>Source book</td>
+</tr>
+<tr>
+<td><code dir="auto">source_class</code></td>
+<td>Which class grants the feature</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="character-sources">Character Sources</h3><a class="sl-anchor-link" href="#character-sources"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Character Sources”</span></a></div>
+<p>Optional per-character source filtering, separate from campaign sources.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">character_id</code></td>
+<td>Parent character</td>
+</tr>
+<tr>
+<td><code dir="auto">source_code</code></td>
+<td>Enabled source book code</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="modules">Modules</h2><a class="sl-anchor-link" href="#modules"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Modules”</span></a></div>
+<p>Modules are adventure containers within a campaign — a dungeon, a town, a story arc.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">id</code></td>
+<td>UUID</td>
+</tr>
+<tr>
+<td><code dir="auto">campaign_id</code></td>
+<td>Parent campaign</td>
+</tr>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>Module name (required)</td>
+</tr>
+<tr>
+<td><code dir="auto">description</code></td>
+<td>Optional description</td>
+</tr>
+<tr>
+<td><code dir="auto">module_number</code></td>
+<td>Display order</td>
+</tr>
+<tr>
+<td><code dir="auto">created_at</code>, <code dir="auto">updated_at</code></td>
+<td>Timestamps</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="module-monsters">Module Monsters</h3><a class="sl-anchor-link" href="#module-monsters"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Module Monsters”</span></a></div>
+<p>References to catalog monsters (or homebrew monsters) used in this module’s encounters.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">module_id</code></td>
+<td>Parent module</td>
+</tr>
+<tr>
+<td><code dir="auto">monster_name</code></td>
+<td>Catalog monster name</td>
+</tr>
+<tr>
+<td><code dir="auto">monster_source</code></td>
+<td>Source book for the monster</td>
+</tr>
+<tr>
+<td><code dir="auto">homebrew_monster_id</code></td>
+<td>Alternative: reference to a homebrew monster</td>
+</tr>
+<tr>
+<td><code dir="auto">display_name</code></td>
+<td>Optional custom name (e.g., “Goblin Boss Grix”)</td>
+</tr>
+<tr>
+<td><code dir="auto">quantity</code></td>
+<td>Number of creatures</td>
+</tr>
+<tr>
+<td><code dir="auto">notes</code></td>
+<td>DM notes about this monster’s role</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="module-npcs">Module NPCs</h3><a class="sl-anchor-link" href="#module-npcs"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Module NPCs”</span></a></div>
+<p>NPCs created specifically for this module (distinct from campaign-level characters).</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>NPC name</td>
+</tr>
+<tr>
+<td><code dir="auto">role</code></td>
+<td>Role in the module</td>
+</tr>
+<tr>
+<td><code dir="auto">description</code></td>
+<td>Background and behavior</td>
+</tr>
+<tr>
+<td><code dir="auto">appearance</code></td>
+<td>Physical description</td>
+</tr>
+<tr>
+<td><code dir="auto">personality</code></td>
+<td>Personality traits</td>
+</tr>
+<tr>
+<td><code dir="auto">motivation</code></td>
+<td>What drives this NPC</td>
+</tr>
+<tr>
+<td><code dir="auto">secrets</code></td>
+<td>Hidden information about the NPC</td>
+</tr>
+<tr>
+<td><code dir="auto">stat_block</code></td>
+<td>Optional JSON stat block</td>
+</tr>
+<tr>
+<td><code dir="auto">token_asset_id</code></td>
+<td>Optional custom token art</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="documents">Documents</h2><a class="sl-anchor-link" href="#documents"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Documents”</span></a></div>
+<p>Flexible text content at either the campaign or module level.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">id</code></td>
+<td>UUID</td>
+</tr>
+<tr>
+<td><code dir="auto">campaign_id</code></td>
+<td>Parent campaign</td>
+</tr>
+<tr>
+<td><code dir="auto">module_id</code></td>
+<td>Parent module (null for campaign-level docs)</td>
+</tr>
+<tr>
+<td><code dir="auto">title</code></td>
+<td>Document title</td>
+</tr>
+<tr>
+<td><code dir="auto">doc_type</code></td>
+<td>Type identifier (e.g., <code dir="auto">campaign_pitch</code>, <code dir="auto">world_primer</code>, <code dir="auto">character_guidelines</code>, <code dir="auto">user_document</code>)</td>
+</tr>
+<tr>
+<td><code dir="auto">content</code></td>
+<td>Full text content</td>
+</tr>
+<tr>
+<td><code dir="auto">sort_order</code></td>
+<td>Display ordering</td>
+</tr>
+<tr>
+<td><code dir="auto">created_at</code>, <code dir="auto">updated_at</code></td>
+<td>Timestamps</td>
+</tr>
+</tbody>
+</table>
+<p>A document belongs to a campaign, and optionally to a specific module within that campaign.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="maps">Maps</h2><a class="sl-anchor-link" href="#maps"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Maps”</span></a></div>
+<p>Battle maps with optional grid, wall, and lighting data.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">id</code></td>
+<td>UUID</td>
+</tr>
+<tr>
+<td><code dir="auto">campaign_id</code></td>
+<td>Parent campaign</td>
+</tr>
+<tr>
+<td><code dir="auto">module_id</code></td>
+<td>Optional parent module</td>
+</tr>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>Map name</td>
+</tr>
+<tr>
+<td><code dir="auto">description</code></td>
+<td>Optional description</td>
+</tr>
+<tr>
+<td><code dir="auto">sort_order</code></td>
+<td>Display ordering</td>
+</tr>
+<tr>
+<td><code dir="auto">uvtt_asset_id</code></td>
+<td>Reference to the uploaded map asset</td>
+</tr>
+<tr>
+<td><code dir="auto">lighting_mode</code></td>
+<td>bright, dim, or dark</td>
+</tr>
+<tr>
+<td><code dir="auto">fog_enabled</code></td>
+<td>Whether fog of war is active (integer: 0/1)</td>
+</tr>
+<tr>
+<td><code dir="auto">created_at</code>, <code dir="auto">updated_at</code></td>
+<td>Timestamps</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="map-overlays">Map Overlays</h3><a class="sl-anchor-link" href="#map-overlays"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Map Overlays”</span></a></div>
+<p>Maps support several overlay types:</p>
+<p><strong>Light Sources</strong> (<code dir="auto">light_sources</code> table) — Dynamic lights with grid position, bright/dim radius, color, and active state.</p>
+<p><strong>Fog Revealed Areas</strong> (<code dir="auto">fog_revealed_areas</code> table) — Rectangles tracking which map areas have been revealed to players (x, y, width, height). Written by the fog reveal commands (<code dir="auto">reveal_rect</code>, <code dir="auto">reveal_circle</code>, <code dir="auto">reveal_all</code>); these are currently not surfaced in the UI — live fog rendering is computed from PC token vision instead (see <a href="../../explanation/vision-system/">Vision System</a>).</p>
+<p><strong>Points of Interest</strong> (<code dir="auto">map_pois</code> table) — Named markers with descriptions, icons, colors, and visibility at specific grid positions.</p>
+<p><strong>Traps</strong> (<code dir="auto">map_traps</code> table) — Trap markers with name, description, trigger/effect descriptions, detection DC, triggered state, and visibility.</p>
+<p><strong>Token Placements</strong> (<code dir="auto">token_placements</code> table) — Monster and NPC positions on the map.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">map_id</code></td>
+<td>Parent map</td>
+</tr>
+<tr>
+<td><code dir="auto">module_monster_id</code></td>
+<td>Reference to module monster (or null)</td>
+</tr>
+<tr>
+<td><code dir="auto">module_npc_id</code></td>
+<td>Reference to module NPC (or null)</td>
+</tr>
+<tr>
+<td><code dir="auto">grid_x</code>, <code dir="auto">grid_y</code></td>
+<td>Grid position</td>
+</tr>
+<tr>
+<td><code dir="auto">label</code></td>
+<td>Optional display label</td>
+</tr>
+<tr>
+<td><code dir="auto">faction_color</code></td>
+<td>Token border color</td>
+</tr>
+<tr>
+<td><code dir="auto">hidden</code></td>
+<td>Whether hidden from players (integer: 0/1)</td>
+</tr>
+<tr>
+<td><code dir="auto">vision_bright_ft</code></td>
+<td>Bright vision range in feet</td>
+</tr>
+<tr>
+<td><code dir="auto">vision_dim_ft</code></td>
+<td>Dim vision range in feet</td>
+</tr>
+<tr>
+<td><code dir="auto">vision_dark_ft</code></td>
+<td>Darkvision range in feet</td>
+</tr>
+<tr>
+<td><code dir="auto">light_radius_ft</code></td>
+<td>Light emitted by this token</td>
+</tr>
+<tr>
+<td><code dir="auto">created_at</code></td>
+<td>Placement timestamp</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="homebrew-content">Homebrew Content</h2><a class="sl-anchor-link" href="#homebrew-content"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Homebrew Content”</span></a></div>
+<p>Custom content scoped to a campaign. Three types:</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="homebrew-items">Homebrew Items</h3><a class="sl-anchor-link" href="#homebrew-items"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Homebrew Items”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>Item name</td>
+</tr>
+<tr>
+<td><code dir="auto">item_type</code></td>
+<td>weapon, armor, potion, etc.</td>
+</tr>
+<tr>
+<td><code dir="auto">rarity</code></td>
+<td>common through legendary</td>
+</tr>
+<tr>
+<td><code dir="auto">data</code></td>
+<td>Full item data as JSON</td>
+</tr>
+<tr>
+<td><code dir="auto">cloned_from_name</code></td>
+<td>Original catalog item name (if cloned)</td>
+</tr>
+<tr>
+<td><code dir="auto">cloned_from_source</code></td>
+<td>Original catalog item source (if cloned)</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="homebrew-monsters">Homebrew Monsters</h3><a class="sl-anchor-link" href="#homebrew-monsters"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Homebrew Monsters”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>Monster name</td>
+</tr>
+<tr>
+<td><code dir="auto">cr</code></td>
+<td>Challenge rating</td>
+</tr>
+<tr>
+<td><code dir="auto">creature_type</code></td>
+<td>beast, fiend, undead, etc.</td>
+</tr>
+<tr>
+<td><code dir="auto">size</code></td>
+<td>Tiny through Gargantuan</td>
+</tr>
+<tr>
+<td><code dir="auto">data</code></td>
+<td>Full stat block as JSON</td>
+</tr>
+<tr>
+<td><code dir="auto">cloned_from_name</code></td>
+<td>Original catalog monster name (if cloned)</td>
+</tr>
+<tr>
+<td><code dir="auto">cloned_from_source</code></td>
+<td>Original catalog monster source (if cloned)</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="homebrew-spells">Homebrew Spells</h3><a class="sl-anchor-link" href="#homebrew-spells"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Homebrew Spells”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>Spell name</td>
+</tr>
+<tr>
+<td><code dir="auto">level</code></td>
+<td>Spell level (0 for cantrips)</td>
+</tr>
+<tr>
+<td><code dir="auto">school</code></td>
+<td>Spell school</td>
+</tr>
+<tr>
+<td><code dir="auto">data</code></td>
+<td>Full spell data as JSON</td>
+</tr>
+<tr>
+<td><code dir="auto">cloned_from_name</code></td>
+<td>Original catalog spell name (if cloned)</td>
+</tr>
+<tr>
+<td><code dir="auto">cloned_from_source</code></td>
+<td>Original catalog spell source (if cloned)</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="campaign-sources">Campaign Sources</h2><a class="sl-anchor-link" href="#campaign-sources"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Campaign Sources”</span></a></div>
+<p>Controls which D&amp;D source books are active for a campaign.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">campaign_id</code></td>
+<td>Campaign this applies to</td>
+</tr>
+<tr>
+<td><code dir="auto">source_code</code></td>
+<td>Source book abbreviation (e.g., “PHB”, “MM”, “XGE”)</td>
+</tr>
+</tbody>
+</table>
+<p>Catalog searches filter results by the campaign’s enabled sources.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="campaign-assets">Campaign Assets</h2><a class="sl-anchor-link" href="#campaign-assets"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Campaign Assets”</span></a></div>
+<p>Uploaded files (map images, token art) stored as binary blobs.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">id</code></td>
+<td>UUID</td>
+</tr>
+<tr>
+<td><code dir="auto">campaign_id</code></td>
+<td>Parent campaign (optional)</td>
+</tr>
+<tr>
+<td><code dir="auto">module_id</code></td>
+<td>Parent module (optional)</td>
+</tr>
+<tr>
+<td><code dir="auto">filename</code></td>
+<td>Original filename</td>
+</tr>
+<tr>
+<td><code dir="auto">description</code></td>
+<td>Optional description</td>
+</tr>
+<tr>
+<td><code dir="auto">mime_type</code></td>
+<td>File MIME type</td>
+</tr>
+<tr>
+<td><code dir="auto">blob_path</code></td>
+<td>Storage path relative to assets directory</td>
+</tr>
+<tr>
+<td><code dir="auto">file_size</code></td>
+<td>File size in bytes</td>
+</tr>
+<tr>
+<td><code dir="auto">uploaded_at</code></td>
+<td>Upload timestamp</td>
+</tr>
+</tbody>
+</table>
+<p>Assets are stored in the <code dir="auto">assets/</code> directory within the application data folder.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="catalog-data">Catalog Data</h2><a class="sl-anchor-link" href="#catalog-data"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Catalog Data”</span></a></div>
+<p>Read-only D&amp;D 5e reference data imported from external sources. Key tables:</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">monsters</code></td>
+<td>Creature stat blocks with CR, type, size, token image path, full JSON</td>
+</tr>
+<tr>
+<td><code dir="auto">items</code></td>
+<td>Equipment and magic items with type, rarity</td>
+</tr>
+<tr>
+<td><code dir="auto">spells</code></td>
+<td>Spells with level, school, ritual/concentration flags</td>
+</tr>
+<tr>
+<td><code dir="auto">races</code></td>
+<td>Playable races with traits</td>
+</tr>
+<tr>
+<td><code dir="auto">classes</code></td>
+<td>Classes with feature data</td>
+</tr>
+<tr>
+<td><code dir="auto">subclasses</code></td>
+<td>Subclasses linked to parent classes</td>
+</tr>
+<tr>
+<td><code dir="auto">class_features</code></td>
+<td>Class features by level</td>
+</tr>
+<tr>
+<td><code dir="auto">subclass_features</code></td>
+<td>Subclass features by level</td>
+</tr>
+<tr>
+<td><code dir="auto">backgrounds</code></td>
+<td>Backgrounds with proficiencies</td>
+</tr>
+<tr>
+<td><code dir="auto">feats</code></td>
+<td>Feats with prerequisites</td>
+</tr>
+<tr>
+<td><code dir="auto">conditions</code></td>
+<td>Status conditions (blinded, charmed, etc.)</td>
+</tr>
+<tr>
+<td><code dir="auto">languages</code></td>
+<td>Languages with type classification</td>
+</tr>
+<tr>
+<td><code dir="auto">deities</code></td>
+<td>Deities with pantheon grouping</td>
+</tr>
+<tr>
+<td><code dir="auto">diseases</code></td>
+<td>Diseases and afflictions</td>
+</tr>
+<tr>
+<td><code dir="auto">hazards</code></td>
+<td>Environmental hazards</td>
+</tr>
+<tr>
+<td><code dir="auto">traps</code></td>
+<td>Trap definitions with tier</td>
+</tr>
+<tr>
+<td><code dir="auto">senses</code></td>
+<td>Sense types</td>
+</tr>
+<tr>
+<td><code dir="auto">skills</code></td>
+<td>Skills with associated ability</td>
+</tr>
+<tr>
+<td><code dir="auto">objects</code></td>
+<td>Interactive objects</td>
+</tr>
+<tr>
+<td><code dir="auto">vehicles</code></td>
+<td>Vehicles with type</td>
+</tr>
+<tr>
+<td><code dir="auto">rewards</code></td>
+<td>Rewards with type</td>
+</tr>
+<tr>
+<td><code dir="auto">psionics</code></td>
+<td>Psionic abilities</td>
+</tr>
+<tr>
+<td><code dir="auto">optional_features</code></td>
+<td>Optional class features (invocations, maneuvers, etc.)</td>
+</tr>
+<tr>
+<td><code dir="auto">variant_rules</code></td>
+<td>Variant and optional rules</td>
+</tr>
+<tr>
+<td><code dir="auto">actions</code></td>
+<td>Standard actions</td>
+</tr>
+<tr>
+<td><code dir="auto">cults</code></td>
+<td>Cults and supernatural boons</td>
+</tr>
+<tr>
+<td><code dir="auto">books</code></td>
+<td>Source book metadata with cover images</td>
+</tr>
+<tr>
+<td><code dir="auto">catalog_sources</code></td>
+<td>Source book registry with enabled/disabled state</td>
+</tr>
+<tr>
+<td><code dir="auto">spell_classes</code></td>
+<td>Join table: which classes have access to which spells</td>
+</tr>
+<tr>
+<td><code dir="auto">spell_subclasses</code></td>
+<td>Join table: subclass spell lists</td>
+</tr>
+<tr>
+<td><code dir="auto">item_attunement_classes</code></td>
+<td>Join table: class-restricted attunement</td>
+</tr>
+<tr>
+<td><code dir="auto">catalog_tables</code></td>
+<td>Reference tables from source books</td>
+</tr>
+</tbody>
+</table>
+<p>A full-text search index (<code dir="auto">catalog_fts</code>, an FTS5 virtual table) provides fast search across all catalog entity types.</p>
+<p>See <a href="../../explanation/catalog-system/">The Catalog System</a> for how this data is used.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="see-also">See Also</h2><a class="sl-anchor-link" href="#see-also"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “See Also”</span></a></div>
+<ul>
+<li><a href="../../explanation/campaign-vs-module/">Campaigns vs Modules</a> — Why the hierarchy exists</li>
+<li><a href="../../explanation/homebrew-system/">The Homebrew System</a> — Creating custom content</li>
+<li><a href="../../explanation/architecture-overview/">Architecture Overview</a> — How data flows through the system</li>
+</ul>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/mimir-dm/mimir/edit/main/docs/src/content/docs/reference/data-model.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-b5raizh3" dir="ltr"><a href="/reference/ui/settings/" rel="prev" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-b5raizh3">Previous<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Settings</span></span></a><a href="/reference/characters/" rel="next" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-b5raizh3">Next<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Characters</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>
